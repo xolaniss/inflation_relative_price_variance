@@ -32,9 +32,9 @@ bibliography: references.bib
 biblio-style: apalike
 natbiboptions: round
 link-citations: true
-linkcolor: blue!000!black
-urlcolor: blue!000!black
-citecolor: blue!000!black
+linkcolor: blue!100!black
+urlcolor: blue!100!black
+citecolor: blue!100!black
 linestretch: 1.5
 indent: TRUE
 title-block-banner: false
@@ -98,7 +98,28 @@ source(here("Functions","borderlines.R" ))
 
 # Introduction
 
-@fornero2011effect 
+Inflation is known to have adverse welfare effects through its distortion of relative prices which causes the misallocation of resources, production inefficiencies leading to lower real economic activity. This is well supported by both theoretical and empirical studies. This paper contributes to the empirical literature, by examining the relationship between inflation and relative price variability (RPV) in South Africa given the little evidence available and to better understand how this relationship has evolved and the implications for monetary policy. 
+
+The South African context can provide further insights into the relationship between inflation and RPV given the shifts in the inflation targets from 3- 6 per cent in 2000 to 4.5 per cent since 2017 as structural changes in inflation can affect the link between inflation and relative price variability [@caglayan2003] and that the functional form of relationship is U-shaped and dynamic [@fielding2000; @choi2010]. The latter motivates the estimation of the inflation rate that minimizes relative price distortions since if the relationship was linear then the optimal inflation rate would be zero. Given the inflation target reform towards a 3% in South Africa, this study contributes to the policy discussion on the appropriate inflation target and understating how dynamic relations between inflation and relative price variability has evolved. 
+
+The theoretical literature generally distinguishes between menu-cost and signal extraction models in explaining the positive relation between trend inflation and RVP.  In these models’ firms follow a one-sided dynamic pricing rule  when setting prices and face fixed non-zero costs of adjusting nominal prices (e.g. printing new menus) when inflation increases as the latter reduces the optimal real price of goods and services. Due to differences in administrative costs, these nominal price adjustment costs vary across firms moreover these adjustments occur at different times which implies staggard price setting behaviour which leads to relative price variability. Menu cost models predict a that higher expected  inflation causes an increase in RVP (citations xxx) while Lucas-type signal extraction models (Lucas(1973); Hercowitz (1981); Cukierman (1984) xxxx more citatiosn) argue unexpected inflation uncertainty causes higher RVP because informational frictions make it difficult to distinguish between idiosyncratic relative shocks or an aggregate (inflationary) shock. Menu cost and signal-extraction models assume a positive and linear relationship making the optimal inflation rate zero, however, recently monetary search models [@head2005] show that this relationship is nonlinear making the optimal inflation rate somewhere between zero and positive inflation rate.  
+
+# Citations
+@adam2024 
+@baglan2016
+@ball1993
+@benabou1993
+@caglayan2003
+@caglayan2008
+@grier1996
+@lach1992
+@nakamura2018
+@ndou2014
+@ndou2017
+@parks1978
+@parsley1996
+@rather2018
+
 
 # Literature review
 
@@ -129,35 +150,3 @@ source(here("Functions","borderlines.R" ))
 
 ## Data
 
-
-```{r}
-#| label: latex_version
-#| warning: FALSE
-#| message: FALSE
-
-# Packages -----------------------------------------------------------
-library(here)
-library(tidyverse)
-library(fs)
-
-
-# Delete current latex folder ----------------------------------------
-if (dir.exists(here("Latex_version"))) {
-  dir_delete(here("Latex_version"))
-}
-
-# Create folder ------------------------------------------------------
-dir.create(here("Latex_version"), recursive = TRUE)
-
-# Copy text files ---------------------------------------------------------
-list.files(path = ".", pattern = "tex", full.names = TRUE ) %>%
-  file.copy(to = here("Latex_version"), overwrite = TRUE)
-file.copy(here("references.bib"), here("Latex_version"), overwrite = TRUE)
-
-# Copy resources folder ---------------------------------------------
-folder_path <- list.dirs(path = ".", recursive = FALSE) %>%
-  str_subset("files")
-folder_name <- str_remove(folder_path, "./")
-dir_copy(folder_path, here("Latex_version", folder_name), overwrite = TRUE)
-
-```
