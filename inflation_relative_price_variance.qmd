@@ -27,6 +27,7 @@ pdf-engine: lualatex
 execute: 
   echo: false
   warning: false
+  cache: true
 editor: source
 bibliography: references.bib
 biblio-style: apalike
@@ -96,6 +97,13 @@ source(here("Functions","modelplot_word.R" ))
 source(here("Functions","borderlines.R" ))
 ```
 
+
+```{r}
+# label: artifacts
+price_data_list <- read_rds(here("Outputs","artifacts_price_data.rds"))
+```
+
+
 # Introduction
 
 Inflation is known to have adverse welfare effects through its distortion of relative prices which causes the misallocation of resources, production inefficiencies leading to lower real economic activity. This is well supported by both theoretical and empirical studies. This paper contributes to the empirical literature, by examining the relationship between inflation and relative price variability (RPV) in South Africa given the little evidence available and to better understand how this relationship has evolved and the implications for monetary policy. 
@@ -125,7 +133,21 @@ The theoretical literature generally distinguishes between menu-cost and signal 
 
 # Data and methodology
 
+
+
 # Results
+
+```{r}
+#| label: fig-rvp_headline_inflation
+#| fig-cap: "Relative price variance and headline inflation"
+#| fig-width: 8
+#| fig-height: 2.5
+
+price_data_list |> 
+  pluck(2, 2)
+
+```
+
 
 # Conclusion
 
@@ -144,9 +166,20 @@ The theoretical literature generally distinguishes between menu-cost and signal 
 \setcounter{figure}{0}
 \renewcommand{\thefigure}{A\arabic{figure}}
 
-\newpage
+
 
 # Appendix
 
 ## Data
+
+```{r}
+#| label: fig-price_data
+#| fig-cap: "Price categories"
+#| fig-width: 8
+#| fig-height: 9
+
+price_data_list |> 
+  pluck(2, 1)
+```
+
 

@@ -6,7 +6,7 @@ function (data, plotname = " ",
   ggplot(data,
     aes(x = Date, y = Value, col = Series)
   ) +
-    geom_line() +
+    geom_line(linewidth = 0.8) +
     facet_wrap (. ~ Series, scale = scale, ncol = ncol) +
     theme_bw() +
     theme(
@@ -22,7 +22,7 @@ function (data, plotname = " ",
       plot.tag = element_text(size = 8)
     ) +
     labs(x = "", y = plotname) +
-    scale_color_manual(values = pnw_palette("Sunset2", variables_color))
+    scale_color_manual(values = pnw_palette("Winter", variables_color))
 }
 
 
