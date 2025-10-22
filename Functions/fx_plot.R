@@ -8,7 +8,7 @@ function (data, plotname = " ",
   ) +
     geom_line(linewidth = 0.8) +
     facet_wrap (. ~ Series, scale = scale, ncol = ncol) +
-    theme_bw() +
+    theme_minimal() +
     theme(
       legend.position = "none",
       panel.grid.major = element_blank(),
@@ -19,7 +19,8 @@ function (data, plotname = " ",
       strip.background = element_rect(colour = "white", fill = "white"),
       axis.text.x = element_text(angle = 90),
       axis.title = element_text(size = 7),
-      plot.tag = element_text(size = 8)
+      plot.tag = element_text(size = 6),
+      axis.line = element_line(color = "black", linewidth = 0.5)
     ) +
     labs(x = "", y = plotname) +
     scale_color_manual(values = pnw_palette("Winter", variables_color))

@@ -27,7 +27,7 @@ pdf-engine: lualatex
 execute: 
   echo: false
   warning: false
-  cache: true
+  cache: false
 editor: source
 bibliography: references.bib
 biblio-style: apalike
@@ -101,6 +101,7 @@ source(here("Functions","borderlines.R" ))
 ```{r}
 # label: artifacts
 price_data_list <- read_rds(here("Outputs","artifacts_price_data.rds"))
+descriptives_list <- read_rds(here("Outputs","artifacts_descriptives.rds"))
 ```
 
 
@@ -132,21 +133,50 @@ The theoretical literature generally distinguishes between menu-cost and signal 
 # Literature review
 
 # Data and methodology
-
-
-
-# Results
+Our analysis uses monthly inflation data on 45 goods categories from January 2009 to March 2025 obtained from Statistics South Africa (Stats SA).^[\url{http://www.statssa.gov.za/}] **The data is seasonally adjusted using ???.** @fig-headline_inflation below shows the long term inflation rate in South Africa, and @fig-price_data in the appendix shows the various price categories used in the analysis. @tbl-descriptive_stats provides the descriptive statistics of the inflation rates for the various price categories used in the analysis.
 
 ```{r}
-#| label: fig-rvp_headline_inflation
-#| fig-cap: "Relative price variance and headline inflation"
+#| label: fig-headline_inflation
+#| fig-cap: "Headline inflation. Note: The dashed red line is the average inflation over the period."
+#| fig-width: 8
+#| fig-height: 2.5
+
+price_data_list |>
+  pluck(2, 2) 
+
+```
+
+
+The relative price variance (RPV) is calculated in line with @lach1992 as the weighted standard deviation of individual price inflation rates from the aggregate inflation rate. The RPV is essentially the variability of relative prices of a given product. We first calculate the monthly inflation rate as follows:
+
+$$ \pi_{i,t} = ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right) * 100, $${#eq-inflation_rate}
+
+where $\pi_{i,t}$ is the inflation rate of good $i$ at time $t$, $P_{i,t}$ is the price of good $i$ at time $t$, and $P_{i,t-1}$ is the price of good $i$ at time $t-1$. Then, the RPV is calculated as:
+
+$$RPV_{i, t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, $${#eq-rpv}
+
+where  $\omega_{j}$ is the expenditure share of the $j^{th}$ good, $\pi_{t}$ is the headline or aggregate inflation rate at time $t$, and $\sum_{i=1}^{n}\omega_{i} = 1$. The expenditure weights ($\omega_{i}$) used are derived from the Consumer Price Index (CPI) basket provided by Stats SA. @fig-rvp shows the RPV calculated using the above formula.**When where these weigths constructed???**. The weights are shown in @fig-weights in the appendix.
+
+
+```{r}
+#| label: fig-rvp
+#| fig-cap: "Relative price variance"
 #| fig-width: 8
 #| fig-height: 2.5
 
 price_data_list |> 
-  pluck(2, 2)
+  pluck(2, 3)
 
 ```
+
+
+To examine the relationship between inflation and RPV, we estimate the following econometric model:
+$$RPV_{i, t} = \alpha_i + \mu_{i, t} ????, $${#eq-rpv_reg}
+
+where $\alpha_i$ is the constant term and $\mu_{i, t}$ is the error term.
+
+# Results
+
 
 
 # Conclusion
@@ -155,7 +185,7 @@ price_data_list |>
 # References {.unnumbered}
 ::: {#refs}
 :::
-
+\newpage
 
 \setcounter{section}{0}
 \renewcommand{\thesection}{\Alph{section}}
@@ -174,7 +204,7 @@ price_data_list |>
 
 ```{r}
 #| label: fig-price_data
-#| fig-cap: "Price categories"
+#| fig-cap: "Good categories inflation"
 #| fig-width: 8
 #| fig-height: 9
 
@@ -183,3 +213,26 @@ price_data_list |>
 ```
 
 
+```{r}
+#| label: fig-weights
+#| fig-cap: "CPI Weights"
+#| fig-width: 8
+#| fig-height: 5
+
+price_data_list |> 
+  pluck(2, 4)
+```
+
+\newpage
+## Descriptive statistics
+```{r}
+#| label: tbl-descriptive_stats
+#| tbl-cap: "Descriptive statistics"
+
+descriptives_list |> 
+  pluck(1) |> 
+  flextable_word() |>
+  align(j = 1, align = "left", part = "all") |>
+  autofit(add_w = 0.2)
+
+```
