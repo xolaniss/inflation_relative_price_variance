@@ -45,10 +45,61 @@ source(here("Functions", "fx_plot.R"))
 
 # Import and cleaning -------------------------------------------------------------
 sheets_names <- excel_sheets(here("Data", "Price_dispersion data.xlsx"))
+
 data  <- 
   read_excel(here("Data", "Price_dispersion data.xlsx"), sheet = sheets_names[3], skip = 0)
-weights_tbl <- data |> 
-  slice((1:2))
+
+weights_tbl <- 
+  data |> 
+  slice((1:2)) |> 
+  rename( "Cereal products" = cerealprod,
+          "Meat" = meat,
+          "Fish and other seafood" = fish_seafood,
+          "Milk, other dairy products and eggs" = milk_dairy_eggs,
+          "Oils and fats" = oil_fats,
+          "Fruit and nuts" = fruit_nuts,
+          "Vegetables" = veggies,
+          "Sugar, confectionary and desserts" = sugar_dess,
+          "Other food" = other_food,
+          "Hot beverages" = hot_bev,
+          "Cold beverages" = cold_bev,
+          "Spirits" = spirits,
+          "Wine" = wine,
+          "Beer" = beer,
+          "Tobacco" = tobacco,
+          "Clothing" = clothing,
+          "Footwear" = footwear,
+          "Actual rentals for housing" = rentals,
+          "Owners' equivalent rent" = OER,
+          "Maintenance and repairs" = main_repairs,
+          "Water supply and miscellaneous services" = water_sup_serv,
+          "Electricity and other fuels" = electr_ofuels,
+          "Furniture, furnishings and carpets" = furn_carp,
+          "Appliances, tableware and equipment" = app_table_equip,
+          "Goods and services for routine household maintenance" = gs_for_housemain,
+          "Medicines and health products" = med_healthpro,
+          "Health services" = health_serv,
+          "Purchase of vehicles" = purch_vehicle,
+          "Passenger transport services" = pass_trans_serv,
+          "Information and communication equipment" = inf_com_equip,
+          "Information and communication services" = info_com_serv,
+          "Recreational and cultural services" = recr_cult_serv,
+          "Newspapers, books and stationery" = news_book_stat,
+          "Package holidays" = pack_hol,
+          "Primary and secondary education" = prim_sec_edu,
+          "Tertiary education" = tert_edu,
+          "Restaurants" = restaurants,
+          "Accommodation services" = accom_serv,
+          "Personal care" = pers_care,
+          "Other services" = other_serv,
+          "Insurance" = insurance,
+          "Financial services" = fin_serv,
+          "Fuel" = fuel
+  ) |> 
+  slice(-1) |> 
+  dplyr::select(-month, - `headline inflation`, -rvp, -`...47`) |>
+  pivot_longer(everything(), names_to = "Series", values_to = "Weight")
+
 price_data_tbl <- 
   data |> 
   slice(-(1:2)) |> 
@@ -101,6 +152,7 @@ price_data_tbl <-
   "Financial services" = fin_serv,
   "Fuel" = fuel
 )
+
 price_data_names <- 
   read_excel(here("Data", "Price_dispersion data.xlsx"), sheet = sheets_names[8], skip = 0) |> 
   dplyr::select(-1) |> 
@@ -114,7 +166,6 @@ price_data_names <-
 old_names_vec <- as_vector(price_data_names$Old_names)
 new_names_vec <- as_vector(price_data_names$New_names)
 cat(price_data_names$vec, sep = "\n")
-
 # EDA ---------------------------------------------------------------
 price_data_tbl |> glimpse()
 price_data_tbl |> skimr::skim()
@@ -150,53 +201,6 @@ rvp_gg <-
 
 weights_gg <-
   weights_tbl |> 
-  rename( "Cereal products" = cerealprod,
-          "Meat" = meat,
-          "Fish and other seafood" = fish_seafood,
-          "Milk, other dairy products and eggs" = milk_dairy_eggs,
-          "Oils and fats" = oil_fats,
-          "Fruit and nuts" = fruit_nuts,
-          "Vegetables" = veggies,
-          "Sugar, confectionary and desserts" = sugar_dess,
-          "Other food" = other_food,
-          "Hot beverages" = hot_bev,
-          "Cold beverages" = cold_bev,
-          "Spirits" = spirits,
-          "Wine" = wine,
-          "Beer" = beer,
-          "Tobacco" = tobacco,
-          "Clothing" = clothing,
-          "Footwear" = footwear,
-          "Actual rentals for housing" = rentals,
-          "Owners' equivalent rent" = OER,
-          "Maintenance and repairs" = main_repairs,
-          "Water supply and miscellaneous services" = water_sup_serv,
-          "Electricity and other fuels" = electr_ofuels,
-          "Furniture, furnishings and carpets" = furn_carp,
-          "Appliances, tableware and equipment" = app_table_equip,
-          "Goods and services for routine household maintenance" = gs_for_housemain,
-          "Medicines and health products" = med_healthpro,
-          "Health services" = health_serv,
-          "Purchase of vehicles" = purch_vehicle,
-          "Passenger transport services" = pass_trans_serv,
-          "Information and communication equipment" = inf_com_equip,
-          "Information and communication services" = info_com_serv,
-          "Recreational and cultural services" = recr_cult_serv,
-          "Newspapers, books and stationery" = news_book_stat,
-          "Package holidays" = pack_hol,
-          "Primary and secondary education" = prim_sec_edu,
-          "Tertiary education" = tert_edu,
-          "Restaurants" = restaurants,
-          "Accommodation services" = accom_serv,
-          "Personal care" = pers_care,
-          "Other services" = other_serv,
-          "Insurance" = insurance,
-          "Financial services" = fin_serv,
-          "Fuel" = fuel
-          ) |> 
-  slice(-1) |> 
-  dplyr::select(-month, - `headline inflation`, -rvp, -`...47`) |>
-  pivot_longer(everything(), names_to = "Series", values_to = "Weight") |>
   # do a bar plot
   ggplot(aes(x = reorder(Series, Weight), y = Weight, fill = Series)) +
   geom_bar(stat = "identity") +
@@ -222,7 +226,7 @@ weights_gg <-
 artifacts_price_data <- list (
   data = list(
     price_data_tbl = price_data_tbl,
-    weights = weights,
+    weights_tbl = weights_tbl,
     price_data_names = price_data_names
   ),
   plots = list(

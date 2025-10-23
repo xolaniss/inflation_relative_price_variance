@@ -215,7 +215,7 @@ price_data_list |>
 
 ```{r}
 #| label: fig-weights
-#| fig-cap: "CPI Weights"
+#| fig-cap: "CPI Weights. Note: Due to a lack of data, some categories (no spitirits; transport services of goods; household textiles; glassware,tableware, and house utensils; and Tools and equipment for house and garden) have been excluded."
 #| fig-width: 8
 #| fig-height: 5
 
@@ -233,6 +233,5 @@ descriptives_list |>
   pluck(1) |> 
   flextable_word() |>
   align(j = 1, align = "left", part = "all") |>
-  autofit(add_w = 0.2)
-
+  autofit(add_w = 0.2)                                                                                                                              
 ```
