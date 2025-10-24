@@ -44,10 +44,10 @@ library(tictoc)
 source(here("Functions", "fx_plot.R"))
 
 # Import and cleaning -------------------------------------------------------------
-sheets_names <- excel_sheets(here("Data", "Price_dispersion data.xlsx"))
+sheets_names <- excel_sheets(here("Data", "Price_dispersion_data.xlsx"))
 
 data  <- 
-  read_excel(here("Data", "Price_dispersion data.xlsx"), sheet = sheets_names[3], skip = 0)
+  read_excel(here("Data", "Price_dispersion_data.xlsx"), sheet = sheets_names[3], skip = 0)
 
 weights_tbl <- 
   data |> 
@@ -154,7 +154,7 @@ price_data_tbl <-
 )
 
 price_data_names <- 
-  read_excel(here("Data", "Price_dispersion data.xlsx"), sheet = sheets_names[8], skip = 0) |> 
+  read_excel(here("Data", "Price_dispersion_data.xlsx"), sheet = sheets_names[8], skip = 0) |> 
   dplyr::select(-1) |> 
   slice(-(1:3)) |> 
   slice(-((n()-6):n())) |>
@@ -215,7 +215,8 @@ weights_gg <-
     strip.background = element_rect(colour = "white", fill = "white"),
     axis.text.x = element_text(angle = 90),
     axis.title = element_text(size = 8),
-    plot.tag = element_text(size = 8)
+    plot.tag = element_text(size = 8),
+    axis.line = element_line(color = "black", linewidth = 0.2)
   ) +
   labs(x = "", y = "Weight (%)") +
   scale_fill_manual(values = pnw_palette("Winter", 48)) +

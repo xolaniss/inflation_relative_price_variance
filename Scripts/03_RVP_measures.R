@@ -57,50 +57,37 @@ weights_tbl <- read_rds(here("Outputs", "artifacts_price_data.rds")) |>
     Weight = Weight /100
   )
  
-# RVP no division ----------------------------------------------------------
-rvp_no_division_tbl <- 
+# RVP  ------------------------------------------------------------
+rvp_tbl <- 
   price_data_tbl |> 
   mutate(across(
     -Date, ~ (.x - headline_inflation)^2
   )) |> 
-  dplyr::select(-headline_inflation) |>
-  tidyr::pivot_longer(-Date, names_to = "Series", values_to = "Value") |> 
-  left_join(weights_tbl, by = c("Series")) |> 
-  group_by(Date) |> 
-  mutate(
-    weight_diff = Value * Weight
-  ) |> 
- summarise_by_time(.date_var = Date, .by = "month", rvp_no_division = sqrt(sum(weight_diff, na.rm = TRUE))) |> 
-  ungroup() |> 
-  mutate(
-    rvp_no_division = rvp_no_division *100
-  )
-
-# RVP division ------------------------------------------------------------
-rvp_base_version <- 
-  price_data_tbl  |> 
-  mutate(across(
-    -Date, ~ (.x - headline_inflation)^2
-  )) |>  
-  dplyr::select(-headline_inflation) |>
+  dplyr::select(-headline_inflation) |> 
   tidyr::pivot_longer(-c(Date), names_to = "Series", values_to = "Value") |> 
   left_join(weights_tbl, by = c("Series")) |> 
   group_by(Date) |> 
   mutate(
     weight_diff = Value * Weight
   ) |> 
-  summarise_by_time(
-    .date_var = Date,
-    .by = "month",
-    rvp_division = sqrt(sum(weight_diff, na.rm = TRUE)) / abs(1 + price_data_tbl$headline_inflation)
-  ) |> 
-  ungroup() |>
+  reframe(
+    rvp = sqrt(sum(weight_diff, na.rm = TRUE))) |> 
+  left_join(
+      price_data_tbl |> 
+        dplyr::select(Date, headline_inflation),
+      by = "Date"
+    ) |> 
   mutate(
-    rvp_division = rvp_division *100
+    rvp_division = (rvp/abs(1+headline_inflation)) *100,
+    headline_inflation = headline_inflation * 100
+  ) |> 
+  relocate(
+    headline_inflation,
+    .after = rvp_division
   )
 
 rvp_base_version_gg <- 
-  rvp_base_version |> 
+  rvp_tbl |>
   ggplot(aes(x = Date, y = rvp_division)) +
   geom_line() +
   theme_minimal() +
@@ -114,26 +101,22 @@ rvp_base_version_gg <-
     strip.background = element_rect(colour = "white", fill = "white"),
     axis.text.x = element_text(angle = 90),
     axis.title = element_text(size = 8),
-    plot.tag = element_text(size = 8)
+    plot.tag = element_text(size = 8),
+    axis.line = element_line(color = "black", linewidth = 0.2)
   ) +
   labs(x = "", y = "Relative price variance") +
   scale_fill_manual(values = pnw_palette("Winter", 1))
 
 
 
-
 # Export ---------------------------------------------------------------
 artifacts_rvp_measures <- list (
-  rvp_no_division_tbl = rvp_no_division_tbl,
-  rvp_base_version = rvp_base_version,
+  rvp_tbl = rvp_tbl,
   rvp_base_version_gg = rvp_base_version_gg
 )
 
-combined_measures_tbl <- 
-  rvp_no_division_tbl |> 
-  left_join(rvp_base_version, by = "Date")
 
-write_excel_csv(combined_measures_tbl, file = here("Outputs", "rvp_measures.csv"))
+write_excel_csv(rvp_tbl, file = here("Outputs", "rvp_measures.csv"))
 write_rds(artifacts_rvp_measures, file = here("Outputs", "artifacts_rvp_measures.rds"))
 
 

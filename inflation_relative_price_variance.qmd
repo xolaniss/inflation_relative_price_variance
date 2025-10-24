@@ -154,7 +154,7 @@ $$ \pi_{i,t} = ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right) * 100, $${#eq-inflation_
 
 where $\pi_{i,t}$ is the inflation rate of good $i$ at time $t$, $P_{i,t}$ is the price of good $i$ at time $t$, and $P_{i,t-1}$ is the price of good $i$ at time $t-1$. Then, the RPV is calculated as:
 
-$$RPV_{i, t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, $${#eq-rpv}
+$$RPV_{t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, $${#eq-rpv}
 
 where  $\omega_{j}$ is the expenditure share of the $j^{th}$ good, $\pi_{t}$ is the headline or aggregate inflation rate at time $t$, and $\sum_{i=1}^{n}\omega_{i} = 1$. The expenditure weights ($\omega_{i}$) used are derived from the Consumer Price Index (CPI) basket provided by Stats SA. @fig-rvp shows the RPV calculated using the above formula.**When where these weigths constructed???**. The weights are shown in @fig-weights in the appendix.
 
@@ -199,7 +199,7 @@ where $\alpha_i$ is the constant term and $\mu_{i, t}$ is the error term.
 
 
 
-# Appendix
+# Appendix A: Data and descriptive statistics
 
 ## Data
 
@@ -237,7 +237,31 @@ descriptives_list |>
   autofit(add_w = 0)                                                                                                                              
 ```
 
-## Alternative Results
+
+## Stationarity tests
+
+
+\newpage
+
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Alph{section}}
+
+\setcounter{table}{0}
+\renewcommand{\thetable}{B\arabic{table}}
+
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{B\arabic{figure}}
+
+# Appendix B: Alternative Results
+
+## Coefficient of variation version of RPV
+
+The coefficient of variation (CV) version of RPV normalizes the RPV by the aggregate price level to account for changes in the overall price level. This measure is particularly useful when comparing RPV across different time periods or economies with varying inflation rates. The CV version of RPV is calculated as follows:
+
+$$RPV_{t} = \sqrt{\dfrac{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}{|1 + \pi_t|}}, $${#eq-rpvcv}
+
+
+
 ```{r}
 #| label: fig-alt_rvp_measure
 #| fig-cap: "Coefficient of variation version of RPV"

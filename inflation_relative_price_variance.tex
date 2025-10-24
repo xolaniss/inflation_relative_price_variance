@@ -297,7 +297,7 @@ where \(\pi_{i,t}\) is the inflation rate of good \(i\) at time \(t\),
 is the price of good \(i\) at time \(t-1\). Then, the RPV is calculated
 as:
 
-\begin{equation}\phantomsection\label{eq-rpv}{RPV_{i, t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, }\end{equation}
+\begin{equation}\phantomsection\label{eq-rpv}{RPV_{t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, }\end{equation}
 
 where \(\omega_{j}\) is the expenditure share of the \(j^{th}\) good,
 \(\pi_{t}\) is the headline or aggregate inflation rate at time \(t\),
@@ -350,7 +350,8 @@ term.
 \setcounter{figure}{0}
 \renewcommand{\thefigure}{A\arabic{figure}}
 
-\section{Appendix}\label{appendix}
+\section{Appendix A: Data and descriptive
+statistics}\label{appendix-a-data-and-descriptive-statistics}
 
 \subsection{Data}\label{data}
 
@@ -696,7 +697,32 @@ equipment for house and garden) have been excluded.}
 
 \renewcommand*{\arraystretch}{1}
 
-\subsection{Alternative Results}\label{alternative-results}
+\subsection{Stationarity tests}\label{stationarity-tests}
+
+\newpage
+
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Alph{section}}
+
+\setcounter{table}{0}
+\renewcommand{\thetable}{B\arabic{table}}
+
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{B\arabic{figure}}
+
+\section{Appendix B: Alternative
+Results}\label{appendix-b-alternative-results}
+
+\subsection{Coefficient of variation version of
+RPV}\label{coefficient-of-variation-version-of-rpv}
+
+The coefficient of variation (CV) version of RPV normalizes the RPV by
+the aggregate price level to account for changes in the overall price
+level. This measure is particularly useful when comparing RPV across
+different time periods or economies with varying inflation rates. The CV
+version of RPV is calculated as follows:
+
+\begin{equation}\phantomsection\label{eq-rpvcv}{RPV_{t} = \sqrt{\dfrac{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}{|1 + \pi_t|}}, }\end{equation}
 
 \begin{figure}[H]
 

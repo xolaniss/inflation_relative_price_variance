@@ -4,18 +4,24 @@
 VPATH = $(shell find . -type d)
 
 ## List of inputs
-INPUT_TARGETS = artifacts_BA930_mortgages.rds \
-artifacts_bank_level_shares.rds \
+INPUT_TARGETS = artifacts_price_data.rds \
+artifacts_descriptives.rds \
+artifacts_rvp_measures.rds
 
 ## Generating the manuscript 
-mortgage_paper: mortgage_paper.qmd $(INPUT_TARGETS)
+mortgage_paper: inflation_relative_price_variance.qmd $(INPUT_TARGETS)
 	quarto render $<
 	
 ## Generating rds inputs to manuscript
-artifacts_BA930_mortgages.rds: 01_BA930_mortgages.R \
-$(wildcard 4.1 BA930 Multiple Bank Export (*).xlsx)
+artifacts_price_data.rds: 01_price_data.R \
+Price_dispersion_data.xlsx
 	Rscript $<
 
-artifacts_bank_level_shares.rds: 02_calculating_bank_level_splits.R \
-artifacts_BA930_mortgages.rds
+artifacts_descriptives.rds: 02_descriptives.R \
+artifacts_price_data.rds
+	Rscript $
+	
+artifacts_rvp_measures.rds: 03_rvp_measures.R \
+artifacts_price_data.rds
 	Rscript $<
+	
