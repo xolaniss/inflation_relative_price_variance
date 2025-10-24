@@ -92,19 +92,41 @@ rvp_base_version <-
   summarise_by_time(
     .date_var = Date,
     .by = "month",
-    rvp_division = sqrt(sum(weight_diff, na.rm = TRUE)) / abs(1 - price_data_tbl$headline_inflation)
+    rvp_division = sqrt(sum(weight_diff, na.rm = TRUE)) / abs(1 + price_data_tbl$headline_inflation)
   ) |> 
   ungroup() |>
   mutate(
     rvp_division = rvp_division *100
   )
 
+rvp_base_version_gg <- 
+  rvp_base_version |> 
+  ggplot(aes(x = Date, y = rvp_division)) +
+  geom_line() +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  ) +
+  theme(
+    text = element_text(size = 8),
+    strip.background = element_rect(colour = "white", fill = "white"),
+    axis.text.x = element_text(angle = 90),
+    axis.title = element_text(size = 8),
+    plot.tag = element_text(size = 8)
+  ) +
+  labs(x = "", y = "Relative price variance") +
+  scale_fill_manual(values = pnw_palette("Winter", 1))
+
+
 
 
 # Export ---------------------------------------------------------------
 artifacts_rvp_measures <- list (
   rvp_no_division_tbl = rvp_no_division_tbl,
-  rvp_base_version = rvp_base_version
+  rvp_base_version = rvp_base_version,
+  rvp_base_version_gg = rvp_base_version_gg
 )
 
 combined_measures_tbl <- 
