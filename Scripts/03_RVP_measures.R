@@ -79,13 +79,16 @@ rvp_tbl <-
     ) |> 
   mutate(
     rvp_division = (rvp/abs(1+headline_inflation)) *100,
-    headline_inflation = headline_inflation * 100
+    headline_inflation = headline_inflation * 100,
+    rvp = rvp * 100
   ) |> 
   relocate(
     headline_inflation,
     .after = rvp_division
   )
 
+
+# Graphing ----------------------------------------------------------------
 rvp_base_version_gg <- 
   rvp_tbl |>
   ggplot(aes(x = Date, y = rvp_division)) +
