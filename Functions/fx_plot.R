@@ -6,7 +6,7 @@ function (data, plotname = " ",
   ggplot(data,
     aes(x = Date, y = Value, col = Series)
   ) +
-    geom_line(linewidth = 0.8) +
+    geom_line(linewidth = 1) +
     facet_wrap (. ~ Series, scale = scale, ncol = ncol) +
     theme_minimal() +
     theme(
@@ -20,7 +20,7 @@ function (data, plotname = " ",
       axis.text.x = element_text(angle = 90),
       axis.title = element_text(size = 7),
       plot.tag = element_text(size = 6),
-      axis.line = element_line(color = "black", linewidth = 0.5)
+      axis.line = element_line(color = "black", linewidth = 0.2)
     ) +
     labs(x = "", y = plotname) +
     scale_color_manual(values = pnw_palette("Winter", variables_color))

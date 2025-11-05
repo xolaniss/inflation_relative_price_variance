@@ -77,7 +77,7 @@ rvp_stationarity_tbl <-
     Stationarity = ifelse(adf_test < 0.05 & pp_test < 0.05, "Stationary", "Non-Stationary")
   ) # for the rvps could be caused by structural breaks in the data
   
-rvp_stationarity_breakpoint_tbl <- 
+rvp_stationarity_diff_tbl <- 
   rvp_tbl |> 
   pivot_longer(cols = -Date, names_to = "Measure", values_to = "Value") |>
   group_by(Measure) |>
@@ -91,10 +91,11 @@ rvp_stationarity_breakpoint_tbl <-
   
 
 # Export ---------------------------------------------------------------
-artifacts_ <- list (
-
+artifacts_stationarity <- list (
+  rvp_stationarity_tbl = rvp_stationarity_tbl,
+  rvp_stationarity_diff_tbl = rvp_stationarity_diff_tbl
 )
 
-write_rds(artifacts_, file = here("Outputs", "artifacts_.rds"))
+write_rds(artifacts_stationarity, file = here("Outputs", "artifacts_stationarity.rds"))
 
 

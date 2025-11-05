@@ -24,4 +24,5 @@ artifacts_price_data.rds
 artifacts_rvp_measures.rds: 03_rvp_measures.R \
 artifacts_price_data.rds
 	Rscript $<
+
 	
