@@ -8,6 +8,7 @@ INPUT_TARGETS = artifacts_price_data.rds \
 artifacts_descriptives.rds \
 artifacts_rvp_measures.rds
 
+
 ## Generating the manuscript 
 mortgage_paper: inflation_relative_price_variance.qmd $(INPUT_TARGETS)
 	quarto render $<

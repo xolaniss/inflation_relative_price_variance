@@ -280,7 +280,8 @@ various price categories used in the analysis.
 }
 
 \caption{\label{fig-headline_inflation}Headline inflation. Note: The
-dashed red line is the average inflation over the period.}
+dashed red line represents the implementation of the mid-point target of
+4.5\% in 2017.}
 
 \end{figure}%
 
@@ -322,12 +323,412 @@ the appendix.
 
 To examine the relationship between inflation and RPV, we estimate the
 following econometric model:
-\begin{equation}\phantomsection\label{eq-rpv_reg}{RPV_{i, t} = \alpha_i + \mu_{i, t} ????, }\end{equation}
 
-where \(\alpha_i\) is the constant term and \(\mu_{i, t}\) is the error
-term.
+\begin{equation}\phantomsection\label{eq-rpv_reg}{RPV_{t} = \beta_0 + \beta_1,|\pi_{t}| + \sum_{h=1}^{4}\omega_hRVP_{t-h}  +  \mu_{t}, }\end{equation}
+
+where \(RPV_{t}\) is the relative price variance at time \(t\),
+\(|\pi_{t}|\) is the absolute value of the inflation rate at time \(t\),
+\(RVP_{t-h}\) are lagged values of RPV to account for its dynamic
+nature, and \(\mu_{t}\) is the error term. The coefficient \(\beta_1\)
+captures the effect of inflation on RPV. We include up to four lags of
+RPV based on Akaike Information Criterion (AIC) and to capture potential
+persistence in relative price variability.
+
+The literature on RVP emphasises the that the relationship between
+inflation and RPV may be time-varying due to structural changes in the
+economy, monetary policy regimes, and other factors. To capture
+potential time variation in the relationship between inflation and RPV,
+we also estimate a rolling regression model with a \textbf{24-month and
+60-month windows} as follows:
+
+\begin{equation}\phantomsection\label{eq-rpv_rolling_reg}{RPV_{t} = \alpha_{t} + \beta_{1,t}|\pi_{t}| + \sum_{h=1}^{4}\omega_{h,t}RVP_{t-h}  +  \mu_{t}, }\end{equation}
+
+where the coefficients \(\alpha_{t}\), \(\beta_{1,t}\), and
+\(\omega_{h,t}\) are allowed to vary over time. This approach allows us
+to observe the stability of the coefficients over time, which is an
+indicator of non-linearities in the relationship between RPV and
+inflation. Furthermore, we employ a quantile regression approach, which
+is robust to outliers and allows us to examine the relationship between
+inflation and RPV across different points of the RPV distribution. The
+quantile regression model is specified as follows:
+
+\begin{equation}\phantomsection\label{eq-rpv_quantile_reg}{Q_{\tau}(RPV_{t}|\pi_{t}, RPV_{t-1},..., RPV_{t-4}) = \gamma_0 + \gamma_1|\pi_{t}| + \sum_{h=1}^{4}\delta_hRVP_{t-h}, }\end{equation}
+
+where \(Q_{\tau}(RPV_{t}|\pi_{t}, RPV_{t-1},..., RPV_{t-4})\) represents
+the \(\tau^{th}\) quantile of RPV conditional on inflation and its
+lagged values. The coefficients \(\gamma_0\), \(\gamma_1\), and
+\(\delta_h\) capture the effects at different quantiles of the RPV
+distribution.
+
+Lastly, we utilise a semi-parametric or partially linear approach to
+estimate the optimal level of inflation given the RVP. This approach
+allows us to model the relationship between inflation and RPV without
+imposing a strict functional form. Following the literature, we first
+specify a quadratic (U-shaped) relationship between inflation and RPV as
+follows:
+
+\begin{equation}\phantomsection\label{eq-rpv_semi_parametric}{RVP_t = \alpha + \pi_t + \beta_2\pi_t^2 + \sum_{h=1}^{4}\phi_hRVP_{t-h} + \epsilon_t, }\end{equation}
+
+where \(\beta_2\) captures the curvature of the relationship between
+inflation and RPV. The optimal inflation rate that minimizes RPV can be
+derived by taking the first derivative of the equation with respect to
+\(|\pi_t|\) and setting it to zero, yielding:
+
+\begin{equation}\phantomsection\label{eq-optimal_inflation}{\pi_t^* = -\dfrac{1}{2\beta_2}.}\end{equation}
+
+To estimate this optional inflation we implement a semi parametric
+approach as follows:
+
+\begin{equation}\phantomsection\label{eq-rpv_semi_parametric_f}{RVP_t =  f(\pi_t) + \sum_{h=1}^{4}\phi_hRVP_{t-h} + \epsilon_t, }\end{equation}
+
+where \(f(\pi_t)\) is a non-linear smooth differentiable function of
+inflation and the RVP. Therefore, the optimal inflation rate can be
+obtained by finding the minimum of the estimated \(f(\pi_t)\) function.
+\(f(\pi_t)\) is estimated in two stages. First we estimate \(\lambda_h\)
+as follows:
+
+\begin{equation}\phantomsection\label{eq-rpv_semi_parametric_stage1}{ RVP_t = \sum_{h=1}^{4}\lambda_h\overline{RVP}_{t-h} + \eta_t, }\end{equation}
+
+where \(\overline{RVP}_{t-h}\) are the residuals from a non-parametric
+regression of each lag of \(RVP_t\) on \(\pi_t\) . In the second stage,
+we estimate \(f(\pi_t)\) non-parametrically as follows:
+
+\begin{equation}\phantomsection\label{eq-rpv_semi_parametric_stage2}{ \hat{\eta}_t = f(\pi_t) + v_t, }\end{equation}
+
+where \(\hat{\eta}_t\) are the residuals from
+Equation~\ref{eq-rpv_semi_parametric_stage1}, and \(f(\pi_t)\) is
+estimated using a kernel regression method. In both stages we use the
+Nadaraya-Watson kernel estimator. The bandwidth (\(h\)) for the kernel
+estimator is selected using \textbf{cross-validation to minimize the
+mean squared error}. As a treatment for extreme values of inflation, we
+further implement the unbounded Gaussian kernel and the outlier-robust
+Epanechnikov kernel. In essence, the semi-parametric approach captures
+the sensitivity of RPV to marginal increases in inflation. In that case,
+the optimal inflation rate can be obtained by finding the point where
+the first derivative of \(f(\pi_t)\) (\(f'(\pi_t)\)) is equal to zero.
+Therefore, if \(f'(\pi_t) > 0\) (\(f'(\pi_t) < 0\)), then an increase in
+inflation (decrease) leads to an increase (decrease) in RPV.
 
 \section{Results}\label{results}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{inflation_relative_price_variance_files/figure-pdf/fig_rvp_inflation-1.png}
+
+}
+
+\caption{Relative price dispersion vs Inflation}
+
+\end{figure}%
+
+\newpage
+
+\global\setlength{\Oldarrayrulewidth}{\arrayrulewidth}
+
+\global\setlength{\Oldtabcolsep}{\tabcolsep}
+
+\setlength{\tabcolsep}{2pt}
+
+\renewcommand*{\arraystretch}{0.5}
+
+
+
+\providecommand{\ascline}[3]{\noalign{\global\arrayrulewidth #1}\arrayrulecolor[HTML]{#2}\cline{#3}}
+
+\begin{longtable}[l]{|p{3.03in}|p{2.06in}}
+
+\caption{\label{tbl-base_regression}Baseline regression results of RPV
+on absolute inflation}
+
+\tabularnewline
+
+\ascline{1pt}{000000}{1-2}
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{\ }}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Estimate}}}} \\
+
+\ascline{1pt}{000000}{1-2}\endfirsthead 
+
+\ascline{1pt}{000000}{1-2}
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{\ }}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Estimate}}}} \\
+
+\ascline{1pt}{000000}{1-2}\endhead
+
+
+
+\multicolumn{2}{>{\centering}m{\dimexpr 5.09in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP\ Full\ Sample}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{(Intercept)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.15*}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{headline\_inflation}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01\ }}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 1)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.07***}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 2)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.53***}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 3)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.31***}}}} \\
+
+
+
+
+
+\multicolumn{2}{>{\raggedright}m{\dimexpr 5.09in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP\ Pre\ 2017}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\centering}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{(Intercept)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.06\ }}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{headline\_inflation}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01\ }}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 1)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.95***}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 2)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.19\ }}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 3)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.14\ }}}} \\
+
+
+
+
+
+\multicolumn{2}{>{\raggedright}m{\dimexpr 5.09in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP\ Post\ 2017}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\centering}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{(Intercept)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.19*}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{headline\_inflation}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.02\ }}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 1)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.13***}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 2)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.72***}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 3)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.38***}}}} \\
+
+
+
+
+
+\multicolumn{2}{>{\raggedright}m{\dimexpr 5.09in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP\ Full\ Sample\ with\ Squared\ Inflation}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\centering}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{(Intercept)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.28\ }}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{headline\_inflation}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.46*}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{squared\_log\_headline\_infaltion}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.71\ }}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 1)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.05***}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 2)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.51***}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 3)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.29***}}}} \\
+
+
+
+
+
+\multicolumn{2}{>{\raggedright}m{\dimexpr 5.09in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP\ Pre\ 2017\ with\ Squared\ Inflation}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{(Intercept)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.46*}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\centering}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{headline\_inflation}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.63**}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{squared\_log\_headline\_infaltion}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.99**}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 1)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.92***}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 2)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.16\ }}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 3)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.11\ }}}} \\
+
+
+
+
+
+\multicolumn{2}{>{\raggedright}m{\dimexpr 5.09in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP\ Post\ 2017\ with\ Squared\ Inflation}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{(Intercept)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.43\ }}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\centering}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{headline\_inflation}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.68\ }}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{squared\_log\_headline\_infaltion}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-1.01\ }}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 1)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.06***}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 2)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.69***}}}} \\
+
+
+
+
+
+\multicolumn{1}{>{\raggedright}m{\dimexpr 3.03in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{lag(log\_rvp,\ 3)}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.06in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.33***}}}} \\
+
+\ascline{1pt}{000000}{1-2}
+
+
+
+\multicolumn{2}{>{\raggedright}m{\dimexpr 5.09in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Note:\ ***\ =\ p\ value\ <\ 0.01,\ **\ =\ 0.01\ <\ p\ value\ <\ 0.05,\ *\ =\ 0.05\ <\ p\ value\ <\ 0.1.}}}} \\
+
+
+
+
+\end{longtable}
+
+\arrayrulecolor[HTML]{000000}
+
+\global\setlength{\arrayrulewidth}{\Oldarrayrulewidth}
+
+\global\setlength{\tabcolsep}{\Oldtabcolsep}
+
+\renewcommand*{\arraystretch}{1}
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{inflation_relative_price_variance_files/figure-pdf/fig-rolling_coefficients-1.png}
+
+}
+
+\caption{\label{fig-rolling_coefficients}Rolling regression coefficients
+(2 year and 5 year windows)}
+
+\end{figure}%
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{inflation_relative_price_variance_files/figure-pdf/fig-quant_reg-1.png}
+
+}
+
+\caption{\label{fig-quant_reg}RVP quantile regressions estimates}
+
+\end{figure}%
 
 \section{Conclusion}\label{conclusion}
 
@@ -699,6 +1100,67 @@ equipment for house and garden) have been excluded.}
 
 \subsection{Stationarity tests}\label{stationarity-tests}
 
+\global\setlength{\Oldarrayrulewidth}{\arrayrulewidth}
+
+\global\setlength{\Oldtabcolsep}{\tabcolsep}
+
+\setlength{\tabcolsep}{2pt}
+
+\renewcommand*{\arraystretch}{0.5}
+
+
+
+\providecommand{\ascline}[3]{\noalign{\global\arrayrulewidth #1}\arrayrulecolor[HTML]{#2}\cline{#3}}
+
+\begin{longtable}[l]{|p{0.94in}|p{0.97in}|p{0.91in}|p{1.04in}|p{0.67in}}
+
+\caption{\label{tbl-stationarity_tests}Stationarity tests results}
+
+\tabularnewline
+
+\ascline{1pt}{000000}{1-5}
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.94in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Measure}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.97in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{ADF\ test\ (p-value)}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.91in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{PP\ test\ (p-value)}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.04in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{KPSS\ test\ (p-value)}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.67in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Stationarity}}}} \\
+
+\ascline{1pt}{000000}{1-5}\endfirsthead 
+
+\ascline{1pt}{000000}{1-5}
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.94in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Measure}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.97in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{ADF\ test\ (p-value)}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.91in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{PP\ test\ (p-value)}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.04in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{KPSS\ test\ (p-value)}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.67in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Stationarity}}}} \\
+
+\ascline{1pt}{000000}{1-5}\endhead
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.94in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{headline\_inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.97in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.19}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.91in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.24}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.04in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.08}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.67in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Stationary}}}} \\
+
+\ascline{1pt}{FFFFFF}{1-5}
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.94in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{rvp}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.97in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.20}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.91in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.04in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.03}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.67in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Stationary}}}} \\
+
+\ascline{1pt}{FFFFFF}{1-5}
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.94in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{rvp\_division}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.97in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.22}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.91in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.04in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.03}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.67in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Stationary}}}} \\
+
+\ascline{1pt}{000000}{1-5}
+
+
+\end{longtable}
+
+\arrayrulecolor[HTML]{000000}
+
+\global\setlength{\arrayrulewidth}{\Oldarrayrulewidth}
+
+\global\setlength{\tabcolsep}{\Oldtabcolsep}
+
+\renewcommand*{\arraystretch}{1}
+
+\subsection{Lag length selection}\label{lag-length-selection}
+
 \newpage
 
 \setcounter{section}{0}
@@ -716,13 +1178,21 @@ Results}\label{appendix-b-alternative-results}
 \subsection{Coefficient of variation version of
 RPV}\label{coefficient-of-variation-version-of-rpv}
 
-The coefficient of variation (CV) version of RPV normalizes the RPV by
-the aggregate price level to account for changes in the overall price
-level. This measure is particularly useful when comparing RPV across
-different time periods or economies with varying inflation rates. The CV
-version of RPV is calculated as follows:
+The coefficient of variation (CV) version of RPV (or RVP-CV) normalizes
+the RPV by the aggregate price level to account for changes in the
+overall price level. This measure is particularly useful when comparing
+RPV across different time periods or economies with varying inflation
+rates. The RVP-CV is calculated as follows:
 
 \begin{equation}\phantomsection\label{eq-rpvcv}{RPV_{t} = \sqrt{\dfrac{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}{|1 + \pi_t|}}, }\end{equation}
+
+where \(\pi_t\) is the aggregate inflation rate at time \(t\), and
+\(\omega_{i}\) are the inflation basket weights.
+
+\subsection{RPV-CV over-time}\label{rpv-cv-over-time}
+
+Figure~\ref{fig-alt_rvp_measure} shows the CV version of RPV calculated
+using the above formula.
 
 \begin{figure}[H]
 
@@ -732,8 +1202,7 @@ version of RPV is calculated as follows:
 
 }
 
-\caption{\label{fig-alt_rvp_measure}Coefficient of variation version of
-RPV}
+\caption{\label{fig-alt_rvp_measure}RVP-CV over-time}
 
 \end{figure}%
 

@@ -190,8 +190,8 @@ headline_inflation_gg <-
   filter(Series %in% c("headline_inflation")) |> 
   mutate(Series = str_replace(Series, "headline_inflation", "Headline Inflation")) |>
   fx_plot(variables_color = 1) +
-  geom_hline(yintercept = median_headline_inflation$median_value, linewidth = .8, linetype = "dashed", color = "red") 
-  # geom_hline(yintercept = 4.5, linewidth = .8, linetype = "dashed", color = "green")
+  # geom_hline(yintercept = median_headline_inflation$median_value, linewidth = .8, linetype = "dashed", color = "red") + 
+  geom_vline(xintercept = as.Date("2017-07-10"), color = "red", linetype = "dashed")
 
 rvp_gg <- 
   price_data_long_tbl |>

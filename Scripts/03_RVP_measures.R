@@ -44,54 +44,61 @@ library(tictoc)
 source(here("Functions", "fx_plot.R"))
 
 # Import -------------------------------------------------------------
-price_data_tbl <- read_rds(here("Outputs", "artifacts_price_data.rds")) |> 
+rvp_tbl <- read_rds(here("Outputs", "artifacts_price_data.rds")) |> 
   pluck(1, 1) |> 
-  dplyr::select(-rvp) |> 
-  mutate(
-    across(-Date, ~ .x / 100)
-  )
+  dplyr::select(Date, headline_inflation, rvp) 
+  # mutate(
+  #   across(-Date, ~ .x / 100)
+  # )
 
-weights_tbl <- read_rds(here("Outputs", "artifacts_price_data.rds")) |> 
-  pluck(1, 2) |> 
-  mutate(
-    Weight = Weight /100
-  )
- 
-# RVP  ------------------------------------------------------------
-rvp_tbl <- 
-  price_data_tbl |> 
-  mutate(across(
-    -Date, ~ (.x - headline_inflation)^2
-  )) |> 
-  dplyr::select(-headline_inflation) |> 
-  tidyr::pivot_longer(-c(Date), names_to = "Series", values_to = "Value") |> 
-  left_join(weights_tbl, by = c("Series")) |> 
-  group_by(Date) |> 
-  mutate(
-    weight_diff = Value * Weight
-  ) |> 
-  reframe(
-    rvp = sqrt(sum(weight_diff, na.rm = TRUE))) |> 
-  left_join(
-      price_data_tbl |> 
-        dplyr::select(Date, headline_inflation),
-      by = "Date"
-    ) |> 
-  mutate(
-    rvp_division = (rvp/abs(1+headline_inflation)) *100,
-    headline_inflation = headline_inflation * 100,
-    rvp = rvp * 100
-  ) |> 
-  relocate(
-    headline_inflation,
-    .after = rvp_division
-  )
-
-
+# price_data_tbl |> glimpse()
+# weights_tbl <- read_rds(here("Outputs", "artifacts_price_data.rds")) |> 
+#   pluck(1, 2) |> 
+#   mutate(
+#     Weight = Weight /100
+#   )
+#  
+# # RVP  ------------------------------------------------------------
+# rvp_tbl <- 
+#   price_data_tbl |> 
+#   mutate(across(
+#     -Date, ~ (.x - headline_inflation)^2
+#   )) |> 
+#   dplyr::select(-headline_inflation) |> 
+#   tidyr::pivot_longer(-c(Date), names_to = "Series", values_to = "Value") |> 
+#   left_join(weights_tbl, by = c("Series")) |> 
+#   group_by(Date) 
+#   mutate(
+#     weight_diff = Value * Weight
+#   ) |> 
+#   reframe(
+#     rvp = sqrt(sum(weight_diff, na.rm = TRUE))) |> 
+#   left_join(
+#       price_data_tbl |> 
+#         dplyr::select(Date, headline_inflation),
+#       by = "Date"
+#     ) |> 
+#   mutate(
+#     rvp_division = (rvp/abs(1+headline_inflation)) *100,
+#     headline_inflation = headline_inflation * 100,
+#     rvp = rvp * 100
+#   ) |> 
+#   relocate(
+#     headline_inflation,
+#     .after = rvp_division
+#   ) |> 
+#   mutate(log_rvp = log(rvp),
+#          log_rvp_division = log(rvp_division),
+#          log_headline_inflation = log(headline_inflation),
+#          policy_2017_dum = ifelse(Date > as.Date("2017-07-01"), 1, 0)
+#   ) 
+# 
+# rvp_tbl <- price_data_tbl |> 
+#   dplyr::select(Date, headline_inflation, rvp)
 # Graphing ----------------------------------------------------------------
 rvp_base_version_gg <- 
   rvp_tbl |>
-  ggplot(aes(x = Date, y = rvp_division)) +
+  ggplot(aes(x = Date, y = rvp)) +
   geom_line() +
   theme_minimal() +
   theme(
