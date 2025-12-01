@@ -46,7 +46,10 @@ source(here("Functions", "fx_plot.R"))
 # Import -------------------------------------------------------------
 rvp_tbl <- read_rds(here("Outputs", "artifacts_price_data.rds")) |> 
   pluck(1, 1) |> 
-  dplyr::select(Date, headline_inflation, rvp) 
+  dplyr::select(Date, headline_inflation, rvp) |> 
+  mutate(
+    policy_2017_dum = ifelse(Date > as.Date("2017-07-01"), 1, 0)
+  )
   # mutate(
   #   across(-Date, ~ .x / 100)
   # )
@@ -112,9 +115,10 @@ rvp_base_version_gg <-
     axis.text.x = element_text(angle = 90),
     axis.title = element_text(size = 8),
     plot.tag = element_text(size = 8),
-    axis.line = element_line(color = "black", linewidth = 0.2)
+    axis.line = element_line(color = "black", linewidth = 0.2),
+    strip.text = element_blank()
   ) +
-  labs(x = "", y = "Relative price variance") +
+  labs(x = "", y = "Relative price variability") +
   scale_fill_manual(values = pnw_palette("Winter", 1))
 
 

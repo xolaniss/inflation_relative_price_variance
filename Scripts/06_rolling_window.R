@@ -44,7 +44,7 @@ library(tictoc)
 source(here("Functions", "fx_plot.R"))
 roll_modelling <- 
   function(data, window, dep_var){
-    roll_spec <-   slidify(.f =  ~lm(..1 ~ ..2 + ..3 + ..4 + ..5 + ..6), 
+    roll_spec <-   slidify(.f =  ~lm(..1 ~ ..2 + ..3 + ..4 + ..5 ), 
                            .period = window,
                            .align = "right",
                            .unlist = FALSE,
@@ -52,7 +52,7 @@ roll_modelling <-
     )
     
     data |> 
-      mutate(roll = roll_spec({{dep_var}}, abs_headline_inflation, rvp_lag1, rvp_lag2, rvp_lag3, rvp_lag4)) |> 
+      mutate(roll = roll_spec({{dep_var}}, abs_headline_inflation, rvp_lag1, rvp_lag2, rvp_lag3)) |> 
       mutate(tidy = map(roll, broom::tidy)) |> 
       unnest(cols = tidy) |> 
       dplyr::select(Date, term:estimate, statistic, p.value) |> 
@@ -62,7 +62,7 @@ roll_modelling <-
       pivot_longer(-Date, names_to = "Series", values_to = "Value") |>
       mutate(Series = dplyr::recode(
         Series,
-        "estimate_..2" = "beta[1]",
+        "estimate_..2" = "Estimate",
         "statistic_..2" = "t-statistic"))
   }
 
@@ -78,7 +78,6 @@ rvp_data_modelling_tbl <-
   rvp_lag1 = lag(rvp, 1),
   rvp_lag2 = lag(rvp, 2),
   rvp_lag3 = lag(rvp, 3),
-  rvp_lag4 = lag(rvp, 4),
   abs_headline_inflation = abs(headline_inflation)) |> 
   dplyr::select(-headline_inflation) |> 
   drop_na() 
@@ -89,20 +88,20 @@ roll_rvp_models_2_year_tbl <-
   roll_modelling(dep_var = rvp, window = 24) |> 
   filter(Date >= ymd("2011-05-31")) 
 
-roll_rvp_2_year_gg <- 
+roll_rvp_2_year_gg <-
   fx_plot(roll_rvp_models_2_year_tbl, variables_color = 2) +
-  facet_wrap (. ~ Series, scale = "free", labeller = label_parsed) + 
-  labs(subtitle = "2-year window")
-
-roll_rvp_division_models_2_year_tbl <- 
-  rvp_data_modelling_tbl |> 
-  roll_modelling(dep_var = rvp_division, window = 24) |> 
-  filter(Date >= ymd("2011-05-31"))
-
-roll_rvp_division_2_year_gg <- 
-  fx_plot(roll_rvp_division_models_2_year_tbl, variables_color = 2) +
   facet_wrap (. ~ Series, scale = "free", labeller = label_parsed) +
-  labs(subtitle = "2-year window")
+  labs(subtitle = "2-year window") 
+
+# roll_rvp_division_models_2_year_tbl <- 
+#   rvp_data_modelling_tbl |> 
+#   roll_modelling(dep_var = rvp_division, window = 24) |> 
+#   filter(Date >= ymd("2011-05-31"))
+# 
+# roll_rvp_division_2_year_gg <- 
+#   fx_plot(roll_rvp_division_models_2_year_tbl, variables_color = 2) +
+#   facet_wrap (. ~ Series, scale = "free", labeller = label_parsed) +
+#   labs(subtitle = "2-year window")
 
 ## 5_year window ---------------
 roll_rvp_models_5_year_tbl <- 
@@ -112,39 +111,30 @@ roll_rvp_models_5_year_tbl <-
 
 roll_rvp_5_year_gg <- fx_plot(roll_rvp_models_5_year_tbl, variables_color = 2) +
   facet_wrap (. ~ Series, scale = "free", labeller = label_parsed) +
-  labs(subtitle = "5-year window") 
+  labs(subtitle = "5-year window", caption = "Note: t-statistics of greater (or less) than 1.96 ( or -1.96) is sigficant at a 5% level of significance.") 
 
-roll_rvp_division_models_5_year_tbl <- 
-  rvp_data_modelling_tbl |> 
-  roll_modelling(dep_var = rvp_division, window = 60) |> 
-  filter(Date >= ymd("2014-05-31"))
-
-roll_rvp_division_5_year_gg <- fx_plot(roll_rvp_division_models_5_year_tbl, variables_color = 2) +
-  facet_wrap (. ~ Series, scale = "free", labeller = label_parsed) +
-  labs(subtitle = "5-year window") 
+# roll_rvp_division_models_5_year_tbl <- 
+#   rvp_data_modelling_tbl |> 
+#   roll_modelling(dep_var = rvp_division, window = 60) |> 
+#   filter(Date >= ymd("2014-05-31"))
+# 
+# roll_rvp_division_5_year_gg <- fx_plot(roll_rvp_division_models_5_year_tbl, variables_color = 2) +
+#   facet_wrap (. ~ Series, scale = "free", labeller = label_parsed) +
+#   labs(subtitle = "5-year window") 
 
 ## Combined plots ----------------
 rvp_combined_gg <- 
   roll_rvp_2_year_gg /
   roll_rvp_5_year_gg 
 
-rvp_division_combined_gg <- 
-  roll_rvp_division_2_year_gg /
-  roll_rvp_division_5_year_gg 
+# rvp_division_combined_gg <- 
+#   roll_rvp_division_2_year_gg /
+#   roll_rvp_division_5_year_gg 
   
 # Export ---------------------------------------------------------------
 artifacts_roll <- list (
-  data = list(
-    roll_rvp_models_2_year_tbl = roll_rvp_models_2_year_tbl,
-    roll_rvp_division_models_2_year_tbl = roll_rvp_division_models_2_year_tbl,
-    roll_rvp_models_5_year_tbl = roll_rvp_models_5_year_tbl,
-    roll_rvp_division_models_5_year_tbl = roll_rvp_division_models_5_year_tbl
-  ),
-  graphs = list(
-      rvp_combined_gg = rvp_combined_gg,
-      rvp_division_combined_gg = rvp_division_combined_gg
+      rvp_combined_gg = rvp_combined_gg
   )
-)
 
 write_rds(artifacts_roll, file = here("Outputs", "artifacts_roll.rds"))
 

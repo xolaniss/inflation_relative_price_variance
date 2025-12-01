@@ -42,7 +42,6 @@ title-block-banner: false
 title-block-style: none
 ---
 
-
 ```{r setup}
 #| include=FALSE
 options(scipen=999)
@@ -98,48 +97,103 @@ source(here("Functions","modelplot_word.R" ))
 source(here("Functions","borderlines.R" ))
 ```
 
-
-```{r}
-# label: artifacts
+```{r data_loading}
 price_data_list <- read_rds(here("Outputs","artifacts_price_data.rds"))
 descriptives_list <- read_rds(here("Outputs","artifacts_descriptives.rds"))
 rvp_measures <- read_rds(here("Outputs", "artifacts_rvp_measures.rds"))
+regressions <- read_rds(here("Outputs","artifacts_base_regression.rds"))
+roll_regressions <- read_rds(here("Outputs","artifacts_roll.rds")) 
+recursive_regression <- read_rds(here("Outputs","artifacts_recursive.rds"))
 ```
-
 
 # Introduction
 
-Inflation is known to have adverse welfare effects through its distortion of relative prices which causes the misallocation of resources, production inefficiencies leading to lower real economic activity. This is well supported by both theoretical and empirical studies. This paper contributes to the empirical literature, by examining the relationship between inflation and relative price variability (RPV) in South Africa given the little evidence available and to better understand how this relationship has evolved and the implications for monetary policy. 
+Inflation is known to have adverse welfare effects through its distortion of relative prices which causes the misallocation of resources, production inefficiencies leading to lower real economic activity. This is well supported by both theoretical and empirical studies. This paper contributes to the empirical literature, by examining the relationship between inflation and relative price variability (RPV) in South Africa given the little evidence available and to better understand how this relationship has evolved and the implications for monetary policy.
 
-The South African context can provide further insights into the relationship between inflation and RPV given the shifts in the inflation targets from 3- 6 per cent in 2000 to 4.5 per cent since 2017 as structural changes in inflation can affect the link between inflation and relative price variability [@caglayan2003] and that the functional form of relationship is U-shaped and dynamic [@fielding2000; @choi2010]. The latter motivates the estimation of the inflation rate that minimizes relative price distortions since if the relationship was linear then the optimal inflation rate would be zero. Given the inflation target reform towards a 3% in South Africa, this study contributes to the policy discussion on the appropriate inflation target and understating how dynamic relations between inflation and relative price variability has evolved. 
+The South African context can provide further insights into the relationship between inflation and RPV given the shifts in the inflation targets from 3-6 per cent in 2000 to 4.5 per cent since 2017 as structural changes in inflation can affect the link between inflation and relative price variability [@caglayan2003] and that the functional form of relationship is U-shaped and dynamic [@fielding2000; @choi2010]. The latter motivates the estimation of the inflation rate that minimizes relative price distortions since if the relationship was linear then the optimal inflation rate would be zero. Given the inflation target reform towards a 3% in South Africa, this study contributes to the policy discussion on the appropriate inflation target and understating how dynamic relations between inflation and relative price variability has evolved.
 
-The theoretical literature generally distinguishes between menu-cost and signal extraction models in explaining the positive relation between trend inflation and RVP.  In these models’ firms follow a one-sided dynamic pricing rule  when setting prices and face fixed non-zero costs of adjusting nominal prices (e.g. printing new menus) when inflation increases as the latter reduces the optimal real price of goods and services. Due to differences in administrative costs, these nominal price adjustment costs vary across firms moreover these adjustments occur at different times which implies staggard price setting behaviour which leads to relative price variability. Menu cost models predict a that higher expected  inflation causes an increase in RVP (citations xxx) while Lucas-type signal extraction models (Lucas(1973); Hercowitz (1981); Cukierman (1984) xxxx more citatiosn) argue unexpected inflation uncertainty causes higher RVP because informational frictions make it difficult to distinguish between idiosyncratic relative shocks or an aggregate (inflationary) shock. Menu cost and signal-extraction models assume a positive and linear relationship making the optimal inflation rate zero, however, recently monetary search models [@head2005] show that this relationship is nonlinear making the optimal inflation rate somewhere between zero and positive inflation rate.  
+The theoretical literature generally distinguishes between menu-cost and signal extraction models in explaining the positive relation between trend inflation and RVP. In these models’ firms follow a one-sided dynamic pricing rule when setting prices and face fixed non-zero costs of adjusting nominal prices (e.g. printing new menus) when inflation increases as the latter reduces the optimal real price of goods and services. Due to differences in administrative costs, these nominal price adjustment costs vary across firms moreover these adjustments occur at different times which implies staggard price setting behaviour which leads to relative price variability. Menu cost models predict a that higher expected inflation causes an increase in RVP (citations xxx) while Lucas-type signal extraction models (Lucas(1973); Hercowitz (1981); Cukierman (1984) xxxx more citatiosn) argue unexpected inflation uncertainty causes higher RVP because informational frictions make it difficult to distinguish between idiosyncratic relative shocks or an aggregate (inflationary) shock. Menu cost and signal-extraction models assume a positive and linear relationship making the optimal inflation rate zero, however, recently monetary search models [@head2005] show that this relationship is nonlinear making the optimal inflation rate somewhere between zero and positive inflation rate.
 
 # Citations
-@adam2024 
-@baglan2016
-@ball1993
-@benabou1993
-@caglayan2003
-@caglayan2008
-@grier1996
-@lach1992
-@nakamura2018
-@ndou2014
-@ndou2017
-@parks1978
-@parsley1996
-@rather2018
 
+@adam2024 @baglan2016 @ball1993 @benabou1993 @caglayan2003 @caglayan2008 @grier1996 @lach1992 @nakamura2018 @ndou2014 @ndou2017 @parks1978 @parsley1996 @rather2018
 
 # Literature review
 
 # Data and methodology
-Our analysis uses monthly inflation data on 45 goods categories from January 2009 to March 2025 obtained from Statistics South Africa (Stats SA).^[\url{http://www.statssa.gov.za/}] **The data is seasonally adjusted using ???.** @fig-headline_inflation below shows the long term inflation rate in South Africa, and @fig-price_data in the appendix shows the various price categories used in the analysis. @tbl-descriptive_stats provides the descriptive statistics of the inflation rates for the various price categories used in the analysis.
+
+Our analysis uses monthly inflation data on 45 goods categories from January 2009 to March 2025 obtained from Statistics South Africa (Stats SA).[^1] **The data is seasonally adjusted using ???.** @fig-headline_inflation below shows the long term inflation rate in South Africa, and @fig-price_data in the appendix shows the various price categories used in the analysis. @tbl-descriptive_stats provides the descriptive statistics of the inflation rates for the various price categories used in the analysis.
+
+[^1]: \url{http://www.statssa.gov.za/}
+
+
+
+The relative price variance (RPV) is calculated in line with @lach1992 as the weighted standard deviation of individual price inflation rates from the aggregate inflation rate. The RPV is essentially the variability of relative prices of a given product. We first calculate the monthly inflation rate as follows:
+
+$$ \pi_{i,t} = ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right) * 100, $$ {#eq-inflation_rate}
+
+where $\pi_{i,t}$ is the inflation rate of good $i$ at time $t$, $P_{i,t}$ is the price of good $i$ at time $t$, and $P_{i,t-1}$ is the price of good $i$ at time $t-1$. Then, the RPV is calculated as:
+
+$$RPV_{t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, $$ {#eq-rpv}
+
+where $\omega_{j}$ is the expenditure share of the $j^{th}$ good, $\pi_{t}$ is the headline or aggregate inflation rate at time $t$, and $\sum_{i=1}^{n}\omega_{i} = 1$. The expenditure weights ($\omega_{i}$) used are derived from the Consumer Price Index (CPI) basket provided by Stats SA. @fig-rvp shows the RPV calculated using the above formula.**When where these weigths constructed???**. The weights are shown in @fig-weights in the appendix.
+
+To examine the relationship between inflation and RPV, we estimate the following econometric model:
+
+$$RPV_{t} = \beta_0 + \beta_1,|\pi_{t}| + \sum_{h=1}^{3}\omega_hRVP_{t-h}  +  \mu_{t}, $$ {#eq-rpv_reg}
+
+where $RPV_{t}$ is the relative price variance at time $t$, $|\pi_{t}|$ is the absolute value of the inflation rate at time $t$, $RVP_{t-h}$ are lagged values of RPV to account for its dynamic nature, and $\mu_{t}$ is the error term. The coefficient $\beta_1$ captures the effect of inflation on RPV. We include up to four lags of RPV based on Akaike Information Criterion (AIC) (and other tests, see @tbl-lag_selection)  and to capture potential persistence in relative price variability.
+
+The literature on RVP emphasises the that the relationship between inflation and RPV may be time-varying due to structural changes in the economy, monetary policy regimes, and other factors. To capture potential time variation in the relationship between inflation and RPV, we also estimate a rolling regression model with a **24-month and 60-month windows** as follows:
+
+$$RPV_{t} = \alpha_{t} + \beta_{1,t}|\pi_{t}| + \sum_{h=1}^{3}\omega_{h,t}RVP_{t-h}  +  \mu_{t}, $$ {#eq-rpv_rolling_reg}
+
+where the coefficients $\alpha_{t}$, $\beta_{1,t}$, and $\omega_{h,t}$ are allowed to vary over time. This approach allows us to observe the stability of the coefficients over time, which is an indicator of non-linearities in the relationship between RPV and inflation. Furthermore, we employ a quantile regression approach, which is robust to outliers and allows us to examine the relationship between inflation and RPV across different points of the RPV distribution. The quantile regression model is specified as follows:
+
+$$Q_{\tau}(RPV_{t}|\pi_{t}, RPV_{t-1},..., RPV_{t-3}) = \gamma_0 + \gamma_1|\pi_{t}| + \sum_{h=1}^{3}\delta_hRVP_{t-h}, $$ {#eq-rpv_quantile_reg}
+
+where $Q_{\tau}(RPV_{t}|\pi_{t}, RPV_{t-1},..., RPV_{t-3})$ represents the $\tau^{th}$ quantile of RPV conditional on inflation and its lagged values. The coefficients $\gamma_0$, $\gamma_1$, and $\delta_h$ capture the effects at different quantiles of the RPV distribution.
+
+Lastly, we utilise a semi-parametric or partially linear approach to estimate the optimal level of inflation given the RVP. This approach allows us to model the relationship between inflation and RPV without imposing a strict functional form. Following the literature, we first specify a quadratic (U-shaped) relationship between inflation and RPV as follows:
+
+$$RVP_t = \alpha + \pi_t + \beta_2\pi_t^2 + \sum_{h=1}^{3}\phi_hRVP_{t-h} + \epsilon_t, $$ {#eq-rpv_semi_parametric}
+
+where $\beta_2$ captures the curvature of the relationship between inflation and RPV. The optimal inflation rate that minimizes RPV can be derived by taking the first derivative of the equation with respect to $|\pi_t|$ and setting it to zero, yielding:
+
+$$\pi_t^* = -\dfrac{1}{2\beta_2}.$$ {#eq-optimal_inflation}
+
+To estimate this optional inflation we implement a semi parametric approach as follows:
+
+$$RVP_t =  f(\pi_t) + \sum_{h=1}^{3}\phi_hRVP_{t-h} + \epsilon_t, $$ {#eq-rpv_semi_parametric_f}
+
+where $f(\pi_t)$ is a non-linear smooth differentiable function of inflation and the RVP. Therefore, the optimal inflation rate can be obtained by finding the minimum of the estimated $f(\pi_t)$ function. $f(\pi_t)$ is estimated in two stages. First we estimate $\lambda_h$ as follows:
+
+$$ RVP_t = \sum_{h=1}^{3}\lambda_h\overline{RVP}_{t-h} + \eta_t, $$ {#eq-rpv_semi_parametric_stage1}
+
+where $\overline{RVP}_{t-h}$ are the residuals from a non-parametric regression of each lag of $RVP_t$ on $\pi_t$ . In the second stage, we estimate $f(\pi_t)$ non-parametrically as follows:
+
+$$ \hat{\eta}_t = f(\pi_t) + v_t, $$ {#eq-rpv_semi_parametric_stage2}
+
+where $\hat{\eta}_t$ are the residuals from @eq-rpv_semi_parametric_stage1, and $f(\pi_t)$ is estimated using a kernel regression method. In both stages we use the Nadaraya-Watson kernel estimator. The bandwidth ($h$) for the kernel estimator is selected using cross-validation to minimize the mean squared error. As a treatment for extreme values of inflation, we further implement the unbounded Gaussian kernel and the outlier-robust Epanechnikov kernel. In essence, the semi-parametric approach captures the sensitivity of RPV to marginal increases in inflation. In that case, the optimal inflation rate can be obtained by finding the point where the first derivative of $f(\pi_t)$ ($f'(\pi_t)$) is equal to zero. Therefore, if $f'(\pi_t) > 0$ ($f'(\pi_t) < 0$), then an increase in inflation (decrease) leads to an increase (decrease) in RPV.
+
+# Results
+
+```{r}
+#| label: fig-rvp
+#| fig-cap: "Relative price variability over-time"
+#| fig-width: 8
+#| fig-height: 2.5
+
+rvp_measures |> 
+  pluck(2)
+
+```
+
+
 
 ```{r}
 #| label: fig-headline_inflation
-#| fig-cap: "Headline inflation. Note: The dashed red line represents the implementation of the mid-point target of 4.5% in 2017."
+#| fig-cap: "Headline inflation (%). Note: The dashed red line represents the implementation of the mid-point target of 4.5% in 2017."
 #| fig-width: 8
 #| fig-height: 2.5
 
@@ -149,86 +203,20 @@ price_data_list |>
 ```
 
 
-The relative price variance (RPV) is calculated in line with @lach1992 as the weighted standard deviation of individual price inflation rates from the aggregate inflation rate. The RPV is essentially the variability of relative prices of a given product. We first calculate the monthly inflation rate as follows:
-
-$$ \pi_{i,t} = ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right) * 100, $${#eq-inflation_rate}
-
-where $\pi_{i,t}$ is the inflation rate of good $i$ at time $t$, $P_{i,t}$ is the price of good $i$ at time $t$, and $P_{i,t-1}$ is the price of good $i$ at time $t-1$. Then, the RPV is calculated as:
-
-$$RPV_{t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, $${#eq-rpv}
-
-where  $\omega_{j}$ is the expenditure share of the $j^{th}$ good, $\pi_{t}$ is the headline or aggregate inflation rate at time $t$, and $\sum_{i=1}^{n}\omega_{i} = 1$. The expenditure weights ($\omega_{i}$) used are derived from the Consumer Price Index (CPI) basket provided by Stats SA. @fig-rvp shows the RPV calculated using the above formula.**When where these weigths constructed???**. The weights are shown in @fig-weights in the appendix.
-
-
-```{r}
-#| label: fig-rvp
-#| fig-cap: "Relative price variance"
-#| fig-width: 8
-#| fig-height: 2.5
-
-price_data_list |> 
-  pluck(2, 3)
-
-```
-
-
-To examine the relationship between inflation and RPV, we estimate the following econometric model:
-
-$$RPV_{t} = \beta_0 + \beta_1,|\pi_{t}| + \sum_{h=1}^{4}\omega_hRVP_{t-h}  +  \mu_{t}, $${#eq-rpv_reg}
-
-where $RPV_{t}$ is the relative price variance at time $t$, $|\pi_{t}|$ is the absolute value of the inflation rate at time $t$, $RVP_{t-h}$ are lagged values of RPV to account for its dynamic nature, and $\mu_{t}$ is the error term. The coefficient $\beta_1$ captures the effect of inflation on RPV. We include up to four lags of RPV based on Akaike Information Criterion (AIC) and to capture potential persistence in relative price variability.
-
-
-The literature on RVP emphasises the that the relationship between inflation and RPV may be time-varying due to structural changes in the economy, monetary policy regimes, and other factors. To capture potential time variation in the relationship between inflation and RPV, we also estimate a rolling regression model with a **24-month and 60-month windows** as follows:
-
-$$RPV_{t} = \alpha_{t} + \beta_{1,t}|\pi_{t}| + \sum_{h=1}^{4}\omega_{h,t}RVP_{t-h}  +  \mu_{t}, $${#eq-rpv_rolling_reg}
-
-where the coefficients $\alpha_{t}$, $\beta_{1,t}$, and $\omega_{h,t}$ are allowed to vary over time. This approach allows us to observe the stability of the coefficients over time, which is an indicator of non-linearities in the relationship between RPV and inflation. Furthermore, we employ a quantile regression approach, which is robust to outliers and allows us to examine the relationship between inflation and RPV across different points of the RPV distribution. The quantile regression model is specified as follows:
-
-$$Q_{\tau}(RPV_{t}|\pi_{t}, RPV_{t-1},..., RPV_{t-4}) = \gamma_0 + \gamma_1|\pi_{t}| + \sum_{h=1}^{4}\delta_hRVP_{t-h}, $${#eq-rpv_quantile_reg}
-
-where $Q_{\tau}(RPV_{t}|\pi_{t}, RPV_{t-1},..., RPV_{t-4})$ represents the $\tau^{th}$ quantile of RPV conditional on inflation and its lagged values. The coefficients $\gamma_0$, $\gamma_1$, and $\delta_h$ capture the effects at different quantiles of the RPV distribution.
-
-Lastly, we utilise a semi-parametric or partially linear approach to estimate the optimal level of inflation given the RVP. This approach allows us to model the relationship between inflation and RPV without imposing a strict functional form. Following the literature, we first specify a quadratic (U-shaped) relationship between inflation and RPV as follows:
-
-$$RVP_t = \alpha + \pi_t + \beta_2\pi_t^2 + \sum_{h=1}^{4}\phi_hRVP_{t-h} + \epsilon_t, $${#eq-rpv_semi_parametric}
-
-where $\beta_2$ captures the curvature of the relationship between inflation and RPV. The optimal inflation rate that minimizes RPV can be derived by taking the first derivative of the equation with respect to $|\pi_t|$ and setting it to zero, yielding:
-
-$$\pi_t^* = -\dfrac{1}{2\beta_2}.$$ {#eq-optimal_inflation}
-
-To estimate this optional inflation we implement a semi parametric approach as follows:
-
-$$RVP_t =  f(\pi_t) + \sum_{h=1}^{4}\phi_hRVP_{t-h} + \epsilon_t, $${#eq-rpv_semi_parametric_f}
-
-where $f(\pi_t)$ is a non-linear smooth differentiable function of inflation and the RVP. Therefore, the optimal inflation rate can be obtained by finding the minimum of the estimated $f(\pi_t)$ function. $f(\pi_t)$ is estimated in two stages. First we estimate  $\lambda_h$ as follows:
-
-$$ RVP_t = \sum_{h=1}^{4}\lambda_h\overline{RVP}_{t-h} + \eta_t, $${#eq-rpv_semi_parametric_stage1}
-
-where $\overline{RVP}_{t-h}$ are the residuals from a non-parametric regression of each lag of $RVP_t$ on $\pi_t$ . In the second stage, we estimate $f(\pi_t)$ non-parametrically as follows:
-
-$$ \hat{\eta}_t = f(\pi_t) + v_t, $${#eq-rpv_semi_parametric_stage2}
-
-where $\hat{\eta}_t$ are the residuals from @eq-rpv_semi_parametric_stage1, and $f(\pi_t)$ is estimated using a kernel regression method. In both stages we use the Nadaraya-Watson kernel estimator. The bandwidth ($h$) for the kernel estimator is selected using **cross-validation to minimize the mean squared error**. As a treatment for extreme values of inflation, we further implement the unbounded Gaussian kernel and the outlier-robust Epanechnikov kernel. In essence, the semi-parametric approach captures the sensitivity of RPV to marginal increases in inflation. In that case, the optimal inflation rate can be obtained by finding the point where the first derivative of $f(\pi_t)$ ($f'(\pi_t)$)  is equal to zero. Therefore, if $f'(\pi_t) > 0$ ($f'(\pi_t) < 0$), then an increase in inflation (decrease) leads to an increase (decrease) in RPV.
-
-
-# Results
-
 ```{r}
 #| label: fig_rvp_inflation
-#| fig-cap: "Relative price dispersion vs Inflation"
+#| fig-cap: "Relative price variability vs headline Inflation"
 #| fig-width: 8
 #| fig-height: 4
 
-library(magick)
 rvp_measures|> 
   pluck(1) |> 
 ggplot(aes(x = headline_inflation, y = rvp, color = factor(policy_2017_dum))) +
   geom_point() +
   geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = TRUE) +
   labs(
-       y = "RVP", 
-       x = "Inflation",
+       y = "Relative price variability ", 
+       x = "Inflation rate (%)",
        color = "Period") +
   scale_color_manual(values =  pnw_palette("Winter", 2), 
                      labels = c("After Jul 2017", "Before Jul 2017")) +
@@ -253,11 +241,11 @@ ggplot(aes(x = headline_inflation, y = rvp, color = factor(policy_2017_dum))) +
 
 ```{r}
 #| label: tbl-base_regression
-#| tbl-cap: "Baseline regression results of RPV on absolute inflation"
+#| tbl-cap: "Baseline regressions"
+#| ft.arraystretch: 0.4
 
-
-read_rds(here("Outputs","artifacts_base_regression.rds")) |> 
-  pluck(3) |> 
+regressions |> 
+  pluck(2) |> 
   rename(
     " " = term,
     "Estimate" = estimate
@@ -271,20 +259,32 @@ read_rds(here("Outputs","artifacts_base_regression.rds")) |>
         "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."), 
       colwidths = 2) |>
   width(j = 1, width = 0.05) |>
-  align(i = c(1, 8, 14, 20, 28, 35), align = "center", part = "body") |>
+  align(i = c(1, 12, 20, 28, 39, 47), align = "center", part = "body") |>
   align(j = 2, align = "center", part = "all") |>
-  autofit(add_w = 1.5)
+  autofit(add_w = 2.1)
 ```
-
 
 ```{r}
 #| label: fig-rolling_coefficients
-#| fig-cap: "Rolling regression coefficients (2 year and 5 year windows)"
+#| fig-cap: "Rolling regression  "
 #| fig-width: 8
 #| fig-height: 6
 
-read_rds(here("Outputs","artifacts_roll.rds")) |> 
-  pluck(2, 1)
+roll_regressions |>
+  pluck(1)
+
+```
+
+
+
+```{r}
+#| label: fig-recursive
+#| fig-cap: "Recursive regression results of RPV on absolute inflation"
+#| fig-width: 8
+#| fig-height: 4
+
+recursive_regression |> 
+  pluck(1)
 
 ```
 
@@ -292,7 +292,7 @@ read_rds(here("Outputs","artifacts_roll.rds")) |>
 
 ```{r}
 #| label: fig-quant_reg
-#| fig-cap: "RVP quantile regressions estimates"
+#| fig-cap: "RVP quantile regressions"
 #| fig-width: 8
 #| fig-height: 4
 
@@ -300,42 +300,38 @@ read_rds(here("Outputs","artifacts_quant_reg.rds")) |>
   pluck(1)
 
 ```
-
-
-
+\newpage
 # Conclusion
 
-\newpage 
+\newpage
+
 # References {.unnumbered}
+
 ::: {#refs}
 :::
+
 \newpage
 
 \setcounter{section}{0}
 \renewcommand{\thesection}{\Alph{section}}
-
 \setcounter{table}{0}
 \renewcommand{\thetable}{A\arabic{table}}
-
 \setcounter{figure}{0}
 \renewcommand{\thefigure}{A\arabic{figure}}
 
-
-
-# Appendix A: Data and descriptive statistics
+# Appendix: Data and descriptive statistics
 
 ## Data
 
 ```{r}
 #| label: fig-price_data
-#| fig-cap: "Good categories inflation"
+#| fig-cap: "Inflation categories (%)"
 #| fig-width: 8
 #| fig-height: 9
 
 price_data_list |> 
   pluck(2, 1)
 ```
-
 
 ```{r}
 #| label: fig-weights
@@ -348,7 +344,9 @@ price_data_list |>
 ```
 
 \newpage
+
 ## Descriptive statistics
+
 ```{r}
 #| label: tbl-descriptive_stats
 #| tbl-cap: "Descriptive statistics"
@@ -360,66 +358,75 @@ descriptives_list |>
   autofit(add_w = 0)                                                                                                                              
 ```
 
-
+\newpage
 ## Stationarity tests
+
 ```{r}
 #| label: tbl-stationarity_tests
 #| tbl-cap: "Stationarity tests results"
 
 read_rds(here("Outputs","artifacts_stationarity.rds")) |> 
   pluck(1) |> 
+  mutate(
+    Measure = str_replace_all(Measure,
+    c("headline_inflation" = "Headline Inflation",
+      "rvp" = "RVP")),
+  ) |> 
   flextable_word() |>
   align(j = 1, align = "left", part = "all") |>
-  autofit(add_w = 0)
+  autofit(add_w = 0.2)
 ```
-
-
-
 
 ## Lag length selection
+
 ```{r}
+#| label: tbl-lag_selection
+#| tbl-cap: "RVP lag length selection"
+
+regressions |> 
+  pluck(1) |> 
+  mutate(
+    across(
+      where(is.numeric),
+      ~ round(.x, 0)
+    )
+  ) |> 
+  flextable_word() |> 
+  colformat_double(j = 2, digits = 0) |>
+  autofit(add_w = 2.5)
+
 
 ```
-
-
 
 \newpage
 
-\setcounter{section}{0}
-\renewcommand{\thesection}{\Alph{section}}
-
 \setcounter{table}{0}
 \renewcommand{\thetable}{B\arabic{table}}
-
 \setcounter{figure}{0}
 \renewcommand{\thefigure}{B\arabic{figure}}
 
-# Appendix B: Alternative Results
+# Appendix: Alternative Results
 
 ## Coefficient of variation version of RPV
 
 The coefficient of variation (CV) version of RPV (or RVP-CV) normalizes the RPV by the aggregate price level to account for changes in the overall price level. This measure is particularly useful when comparing RPV across different time periods or economies with varying inflation rates. The RVP-CV is calculated as follows:
 
-$$RPV_{t} = \sqrt{\dfrac{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}{|1 + \pi_t|}}, $${#eq-rpvcv}
+$$RPV_{t} = \sqrt{\dfrac{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}{|1 + \pi_t|}}, $$ {#eq-rpvcv}
 
-where $\pi_t$ is the aggregate inflation rate at time $t$, and $\omega_{i}$ are the inflation basket weights. 
+where $\pi_t$ is the aggregate inflation rate at time $t$, and $\omega_{i}$ are the inflation basket weights.
 
-## RPV-CV over-time
+<!-- ## RPV-CV over-time -->
 
-@fig-alt_rvp_measure shows the CV version of RPV calculated using the above formula.
+<!-- @fig-alt_rvp_measure shows the CV version of RPV calculated using the above formula. -->
 
 ```{r}
 #| label: fig-alt_rvp_measure
 #| fig-cap: "RVP-CV over-time"
 #| fig-width: 8
 #| fig-height: 2.5
+#| eval: FALSE
 
 rvp_measures |> 
   pluck(2)
 
 ```
-
-
-
-
-

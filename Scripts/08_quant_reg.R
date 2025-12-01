@@ -52,7 +52,7 @@ rvp_data_tbl <- read_rds(here("Outputs", "artifacts_rvp_measures.rds")) |>
 
 # quantile regressions ---------------------------------------------------------------
 quants_regs_tbl <- rq(
-  formula = rvp_division  ~ abs(headline_inflation) + lag(rvp, 1) + lag(rvp, 2) + lag(rvp, 3) + lag(rvp, 4),
+  formula = log(rvp)  ~ abs(headline_inflation) + log(lag(rvp, 1)) + log(lag(rvp, 2)) + log(lag(rvp, 3)),
   data = rvp_data_tbl,
   tau = c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
   ) |> 
@@ -91,7 +91,7 @@ quantile_reg_plot <- quants_regs_tbl |>
     axis.title = element_text(size = 7),
     axis.line = element_line(color = 'black'),
     plot.tag = element_text(size = 8)) +
-  labs(x = "Estimate", y = "", col = "") +
+  labs(x = bquote(beta[1][t]), y = "", col = "") +
   scale_color_manual(values = pnw_palette("Winter", 9)) +
   coord_flip()
 

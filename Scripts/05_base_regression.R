@@ -55,14 +55,14 @@ rvp_data_tbl <- read_rds(here("Outputs", "artifacts_rvp_measures.rds")) |>
     dum_2011m12 = ifelse(Date == "2011-12-01", 1, 0),
     dum_2011m12 = ifelse(Date == "2011-12-01", 1, 0),
     dum_2014m7 = ifelse(Date == "2014-07-01", 1, 0),
-    dum_2017m7 = ifelse(Date == "2017-06-01", 1, 0),
+    dum_2017m7 = ifelse(Date == "2017-07-01", 1, 0),
     dum_2020m2 = ifelse(Date == "2020-02-01", 1, 0),
     dum_2022m8 = ifelse(Date == "2022-08-01", 1, 0),
-    dum_policy_2017 = ifelse(Date >= "2017-06-01", 0, 1)
+    dum_policy_2017 = ifelse(Date >= "2017-06-01", 1, 0)
   ) |> 
   mutate(
     across(starts_with("dum_"), ~as_factor(.x))
-  ) |> 
+  ) |>  
   mutate(
     squared_headline_infaltion = headline_inflation^2,
     log_rvp = log(rvp),
@@ -71,9 +71,11 @@ rvp_data_tbl <- read_rds(here("Outputs", "artifacts_rvp_measures.rds")) |>
 # Picking significant lags using var -----------------------------------
 
 varselect_rvp_tbl <- VARselect(rvp_data_tbl |> dplyr::select(log_rvp, headline_inflation), lag.max = 10)$selection |>
-  as_tibble() |>
-  mutate(across(everything(), ~ as.numeric(.x))) |>
-  summarise(mean = mean(value))
+  as_tibble() |> 
+  mutate(Tests = c("AIC(n)", "HQ(n)", "SC(n)", "FPE(n)")) |> 
+  relocate(Tests, .before = value) |> 
+  rename("Optimal Lags" = "value") |>
+  mutate(across(2, ~ as.numeric(.x))) 
 
 # varselect_rvp_division_tbl <- VARselect(rvp_data_tbl |> dplyr::select(log_rvp_division, headline_inflation),
 #                                         lag.max = 10)$selection |>
@@ -85,7 +87,7 @@ varselect_rvp_tbl <- VARselect(rvp_data_tbl |> dplyr::select(log_rvp, headline_i
 ## Full sample -----------
 
 formula <- as.formula(
-  "log_rvp ~ headline_inflation + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
+  "log_rvp ~ abs(headline_inflation) + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
   dum_2011m12 + dum_2014m7 + dum_2017m7 + dum_2020m2 + dum_2022m8"
 )
 
@@ -98,13 +100,13 @@ robust_rvp_full_sample <-
   stars()
 
 ## Pre 2017 sample -----------
-formula <- as.formula(
-  "log_rvp ~ headline_inflation + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
+formula_pre <- as.formula(
+  "log_rvp ~ abs(headline_inflation) + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
   dum_2011m12 + dum_2014m7"
 )
 
-rvp_pre_2017 <- lm(formula, 
-                      data = rvp_data_tbl |>  filter(dum_policy_2017 == 1))
+rvp_pre_2017 <- lm(formula_pre, 
+                      data = rvp_data_tbl |>  filter(dum_policy_2017 == 0))
 
 robust_rvp_pre_2017 <- 
   lmtest::coeftest(rvp_pre_2017, vcov = vcovHC(rvp_full_sample, "HC1")) |>
@@ -112,47 +114,57 @@ robust_rvp_pre_2017 <-
   stars()
 
 ## Post 2017 sample -----------
-formula <- as.formula(
-  "log_rvp ~ headline_inflation + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
-   dum_2017m7 + dum_2020m2 + dum_2022m8"
+formula_post <- as.formula(
+  "log_rvp ~ abs(headline_inflation) + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
+   dum_2020m2 + dum_2022m8"
 )
 
-rvp_post_2017 <- lm(formula, 
-                       data = rvp_data_tbl |> filter(dum_policy_2017 == 0))
+rvp_post_2017 <- lm(formula_post, 
+                       data = rvp_data_tbl |> filter(dum_policy_2017 == 1))
 robust_rvp_post_2017 <- 
   lmtest::coeftest(rvp_post_2017, vcov = vcovHC(rvp_full_sample, "HC1")) |>
   tidy() |>
   stars()
 
 # Regression with squared inflation ---------------------------------------
-formula <- as.formula(
-  "log_rvp ~ headline_inflation + squared_log_headline_infaltion + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
+formula_sq <- as.formula(
+  "log_rvp ~ abs(headline_inflation) + squared_headline_infaltion + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
   dum_2011m12 + dum_2014m7 + dum_2017m7 + dum_2020m2 + dum_2022m8"
 )
 
 ## Full sample ---------
-rvp_full_sample_sq <- lm(formula, 
+rvp_full_sample_sq <- lm(formula_sq, 
                             data = rvp_data_tbl)
 
 robust_rvp_full_sample_sq <-
-  lmtest::coeftest(rvp_full_sample_sq, vcov = NeweyWest(rvp_full_sample_sq)) |>
+  lmtest::coeftest(rvp_full_sample_sq, vcov = vcovHC(rvp_full_sample, "HC1")) |>
   tidy() |>
   stars()
 
 ## Pre 2017 -------------
-rvp_pre_2017_sq <- lm(formula, 
-                         data = rvp_data_tbl |> filter(policy_2017_dum == 0))
+formula_sq_pre <- as.formula(
+  "log_rvp ~ abs(headline_inflation) + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
+  dum_2011m12 + dum_2014m7"
+)
+
+rvp_pre_2017_sq <- lm(formula_sq_pre, 
+                         data = rvp_data_tbl |> filter(dum_policy_2017 == 0))
 
 robust_rvp_pre_2017_sq <-
-  lmtest::coeftest(rvp_pre_2017_sq, vcov = NeweyWest(rvp_pre_2017_sq)) |>
+  lmtest::coeftest(rvp_pre_2017_sq, vcov = vcovHC(rvp_full_sample, "HC1")) |>
   tidy() |>
   stars()
 
 ## Post 2017 ---------------
-post_2017_sq <- lm(formula, 
-                          data = rvp_data_tbl |> filter(policy_2017_dum == 1))
+formula_sq_post <- as.formula(
+  "log_rvp ~ abs(headline_inflation) + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
+   dum_2020m2 + dum_2022m8"
+)
+
+post_2017_sq <- lm(formula_sq_post, 
+                          data = rvp_data_tbl |> filter(dum_policy_2017 == 1))
 robust_rvp_post_2017_sq <-
-  lmtest::coeftest(post_2017_sq, vcov = NeweyWest(post_2017_sq)) |>
+  lmtest::coeftest(post_2017_sq, vcov = vcovHC(rvp_full_sample, "HC1")) |>
   tidy() |>
   stars()
 
@@ -179,14 +191,14 @@ combined_models_tbl <-
     )
   ) |> 
   dplyr::select(-std.error, -statistic, -p.value) |> 
-  mutate(across(where(is.numeric), ~ round(.x, 2))) |> 
+  mutate(across(where(is.numeric), ~ round(.x, 3))) |> 
   mutate(estimate = paste0(estimate, stars)) |> 
   dplyr::select(-stars) 
 
 # Export ---------------------------------------------------------------
 artifacts_base_regression <- list (
   varselect_rvp_tbl = varselect_rvp_tbl,
-  varselect_rvp_division_tbl = varselect_rvp_division_tbl,
+  # varselect_rvp_division_tbl = varselect_rvp_division_tbl,
   combined_models_tbl = combined_models_tbl
 )
 
