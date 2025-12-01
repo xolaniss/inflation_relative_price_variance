@@ -52,7 +52,7 @@ rvp_data_tbl <- read_rds(here("Outputs", "artifacts_rvp_measures.rds")) |>
 
 # quantile regressions ---------------------------------------------------------------
 quants_regs_tbl <- rq(
-  formula = log(rvp)  ~ abs(headline_inflation) + log(lag(rvp, 1)) + log(lag(rvp, 2)) + log(lag(rvp, 3)),
+  formula = log(rvp)  ~ headline_inflation + log(lag(rvp, 1)) + log(lag(rvp, 2)) + log(lag(rvp, 3)),
   data = rvp_data_tbl,
   tau = c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
   ) |> 
@@ -72,7 +72,7 @@ quants_regs_tbl <- rq(
 
 # graphing ---------------------------------------------------------------
 quantile_reg_plot <- quants_regs_tbl |>
-  filter(term == "abs(headline_inflation)") |>
+  filter(term == "headline_inflation") |>
   ggplot(aes(y = tau, x = estimate, color = tau)) +
   geom_vline(xintercept = 0, linetype = "dashed") +
   geom_point(size = 2) +

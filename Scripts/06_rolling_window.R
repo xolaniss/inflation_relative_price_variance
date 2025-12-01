@@ -78,7 +78,7 @@ rvp_data_modelling_tbl <-
   rvp_lag1 = lag(rvp, 1),
   rvp_lag2 = lag(rvp, 2),
   rvp_lag3 = lag(rvp, 3),
-  abs_headline_inflation = abs(headline_inflation)) |> 
+  abs_headline_inflation = headline_inflation) |> 
   dplyr::select(-headline_inflation) |> 
   drop_na() 
 

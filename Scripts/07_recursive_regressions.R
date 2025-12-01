@@ -57,9 +57,8 @@ rvp_data_modelling_tbl <-
   mutate(
     rvp_lag1 = lag(rvp, 1),
     rvp_lag2 = lag(rvp, 2),
-    rvp_lag3 = lag(rvp, 3),
-    abs_headline_inflation = abs(headline_inflation)) |> 
-  dplyr::select(-headline_inflation) |> 
+    rvp_lag3 = lag(rvp, 3)
+    ) |> 
   drop_na() 
 
 # Recursive regression function -------------------------
@@ -72,13 +71,13 @@ data[40, ]
 for(i in 40:nrow(data)) {
   train_data <- data[1:i, ]
   
-  model <- lm(log(rvp) ~ abs_headline_inflation + log(rvp_lag1) + log(rvp_lag2) + log(rvp_lag3), data = train_data)
+  model <- lm(log(rvp) ~ headline_inflation + log(rvp_lag1) + log(rvp_lag2) + log(rvp_lag3), data = train_data)
   
   results <- bind_rows(
     results,
     tibble(
       date = data$Date[i],
-      abs_headline_inflation = coef(model)["abs_headline_inflation"],
+      headline_inflation = coef(model)["headline_inflation"],
       rvp_lag1 = coef(model)["rvp_lag1"],
       rvp_lag2 = coef(model)["rvp_lag2"],
       rvp_lag3 = coef(model)["rvp_lag3"],
@@ -90,8 +89,8 @@ for(i in 40:nrow(data)) {
 results_gg <- 
   results |> 
   pivot_longer(-date, names_to = "Series", values_to = "Value") |> 
-  rename(Date = date) |>
-  filter(Series == "abs_headline_inflation") |> 
+  rename(Date = date) |> 
+  filter(Series == "headline_inflation") |> 
   fx_plot(variables_color = 1) +
   labs(title = "",
        x = " ",

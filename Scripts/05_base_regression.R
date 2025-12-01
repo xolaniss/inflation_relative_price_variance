@@ -87,7 +87,7 @@ varselect_rvp_tbl <- VARselect(rvp_data_tbl |> dplyr::select(log_rvp, headline_i
 ## Full sample -----------
 
 formula <- as.formula(
-  "log_rvp ~ abs(headline_inflation) + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
+  "log_rvp ~ headline_inflation + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
   dum_2011m12 + dum_2014m7 + dum_2017m7 + dum_2020m2 + dum_2022m8"
 )
 
@@ -101,7 +101,7 @@ robust_rvp_full_sample <-
 
 ## Pre 2017 sample -----------
 formula_pre <- as.formula(
-  "log_rvp ~ abs(headline_inflation) + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
+  "log_rvp ~ headline_inflation + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
   dum_2011m12 + dum_2014m7"
 )
 
@@ -115,7 +115,7 @@ robust_rvp_pre_2017 <-
 
 ## Post 2017 sample -----------
 formula_post <- as.formula(
-  "log_rvp ~ abs(headline_inflation) + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
+  "log_rvp ~ headline_inflation + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
    dum_2020m2 + dum_2022m8"
 )
 
@@ -128,7 +128,7 @@ robust_rvp_post_2017 <-
 
 # Regression with squared inflation ---------------------------------------
 formula_sq <- as.formula(
-  "log_rvp ~ abs(headline_inflation) + squared_headline_infaltion + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
+  "log_rvp ~ headline_inflation + squared_headline_infaltion + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
   dum_2011m12 + dum_2014m7 + dum_2017m7 + dum_2020m2 + dum_2022m8"
 )
 
@@ -143,7 +143,7 @@ robust_rvp_full_sample_sq <-
 
 ## Pre 2017 -------------
 formula_sq_pre <- as.formula(
-  "log_rvp ~ abs(headline_inflation) + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
+  "log_rvp ~ headline_inflation + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
   dum_2011m12 + dum_2014m7"
 )
 
@@ -157,7 +157,7 @@ robust_rvp_pre_2017_sq <-
 
 ## Post 2017 ---------------
 formula_sq_post <- as.formula(
-  "log_rvp ~ abs(headline_inflation) + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
+  "log_rvp ~ headline_inflation + lag(log_rvp, 1) + lag(log_rvp, 2) + lag(log_rvp, 3) +
    dum_2020m2 + dum_2022m8"
 )
 
