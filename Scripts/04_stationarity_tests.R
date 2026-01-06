@@ -66,7 +66,7 @@ plot(breakpoints_inflation)
 
 # Stationarity ------------------------------------------------------------
 rvp_stationarity_tbl <- 
-  rvp_tbl |> 
+  rvp_data |> 
   pivot_longer(cols = -Date, names_to = "Measure", values_to = "Value") |>
   group_by(Measure) |>
   summarise(

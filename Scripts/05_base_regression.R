@@ -193,7 +193,7 @@ combined_models_tbl <-
   dplyr::select(-std.error, -statistic, -p.value) |> 
   mutate(across(where(is.numeric), ~ round(.x, 3))) |> 
   mutate(estimate = paste0(estimate, stars)) |> 
-  dplyr::select(-stars) 
+  dplyr::select(-stars)
 
 # Export ---------------------------------------------------------------
 artifacts_base_regression <- list (

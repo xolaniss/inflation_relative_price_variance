@@ -246,6 +246,20 @@ ggplot(aes(x = headline_inflation, y = rvp, color = factor(policy_2017_dum))) +
 
 regressions |> 
   pluck(2) |> 
+  mutate(term = case_when(
+    term == "(Intercept)" ~ "Constant",
+    term == "headline_inflation" ~ "\\pi_t",
+    term == "squared_headline_infaltion" ~ "\\pi_t^2",
+    term == "lag(log_rvp, 1)" ~ "RVP_{t-1}",
+    term == "lag(log_rvp, 2)" ~ "RVP_{t-2}",
+    term == "lag(log_rvp, 3)" ~ "RVP_{t-3}",
+    term == "dum_2011m121" ~ "D_{2011m12}",
+    term == "dum_2014m71" ~ "D_{2014m7}",
+    term == "dum_2017m71" ~ "D_{2017m7}",
+    term == "dum_2020m21" ~ "D_{2020m2}",
+    term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions
+    TRUE ~ term
+  )) |>
   rename(
     " " = term,
     "Estimate" = estimate
@@ -261,6 +275,7 @@ regressions |>
   width(j = 1, width = 0.05) |>
   align(i = c(1, 12, 20, 28, 39, 47), align = "center", part = "body") |>
   align(j = 2, align = "center", part = "all") |>
+  compose(i = ~ !is.na(` `), j = 1, value = as_paragraph(as_equation(` `))) |>
   autofit(add_w = 2.1)
 ```
 
@@ -275,7 +290,7 @@ roll_regressions |>
 
 ```
 
-
+\newpage
 
 ```{r}
 #| label: fig-recursive
@@ -301,6 +316,53 @@ read_rds(here("Outputs","artifacts_quant_reg.rds")) |>
 
 ```
 \newpage
+
+
+```{r}
+#| label: fig-semi_parametric
+#| fig-cap: "Semi-parametric estimation of the relationship between RPV and inflation"
+#| fig-width: 8
+#| fig-height: 8
+
+# Function to read and convert image to ggplot
+img_to_plot <- function(path, title = "") {
+  img <- magick::image_read(path)
+  
+  # Crop the left side to remove the old "Relative price dispersion" label
+  # Stata left margins with titles are usually significant. 
+  # We chop off 60 pixels from the left.
+  img <- magick::image_chop(img, "60x0")
+  
+  ggplot() +
+    annotation_custom(grid::rasterGrob(img, width = unit(1,"npc"), height = unit(1,"npc")), 
+                      -Inf, Inf, -Inf, Inf) +
+    labs(title = title, y = "RPV") +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 10, hjust = 0.5, face = "bold"),
+      axis.title.y = element_text(angle = 90, size = 9, margin = margin(r = 5)), # Turn y-axis label back on
+    ) 
+}
+
+# Paths with consistent ordering and correct spellings
+# Columns: Gaussian, Epanechnikov
+# Rows: Full Sample, Pre-2017, Post-2017
+
+p1 <- img_to_plot(here("Outputs/non_linear/full_sample_guassian.png"), "Full Sample (Gaussian)")
+p2 <- img_to_plot(here("Outputs/non_linear/full_sample_epanechnikov.png"), "Full Sample (Epanechnikov)")
+
+p3 <- img_to_plot(here("Outputs/non_linear/Pre-2017_guassian.png"), "Pre-2017 (Gaussian)")
+p4 <- img_to_plot(here("Outputs/non_linear/Pre-2017_epanechnikov.png"), "Pre-2017 (Epanechnikov)")
+
+p5 <- img_to_plot(here("Outputs/non_linear/Post-2017_gaussain.png"), "Post-2017 (Gaussian)")
+p6 <- img_to_plot(here("Outputs/non_linear/Post-2017_epanechnikov.png"), "Post-2017 (Epanechnikov)")
+
+# Combine using patchwork
+(p1 + p2) / (p3 + p4) / (p5 + p6)
+```
+
+
+
 # Conclusion
 
 \newpage
