@@ -597,6 +597,7 @@ To further capture the dynamic dependencies in the data, we perform a quantile o
 
 However, @gupta2018does note that standard quantile regressions are limited in their ability to capture dependency in its entirety. That is, although quantile regressions capture the relationship between two variable (for example) at various points of the conditional distribution, it restricts the possibility that the nature of the independent variable can also influence how the independent variable is calculated. The quantile-on-quantile  regression (QQR), therefore, offers a more complete picture of the complex dependency structure, and was utilised numerous times in the literature (see @mishra2019does, @chang2020asymmetric, and @sim2016modeling).
 
+\newpage
 Given this brief explanation on QQR, we estimate the relationship between the $\theta$-quantile of RVP ($a_{2t}$) and the $\tau$-quantile of headline inflation ($\Gamma_t$) as follows:
 
 $$
@@ -628,6 +629,6 @@ Therefore, @eq-qqr_4 captures the relationship between the $\theta$-quantile of 
 
 $$
 	\underset{b_0, b_1}{min}\sum_{i=1}^n\rho_{\theta}\left[a_{2t} - b_0 - b_1(\widehat{\Gamma_t} - \widehat{\Gamma}) \right]K\left(\dfrac{F_n(\widehat{\Gamma_t}) - \tau}{h}\right)
-$$
+$$ {#eq-qqr_5}
 
 where $\rho_{\theta}$ is a tilted absolute value function which produces $\theta$-quantile values of $a_{2t}$. A Gaussian kernel $K(.)$ is used to weight observations in the neighbourhood of $\widehat{\Gamma^\tau}$ using $h$ as a bandwidth. These weights are inversely related to $\widehat{\Gamma_t} - \widehat{\Gamma}$. Lastly, the choice of $h$ remains uncertain in kernel regression where if a small $h$ is chosen the bias of the estimates is smaller but the variance of these estimates increases, and conversely. To overcome this uncertainty we use the cross validation method to calculate the appropripate level of $h$.

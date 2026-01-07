@@ -1873,6 +1873,8 @@ a more complete picture of the complex dependency structure, and was
 utilised numerous times in the literature (see \citet{mishra2019does},
 \citet{chang2020asymmetric}, and \citet{sim2016modeling}).
 
+\newpage
+
 Given this brief explanation on QQR, we estimate the relationship
 between the \(\theta\)-quantile of RVP (\(a_{2t}\)) and the
 \(\tau\)-quantile of headline inflation (\(\Gamma_t\)) as follows:
@@ -1914,9 +1916,9 @@ dependence structure of the respective distributions. To this end, to
 get the estimates of \(\hat{\beta_0}(\theta, \tau)\) and
 \(\hat{\beta_1}(\theta, \tau)\) we solve for:
 
-\[
+\begin{equation}\phantomsection\label{eq-qqr_5}{
     \underset{b_0, b_1}{min}\sum_{i=1}^n\rho_{\theta}\left[a_{2t} - b_0 - b_1(\widehat{\Gamma_t} - \widehat{\Gamma}) \right]K\left(\dfrac{F_n(\widehat{\Gamma_t}) - \tau}{h}\right)
-\]
+}\end{equation}
 
 where \(\rho_{\theta}\) is a tilted absolute value function which
 produces \(\theta\)-quantile values of \(a_{2t}\). A Gaussian kernel
