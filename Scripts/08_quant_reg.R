@@ -45,6 +45,7 @@ library(KernSmooth)
 
 # Functions ---------------------------------------------------------------
 source(here("Functions", "fx_plot.R"))
+source(here("Functions", "QQR_functions.R"))
 
 # Import -------------------------------------------------------------
 rvp_data_tbl <- read_rds(here("Outputs", "artifacts_rvp_measures.rds")) |> 
@@ -95,10 +96,20 @@ quantile_reg_plot <- quants_regs_tbl |>
   scale_color_manual(values = pnw_palette("Winter", 9)) +
   coord_flip()
 
+# QQR ---------------------------------------------------------------------
+qqr_rvp <- QQR(x = rvp_data_tbl$headline_inflation,
+               y = log(rvp_data_tbl$rvp),
+               hm = "CV"
+)
+
+qqr_rvp_gg <- ggplot.QQR(qqr_rvp)
+
+
 # Export ---------------------------------------------------------------
 artifacts_quant_reg <- list (
   quantile_reg_plot = quantile_reg_plot,
-  quants_regs_tbl = quants_regs_tbl
+  quants_regs_tbl = quants_regs_tbl,
+  qqr_rvp_gg = qqr_rvp_gg
 )
 
 write_rds(artifacts_quant_reg, file = here("Outputs", "artifacts_quant_reg.rds"))

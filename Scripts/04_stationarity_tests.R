@@ -55,11 +55,6 @@ breakpoints_rvp <- breakpoints(rvp ~ 1, data = rvp_data)
 summary(breakpoints_rvp)
 plot(breakpoints_rvp)
 
-# breakpoints_rvp_division <- breakpoints(rvp_division ~ 1, data = rvp_data)
-# summary(breakpoints_rvp_division)
-# plot(breakpoints_rvp_division)
-
-
 breakpoints_inflation <- breakpoints(headline_inflation ~ 1, data = rvp_data)
 summary(breakpoints_inflation)
 plot(breakpoints_inflation)

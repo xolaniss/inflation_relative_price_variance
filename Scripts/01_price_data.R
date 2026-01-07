@@ -192,7 +192,7 @@ headline_inflation_gg <-
   mutate(Series = str_replace(Series, "headline_inflation", "Headline Inflation")) |>
   fx_plot(variables_color = 1) +
   # geom_hline(yintercept = median_headline_inflation$median_value, linewidth = .8, linetype = "dashed", color = "red") +
-  geom_vline(xintercept = as.Date("2017-07-10"), color = "red", linetype = "dashed") +
+  # geom_vline(xintercept = as.Date("2017-07-10"), color = "red", linetype = "dashed") +
   labs(y = "Headline Inflation") +
   theme(strip.text = element_blank(), strip.background = element_blank())
 

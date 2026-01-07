@@ -11,7 +11,8 @@ artifacts_stationarity.rds \
 artifacts_base_regression.rds \
 artifacts_roll.rds \
 artifacts_recursive.rds \
-artifacts_quant_reg.rds
+artifacts_quant_reg.rds \
+artifacts_base_regression_core.rds
 
 
 ## Generating the manuscript 
@@ -49,4 +50,8 @@ artifacts_rvp_measures.rds
 
 artifacts_quant_reg.rds: Scripts/08_quant_reg.R \
 artifacts_rvp_measures.rds
+	Rscript $<
+
+artifacts_base_regression_core.rds: Scripts/05a_base_regressions_core.R \
+Data/Price_dispersion_data_core.xlsx
 	Rscript $<

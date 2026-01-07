@@ -1,11 +1,11 @@
-# quantile on quantile regressiok
+# quantile on quantile regression
 # x =independent variable
 # y = dependent variable
 # tstart = starting quantile, default = 0.02
 # tend = ending quantile, default = 0.98
 # tby = quantile increment
 # 
-# hm = bandwidth claculation method (string), available methods are:
+# hm = bandwidth calculation method (string), available methods are:
 #       CV = cross validation
 #       YJ = Yu and jones 1998
 #       fixed = uses user specified badwidth = h
@@ -166,7 +166,7 @@ ggplot.QQR <- function(QQR,
     geom_tile() + 
     coord_equal() +
     geom_contour(color = "white", alpha = 0.5) + 
-    scale_fill_distiller(palette="RdYlBu", na.value="white")  + 
+    scale_fill_distiller(palette="RdGy", na.value="white")  + 
     theme_bw() +
     ggtitle(main) +
     xlab(xlab) +

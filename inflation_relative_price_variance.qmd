@@ -104,6 +104,7 @@ rvp_measures <- read_rds(here("Outputs", "artifacts_rvp_measures.rds"))
 regressions <- read_rds(here("Outputs","artifacts_base_regression.rds"))
 roll_regressions <- read_rds(here("Outputs","artifacts_roll.rds")) 
 recursive_regression <- read_rds(here("Outputs","artifacts_recursive.rds"))
+core_regressions <- read_rds(here("Outputs", "artifacts_base_regression_core.rds"))
 ```
 
 # Introduction
@@ -124,8 +125,7 @@ The theoretical literature generally distinguishes between menu-cost and signal 
 
 Our analysis uses monthly inflation data on 45 goods categories from January 2009 to March 2025 obtained from Statistics South Africa (Stats SA).[^1] **The data is seasonally adjusted using ???.** @fig-headline_inflation below shows the long term inflation rate in South Africa, and @fig-price_data in the appendix shows the various price categories used in the analysis. @tbl-descriptive_stats provides the descriptive statistics of the inflation rates for the various price categories used in the analysis.
 
-[^1]: \url{http://www.statssa.gov.za/}
-
+[^1]: The data is available at: \url{http://www.statssa.gov.za/}
 
 
 The relative price variance (RPV) is calculated in line with @lach1992 as the weighted standard deviation of individual price inflation rates from the aggregate inflation rate. The RPV is essentially the variability of relative prices of a given product. We first calculate the monthly inflation rate as follows:
@@ -142,17 +142,13 @@ To examine the relationship between inflation and RPV, we estimate the following
 
 $$RPV_{t} = \beta_0 + \beta_1,\pi_{t} + \sum_{h=1}^{3}\omega_hRVP_{t-h}  +  \mu_{t}, $$ {#eq-rpv_reg}
 
-where $RPV_{t}$ is the relative price variance at time $t$, $\pi_{t}$ is the absolute value of the inflation rate at time $t$, $RVP_{t-h}$ are lagged values of RPV to account for its dynamic nature, and $\mu_{t}$ is the error term. The coefficient $\beta_1$ captures the effect of inflation on RPV. We include up to four lags of RPV based on Akaike Information Criterion (AIC) (and other tests, see @tbl-lag_selection)  and to capture potential persistence in relative price variability.
+where $RPV_{t}$ is the relative price variance at time $t$, $\pi_{t}$ is the absolute value of the inflation rate at time $t$, $RVP_{t-h}$ are lagged values of RPV to account for its dynamic nature, and $\mu_{t}$ is the error term. The coefficient $\beta_1$ captures the effect of inflation on RPV. We include up to four lags of RPV based on Akaike Information Criterion (AIC) (and other tests)  and to capture potential persistence in relative price variability. For robustness, we repeat this estimation using core inflation (excluding food and non-alcoholic beverages, and fuel and electricity) instead of headline inflation to account for the potential volatility in these components.
 
 The literature on RVP emphasises the that the relationship between inflation and RPV may be time-varying due to structural changes in the economy, monetary policy regimes, and other factors. To capture potential time variation in the relationship between inflation and RPV, we also estimate a rolling regression model with a **24-month and 60-month windows** as follows:
 
 $$RPV_{t} = \alpha_{t} + \beta_{1,t}\pi_{t} + \sum_{h=1}^{3}\omega_{h,t}RVP_{t-h}  +  \mu_{t}, $$ {#eq-rpv_rolling_reg}
 
-where the coefficients $\alpha_{t}$, $\beta_{1,t}$, and $\omega_{h,t}$ are allowed to vary over time. This approach allows us to observe the stability of the coefficients over time, which is an indicator of non-linearities in the relationship between RPV and inflation. Furthermore, we employ a quantile regression approach, which is robust to outliers and allows us to examine the relationship between inflation and RPV across different points of the RPV distribution. The quantile regression model is specified as follows:
-
-$$Q_{\tau}(RPV_{t}|\pi_{t}, RPV_{t-1},..., RPV_{t-3}) = \gamma_0 + \gamma_1\pi_{t} + \sum_{h=1}^{3}\delta_hRVP_{t-h}, $$ {#eq-rpv_quantile_reg}
-
-where $Q_{\tau}(RPV_{t}|\pi_{t}, RPV_{t-1},..., RPV_{t-3})$ represents the $\tau^{th}$ quantile of RPV conditional on inflation and its lagged values. The coefficients $\gamma_0$, $\gamma_1$, and $\delta_h$ capture the effects at different quantiles of the RPV distribution.
+where the coefficients $\alpha_{t}$, $\beta_{1,t}$, and $\omega_{h,t}$ are allowed to vary over time. This approach allows us to observe the stability of the coefficients over time, which is an indicator of non-linearities in the relationship between RPV and inflation. Furthermore, we employ a quantile on quantile regression approach, which is robust to outliers and allows us to regime aspects of the relationship between RPV and inflation. For brevity, we explain the quantile on quantile estimation proceducure in the Appendix.
 
 Lastly, we utilise a semi-parametric or partially linear approach to estimate the optimal level of inflation given the RVP. This approach allows us to model the relationship between inflation and RPV without imposing a strict functional form. Following the literature, we first specify a quadratic (U-shaped) relationship between inflation and RPV as follows:
 
@@ -191,35 +187,27 @@ rvp_measures |>
 
 
 
-```{r}
-#| label: fig-headline_inflation
-#| fig-cap: "Headline inflation (%). Note: The dashed red line represents the implementation of the mid-point target of 4.5% in 2017."
-#| fig-width: 8
-#| fig-height: 3
 
-price_data_list |>
-  pluck(2, 2) 
-
-```
 
 
 ```{r}
 #| label: fig_rvp_inflation
 #| fig-cap: "Relative price variability vs headline Inflation"
-#| fig-width: 8
+#| fig-width: 6
 #| fig-height: 3
 
 rvp_measures|> 
   pluck(1) |> 
 ggplot(aes(x = headline_inflation, y = rvp, color = factor(policy_2017_dum))) +
   geom_point() +
-  geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = TRUE) +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE) +
   labs(
        y = "Relative price variability ", 
        x = "Inflation rate (%)",
        color = "Period") +
   scale_color_manual(values =  pnw_palette("Winter", 2), 
-                     labels = c("After Jul 2017", "Before Jul 2017")) +
+                     labels = c("Before Jul 2017", "After Jul 2017")) +
+  scale_y_continuous(limits = c(2, 10), breaks = c(2, 4, 6, 8, 10)) +
   theme_minimal() +
       theme(
       legend.position = "bottom",
@@ -241,15 +229,15 @@ ggplot(aes(x = headline_inflation, y = rvp, color = factor(policy_2017_dum))) +
 
 ```{r}
 #| label: tbl-base_regression
-#| tbl-cap: "Baseline regressions"
-#| ft.arraystretch: 0.4
+#| tbl-cap: "RVP baseline regressions"
+#| ft.arraystretch: 0.45
 
 regressions |> 
   pluck(2) |> 
   mutate(term = case_when(
     term == "(Intercept)" ~ "Constant",
     term == "headline_inflation" ~ "\\pi_t",
-    term == "squared_headline_infaltion" ~ "\\pi_t^2",
+    term == "squared_headline_inflation" ~ "\\pi_t^2",
     term == "lag(log_rvp, 1)" ~ "RVP_{t-1}",
     term == "lag(log_rvp, 2)" ~ "RVP_{t-2}",
     term == "lag(log_rvp, 3)" ~ "RVP_{t-3}",
@@ -273,7 +261,7 @@ regressions |>
         "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."), 
       colwidths = 2) |>
   width(j = 1, width = 0.05) |>
-  align(i = c(1, 12, 20, 28, 39, 47), align = "center", part = "body") |>
+  align(i = c(1, 12, 20, 28, 40, 49), align = "center", part = "body") |>
   align(j = 2, align = "center", part = "all") |>
   compose(i = ~ !is.na(` `), j = 1, value = as_paragraph(as_equation(` `))) |>
   autofit(add_w = 2.1)
@@ -307,12 +295,12 @@ recursive_regression |>
 
 ```{r}
 #| label: fig-quant_reg
-#| fig-cap: "RVP quantile regressions"
+#| fig-cap: "RVP quantile on quantile regressions"
 #| fig-width: 8
-#| fig-height: 3
+#| fig-height: 4
 
 read_rds(here("Outputs","artifacts_quant_reg.rds")) |> 
-  pluck(1)
+  pluck(3)
 
 ```
 \newpage
@@ -372,7 +360,6 @@ p6 <- img_to_plot(here("Outputs/non_linear/Post-2017_epanechnikov.png"), "Post-2
 ::: {#refs}
 :::
 
-\newpage
 
 \setcounter{section}{0}
 \renewcommand{\thesection}{\Alph{section}}
@@ -380,10 +367,24 @@ p6 <- img_to_plot(here("Outputs/non_linear/Post-2017_epanechnikov.png"), "Post-2
 \renewcommand{\thetable}{A\arabic{table}}
 \setcounter{figure}{0}
 \renewcommand{\thefigure}{A\arabic{figure}}
-
+\newpage
 # Appendix: Data and descriptive statistics
 
 ## Data
+
+
+```{r}
+#| label: fig-headline_inflation
+#| fig-cap: "Headline inflation (%). Note: The dashed red line represents the implementation of the mid-point target of 4.5% in 2017."
+#| fig-width: 8
+#| fig-height: 3
+
+price_data_list |>
+  pluck(2, 2) 
+
+```
+
+
 
 ```{r}
 #| label: fig-price_data
@@ -457,7 +458,6 @@ regressions |>
   colformat_double(j = 2, digits = 0) |>
   autofit(add_w = 2.5)
 
-
 ```
 
 \newpage
@@ -467,9 +467,107 @@ regressions |>
 \setcounter{figure}{0}
 \renewcommand{\thefigure}{B\arabic{figure}}
 
-# Appendix: Alternative Results
+# Appendix: Alternative Results (OLS Robustness)
 
-## Coefficient of variation version of RPV
+The core RPV (excluding food and non-alcoholic beverages, and fuel and electricity) is calculated using the same formula as in @eq-rpv but using the core inflation rate instead of the headline inflation rate. The results are consistent with the main findings, indicating a positive relationship between core inflation and core RPV. 
+
+
+## Core RPV over-time
+
+```{r}
+#| label: fig-core_rvp
+#| fig-cap: "Core Relative Price Variability"
+#| fig-width: 8
+#| fig-height: 3
+
+core_regressions |> pluck("rvp_core_gg")
+```
+
+\newpage
+## Stationarity tests for core RPV
+
+```{r}
+#| label: tbl-core_stationarity_tests
+#| tbl-cap: "Stationarity tests results"
+core_regressions |>
+  pluck(4) |> 
+  mutate(
+    Measure = str_replace_all(Measure,
+    c("core_inflation" = "Core Inflation",
+      "rvp_core" = "Core RVP")),
+  ) |> 
+  flextable_word() |>
+  align(j = 1, align = "left", part = "all") |>
+  autofit(add_w = 0.2)
+```
+
+
+## Lag length selection for core RPV
+
+```{r}
+#| label: tbl-core_lag_selection
+#| tbl-cap: "Core RVP lag length selection"
+
+core_regressions |> 
+  pluck(3) |> 
+  mutate(
+    across(
+      where(is.numeric),
+      ~ round(.x, 0)
+    )
+  ) |> 
+  flextable_word() |> 
+  colformat_double(j = 2, digits = 0) |>
+  autofit(add_w = 2.5)
+
+```
+
+\newpage
+
+## Core RPV baseline regression results
+
+```{r}
+#| label: tbl-core_base_regression
+#| tbl-cap: "Core RVP baseline regressions"
+#| ft.arraystretch: 0.45
+
+core_regressions |> 
+  pluck(5) |> 
+  mutate(term = case_when(
+    term == "(Intercept)" ~ "Constant",
+    term == "core_inflation" ~ "\\pi_t",
+    term == "squared_core_inflation" ~ "\\pi_t^2",
+    term == "lag(log_rvp_core, 1)" ~ "RVP_{t-1}",
+    term == "dum_2011m121" ~ "D_{2011m12}",
+    term == "dum_2014m71" ~ "D_{2014m7}",
+    term == "dum_2017m71" ~ "D_{2017m7}",
+    term == "dum_2020m21" ~ "D_{2020m2}",
+    term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions
+    TRUE ~ term
+  )) |> 
+  rename(
+    " " = term,
+    "Estimate" = estimate
+  ) |> 
+  as_grouped_data(group = "model_type") |> 
+  as_flextable(hide_group = TRUE) |> 
+  align(j = 1, align = "left", part = "all") |>
+  add_footer_row(
+      values = 
+        as_paragraph(
+        "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."), 
+      colwidths = 2) |> 
+  width(j = 1, width = 0.05) |> 
+  align(i = c(1, 10, 16, 22, 32, 39), align = "center", part = "body") |>
+  align(j = 2, align = "center", part = "all") |>
+  compose(i = ~ !is.na(` `), j = 1, value = as_paragraph(as_equation(` `))) |>
+  autofit(add_w = 2.1)
+```
+
+
+\newpage
+
+# Appendix: Coefficient of variation version of RPV
 
 The coefficient of variation (CV) version of RPV (or RVP-CV) normalizes the RPV by the aggregate price level to account for changes in the overall price level. This measure is particularly useful when comparing RPV across different time periods or economies with varying inflation rates. The RVP-CV is calculated as follows:
 
@@ -492,3 +590,44 @@ rvp_measures |>
   pluck(2)
 
 ```
+
+# Appendix: Explanation of the quantile on quantile regression
+
+To further capture the dynamic dependencies in the data, we perform a quantile on quantile regressions. Quantile regressions address the limitations of OLS which only estimates the mean dependency between on or more independent variables and the dependant variable. Distribution moments, such as the mean, can be strongly affected by heavy tails (or tail behaviour), non-linearity and extreme values in general (see @koenker2017quantile). In response to these limitations, the quantile regression was first introduced by \cite{koenker1978regression}. @koenker2017quantile notes that quantile regressions are inherently local and are immune to small deviations in distributions. 
+
+However, @gupta2018does note that standard quantile regressions are limited in their ability to capture dependency in its entirety. That is, although quantile regressions capture the relationship between two variable (for example) at various points of the conditional distribution, it restricts the possibility that the nature of the independent variable can also influence how the independent variable is calculated. The quantile-on-quantile  regression (QQR), therefore, offers a more complete picture of the complex dependency structure, and was utilised numerous times in the literature (see @mishra2019does, @chang2020asymmetric, and @sim2016modeling).
+
+Given this brief explanation on QQR, we estimate the relationship between the $\theta$-quantile of RVP ($a_{2t}$) and the $\tau$-quantile of headline inflation ($\Gamma_t$) as follows:
+
+$$
+	a_{2t} = \beta^\theta\Gamma_t + \epsilon_{t}^\theta, 
+$$ {#eq-qqr_1}
+
+Taking the linear version of  $\beta^\theta(.)$ with a first order Taylor expansion of $\beta^\theta(.)$ around $\Gamma^\tau$  gives:
+
+$$
+	\beta^\theta(\Gamma_t) \approx \beta^\theta(\Gamma^\tau) + \beta^{\theta'}(\Gamma^\tau)(\Gamma_t - \Gamma^\tau)
+$$ {#eq-qqr_2}
+
+
+In this instance both $\beta^\theta(\Gamma^\tau)$ and $\beta^{\theta'}(\Gamma^\tau)$ are indexed to $\theta$ and $\tau$. This means that @eq-qqr_2 can be summarised as follows:
+
+$$
+	\beta^\theta(\Gamma_t) \approx \beta_0(\theta, \tau) + \beta_1(\theta, \tau)(\Gamma_t - \Gamma),
+$$ {#eq-qqr_3}
+
+and collecting terms gives and substituting into @eq-qqr_1 results in :
+
+$$
+a_{2t} =  \beta_0(\theta, \tau) + \beta_1(\theta, \tau)(\Gamma^\tau)(\Gamma_t - \Gamma) + \epsilon_{t}^\theta
+$$ {#eq-qqr_4}
+
+where $\beta^\theta(\Gamma^\tau)$ and $\beta^{\theta'}(\Gamma^\tau)$ are substituted with $\beta_0(\theta, \tau)$ and $\beta_1(\theta, \tau)(\Gamma^\tau)$ respectively.
+
+Therefore, @eq-qqr_4 captures the relationship between the $\theta$-quantile of herding in the US foreign exchange market and the $\tau$-quantile of the happiness index, that is, the overall dependence structure of the respective distributions. To this end, to get the estimates of $\hat{\beta_0}(\theta, \tau)$ and  $\hat{\beta_1}(\theta, \tau)$ we solve for:
+
+$$
+	\underset{b_0, b_1}{min}\sum_{i=1}^n\rho_{\theta}\left[a_{2t} - b_0 - b_1(\widehat{\Gamma_t} - \widehat{\Gamma}) \right]K\left(\dfrac{F_n(\widehat{\Gamma_t}) - \tau}{h}\right)
+$$
+
+where $\rho_{\theta}$ is a tilted absolute value function which produces $\theta$-quantile values of $a_{2t}$. A Gaussian kernel $K(.)$ is used to weight observations in the neighbourhood of $\widehat{\Gamma^\tau}$ using $h$ as a bandwidth. These weights are inversely related to $\widehat{\Gamma_t} - \widehat{\Gamma}$. Lastly, the choice of $h$ remains uncertain in kernel regression where if a small $h$ is chosen the bias of the estimates is smaller but the variance of these estimates increases, and conversely. To overcome this uncertainty we use the cross validation method to calculate the appropripate level of $h$.
