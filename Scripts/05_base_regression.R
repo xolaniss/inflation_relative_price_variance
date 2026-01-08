@@ -174,18 +174,19 @@ combined_models_tbl <-
   ) |> 
   mutate(
     model_type = case_when(
-      model_type ==  1 ~ "RVP Full Sample",
-      model_type ==  2 ~ "RVP Pre 2017",
-      model_type == 3 ~ "RVP Post 2017",
-      model_type == 4 ~ "RVP Full Sample with Squared Inflation",
-      model_type == 5 ~ "RVP Pre 2017 with Squared Inflation",
-      model_type == 6 ~ "RVP Post 2017 with Squared Inflation"
+      model_type ==  1 ~  "Full Sample",
+      model_type ==  2 ~  "Pre 2017",
+      model_type == 3 ~  "Post 2017",
+      model_type == 4 ~ "Full Sample: Squared Inflation",
+      model_type == 5 ~ "Pre 2017: Squared Inflation",
+      model_type == 6 ~ "Post 2017: Squared Inflation"
     )
   ) |> 
   dplyr::select(-std.error, -statistic, -p.value) |> 
   mutate(across(where(is.numeric), ~ round(.x, 3))) |> 
   mutate(estimate = paste0(estimate, stars)) |> 
-  dplyr::select(-stars)
+  dplyr::select(-stars) |> 
+  pivot_wider(names_from = model_type, values_from = estimate)
 
 # Export ---------------------------------------------------------------
 artifacts_base_regression <- list (

@@ -91,7 +91,7 @@ roll_rvp_models_2_year_tbl <-
 roll_rvp_2_year_gg <-
   fx_plot(roll_rvp_models_2_year_tbl, variables_color = 2) +
   facet_wrap (. ~ Series, scale = "free", labeller = label_parsed) +
-  labs(subtitle = "2-year window") 
+  labs(subtitle = "2-year window")
 
 # roll_rvp_division_models_2_year_tbl <- 
 #   rvp_data_modelling_tbl |> 

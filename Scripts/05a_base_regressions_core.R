@@ -101,7 +101,7 @@ rvp_core_gg <-
               axis.line = element_line(color = "black", linewidth = 0.2),
               strip.text = element_blank()
        ) +
-       labs(x = "", y = "Core Inflation relative price variability")
+       labs(x = "", y = "Core RPV")
 
 # Picking significant lags using var -----------------------------------
 varselect_rvp_core_tbl <- VARselect(data_core_tbl |> dplyr::select(log_rvp_core, core_inflation), lag.max = 10)$selection |>
@@ -244,18 +244,19 @@ combined_models_core_tbl <-
        ) |>
        mutate(
               model_type = case_when(
-                     model_type == 1 ~ "Core RVP Full Sample",
-                     model_type == 2 ~ "Core RVP Pre 2017",
-                     model_type == 3 ~ "Core RVP Post 2017",
-                     model_type == 4 ~ "Core RVP Full Sample with Squared Inflation",
-                     model_type == 5 ~ "Core RVP Pre 2017 with Squared Inflation",
-                     model_type == 6 ~ "Core RVP Post 2017 with Squared Inflation"
+                     model_type == 1 ~ "Full Sample",
+                     model_type == 2 ~ "Pre 2017",
+                     model_type == 3 ~ "Post 2017",
+                     model_type == 4 ~ "Full Sample: Squared Inflation",
+                     model_type == 5 ~ "Pre 2017: Squared Inflation",
+                     model_type == 6 ~ "Post 2017: Squared Inflation"
               )
        ) |>
        dplyr::select(-std.error, -statistic, -p.value) |>
        mutate(across(where(is.numeric), ~ round(.x, 3))) |>
        mutate(estimate = paste0(estimate, stars)) |>
-       dplyr::select(-stars)
+       dplyr::select(-stars) |> 
+       pivot_wider(names_from = model_type, values_from = estimate)
 
 
 # Export ---------------------------------------------------------------

@@ -97,19 +97,37 @@ quantile_reg_plot <- quants_regs_tbl |>
   coord_flip()
 
 # QQR ---------------------------------------------------------------------
-qqr_rvp <- QQR(x = rvp_data_tbl$headline_inflation,
+## Full sample QQR -----------------------------------------------------------
+qqr_rvp_full <- QQR(x = rvp_data_tbl$headline_inflation,
                y = log(rvp_data_tbl$rvp),
                hm = "CV"
 )
+qqr_rvp_full_gg <- ggplot.QQR(qqr_rvp_full)
 
-qqr_rvp_gg <- ggplot.QQR(qqr_rvp)
+## Pre 2017 QQR -----------------------------------------------------------
+rvp_data_pre_tbl <- rvp_data_tbl |> filter(Date < "2017-01-01")
+qqr_rvp_pre_2017 <-QQR(x = rvp_data_pre_tbl$headline_inflation,
+                       y = log(rvp_data_pre_tbl$rvp),
+                       hm = "CV"
+)
+qqr_rvp_pre_2017_gg <- ggplot.QQR(qqr_rvp_pre_2017)
+
+## Post 2017 QQR -----------------------------------------------------------
+rvp_data_post_tbl <- rvp_data_tbl |> filter(Date >= "2017-01-01")
+qqr_rvp_post_2017 <-QQR(x = rvp_data_post_tbl$headline_inflation,
+                        y = log(rvp_data_post_tbl$rvp),
+                        hm = "CV"
+)
+qqr_rvp_post_2017_gg <- ggplot.QQR(qqr_rvp_post_2017)
 
 
 # Export ---------------------------------------------------------------
 artifacts_quant_reg <- list (
   quantile_reg_plot = quantile_reg_plot,
   quants_regs_tbl = quants_regs_tbl,
-  qqr_rvp_gg = qqr_rvp_gg
+  qqr_rvp_full_gg = qqr_rvp_full_gg,
+  qqr_rvp_pre_2017_gg = qqr_rvp_pre_2017_gg,
+  qqr_rvp_post_2017_gg = qqr_rvp_post_2017_gg
 )
 
 write_rds(artifacts_quant_reg, file = here("Outputs", "artifacts_quant_reg.rds"))

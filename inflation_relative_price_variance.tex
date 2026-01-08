@@ -187,7 +187,7 @@
 
 \title{Inflation relative price variance}
 \author {Keagile Lesame\footnote{Corresponding author. National Treasury, South Africa. Email: Keagile.Lesame@treasury.gov.za} \and
-Xolani Sibande\footnote{Economic Research Department, South African Reserve Bank; Email: xolani.sibande@resbank.co.za.}}
+Xolani Sibande\footnote{Economic Research Department, South African Reserve Bank. Email: xolani.sibande@resbank.co.za.}}
 
 
 \date{\today}
@@ -231,7 +231,7 @@ inflation and relative price variability has evolved.
 
 The theoretical literature generally distinguishes between menu-cost and
 signal extraction models in explaining the positive relation between
-trend inflation and RVP. In these models' firms follow a one-sided
+trend inflation and RPV. In these models' firms follow a one-sided
 dynamic pricing rule when setting prices and face fixed non-zero costs
 of adjusting nominal prices (e.g.~printing new menus) when inflation
 increases as the latter reduces the optimal real price of goods and
@@ -239,10 +239,10 @@ services. Due to differences in administrative costs, these nominal
 price adjustment costs vary across firms moreover these adjustments
 occur at different times which implies staggard price setting behaviour
 which leads to relative price variability. Menu cost models predict a
-that higher expected inflation causes an increase in RVP (citations xxx)
+that higher expected inflation causes an increase in RPV (citations xxx)
 while Lucas-type signal extraction models (Lucas(1973); Hercowitz
 (1981); Cukierman (1984) xxxx more citatiosn) argue unexpected inflation
-uncertainty causes higher RVP because informational frictions make it
+uncertainty causes higher RPV because informational frictions make it
 difficult to distinguish between idiosyncratic relative shocks or an
 aggregate (inflationary) shock. Menu cost and signal-extraction models
 assume a positive and linear relationship making the optimal inflation
@@ -299,72 +299,70 @@ the appendix.
 To examine the relationship between inflation and RPV, we estimate the
 following econometric model:
 
-\begin{equation}\phantomsection\label{eq-rpv_reg}{RPV_{t} = \beta_0 + \beta_1,\pi_{t} + \sum_{h=1}^{3}\omega_hRVP_{t-h}  +  \mu_{t}, }\end{equation}
+\begin{equation}\phantomsection\label{eq-rpv_reg}{RPV_{t} = \beta_0 + \beta_1|\pi_{t}| + \sum_{h=1}^{3}\omega_hRPV_{t-h}  +  \mu_{t}, }\end{equation}
 
 where \(RPV_{t}\) is the relative price variance at time \(t\),
-\(\pi_{t}\) is the absolute value of the inflation rate at time \(t\),
-\(RVP_{t-h}\) are lagged values of RPV to account for its dynamic
+\(|\pi_{t}|\) is the absolute value of aggregate inflation rate at time
+\(t\), \(RPV_{t-h}\) are lagged values of RPV to account for its dynamic
 nature, and \(\mu_{t}\) is the error term. The coefficient \(\beta_1\)
-captures the effect of inflation on RPV. We include up to four lags of
-RPV based on Akaike Information Criterion (AIC) (and other tests) and to
-capture potential persistence in relative price variability. For
-robustness, we repeat this estimation using core inflation (excluding
-food and non-alcoholic beverages, and fuel and electricity) instead of
-headline inflation to account for the potential volatility in these
-components.
+captures the effect of inflation on RPV. We include three lags of RPV
+based on Akaike Information Criterion (AIC) (and other tests) and to
+capture potential persistence in RPV. For robustness, we repeat this
+estimation using core inflation (excluding food and non-alcoholic
+beverages, and fuel and electricity) instead of headline inflation to
+account for the potential volatility in these components.
 
-The literature on RVP emphasises the that the relationship between
-inflation and RPV may be time-varying due to structural changes in the
-economy, monetary policy regimes, and other factors. To capture
-potential time variation in the relationship between inflation and RPV,
-we also estimate a rolling regression model with a \textbf{24-month and
-60-month windows} as follows:
+The literature on RPV emphasises that the relationship between inflation
+and RPV maybe time-varying due to structural changes in the economy,
+monetary policy regimes, and other factors. To capture potential time
+variation in the relationship, we also estimate a rolling regression
+model with a \textbf{24-month and 60-month windows} as follows:
 
-\begin{equation}\phantomsection\label{eq-rpv_rolling_reg}{RPV_{t} = \alpha_{t} + \beta_{1,t}\pi_{t} + \sum_{h=1}^{3}\omega_{h,t}RVP_{t-h}  +  \mu_{t}, }\end{equation}
+\begin{equation}\phantomsection\label{eq-rpv_rolling_reg}{RPV_{t} = \alpha_{t} + \beta_{1,t}|\pi_{t}| + \sum_{h=1}^{3}\omega_{h,t}RPV_{t-h}  +  \mu_{t}, }\end{equation}
 
 where the coefficients \(\alpha_{t}\), \(\beta_{1,t}\), and
-\(\omega_{h,t}\) are allowed to vary over time. This approach allows us
-to observe the stability of the coefficients over time, which is an
-indicator of non-linearities in the relationship between RPV and
-inflation. Furthermore, we employ a quantile on quantile regression
-approach, which is robust to outliers and allows us to regime aspects of
-the relationship between RPV and inflation. For brevity, we explain the
-quantile on quantile estimation proceducure in the Appendix.
+\(\omega_{h,t}\) vary over time. This approach allows us to observe the
+stability of the coefficients over time, which is an indicator of
+non-linearity in the relationship between RPV and inflation.
+Furthermore, we employ a quantile on quantile regression approach, which
+is robust to outliers and allows us to regime aspects of the
+relationship between RPV and inflation. For brevity, we explain the
+quantile on quantile estimation procedure in the Appendix.
 
 Lastly, we utilise a semi-parametric or partially linear approach to
-estimate the optimal level of inflation given the RVP. This approach
+estimate the optimal level of inflation given the RPV. This approach
 allows us to model the relationship between inflation and RPV without
 imposing a strict functional form. Following the literature, we first
 specify a quadratic (U-shaped) relationship between inflation and RPV as
 follows:
 
-\begin{equation}\phantomsection\label{eq-rpv_semi_parametric}{RVP_t = \alpha + \pi_t + \beta_2\pi_t^2 + \sum_{h=1}^{3}\phi_hRVP_{t-h} + \epsilon_t, }\end{equation}
+\begin{equation}\phantomsection\label{eq-rpv_semi_parametric}{RPV_t = \alpha + \pi_t + \beta_2\pi_t^2 + \sum_{h=1}^{3}\phi_hRPV_{t-h} + \epsilon_t, }\end{equation}
 
 where \(\beta_2\) captures the curvature of the relationship between
 inflation and RPV. The optimal inflation rate that minimizes RPV can be
 derived by taking the first derivative of the equation with respect to
-\(|\pi_t|\) and setting it to zero, yielding:
+\(\pi_t\) and setting it to zero, yielding:
 
 \begin{equation}\phantomsection\label{eq-optimal_inflation}{\pi_t^* = -\dfrac{1}{2\beta_2}.}\end{equation}
 
-To estimate this optional inflation we implement a semi parametric
+To estimate this optiomal inflation we implement a semi parametric
 approach as follows:
 
-\begin{equation}\phantomsection\label{eq-rpv_semi_parametric_f}{RVP_t =  f(\pi_t) + \sum_{h=1}^{3}\phi_hRVP_{t-h} + \epsilon_t, }\end{equation}
+\begin{equation}\phantomsection\label{eq-rpv_semi_parametric_f}{RPV_t =  f(\pi_t) + \sum_{h=1}^{3}\phi_hRPV_{t-h} + \epsilon_t, }\end{equation}
 
 where \(f(\pi_t)\) is a non-linear smooth differentiable function of
-inflation and the RVP. Therefore, the optimal inflation rate can be
+inflation and the RPV. Therefore, the optimal inflation rate can be
 obtained by finding the minimum of the estimated \(f(\pi_t)\) function.
 \(f(\pi_t)\) is estimated in two stages. First we estimate \(\lambda_h\)
 as follows:
 
-\begin{equation}\phantomsection\label{eq-rpv_semi_parametric_stage1}{ RVP_t = \sum_{h=1}^{3}\lambda_h\overline{RVP}_{t-h} + \eta_t, }\end{equation}
+\begin{equation}\phantomsection\label{eq-rpv_semi_parametric_stage1}{ RPV_t = \sum_{h=1}^{3}\lambda_h\overline{RPV}_{t-h} + \eta_t, }\end{equation}
 
-where \(\overline{RVP}_{t-h}\) are the residuals from a non-parametric
-regression of each lag of \(RVP_t\) on \(\pi_t\) . In the second stage,
+where \(\overline{RPV}_{t-h}\) are the residuals from a non-parametric
+regression of each lag of \(RPV_t\) on \(\pi_t\). In the second stage,
 we estimate \(f(\pi_t)\) non-parametrically as follows:
 
-\begin{equation}\phantomsection\label{eq-rpv_semi_parametric_stage2}{ \hat{\eta}_t = f(\pi_t) + v_t, }\end{equation}
+\begin{equation}\phantomsection\label{eq-rpv_semi_parametric_stage2}{\hat{\eta}_t = f(\pi_t) + v_t, }\end{equation}
 
 where \(\hat{\eta}_t\) are the residuals from
 Equation~\ref{eq-rpv_semi_parametric_stage1}, and \(f(\pi_t)\) is
@@ -376,9 +374,9 @@ further implement the unbounded Gaussian kernel and the outlier-robust
 Epanechnikov kernel. In essence, the semi-parametric approach captures
 the sensitivity of RPV to marginal increases in inflation. In that case,
 the optimal inflation rate can be obtained by finding the point where
-the first derivative of \(f(\pi_t)\) (\(f'(\pi_t)\)) is equal to zero.
-Therefore, if \(f'(\pi_t) > 0\) (\(f'(\pi_t) < 0\)), then an increase in
-inflation (decrease) leads to an increase (decrease) in RPV.
+the first derivative (\(f'(\pi_t)\)) is equal to zero. Therefore, if
+\(f'(\pi_t) > 0\) (\(f'(\pi_t) < 0\)), then an increase in inflation
+(decrease) leads to an increase (decrease) in the RPV.
 
 \section{Results}\label{results}
 
@@ -390,7 +388,7 @@ inflation (decrease) leads to an increase (decrease) in RPV.
 
 }
 
-\caption{\label{fig-rvp}Relative price variability over-time}
+\caption{\label{fig-rvp}RPV over-time}
 
 \end{figure}%
 
@@ -400,11 +398,9 @@ inflation (decrease) leads to an increase (decrease) in RPV.
 
 }
 
-\caption{Relative price variability vs headline Inflation}
+\caption{RPV vs headline Inflation}
 
 \end{figure}%
-
-\newpage
 
 \global\setlength{\Oldarrayrulewidth}{\arrayrulewidth}
 
@@ -412,375 +408,99 @@ inflation (decrease) leads to an increase (decrease) in RPV.
 
 \setlength{\tabcolsep}{2pt}
 
-\renewcommand*{\arraystretch}{0.45}
+\renewcommand*{\arraystretch}{0.6}
 
 
 
 \providecommand{\ascline}[3]{\noalign{\global\arrayrulewidth #1}\arrayrulecolor[HTML]{#2}\cline{#3}}
 
-\begin{longtable}[l]{|p{3.29in}|p{2.67in}}
+\begin{longtable}[l]{|p{0.24in}|p{0.70in}|p{0.58in}|p{0.62in}|p{1.49in}|p{1.37in}|p{1.41in}}
 
-\caption{\label{tbl-base_regression}RVP baseline regressions}
+\caption{\label{tbl-base_regression}Baseline regressions}
 
 \tabularnewline
 
-\ascline{1pt}{000000}{1-2}
+\ascline{1pt}{000000}{1-7}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{\ }}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Estimate}}}} \\
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Full\ Sample}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Pre\ 2017}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Post\ 2017}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Full\ Sample:\ Squared\ Inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Pre\ 2017:\ Squared\ Inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Post\ 2017:\ Squared\ Inflation}}}} \\
 
-\ascline{1pt}{000000}{1-2}\endfirsthead 
+\ascline{1pt}{000000}{1-7}\endfirsthead 
 
-\ascline{1pt}{000000}{1-2}
+\ascline{1pt}{000000}{1-7}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{\ }}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Estimate}}}} \\
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Full\ Sample}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Pre\ 2017}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Post\ 2017}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Full\ Sample:\ Squared\ Inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Pre\ 2017:\ Squared\ Inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Post\ 2017:\ Squared\ Inflation}}}} \\
 
-\ascline{1pt}{000000}{1-2}\endhead
+\ascline{1pt}{000000}{1-7}\endhead
 
 
 
-\multicolumn{2}{>{\centering}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP\ Full\ Sample}}}} \\
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t^2$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.006*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.011*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.007\ }}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
 
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.009*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.009\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.032***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.047\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.104\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.031\ }}}} \\
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.097**}}}} \\
+\ascline{1pt}{FFFFFF}{1-7}
 
 
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RPV_{t-3}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.247***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.173*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.259**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.237***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.154\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.223**}}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.009*}}}} \\
 
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RPV_{t-2}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.386***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.14\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.66***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.367***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.111\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.626***}}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-1}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.039***}}}} \\
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RPV_{t-1}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.039***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.896***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.12***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.017***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.864***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.071***}}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.386***}}}} \\
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2022m8}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.027\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.026\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.001\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.008\ }}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
 
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2020m2}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.116\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.215**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.107\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.208**}}}} \\
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-3}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.247***}}}} \\
+\ascline{1pt}{FFFFFF}{1-7}
 
 
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2017m7}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.156*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.161*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2011m12}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.042\ }}}} \\
 
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2014m7}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.097\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.087\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.104\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.096\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2014m7}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.097\ }}}} \\
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2011m12}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.042\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.027\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.047\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.037\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2017m7}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.156*}}}} \\
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$C$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.097**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.049\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.265***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.248**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.375*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.473***}}}} \\
 
+\ascline{1pt}{000000}{1-7}
 
 
 
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2020m2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.116\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2022m8}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.027\ }}}} \\
-
-
-
-
-
-\multicolumn{2}{>{\centering}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP\ Pre\ 2017}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.049\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.009\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-1}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.896***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.14\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-3}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.173*}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2011m12}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.027\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2014m7}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.087\ }}}} \\
-
-
-
-
-
-\multicolumn{2}{>{\centering}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP\ Post\ 2017}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.265***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.032***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-1}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.12***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.66***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-3}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.259**}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2020m2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.215**}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2022m8}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.026\ }}}} \\
-
-
-
-
-
-\multicolumn{2}{>{\centering}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP\ Full\ Sample\ with\ Squared\ Inflation}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.248**}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.047\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t^2$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.006*}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-1}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.017***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.367***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-3}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.237***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2011m12}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.047\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2014m7}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.104\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2017m7}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.161*}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2020m2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.107\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2022m8}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.001\ }}}} \\
-
-
-
-
-
-\multicolumn{2}{>{\centering}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP\ Pre\ 2017\ with\ Squared\ Inflation}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.375*}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.104\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t^2$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.011*}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-1}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.864***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.111\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-3}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.154\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2011m12}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.037\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2014m7}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.096\ }}}} \\
-
-
-
-
-
-\multicolumn{2}{>{\centering}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP\ Post\ 2017\ with\ Squared\ Inflation}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.473***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.031\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t^2$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.007\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-1}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.071***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.626***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-3}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.223**}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2020m2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.208**}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2022m8}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.008\ }}}} \\
-
-\ascline{1pt}{000000}{1-2}
-
-
-
-\multicolumn{2}{>{\raggedright}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Note:\ ***\ =\ p\ value\ <\ 0.01,\ **\ =\ 0.01\ <\ p\ value\ <\ 0.05,\ *\ =\ 0.05\ <\ p\ value\ <\ 0.1.}}}} \\
+\multicolumn{7}{>{\raggedright}m{\dimexpr 6.41in+12\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Note:\ ***\ =\ p\ value\ <\ 0.01,\ **\ =\ 0.01\ <\ p\ value\ <\ 0.05,\ *\ =\ 0.05\ <\ p\ value\ <\ 0.1.}}}} \\
 
 
 
@@ -803,11 +523,9 @@ inflation (decrease) leads to an increase (decrease) in RPV.
 
 }
 
-\caption{\label{fig-rolling_coefficients}Rolling regression}
+\caption{\label{fig-rolling_coefficients}Rolling regressions}
 
 \end{figure}%
-
-\newpage
 
 \begin{figure}[H]
 
@@ -817,10 +535,11 @@ inflation (decrease) leads to an increase (decrease) in RPV.
 
 }
 
-\caption{\label{fig-recursive}Recursive regression results of RPV on
-absolute inflation}
+\caption{\label{fig-recursive}Recursive regressions}
 
 \end{figure}%
+
+\newpage
 
 \begin{figure}[H]
 
@@ -830,7 +549,7 @@ absolute inflation}
 
 }
 
-\caption{\label{fig-quant_reg}RVP quantile on quantile regressions}
+\caption{\label{fig-quant_reg}Quantile on quantile regressions}
 
 \end{figure}%
 
@@ -844,8 +563,7 @@ absolute inflation}
 
 }
 
-\caption{\label{fig-semi_parametric}Semi-parametric estimation of the
-relationship between RPV and inflation}
+\caption{\label{fig-semi_parametric}Semi-parametric regressions}
 
 \end{figure}%
 
@@ -880,9 +598,7 @@ statistics}\label{appendix-data-and-descriptive-statistics}
 
 }
 
-\caption{\label{fig-headline_inflation}Headline inflation (\%). Note:
-The dashed red line represents the implementation of the mid-point
-target of 4.5\% in 2017.}
+\caption{\label{fig-headline_inflation}Headline inflation (\%).}
 
 \end{figure}%
 
@@ -1270,7 +986,7 @@ equipment for house and garden) have been excluded.}
 
 
 
-\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.14in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RVP}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.17in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.09}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.11in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.34}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.87in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Stationary}}}} \\
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.14in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{RPV}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.17in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.09}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.11in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.34}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.87in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Stationary}}}} \\
 
 \ascline{1pt}{000000}{1-5}
 
@@ -1301,7 +1017,7 @@ equipment for house and garden) have been excluded.}
 
 \begin{longtable}[l]{|p{2.99in}|p{3.26in}}
 
-\caption{\label{tbl-lag_selection}RVP lag length selection}
+\caption{\label{tbl-lag_selection}RPV lag length selection}
 
 \tabularnewline
 
@@ -1379,7 +1095,7 @@ core RPV.
 
 }
 
-\caption{\label{fig-core_rvp}Core Relative Price Variability}
+\caption{\label{fig-core_rvp}Core RPV overtime}
 
 \end{figure}%
 
@@ -1426,7 +1142,7 @@ RPV}\label{stationarity-tests-for-core-rpv}
 
 
 
-\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.96in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Core\ RVP}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.17in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.10}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.11in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.23}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.87in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Stationary}}}} \\
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.96in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Core\ RPV}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.17in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.10}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.11in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.23}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.87in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Stationary}}}} \\
 
 \ascline{1pt}{000000}{1-5}
 
@@ -1458,7 +1174,7 @@ RPV}\label{lag-length-selection-for-core-rpv}
 
 \begin{longtable}[l]{|p{2.99in}|p{3.26in}}
 
-\caption{\label{tbl-core_lag_selection}Core RVP lag length selection}
+\caption{\label{tbl-core_lag_selection}Core RPV lag length selection}
 
 \tabularnewline
 
@@ -1520,303 +1236,87 @@ results}\label{core-rpv-baseline-regression-results}
 
 \setlength{\tabcolsep}{2pt}
 
-\renewcommand*{\arraystretch}{0.45}
+\renewcommand*{\arraystretch}{0.6}
 
 
 
 \providecommand{\ascline}[3]{\noalign{\global\arrayrulewidth #1}\arrayrulecolor[HTML]{#2}\cline{#3}}
 
-\begin{longtable}[l]{|p{3.29in}|p{2.67in}}
+\begin{longtable}[l]{|p{0.24in}|p{0.70in}|p{0.58in}|p{0.62in}|p{1.49in}|p{1.37in}|p{1.41in}}
 
-\caption{\label{tbl-core_base_regression}Core RVP baseline regressions}
+\caption{\label{tbl-core_base_regression}Core RPV baseline regressions}
 
 \tabularnewline
 
-\ascline{1pt}{000000}{1-2}
+\ascline{1pt}{000000}{1-7}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{\ }}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Estimate}}}} \\
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Full\ Sample}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Pre\ 2017}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Post\ 2017}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Full\ Sample:\ Squared\ Inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Pre\ 2017:\ Squared\ Inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Post\ 2017:\ Squared\ Inflation}}}} \\
 
-\ascline{1pt}{000000}{1-2}\endfirsthead 
+\ascline{1pt}{000000}{1-7}\endfirsthead 
 
-\ascline{1pt}{000000}{1-2}
+\ascline{1pt}{000000}{1-7}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{\ }}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Estimate}}}} \\
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Full\ Sample}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Pre\ 2017}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Post\ 2017}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Full\ Sample:\ Squared\ Inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Pre\ 2017:\ Squared\ Inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Post\ 2017:\ Squared\ Inflation}}}} \\
 
-\ascline{1pt}{000000}{1-2}\endhead
+\ascline{1pt}{000000}{1-7}\endhead
 
 
 
-\multicolumn{2}{>{\centering}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Core\ RVP\ Full\ Sample}}}} \\
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.003\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.003\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.034\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.106**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.165\ }}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
 
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t^2$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.004\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.02\ }}}} \\
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.092**}}}} \\
+\ascline{1pt}{FFFFFF}{1-7}
 
 
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RPV_{t-1}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.924***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.946***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.865***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.909***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.866***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.875***}}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.003\ }}}} \\
 
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2022m8}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.023*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.05\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.034\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.041\ }}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-1}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.924***}}}} \\
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2020m2}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.047***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.046\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.046\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.037\ }}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2011m12}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.035***}}}} \\
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2017m7}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.055***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.057\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
 
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2014m7}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.078***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.074\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.077\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.076\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} \\
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2014m7}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.078***}}}} \\
+\ascline{1pt}{FFFFFF}{1-7}
 
 
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2011m12}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.035***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.032\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.038\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.034\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} \\
 
+\ascline{1pt}{FFFFFF}{1-7}
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2017m7}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.055***}}}} \\
 
 
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 0.24in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.7in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.092**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.58in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.06\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 0.62in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.148*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.49in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.201**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.37in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.46***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.41in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.161\ }}}} \\
 
+\ascline{1pt}{000000}{1-7}
 
 
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2020m2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.047***}}}} \\
 
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2022m8}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.023*}}}} \\
-
-
-
-
-
-\multicolumn{2}{>{\centering}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Core\ RVP\ Pre\ 2017}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.06\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.003\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-1}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.946***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2011m12}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.032\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2014m7}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.074\ }}}} \\
-
-
-
-
-
-\multicolumn{2}{>{\centering}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Core\ RVP\ Post\ 2017}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.148*}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-1}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.865***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2020m2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.046\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2022m8}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.05\ }}}} \\
-
-
-
-
-
-\multicolumn{2}{>{\centering}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Core\ RVP\ Full\ Sample\ with\ Squared\ Inflation}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.201**}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.034\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t^2$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.004\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-1}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.909***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2011m12}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.038\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2014m7}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.077\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2017m7}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.057\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2020m2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.046\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2022m8}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.034\ }}}} \\
-
-
-
-
-
-\multicolumn{2}{>{\centering}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Core\ RVP\ Pre\ 2017\ with\ Squared\ Inflation}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.46***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.106**}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t^2$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01**}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-1}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.866***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2011m12}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.034\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2014m7}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.076\ }}}} \\
-
-
-
-
-
-\multicolumn{2}{>{\centering}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Core\ RVP\ Post\ 2017\ with\ Squared\ Inflation}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$Constant$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.161\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.165\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t^2$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.02\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RVP_{t-1}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.875***}}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2020m2}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.037\ }}}} \\
-
-
-
-
-
-\multicolumn{1}{>{\raggedright}m{\dimexpr 3.29in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2022m8}$}}}} & \multicolumn{1}{>{\centering}m{\dimexpr 2.67in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.041\ }}}} \\
-
-\ascline{1pt}{000000}{1-2}
-
-
-
-\multicolumn{2}{>{\raggedright}m{\dimexpr 5.96in+2\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Note:\ ***\ =\ p\ value\ <\ 0.01,\ **\ =\ 0.01\ <\ p\ value\ <\ 0.05,\ *\ =\ 0.05\ <\ p\ value\ <\ 0.1.}}}} \\
+\multicolumn{7}{>{\raggedright}m{\dimexpr 6.41in+12\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Note:\ ***\ =\ p\ value\ <\ 0.01,\ **\ =\ 0.01\ <\ p\ value\ <\ 0.05,\ *\ =\ 0.05\ <\ p\ value\ <\ 0.1.}}}} \\
 
 
 
@@ -1836,11 +1336,11 @@ results}\label{core-rpv-baseline-regression-results}
 \section{Appendix: Coefficient of variation version of
 RPV}\label{appendix-coefficient-of-variation-version-of-rpv}
 
-The coefficient of variation (CV) version of RPV (or RVP-CV) normalizes
+The coefficient of variation (CV) version of RPV (or RPV-CV) normalizes
 the RPV by the aggregate price level to account for changes in the
 overall price level. This measure is particularly useful when comparing
 RPV across different time periods or economies with varying inflation
-rates. The RVP-CV is calculated as follows:
+rates. The RPV-CV is calculated as follows:
 
 \begin{equation}\phantomsection\label{eq-rpvcv}{RPV_{t} = \sqrt{\dfrac{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}{|1 + \pi_t|}}, }\end{equation}
 
@@ -1876,7 +1376,7 @@ utilised numerous times in the literature (see \citet{mishra2019does},
 \newpage
 
 Given this brief explanation on QQR, we estimate the relationship
-between the \(\theta\)-quantile of RVP (\(a_{2t}\)) and the
+between the \(\theta\)-quantile of RPV (\(a_{2t}\)) and the
 \(\tau\)-quantile of headline inflation (\(\Gamma_t\)) as follows:
 
 \begin{equation}\phantomsection\label{eq-qqr_1}{
@@ -1910,11 +1410,11 @@ are substituted with \(\beta_0(\theta, \tau)\) and
 \(\beta_1(\theta, \tau)(\Gamma^\tau)\) respectively.
 
 Therefore, Equation~\ref{eq-qqr_4} captures the relationship between the
-\(\theta\)-quantile of herding in the US foreign exchange market and the
-\(\tau\)-quantile of the happiness index, that is, the overall
-dependence structure of the respective distributions. To this end, to
-get the estimates of \(\hat{\beta_0}(\theta, \tau)\) and
-\(\hat{\beta_1}(\theta, \tau)\) we solve for:
+\(\theta\)-quantile of the RPV and the \(\tau\)-quantile of inflation,
+that is, the overall dependence structure of the respective
+distributions. To this end, to get the estimates of
+\(\hat{\beta_0}(\theta, \tau)\) and \(\hat{\beta_1}(\theta, \tau)\) we
+solve for:
 
 \begin{equation}\phantomsection\label{eq-qqr_5}{
     \underset{b_0, b_1}{min}\sum_{i=1}^n\rho_{\theta}\left[a_{2t} - b_0 - b_1(\widehat{\Gamma_t} - \widehat{\Gamma}) \right]K\left(\dfrac{F_n(\widehat{\Gamma_t}) - \tau}{h}\right)
