@@ -79,6 +79,7 @@ data_core_tbl <-
        mutate(
               squared_core_inflation = core_inflation^2,
               log_rvp_core = log(rvp_core),
+              abs_core_inflation = abs(core_inflation)
        )
 
 # Graphing ----------------------------------------------------------------
@@ -146,7 +147,7 @@ core_rvp_stationarity_tbl <-
 ## Full sample -----------
 
 formula <- as.formula(
-       "log_rvp_core ~ core_inflation + lag(log_rvp_core, 1)  + dum_2011m12 + dum_2014m7 + dum_2017m7 + dum_2020m2 + dum_2022m8"
+       "log_rvp_core ~ abs_core_inflation + lag(log_rvp_core, 1)  + dum_2011m12 + dum_2014m7 + dum_2017m7 + dum_2020m2 + dum_2022m8"
 )
 
 rvp_full_sample <- 
@@ -160,7 +161,7 @@ robust_rvp_full_sample <-
 
 ## Pre 2017 sample -----------
 formula_pre <- as.formula(
-       "log_rvp_core ~ core_inflation + lag(log_rvp_core, 1)  + dum_2011m12 + dum_2014m7"
+       "log_rvp_core ~ abs_core_inflation + lag(log_rvp_core, 1)  + dum_2011m12 + dum_2014m7"
 )
 
 rvp_pre_2017 <- lm(formula_pre,
@@ -174,7 +175,7 @@ robust_rvp_pre_2017 <-
 
 ## Post 2017 sample -----------
 formula_post <- as.formula(
-       "log_rvp_core ~ core_inflation + lag(log_rvp_core, 1)  + dum_2020m2 + dum_2022m8"
+       "log_rvp_core ~ abs_core_inflation + lag(log_rvp_core, 1)  + dum_2020m2 + dum_2022m8"
 )
 
 rvp_post_2017 <- lm(formula_post,

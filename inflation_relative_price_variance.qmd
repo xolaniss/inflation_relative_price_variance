@@ -232,11 +232,13 @@ ggplot(aes(x = headline_inflation, y = rvp, color = factor(policy_2017_dum))) +
 #| tbl-cap: "Baseline regressions"
 #| ft.arraystretch: 0.6
 
-regressions |> 
+base_tbl <- 
+  regressions |> 
   pluck(2) |> 
   mutate(term = case_when(
     term == "(Intercept)" ~ "C",
     term == "headline_inflation" ~ "\\pi_t",
+    term == "abs_headline_inflation" ~ "|\\pi_t|",
     term == "squared_headline_inflation" ~ "\\pi_t^2",
     term == "lag(log_rvp, 1)" ~ "RPV_{t-1}",
     term == "lag(log_rvp, 2)" ~ "RPV_{t-2}",
@@ -248,7 +250,18 @@ regressions |>
     term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions
     TRUE ~ term
   )) |>  
-  arrange(desc(term)) |> 
+  arrange(desc(term))
+
+replace_two <- base_tbl |> 
+  slice(2)
+  
+replace_three <- base_tbl |> 
+  slice(3)
+
+base_tbl[2, ] <- replace_three
+base_tbl[3, ] <- replace_two
+
+base_tbl |> 
   rename(
     " " = term
   ) |> 
@@ -551,6 +564,7 @@ core_tbl <-
   mutate(term = case_when(
     term == "(Intercept)" ~ "Constant",
     term == "core_inflation" ~ "\\pi_t",
+    term == "abs_core_inflation" ~ "|\\pi_t|",
     term == "squared_core_inflation" ~ "\\pi_t^2",
     term == "lag(log_rvp_core, 1)" ~ "RPV_{t-1}",
     term == "dum_2011m121" ~ "D_{2011m12}",
@@ -563,13 +577,13 @@ core_tbl <-
   arrange(desc(term)) 
 
 replace_two <- core_tbl |> 
-  slice(1)
-  
-replace_one <- core_tbl |> 
   slice(2)
+  
+replace_three <- core_tbl |> 
+  slice(3)
 
-core_tbl[2, ] <- replace_two
-core_tbl[1, ] <- replace_one
+core_tbl[2, ] <- replace_three
+core_tbl[3, ] <- replace_two
 
 core_tbl |>
   rename(
