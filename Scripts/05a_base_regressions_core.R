@@ -47,45 +47,33 @@ source(here("Functions", "fx_plot.R"))
 source(here("Functions", "stars.R"))
 options(scipen = 999)
 
-# Import -------------------------------------------------------------
-sheets_names <- excel_sheets(here("Data", "Price_dispersion_data_core.xlsx"))
-
-# Read the data sheet (assuming it's the 3rd sheet as in the original script, or inspecting names)
-# Original script: data <- read_excel(..., sheet = sheets_names[3], skip = 0)
-# We will start by importing the raw data similar to 01_price_data.R
-
-data_core_tbl <-
-       read_excel(here("Data", "Price_dispersion_data_core.xlsx"), sheet = sheets_names[7], skip = 0) |> 
-       dplyr::select(month, corerpv, corecpi) |> 
-       rename(
-              Date = month,
-              rvp_core = corerpv,
-              core_inflation = corecpi
-       ) |> 
-       mutate(Date = lubridate::floor_date(Date, "month")) |> 
-       mutate(Date = as.Date(Date)) |> 
-       mutate(
-              dum_2011m12 = ifelse(Date == "2011-12-01", 1, 0),
-              dum_2011m12 = ifelse(Date == "2011-12-01", 1, 0),
-              dum_2014m7 = ifelse(Date == "2014-07-01", 1, 0),
-              dum_2017m7 = ifelse(Date == "2017-07-01", 1, 0),
-              dum_2020m2 = ifelse(Date == "2020-02-01", 1, 0),
-              dum_2022m8 = ifelse(Date == "2022-08-01", 1, 0),
-              dum_policy_2017 = ifelse(Date >= "2017-06-01", 1, 0)
-       ) |>
-       mutate(
-              across(starts_with("dum_"), ~ as_factor(.x))
-       ) |>
-       mutate(
-              squared_core_inflation = core_inflation^2,
-              log_rvp_core = log(rvp_core),
-              abs_core_inflation = abs(core_inflation)
-       )
+# Import and clean -------------------------------------------------------------
+data_cov_tbl <- 
+  read_rds(here("Outputs", "artifacts_rpd_measures.rds")) |> 
+  pluck(1) |> 
+  mutate(Date = as.Date(Date)) |> 
+  mutate(Date = lubridate::floor_date(Date, "month")) |> 
+  mutate(
+        dum_2011m12 = ifelse(Date == "2011-12-01", 1, 0),
+        dum_2011m12 = ifelse(Date == "2011-12-01", 1, 0),
+        dum_2014m7 = ifelse(Date == "2014-07-01", 1, 0),
+        dum_2017m7 = ifelse(Date == "2017-07-01", 1, 0),
+        dum_2020m2 = ifelse(Date == "2020-02-01", 1, 0),
+        dum_2022m8 = ifelse(Date == "2022-08-01", 1, 0),
+        dum_policy_2017 = ifelse(Date >= "2017-06-01", 1, 0)
+ ) |>
+  mutate(
+        across(starts_with("dum_"), ~ as_factor(.x))
+ ) |>
+  mutate(
+        squared_core_inflation = core_inflation^2,
+        log_rpd_cov = log(rpd_cov)
+ )
 
 # Graphing ----------------------------------------------------------------
-rvp_core_gg <-
-       data_core_tbl |>
-       ggplot(aes(x = Date, y = rvp_core)) +
+rpd_cov_gg <-
+       data_cov_tbl |>
+       ggplot(aes(x = Date, y = rpd_cov)) +
        geom_line(color = pnw_palette("Winter", 1)) +
        theme_minimal() +
        theme(
@@ -105,7 +93,7 @@ rvp_core_gg <-
        labs(x = "", y = "Core RPV")
 
 # Picking significant lags using var -----------------------------------
-varselect_rvp_core_tbl <- VARselect(data_core_tbl |> dplyr::select(log_rvp_core, core_inflation), lag.max = 10)$selection |>
+varselect_rpd_cov_tbl <- VARselect(data_cov_tbl |> dplyr::select(log_rpd_cov, core_inflation), lag.max = 10)$selection |>
        as_tibble() |>
        mutate(Tests = c("AIC(n)", "HQ(n)", "SC(n)", "FPE(n)")) |>
        relocate(Tests, .before = value) |>
@@ -113,18 +101,18 @@ varselect_rvp_core_tbl <- VARselect(data_core_tbl |> dplyr::select(log_rvp_core,
        mutate(across(2, ~ as.numeric(.x)))
 
 # Structural breaks -----------------------------------------------------
-breakpoints_core_rvp <- breakpoints(rvp_core ~ 1, data = data_core_tbl)
-summary(breakpoints_core_rvp)
-plot(breakpoints_core_rvp)
+breakpoints_core_rpd_cov <- breakpoints(rpd_cov ~ 1, data = data_cov_tbl)
+summary(breakpoints_core_rpd_cov)
+plot(breakpoints_core_rpd_cov)
 
-breakpoints_core_inflation <- breakpoints(core_inflation ~ 1, data = data_core_tbl)
+breakpoints_core_inflation <- breakpoints(core_inflation ~ 1, data = data_cov_tbl)
 summary(breakpoints_core_inflation)
 plot(breakpoints_core_inflation)
 
 # Stationarity ------------------------------------------------------------
-core_rvp_stationarity_tbl <- 
-  data_core_tbl|> 
-  dplyr::select(Date, rvp_core, core_inflation) |>
+core_rpd_cov_stationarity_tbl <- 
+  data_cov_tbl|> 
+  dplyr::select(Date, rpd_cov, core_inflation) |>
   pivot_longer(cols = -Date, names_to = "Measure", values_to = "Value") |> 
   group_by(Measure) |>
   summarise(
@@ -135,7 +123,7 @@ core_rvp_stationarity_tbl <-
   mutate(
     Stationarity = ifelse(adf_test < 0.1 | pp_test < 0.1 | kp_test < 0.1, "Stationary", "Non-Stationary")
   ) |>
-  filter(Measure %in% c("rvp_core", "core_inflation")) |> 
+  filter(Measure %in% c("rpd_cov", "core_inflation")) |> 
   rename(
     "ADF test (p-value)" = adf_test,
     "PP test (p-value)" = pp_test,
@@ -147,86 +135,86 @@ core_rvp_stationarity_tbl <-
 ## Full sample -----------
 
 formula <- as.formula(
-       "log_rvp_core ~ abs_core_inflation + lag(log_rvp_core, 1)  + dum_2011m12 + dum_2014m7 + dum_2017m7 + dum_2020m2 + dum_2022m8"
+       "log_rpd_cov ~ core_inflation + lag(log_rpd_cov, 1)  + dum_2011m12 + dum_2014m7 + dum_2017m7 + dum_2020m2 + dum_2022m8"
 )
 
-rvp_full_sample <- 
-  lm(formula, data = data_core_tbl
+rpd_cov_full_sample <- 
+  lm(formula, data = data_cov_tbl
 )
 
-robust_rvp_full_sample <-
-       lmtest::coeftest(rvp_full_sample, vcov = vcovHC(rvp_full_sample, "HC1")) |>
+robust_rpd_cov_full_sample <-
+       lmtest::coeftest(rpd_cov_full_sample, vcov = vcovHC(rpd_cov_full_sample, "HC1")) |>
        tidy() |>
        stars()
 
 ## Pre 2017 sample -----------
 formula_pre <- as.formula(
-       "log_rvp_core ~ abs_core_inflation + lag(log_rvp_core, 1)  + dum_2011m12 + dum_2014m7"
+       "log_rpd_cov ~ core_inflation + lag(log_rpd_cov, 1)  + dum_2011m12 + dum_2014m7"
 )
 
-rvp_pre_2017 <- lm(formula_pre,
-       data = data_core_tbl |> filter(dum_policy_2017 == 0)
+rpd_cov_pre_2017 <- lm(formula_pre,
+       data = data_cov_tbl |> filter(dum_policy_2017 == 0)
 )
 
-robust_rvp_pre_2017 <-
-       lmtest::coeftest(rvp_pre_2017) |>
+robust_rpd_cov_pre_2017 <-
+       lmtest::coeftest(rpd_cov_pre_2017) |>
        tidy() |>
        stars()
 
 ## Post 2017 sample -----------
 formula_post <- as.formula(
-       "log_rvp_core ~ abs_core_inflation + lag(log_rvp_core, 1)  + dum_2020m2 + dum_2022m8"
+       "log_rpd_cov ~ core_inflation + lag(log_rpd_cov, 1)  + dum_2020m2 + dum_2022m8"
 )
 
-rvp_post_2017 <- lm(formula_post,
-       data = data_core_tbl |> filter(dum_policy_2017 == 1)
+rpd_cov_post_2017 <- lm(formula_post,
+       data = data_cov_tbl |> filter(dum_policy_2017 == 1)
 )
-robust_rvp_post_2017 <-
-       lmtest::coeftest(rvp_post_2017) |>
+robust_rpd_cov_post_2017 <-
+       lmtest::coeftest(rpd_cov_post_2017) |>
        tidy() |>
        stars()
 
 # Regression with squared inflation ---------------------------------------
 formula_sq <- as.formula(
-       "log_rvp_core ~ core_inflation + squared_core_inflation + lag(log_rvp_core, 1)  + 
+       "log_rpd_cov ~ core_inflation + squared_core_inflation + lag(log_rpd_cov, 1)  + 
        dum_2011m12 + dum_2014m7 + dum_2017m7 + dum_2020m2 + dum_2022m8"
 )
 
 ## Full sample ---------
-rvp_full_sample_sq <- lm(formula_sq,
-       data = data_core_tbl
+rpd_cov_full_sample_sq <- lm(formula_sq,
+       data = data_cov_tbl
 )
 
-robust_rvp_full_sample_sq <-
-       lmtest::coeftest(rvp_full_sample_sq) |>
+robust_rpd_cov_full_sample_sq <-
+       lmtest::coeftest(rpd_cov_full_sample_sq) |>
        tidy() |>
        stars()
 
 ## Pre 2017 -------------
 formula_sq_pre <- as.formula(
-       "log_rvp_core ~ core_inflation + squared_core_inflation + lag(log_rvp_core, 1)  +
+       "log_rpd_cov ~ core_inflation + squared_core_inflation + lag(log_rpd_cov, 1)  +
   dum_2011m12 + dum_2014m7"
 )
 
-rvp_pre_2017_sq <- lm(formula_sq_pre,
-       data = data_core_tbl |> filter(dum_policy_2017 == 0)
+rpd_cov_pre_2017_sq <- lm(formula_sq_pre,
+       data = data_cov_tbl |> filter(dum_policy_2017 == 0)
 )
 
-robust_rvp_pre_2017_sq <-
-       lmtest::coeftest(rvp_pre_2017_sq) |>
+robust_rpd_cov_pre_2017_sq <-
+       lmtest::coeftest(rpd_cov_pre_2017_sq) |>
        tidy() |>
        stars()
 
 ## Post 2017 ---------------
 formula_sq_post <- as.formula(
-       "log_rvp_core ~ core_inflation + squared_core_inflation + lag(log_rvp_core, 1)  +
+       "log_rpd_cov ~ core_inflation + squared_core_inflation + lag(log_rpd_cov, 1)  +
    dum_2020m2 + dum_2022m8"
 )
 
 post_2017_sq <- lm(formula_sq_post,
-       data = data_core_tbl |> filter(dum_policy_2017 == 1)
+       data = data_cov_tbl |> filter(dum_policy_2017 == 1)
 )
-robust_rvp_post_2017_sq <-
+robust_rpd_cov_post_2017_sq <-
        lmtest::coeftest(post_2017_sq) |>
        tidy() |>
        stars()
@@ -236,12 +224,12 @@ robust_rvp_post_2017_sq <-
 combined_models_core_tbl <-
        bind_rows(
               .id = "model_type",
-              robust_rvp_full_sample,
-              robust_rvp_pre_2017,
-              robust_rvp_post_2017,
-              robust_rvp_full_sample_sq,
-              robust_rvp_pre_2017_sq,
-              robust_rvp_post_2017_sq
+              robust_rpd_cov_full_sample,
+              robust_rpd_cov_pre_2017,
+              robust_rpd_cov_post_2017,
+              robust_rpd_cov_full_sample_sq,
+              robust_rpd_cov_pre_2017_sq,
+              robust_rpd_cov_post_2017_sq
        ) |>
        mutate(
               model_type = case_when(
@@ -262,10 +250,10 @@ combined_models_core_tbl <-
 
 # Export ---------------------------------------------------------------
 artifacts_base_regression_core <- list(
-       data_core_tbl = data_core_tbl,
-       rvp_core_gg = rvp_core_gg,
-       varselect_rvp_core_tbl = varselect_rvp_core_tbl,
-       core_rvp_stationarity_tbl = core_rvp_stationarity_tbl,
+       data_cov_tbl = data_cov_tbl,
+       rpd_cov_gg = rpd_cov_gg,
+       varselect_rpd_cov_tbl = varselect_rpd_cov_tbl,
+       core_rpd_cov_stationarity_tbl = core_rpd_cov_stationarity_tbl,
        combined_models_core_tbl = combined_models_core_tbl
 )
 

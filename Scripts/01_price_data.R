@@ -44,14 +44,15 @@ library(tictoc)
 source(here("Functions", "fx_plot.R"))
 
 # Import and cleaning -------------------------------------------------------------
-sheets_names <- excel_sheets(here("Data", "Price_dispersion_data.xlsx"))
-
+sheets_names <- excel_sheets(here("Data", "Price_dispersion_data_20260123.xlsx"))
 data <-
-  read_excel(here("Data", "Price_dispersion_data.xlsx"), sheet = sheets_names[3], skip = 0)
+  read_excel(here("Data", "Price_dispersion_data_20260123.xlsx"), sheet = sheets_names[8], skip = 0)
+
 
 weights_tbl <-
-  data |>
-  slice((1:2)) |>
+  read_excel(here("Data", "Price_dispersion_data_20260123.xlsx"), sheet = sheets_names[3], skip = 0) |>
+  dplyr::select(-starts_with("..."), -starts_with("1")) |> 
+  slice(1) |> 
   rename(
     "Cereal products" = cerealprod,
     "Meat" = meat,
@@ -96,18 +97,14 @@ weights_tbl <-
     "Insurance" = insurance,
     "Financial services" = fin_serv,
     "Fuel" = fuel
-  ) |>
-  slice(-1) |>
-  dplyr::select(-month, -`headline inflation`, -rvp, -`...47`) |>
-  pivot_longer(everything(), names_to = "Series", values_to = "Weight")
+  ) |>  
+  pivot_longer(-month, names_to = "Series", values_to = "Weight") |> 
+  dplyr::select(-month)
+
 
 price_data_tbl <-
   data |>
-  slice(-(1:2)) |>
-  janitor::clean_names() |>
-  mutate(month = as.Date(month, format = "%Y-%m-%d")) |>
-  rename(Date = month) |>
-  dplyr::select(-starts_with("x")) |>
+  dplyr::select(-starts_with("...")) |> 
   rename(
     "Cereal products" = cerealprod,
     "Meat" = meat,
@@ -127,7 +124,7 @@ price_data_tbl <-
     "Clothing" = clothing,
     "Footwear" = footwear,
     "Actual rentals for housing" = rentals,
-    "Owners' equivalent rent" = oer,
+    "Owners' equivalent rent" = OER,
     "Maintenance and repairs" = main_repairs,
     "Water supply and miscellaneous services" = water_sup_serv,
     "Electricity and other fuels" = electr_ofuels,
@@ -152,10 +149,12 @@ price_data_tbl <-
     "Insurance" = insurance,
     "Financial services" = fin_serv,
     "Fuel" = fuel
-  )
+  ) |> 
+  rename(Date = month)
+
 
 price_data_names <-
-  read_excel(here("Data", "Price_dispersion_data.xlsx"), sheet = sheets_names[8], skip = 0) |>
+  read_excel(here("Data", "Price_dispersion_data.xlsx"), sheet = sheets_names[8], skip = 0) |> 
   dplyr::select(-1) |>
   slice(-(1:3)) |>
   slice(-((n() - 6):n())) |>
@@ -167,6 +166,7 @@ price_data_names <-
 old_names_vec <- as_vector(price_data_names$Old_names)
 new_names_vec <- as_vector(price_data_names$New_names)
 cat(price_data_names$vec, sep = "\n")
+
 # EDA ---------------------------------------------------------------
 price_data_tbl |> glimpse()
 price_data_tbl |> skimr::skim()
@@ -178,29 +178,21 @@ price_data_long_tbl <-
 
 price_data_gg <-
   price_data_long_tbl |>
-  filter(!Series %in% c("rvp", "headline_inflation")) |>
-  fx_plot(variables_color = 45, ncol = 6)
-
-median_headline_inflation <-
-  price_data_long_tbl |>
-  filter(Series %in% c("headline_inflation")) |>
-  summarise(median_value = median(Value, na.rm = TRUE))
+  filter(!Series %in% c("hinfl", "coreinfl")) |>
+  fx_plot(variables_color = 45, ncol = 5)+
+  theme(
+    strip.text = element_text(size = 4)
+  )
 
 headline_inflation_gg <-
   price_data_long_tbl |>
-  filter(Series %in% c("headline_inflation")) |>
-  mutate(Series = str_replace(Series, "headline_inflation", "Headline Inflation")) |>
+  filter(Series %in% c("hinfl")) |> 
+  mutate(Series = str_replace(Series, "hinfl", "Headline Inflation")) |>
   fx_plot(variables_color = 1) +
   # geom_hline(yintercept = median_headline_inflation$median_value, linewidth = .8, linetype = "dashed", color = "red") +
   # geom_vline(xintercept = as.Date("2017-07-10"), color = "red", linetype = "dashed") +
   labs(y = "Headline Inflation") +
   theme(strip.text = element_blank(), strip.background = element_blank())
-
-rvp_gg <-
-  price_data_long_tbl |>
-  filter(Series %in% c("rvp")) |>
-  mutate(Series = str_replace(Series, "rvp", "Relative price variance")) |>
-  fx_plot(variables_color = 1)
 
 weights_gg <-
   weights_tbl |>
@@ -236,7 +228,6 @@ artifacts_price_data <- list(
   plots = list(
     price_data_gg = price_data_gg,
     headline_inflation_gg = headline_inflation_gg,
-    rvp_gg = rvp_gg,
     weights_gg = weights_gg
   )
 )

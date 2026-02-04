@@ -44,12 +44,14 @@ library(tictoc)
 source(here("Functions", "fx_plot.R"))
 
 # Import -------------------------------------------------------------
-rvp_tbl <- read_rds(here("Outputs", "artifacts_price_data.rds")) |> 
-  pluck(1, 1) |> 
-  dplyr::select(Date, headline_inflation, rvp) |> 
-  mutate(
-    policy_2017_dum = ifelse(Date > as.Date("2017-07-01"), 1, 0)
-  )
+sheets_names <- excel_sheets(here("Data", "Price_dispersion_data_20260123.xlsx"))
+
+rpd_tbl <-
+  read_excel(here("Data", "Price_dispersion_data_20260123.xlsx"), sheet = sheets_names[14], skip = 0) |> 
+  rename(Date = month,
+         headline_inflation = hcpi,
+         core_inflation = corecpi) |> 
+  dplyr::select(Date, headline_inflation, core_inflation, rpd, rpd_cov) 
   # mutate(
   #   across(-Date, ~ .x / 100)
   # )
@@ -99,9 +101,9 @@ rvp_tbl <- read_rds(here("Outputs", "artifacts_price_data.rds")) |>
 # rvp_tbl <- price_data_tbl |> 
 #   dplyr::select(Date, headline_inflation, rvp)
 # Graphing ----------------------------------------------------------------
-rvp_base_version_gg <- 
-  rvp_tbl |>
-  ggplot(aes(x = Date, y = rvp)) +
+rpd_gg <- 
+  rpd_tbl |>
+  ggplot(aes(x = Date, y = rpd)) +
   geom_line() +
   theme_minimal() +
   theme(
@@ -118,19 +120,45 @@ rvp_base_version_gg <-
     axis.line = element_line(color = "black", linewidth = 0.2),
     strip.text = element_blank()
   ) +
-  labs(x = "", y = "Relative price variability") +
+  labs(x = "", y = "Relative price dispersion") +
+  scale_fill_manual(values = pnw_palette("Winter", 1))
+
+
+rpd_cov_gg <- 
+  rpd_tbl |>
+  ggplot(aes(x = Date, y = rpd_cov)) +
+  geom_line() +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  ) +
+  theme(
+    text = element_text(size = 8),
+    strip.background = element_rect(colour = "white", fill = "white"),
+    axis.text.x = element_text(angle = 90),
+    axis.title = element_text(size = 8),
+    plot.tag = element_text(size = 8),
+    axis.line = element_line(color = "black", linewidth = 0.2),
+    strip.text = element_blank()
+  ) +
+  labs(x = "", y = "Relative price dispersion (CoV)") +
   scale_fill_manual(values = pnw_palette("Winter", 1))
 
 
 
+
+
 # Export ---------------------------------------------------------------
-artifacts_rvp_measures <- list (
-  rvp_tbl = rvp_tbl,
-  rvp_base_version_gg = rvp_base_version_gg
+artifacts_rpd_measures <- list (
+  rpd_tbl = rpd_tbl,
+  rpd_gg = rpd_gg,
+  rpd_cov_gg = rpd_cov_gg
 )
 
 
-write_excel_csv(rvp_tbl, file = here("Outputs", "rvp_measures.csv"))
-write_rds(artifacts_rvp_measures, file = here("Outputs", "artifacts_rvp_measures.rds"))
+write_excel_csv(rpd_tbl, file = here("Outputs", "rdp_measures.csv"))
+write_rds(artifacts_rpd_measures, file = here("Outputs", "artifacts_rpd_measures.rds"))
 
 

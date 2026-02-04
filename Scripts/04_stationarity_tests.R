@@ -44,24 +44,24 @@ library(tictoc)
 source(here("Functions", "fx_plot.R"))
 
 # Import -------------------------------------------------------------
-rvp_data <- read_rds(here("Outputs", "artifacts_rvp_measures.rds")) |> 
+rpd_data <- read_rds(here("Outputs", "artifacts_rpd_measures.rds")) |> 
   pluck(1)
 
 #???Is the data seasonaly adjusted?
 
 
 # Structural breaks -----------------------------------------------------
-breakpoints_rvp <- breakpoints(rvp ~ 1, data = rvp_data)
-summary(breakpoints_rvp)
-plot(breakpoints_rvp)
+breakpoints_rpd <- breakpoints(rpd ~ 1, data = rpd_data)
+summary(breakpoints_rpd)
+plot(breakpoints_rpd)
 
-breakpoints_inflation <- breakpoints(headline_inflation ~ 1, data = rvp_data)
+breakpoints_inflation <- breakpoints(headline_inflation ~ 1, data = rpd_data)
 summary(breakpoints_inflation)
 plot(breakpoints_inflation)
 
 # Stationarity ------------------------------------------------------------
-rvp_stationarity_tbl <- 
-  rvp_data |> 
+rpd_stationarity_tbl <- 
+  rpd_data |> 
   pivot_longer(cols = -Date, names_to = "Measure", values_to = "Value") |>
   group_by(Measure) |>
   summarise(
@@ -71,16 +71,16 @@ rvp_stationarity_tbl <-
   ) |> 
   mutate(
     Stationarity = ifelse(adf_test < 0.1 | pp_test < 0.1 | kp_test < 0.1, "Stationary", "Non-Stationary")
-  ) |>  # for the rvps could be caused by structural breaks in the data 
-  filter(Measure %in% c("rvp", "rvp_division", "headline_inflation")) |> 
+  ) |>  # for the rpds could be caused by structural breaks in the data 
+  filter(Measure %in% c("rpd", "rpd_division", "headline_inflation")) |> 
   rename(
     "ADF test (p-value)" = adf_test,
     "PP test (p-value)" = pp_test,
     "KPSS test (p-value)" = kp_test
   )
 
-# rvp_stationarity_diff_tbl <- 
-#   rvp_tbl |> 
+# rpd_stationarity_diff_tbl <- 
+#   rpd_tbl |> 
 #   pivot_longer(cols = -Date, names_to = "Measure", values_to = "Value") |>
 #   group_by(Measure) |>
 #   summarise(
@@ -94,8 +94,8 @@ rvp_stationarity_tbl <-
 
 # Export ---------------------------------------------------------------
 artifacts_stationarity <- list (
-  rvp_stationarity_tbl = rvp_stationarity_tbl
-  # rvp_stationarity_diff_tbl = rvp_stationarity_diff_tbl
+  rpd_stationarity_tbl = rpd_stationarity_tbl
+  # rpd_stationarity_diff_tbl = rpd_stationarity_diff_tbl
 )
 
 write_rds(artifacts_stationarity, file = here("Outputs", "artifacts_stationarity.rds"))

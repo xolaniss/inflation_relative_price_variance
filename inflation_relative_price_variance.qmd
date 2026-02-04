@@ -100,21 +100,21 @@ source(here("Functions","borderlines.R" ))
 ```{r data_loading}
 price_data_list <- read_rds(here("Outputs","artifacts_price_data.rds"))
 descriptives_list <- read_rds(here("Outputs","artifacts_descriptives.rds"))
-rvp_measures <- read_rds(here("Outputs", "artifacts_rvp_measures.rds"))
+rpd_measures <- read_rds(here("Outputs", "artifacts_rpd_measures.rds"))
 regressions <- read_rds(here("Outputs","artifacts_base_regression.rds"))
 roll_regressions <- read_rds(here("Outputs","artifacts_roll.rds")) 
 recursive_regression <- read_rds(here("Outputs","artifacts_recursive.rds"))
-core_regressions <- read_rds(here("Outputs", "artifacts_base_regression_core.rds"))
+cov_regressions <- read_rds(here("Outputs", "artifacts_base_regression_cov.rds"))
 qqr_results <- read_rds(here("Outputs","artifacts_quant_reg.rds")) 
 ```
 
 # Introduction
 
-Inflation is known to have adverse welfare effects through its distortion of relative prices which causes the misallocation of resources, production inefficiencies leading to lower real economic activity. This is well supported by both theoretical and empirical studies. This paper contributes to the empirical literature, by examining the relationship between inflation and relative price variability (RPV) in South Africa given the little evidence available and to better understand how this relationship has evolved and the implications for monetary policy.
+Inflation is known to have adverse welfare effects through its distortion of relative prices which causes the misallocation of resources, production inefficiencies leading to lower real economic activity. This is well supported by both theoretical and empirical studies. This paper contributes to the empirical literature, by examining the relationship between inflation and relative price variability (RPD) in South Africa given the little evidence available and to better understand how this relationship has evolved and the implications for monetary policy.
 
-The South African context can provide further insights into the relationship between inflation and RPV given the shifts in the inflation targets from 3-6 per cent in 2000 to 4.5 per cent since 2017 as structural changes in inflation can affect the link between inflation and relative price variability [@caglayan2003] and that the functional form of relationship is U-shaped and dynamic [@fielding2000; @choi2010]. The latter motivates the estimation of the inflation rate that minimizes relative price distortions since if the relationship was linear then the optimal inflation rate would be zero. Given the inflation target reform towards a 3% in South Africa, this study contributes to the policy discussion on the appropriate inflation target and understating how dynamic relations between inflation and relative price variability has evolved.
+The South African context can provide further insights into the relationship between inflation and RPD given the shifts in the inflation targets from 3-6 per cent in 2000 to 4.5 per cent since 2017 as structural changes in inflation can affect the link between inflation and relative price variability [@caglayan2003] and that the functional form of relationship is U-shaped and dynamic [@fielding2000; @choi2010]. The latter motivates the estimation of the inflation rate that minimizes relative price distortions since if the relationship was linear then the optimal inflation rate would be zero. Given the inflation target reform towards a 3% in South Africa, this study contributes to the policy discussion on the appropriate inflation target and understating how dynamic relations between inflation and relative price variability has evolved.
 
-The theoretical literature generally distinguishes between menu-cost and signal extraction models in explaining the positive relation between trend inflation and RPV. In these models’ firms follow a one-sided dynamic pricing rule when setting prices and face fixed non-zero costs of adjusting nominal prices (e.g. printing new menus) when inflation increases as the latter reduces the optimal real price of goods and services. Due to differences in administrative costs, these nominal price adjustment costs vary across firms moreover these adjustments occur at different times which implies staggard price setting behaviour which leads to relative price variability. Menu cost models predict a that higher expected inflation causes an increase in RPV (citations xxx) while Lucas-type signal extraction models (Lucas(1973); Hercowitz (1981); Cukierman (1984) xxxx more citatiosn) argue unexpected inflation uncertainty causes higher RPV because informational frictions make it difficult to distinguish between idiosyncratic relative shocks or an aggregate (inflationary) shock. Menu cost and signal-extraction models assume a positive and linear relationship making the optimal inflation rate zero, however, recently monetary search models [@head2005] show that this relationship is nonlinear making the optimal inflation rate somewhere between zero and positive inflation rate.
+The theoretical literature generally distinguishes between menu-cost and signal extraction models in explaining the positive relation between trend inflation and RPD. In these models’ firms follow a one-sided dynamic pricing rule when setting prices and face fixed non-zero costs of adjusting nominal prices (e.g. printing new menus) when inflation increases as the latter reduces the optimal real price of goods and services. Due to differences in administrative costs, these nominal price adjustment costs vary across firms moreover these adjustments occur at different times which implies staggard price setting behaviour which leads to relative price variability. Menu cost models predict a that higher expected inflation causes an increase in RPD (citations xxx) while Lucas-type signal extraction models [@lucas1973; @hercowitz1981; @cukierman1983] argue unexpected inflation uncertainty causes higher RPD because informational frictions make it difficult to distinguish between idiosyncratic relative shocks or an aggregate (inflationary) shock. Menu cost and signal-extraction models assume a positive and linear relationship making the optimal inflation rate zero, however, recently monetary search models [@head2005] show that this relationship is nonlinear making the optimal inflation rate somewhere between zero and positive inflation rate.
 
 # Citations
 
@@ -124,91 +124,101 @@ The theoretical literature generally distinguishes between menu-cost and signal 
 
 # Data and methodology
 
-Our analysis uses monthly inflation data on 45 goods categories from January 2009 to March 2025 obtained from Statistics South Africa (Stats SA).[^1] **The data is seasonally adjusted using ???.** @fig-headline_inflation below shows the long term inflation rate in South Africa, and @fig-price_data in the appendix shows the various price categories used in the analysis. @tbl-descriptive_stats provides the descriptive statistics of the inflation rates for the various price categories used in the analysis.
+Our analysis uses monthly inflation data on 45 goods categories from January 2009 to NoV 2025 obtained from Statistics South Africa (Stats SA).[^1] . @fig-headline_inflation below shows the long term inflation rate in South Africa, and @fig-price_data in the appendix shows the various price categories used in the analysis. @tbl-descriptive_stats provides the descriptive statistics of the inflation rates for the various price categories used in the analysis.
 
-[^1]: The data is available at: \url{http://www.statssa.gov.za/}
+[^1]: The data is available at: \url{http://www.statssa.gov.za/} The data is seasonally adjusted.
 
 
-The relative price variance (RPV) is calculated in line with @lach1992 as the weighted standard deviation of individual price inflation rates from the aggregate inflation rate. The RPV is essentially the variability of relative prices of a given product. We first calculate the monthly inflation rate as follows:
+The relative price dispersion (RPD) is calculated in line with @lach1992 as the weighted standard deviation of individual price inflation rates from the aggregate inflation rate. The RPD is essentially the variability of relative prices of a given product. We first calculate the monthly inflation rate as follows:
 
 $$ \pi_{i,t} = ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right) * 100, $$ {#eq-inflation_rate}
 
-where $\pi_{i,t}$ is the inflation rate of good $i$ at time $t$, $P_{i,t}$ is the price of good $i$ at time $t$, and $P_{i,t-1}$ is the price of good $i$ at time $t-1$. Then, the RPV is calculated as:
+where $\pi_{i,t}$ is the inflation rate of good $i$ at time $t$, $P_{i,t}$ is the price of good $i$ at time $t$, and $P_{i,t-1}$ is the price of good $i$ at time $t-1$. Then, the RPD is calculated as:
 
-$$RPV_{t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, $$ {#eq-rpv}
+$$RPD_{t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, $$ {#eq-rpd}
 
-where $\omega_{j}$ is the expenditure share of the $j^{th}$ good, $\pi_{t}$ is the headline or aggregate inflation rate at time $t$, and $\sum_{i=1}^{n}\omega_{i} = 1$. The expenditure weights ($\omega_{i}$) used are derived from the Consumer Price Index (CPI) basket provided by Stats SA. @fig-rvp shows the RPV calculated using the above formula.**When where these weigths constructed???**. The weights are shown in @fig-weights in the appendix.
+where $\omega_{j}$ is the expenditure share of the $j^{th}$ good, $\pi_{t}$ is the headline or aggregate inflation rate at time $t$, and $\sum_{i=1}^{n}\omega_{i} = 1$. The expenditure weights ($\omega_{i}$) used are derived from the Consumer Price Index (CPI) basket provided by Stats SA. @fig-rpd shows the RPD calculated using the above formula. We use the 2025 CPI Stats SA weights. The weights are shown in @fig-weights in the appendix.
 
-To examine the relationship between inflation and RPV, we estimate the following econometric model:
+To examine the relationship between inflation and RPD, we estimate the following econometric model:
 
-$$RPV_{t} = \beta_0 + \beta_1|\pi_{t}| + \sum_{h=1}^{3}\omega_hRPV_{t-h}  +  \mu_{t}, $$ {#eq-rpv_reg}
+$$RPD_{t} = \beta_0 + \beta_1|\pi_{t}| + \sum_{h=1}^{3}\omega_hRPD_{t-h}  +  \mu_{t}, $$ {#eq-rpd_reg}
 
-where $RPV_{t}$ is the relative price variance at time $t$, $|\pi_{t}|$ is the absolute value of aggregate inflation rate at time $t$, $RPV_{t-h}$ are lagged values of RPV to account for its dynamic nature, and $\mu_{t}$ is the error term. The coefficient $\beta_1$ captures the effect of inflation on RPV. We include three lags of RPV based on Akaike Information Criterion (AIC) (and other tests)  and to capture potential persistence in RPV. For robustness, we repeat this estimation using core inflation (excluding food and non-alcoholic beverages, and fuel and electricity) instead of headline inflation to account for the potential volatility in these components.
+where $RPD_{t}$ is the relative price variance at time $t$, $|\pi_{t}|$ is the absolute value of aggregate inflation rate at time $t$, $RPD_{t-h}$ are lagged values of RPD to account for its dynamic nature, and $\mu_{t}$ is the error term. The coefficient $\beta_1$ captures the effect of inflation on RPD. We include three lags of RPD based on Akaike Information Criterion (AIC) (and other tests)  and to capture potential persistence in RPD. For robustness, we repeat this estimation using core inflation (excluding food and non-alcoholic beverages, and fuel and electricity) instead of headline inflation to account for the potential volatility in these components.
 
-The literature on RPV emphasises that the relationship between inflation and RPV maybe time-varying due to structural changes in the economy, monetary policy regimes, and other factors. To capture potential time variation in the relationship, we also estimate a rolling regression model with a **24-month and 60-month windows** as follows:
+The literature on RPD emphasises that the relationship between inflation and RPD maybe time-varying due to structural changes in the economy, monetary policy regimes, and other factors. To capture potential time variation in the relationship, we also estimate a rolling regression model with a 24-month and 60-month windows as follows:
 
-$$RPV_{t} = \alpha_{t} + \beta_{1,t}|\pi_{t}| + \sum_{h=1}^{3}\omega_{h,t}RPV_{t-h}  +  \mu_{t}, $$ {#eq-rpv_rolling_reg}
+$$RPD_{t} = \alpha_{t} + \beta_{1,t}|\pi_{t}| + \sum_{h=1}^{3}\omega_{h,t}RPD_{t-h}  +  \mu_{t}, $$ {#eq-rpd_rolling_reg}
 
-where the coefficients $\alpha_{t}$, $\beta_{1,t}$, and $\omega_{h,t}$ vary over time. This approach allows us to observe the stability of the coefficients over time, which is an indicator of non-linearity in the relationship between RPV and inflation. Furthermore, we employ a quantile on quantile regression approach, which is robust to outliers and allows us to regime aspects of the relationship between RPV and inflation. For brevity, we explain the quantile on quantile estimation procedure in the Appendix.
+where the coefficients $\alpha_{t}$, $\beta_{1,t}$, and $\omega_{h,t}$ vary over time. This approach allows us to observe the stability of the coefficients over time, which is an indicator of non-linearity in the relationship between RPD and inflation. 
 
-Lastly, we utilise a semi-parametric or partially linear approach to estimate the optimal level of inflation given the RPV. This approach allows us to model the relationship between inflation and RPV without imposing a strict functional form. Following the literature, we first specify a quadratic (U-shaped) relationship between inflation and RPV as follows:
+Next, we utilise a semi-parametric or partially linear approach to estimate the optimal level of inflation given the RPD. This approach allows us to model the relationship between inflation and RPD without imposing a strict functional form. Following the literature, we first specify a quadratic (U-shaped) relationship between inflation and RPD as follows:
 
-$$RPV_t = \alpha + \pi_t + \beta_2\pi_t^2 + \sum_{h=1}^{3}\phi_hRPV_{t-h} + \epsilon_t, $$ {#eq-rpv_semi_parametric}
+$$RPD_t = \alpha + \pi_t + \beta_2\pi_t^2 + \sum_{h=1}^{3}\phi_hRPD_{t-h} + \epsilon_t, $$ {#eq-rpd_semi_parametric}
 
-where $\beta_2$ captures the curvature of the relationship between inflation and RPV. The optimal inflation rate that minimizes RPV can be derived by taking the first derivative of the equation with respect to $\pi_t$ and setting it to zero, yielding:
+where $\beta_2$ captures the curvature of the relationship between inflation and RPD. The optimal inflation rate that minimizes RPD can be derived by taking the first derivative of the equation with respect to $\pi_t$ and setting it to zero, yielding:
 
 $$\pi_t^* = -\dfrac{1}{2\beta_2}.$$ {#eq-optimal_inflation}
 
 To estimate this optiomal inflation we implement a semi parametric approach as follows:
 
-$$RPV_t =  f(\pi_t) + \sum_{h=1}^{3}\phi_hRPV_{t-h} + \epsilon_t, $$ {#eq-rpv_semi_parametric_f}
+$$RPD_t =  f(\pi_t) + \sum_{h=1}^{3}\phi_hRPD_{t-h} + \epsilon_t, $$ {#eq-rpd_semi_parametric_f}
 
-where $f(\pi_t)$ is a non-linear smooth differentiable function of inflation and the RPV. Therefore, the optimal inflation rate can be obtained by finding the minimum of the estimated $f(\pi_t)$ function. $f(\pi_t)$ is estimated in two stages. First we estimate $\lambda_h$ as follows:
+where $f(\pi_t)$ is a non-linear smooth differentiable function of inflation and the RPD. Therefore, the optimal inflation rate can be obtained by finding the minimum of the estimated $f(\pi_t)$ function. $f(\pi_t)$ is estimated in two stages. First we estimate $\lambda_h$ as follows:
 
-$$ RPV_t = \sum_{h=1}^{3}\lambda_h\overline{RPV}_{t-h} + \eta_t, $$ {#eq-rpv_semi_parametric_stage1}
+$$ RPD_t = \sum_{h=1}^{3}\lambda_h\overline{RPD}_{t-h} + \eta_t, $$ {#eq-rpd_semi_parametric_stage1}
 
-where $\overline{RPV}_{t-h}$ are the residuals from a non-parametric regression of each lag of $RPV_t$ on $\pi_t$. In the second stage, we estimate $f(\pi_t)$ non-parametrically as follows:
+where $\overline{RPD}_{t-h}$ are the residuals from a non-parametric regression of each lag of $RPD_t$ on $\pi_t$. In the second stage, we estimate $f(\pi_t)$ non-parametrically as follows:
 
-$$\hat{\eta}_t = f(\pi_t) + v_t, $$ {#eq-rpv_semi_parametric_stage2}
+$$\hat{\eta}_t = f(\pi_t) + v_t, $$ {#eq-rpd_semi_parametric_stage2}
 
-where $\hat{\eta}_t$ are the residuals from @eq-rpv_semi_parametric_stage1, and $f(\pi_t)$ is estimated using a kernel regression method. In both stages we use the Nadaraya-Watson kernel estimator. The bandwidth ($h$) for the kernel estimator is selected using cross-validation to minimize the mean squared error. As a treatment for extreme values of inflation, we further implement the unbounded Gaussian kernel and the outlier-robust Epanechnikov kernel. In essence, the semi-parametric approach captures the sensitivity of RPV to marginal increases in inflation. In that case, the optimal inflation rate can be obtained by finding the point where the first derivative ($f'(\pi_t)$) is equal to zero. Therefore, if $f'(\pi_t) > 0$ ($f'(\pi_t) < 0$), then an increase in inflation (decrease) leads to an increase (decrease) in the RPV.
+where $\hat{\eta}_t$ are the residuals from @eq-rpd_semi_parametric_stage1, and $f(\pi_t)$ is estimated using a kernel regression method. The bandwidth ($h$) for the kernel estimator is selected using cross-validation to minimize the mean squared error. As a treatment for extreme values of inflation, we further implement the unbounded Gaussian kernel and the outlier-robust Epanechnikov kernel. In essence, the semi-parametric approach captures the sensitivity of RPD to marginal increases in inflation. In that case, the optimal inflation rate can be obtained by finding the point where the first derivative ($f'(\pi_t)$) is equal to zero. Therefore, if $f'(\pi_t) > 0$ ($f'(\pi_t) < 0$), then an increase in inflation (decrease) leads to an increase (decrease) in the RPD. For robustness we estimate the $g(UIN_t)$ with multiple bandwith ($h$).
+
+To further disentangle the effects of RPD on inflation, we decompose headline inflation into its expected and unexpected components. As discussed in the literature section, for example, theory suggests that inflation uncertainty has a more pronounced effect on RPD due to information frictions faced by firms when adjusting prices [@lucas1973; @hercowitz1981; @cukierman1983].
+
+We therefore estimate the following model:
+
+$$ RPD_t = \alpha + \beta_0 EIN_t + \beta_1 UIN_t + g(UIN_t) + \sum_{k=1}^{3}\lambda_k RPD_{t-k} + \epsilon_t, $$ {#eq-unexpected}
+
+where $EIN_t$ is the expected inflation rate, $UIN_t$ is the unexpected inflation rate, and $g(UIN_t)$ is a non-linear function of unexpected inflation ($UIN_t$). We obtain the expected using **a simple moving average of headline inflation, and unexpected inflation as the standard deviation of inflation**. The estimation of $g(UIN_t)$ follows the same two-stage semi-parametric approach outlined in @eq-rpd_semi_parametric_stage1 and @eq-rpd_semi_parametric_stage2. The number of lags is the same as in @eq-rpd_reg.
+
+Lastly, and some-what novel to the RPD literature, we employ a quantile on quantile regression approach [@koenker2017]. Quantile on quantile regressions are robust to outliers and allows us to estimate the regime aspects of the relationship between RPD and inflation. For brevity, we explain the quantile on quantile estimation procedure in the Appendix.
 
 # Results
 
 ```{r}
-#| label: fig-rvp
-#| fig-cap: "RPV over-time"
+#| label: fig-rpd
+#| fig-cap: "RPD over-time"
 #| fig-width: 8
 #| fig-height: 3
 
-rvp_measures |> 
+rpd_measures |> 
   pluck(2)
 
 ```
 
 
 
-
-
-
 ```{r}
-#| label: fig_rvp_inflation
-#| fig-cap: "RPV vs headline Inflation"
+#| label: fig-rpd_inflation
+#| fig-cap: "RPD vs headline Inflation"
 #| fig-width: 6
 #| fig-height: 3
 
-rvp_measures|> 
+rpd_measures|> 
   pluck(1) |> 
-ggplot(aes(x = headline_inflation, y = rvp, color = factor(policy_2017_dum))) +
+  mutate(
+    policy_2017_dum = if_else(Date >= ymd("2017-07-01"), 1, 0)
+  ) |> 
+ggplot(aes(x = headline_inflation, y = rpd, color = factor(policy_2017_dum))) +
   geom_point(size = 0.5) +
   geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE, linewidth = 0.5) +
   labs(
-       y = "RPV", 
+       y = "RPD", 
        x = "Inflation rate (%)",
        color = "Period") +
   scale_color_manual(values =  pnw_palette("Winter", 2), 
                      labels = c("Before Jul 2017", "After Jul 2017")) +
-  scale_y_continuous(limits = c(2, 10), breaks = c(2, 4, 6, 8, 10)) +
+  scale_y_continuous(limits = c(0, 5), breaks = c(1, 2, 3, 4, 5)) +
   theme_minimal() +
       theme(
       legend.position = "bottom",
@@ -238,11 +248,11 @@ base_tbl <-
   mutate(term = case_when(
     term == "(Intercept)" ~ "C",
     term == "headline_inflation" ~ "\\pi_t",
-    term == "abs_headline_inflation" ~ "|\\pi_t|",
+    # term == "abs_headline_inflation" ~ "|\\pi_t|",
     term == "squared_headline_inflation" ~ "\\pi_t^2",
-    term == "lag(log_rvp, 1)" ~ "RPV_{t-1}",
-    term == "lag(log_rvp, 2)" ~ "RPV_{t-2}",
-    term == "lag(log_rvp, 3)" ~ "RPV_{t-3}",
+    term == "lag(log_rpd, 1)" ~ "RPD_{t-1}",
+    term == "lag(log_rpd, 2)" ~ "RPD_{t-2}",
+    term == "lag(log_rpd, 3)" ~ "RPD_{t-3}",
     term == "dum_2011m121" ~ "D_{2011m12}",
     term == "dum_2014m71" ~ "D_{2014m7}",
     term == "dum_2017m71" ~ "D_{2017m7}",
@@ -252,14 +262,14 @@ base_tbl <-
   )) |>  
   arrange(desc(term))
 
+replace_one <- base_tbl |> 
+  slice(1)
+  
 replace_two <- base_tbl |> 
   slice(2)
-  
-replace_three <- base_tbl |> 
-  slice(3)
 
-base_tbl[2, ] <- replace_three
-base_tbl[3, ] <- replace_two
+base_tbl[2, ] <- replace_one
+base_tbl[1, ] <- replace_two
 
 base_tbl |> 
   rename(
@@ -303,6 +313,117 @@ recursive_regression |>
 
 \newpage
 
+
+
+
+```{r}
+#| label: fig-semi_parametric
+#| fig-cap: "Semi-parametric regressions"
+#| fig-width: 8
+#| fig-height: 8
+
+# Function to read and convert image to ggplot
+img_to_plot <- function(path, title = "", y_axis = "") {
+  img <- magick::image_read(path)
+  
+  # Crop the left side to remove the old "Relative price dispersion" label
+  # Stata left margins with titles are usually significant. 
+  # We chop off 60 pixels from the left.
+  img <- magick::image_chop(img, "60x0")
+  
+  ggplot() +
+    annotation_custom(grid::rasterGrob(img, width = unit(1,"npc"), height = unit(1,"npc")), 
+                      -Inf, Inf, -Inf, Inf) +
+    labs(title = title, y = y_axis) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 10, hjust = 0.5, face = "bold"),
+      axis.title.y = element_text(angle = 90, size = 6, margin = margin(r = 5)), # Turn y-axis label back on
+    ) 
+}
+
+# Paths with consistent ordering and correct spellings
+# Columns: Gaussian, Epanechnikov
+# Rows: Full Sample, Pre-2017, Post-2017
+
+p1 <- img_to_plot(here("Outputs/non_linear/full_sample_gaussian_eq10.png"), 
+                  y_axis = "")
+p2 <- img_to_plot(here("Outputs/non_linear/full_sample_epanechnikov_eq10.png"), 
+                  y_axis = "")
+
+p3 <- img_to_plot(here("Outputs/non_linear/Pre2017_gaussian_eq10.png"), 
+                  y_axis = "")
+p4 <- img_to_plot(here("Outputs/non_linear/Pre2017_epanechnikov_eq10.png"), 
+                  y_axis = "")
+
+p5 <- img_to_plot(here("Outputs/non_linear/Post2017_gaussian_eq10.png"), 
+                  y_axis = "")
+p6 <- img_to_plot(here("Outputs/non_linear/Post2017_epanechnikov_eq10.png"), 
+                  y_axis = "")
+
+# Combine using patchwork
+(p1 + p2) / (p3 + p4) / (p5 + p6)
+```
+
+
+
+
+```{r}
+#| label: fig-semi_parametric_robustness
+#| fig-cap: "Semi-parametric regressions with alternative bandwidth selection"
+#| fig-width: 8
+#| fig-height: 8
+p1 <- img_to_plot(here("Outputs/robustness/full_sample_gaussian_robust_bandwidth_eq10.png"), 
+                  y_axis = "")
+p2 <- img_to_plot(here("Outputs/robustness/full_sample_epanechnikov_robust_bandwidth_eq10.png"), 
+                  y_axis = "")
+
+p3 <- img_to_plot(here("Outputs/robustness/Pre2017_gaussian_robust_bandwidth_eq10.png"), 
+                  y_axis = "")
+p4 <- img_to_plot(here("Outputs/robustness/Pre2017_epanechnikov_robust_bandwidth_eq10.png"), 
+                  y_axis = "")
+
+p5 <- img_to_plot(here("Outputs/robustness/Post2017_gaussian_robust_bandwidth_eq10.png"), 
+                  y_axis = "")
+p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidth_eq10.png"), 
+                  y_axis = "")
+
+# Combine using patchwork
+(p1 + p2) / (p3 + p4) / (p5 + p6)
+
+```
+
+
+
+
+
+```{r}
+#| label: fig-unexpected_inflation
+#| fig-cap: "Semi-parametric regressions for unexpected inflation"
+#| fig-width: 8
+#| fig-height: 8
+p1 <- img_to_plot(here("Outputs/unexpected/full_sample_gaussian_eq14.png"), 
+                  y_axis = "")
+p2 <- img_to_plot(here("Outputs/unexpected/full_sample_epanechnikov_eq14.png"), 
+                  y_axis = "")
+
+p3 <- img_to_plot(here("Outputs/unexpected/Pre2017_gaussian_eq14.png"), 
+                  y_axis = "")
+p4 <- img_to_plot(here("Outputs/unexpected/Pre2017_epanechnikov_eq14.png"), 
+                  y_axis = "")
+
+p5 <- img_to_plot(here("Outputs/unexpected/Post2017_gaussian_eq14.png"), 
+                  y_axis = "")
+p6 <- img_to_plot(here("Outputs/unexpected/Post2017_epanechnikov_eq14.png"), 
+                  y_axis = "")
+
+# Combine using patchwork
+(p1 + p2) / (p3 + p4) / (p5 + p6)
+
+```
+
+\newpage 
+
 ```{r}
 #| label: fig-quant_reg
 #| fig-cap: "Quantile on quantile regressions"
@@ -315,6 +436,7 @@ theme <-
     axis.text = element_text(size = 7),
     legend.text = element_text(size = 7),
     legend.title = element_text(size = 8),
+    plot.tag = element_text(size = 8, face = "plain"),
     legend.position = "bottom"
   )
 p1 <- qqr_results[[3]] + 
@@ -331,52 +453,6 @@ p1 | p2 | p3
 
 ```
 \newpage
-
-
-```{r}
-#| label: fig-semi_parametric
-#| fig-cap: "Semi-parametric regressions"
-#| fig-width: 8
-#| fig-height: 8
-
-# Function to read and convert image to ggplot
-img_to_plot <- function(path, title = "") {
-  img <- magick::image_read(path)
-  
-  # Crop the left side to remove the old "Relative price dispersion" label
-  # Stata left margins with titles are usually significant. 
-  # We chop off 60 pixels from the left.
-  img <- magick::image_chop(img, "60x0")
-  
-  ggplot() +
-    annotation_custom(grid::rasterGrob(img, width = unit(1,"npc"), height = unit(1,"npc")), 
-                      -Inf, Inf, -Inf, Inf) +
-    labs(title = title, y = "RPV") +
-    theme_minimal() +
-    theme(
-      plot.title = element_text(size = 10, hjust = 0.5, face = "bold"),
-      axis.title.y = element_text(angle = 90, size = 9, margin = margin(r = 5)), # Turn y-axis label back on
-    ) 
-}
-
-# Paths with consistent ordering and correct spellings
-# Columns: Gaussian, Epanechnikov
-# Rows: Full Sample, Pre-2017, Post-2017
-
-p1 <- img_to_plot(here("Outputs/non_linear/full_sample_guassian.png"), "Full Sample (Gaussian)")
-p2 <- img_to_plot(here("Outputs/non_linear/full_sample_epanechnikov.png"), "Full Sample (Epanechnikov)")
-
-p3 <- img_to_plot(here("Outputs/non_linear/Pre-2017_guassian.png"), "Pre-2017 (Gaussian)")
-p4 <- img_to_plot(here("Outputs/non_linear/Pre-2017_epanechnikov.png"), "Pre-2017 (Epanechnikov)")
-
-p5 <- img_to_plot(here("Outputs/non_linear/Post-2017_gaussain.png"), "Post-2017 (Gaussian)")
-p6 <- img_to_plot(here("Outputs/non_linear/Post-2017_epanechnikov.png"), "Post-2017 (Epanechnikov)")
-
-# Combine using patchwork
-(p1 + p2) / (p3 + p4) / (p5 + p6)
-```
-
-
 
 # Conclusion
 
@@ -430,7 +506,7 @@ price_data_list |>
 #| fig-height: 5
 
 price_data_list |> 
-  pluck(2, 4)
+  pluck(2, 3)
 ```
 
 \newpage
@@ -460,7 +536,7 @@ read_rds(here("Outputs","artifacts_stationarity.rds")) |>
   mutate(
     Measure = str_replace_all(Measure,
     c("headline_inflation" = "Headline Inflation",
-      "rvp" = "RPV")),
+      "rpd" = "RPD")),
   ) |> 
   flextable_word() |>
   align(j = 1, align = "left", part = "all") |>
@@ -471,7 +547,7 @@ read_rds(here("Outputs","artifacts_stationarity.rds")) |>
 
 ```{r}
 #| label: tbl-lag_selection
-#| tbl-cap: "RPV lag length selection"
+#| tbl-cap: "RPD lag length selection"
 
 regressions |> 
   pluck(1) |> 
@@ -496,32 +572,36 @@ regressions |>
 
 # Appendix: Alternative Results (OLS Robustness)
 
-The core RPV (excluding food and non-alcoholic beverages, and fuel and electricity) is calculated using the same formula as in @eq-rpv but using the core inflation rate instead of the headline inflation rate. The results are consistent with the main findings, indicating a positive relationship between core inflation and core RPV. 
+The coefficient of variation (CV) version of RPD (or RPD-CV) normalizes the RPD by the aggregate price level to account for changes in the overall price level. This measure is particularly useful when comparing RPD across different time periods or economies with varying inflation rates. The RPD-CV is calculated as follows:
+
+$$RPD-CV_{t} = \sqrt{\dfrac{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}{|1 + \pi_t|}}, $$ {#eq-rpdcv}
+
+where $\pi_t$ is the aggregate inflation rate at time $t$, and $\omega_{i}$ are the inflation basket weights.
 
 
-## Core RPV over-time
+## RPD-CV over-time
 
 ```{r}
-#| label: fig-core_rvp
-#| fig-cap: "Core RPV overtime"
+#| label: fig-core_rpd
+#| fig-cap: "RPD-CV overtime"
 #| fig-width: 8
 #| fig-height: 3
 
-core_regressions |> pluck("rvp_core_gg")
+cov_regressions |> pluck(2)
 ```
 
 \newpage
-## Stationarity tests for core RPV
+## Stationarity tests for RPD-CV
 
 ```{r}
-#| label: tbl-core_stationarity_tests
-#| tbl-cap: "Stationarity tests results"
-core_regressions |>
+#| label: tbl-cov_stationarity_tests
+#| tbl-cap: "Stationarity tests results for RPD-CV"
+cov_regressions |>
   pluck(4) |> 
   mutate(
     Measure = str_replace_all(Measure,
-    c("core_inflation" = "Core Inflation",
-      "rvp_core" = "Core RPV")),
+    c("headline_inflation" = "Headline Inflation",
+      "rpd_cov" = "RPD-CV")),
   ) |> 
   flextable_word() |>
   align(j = 1, align = "left", part = "all") |>
@@ -529,13 +609,13 @@ core_regressions |>
 ```
 
 
-## Lag length selection for core RPV
+## Lag length selection for RPD-CV
 
 ```{r}
-#| label: tbl-core_lag_selection
-#| tbl-cap: "Core RPV lag length selection"
+#| label: tbl-cov_lag_selection
+#| tbl-cap: "RPD-CV lag length selection"
 
-core_regressions |> 
+cov_regressions |> 
   pluck(3) |> 
   mutate(
     across(
@@ -551,22 +631,24 @@ core_regressions |>
 
 \newpage
 
-## Core RPV baseline regression results
+## RPD-CV baseline regression results
 
 ```{r}
-#| label: tbl-core_base_regression
-#| tbl-cap: "Core RPV baseline regressions"
+#| label: tbl-cov_base_regression
+#| tbl-cap: "RPD-CV baseline regressions"
 #| ft.arraystretch: 0.6
 
-core_tbl <- 
-  core_regressions |> 
+cov_tbl <- 
+  cov_regressions |> 
   pluck(5) |> 
   mutate(term = case_when(
     term == "(Intercept)" ~ "Constant",
-    term == "core_inflation" ~ "\\pi_t",
-    term == "abs_core_inflation" ~ "|\\pi_t|",
-    term == "squared_core_inflation" ~ "\\pi_t^2",
-    term == "lag(log_rvp_core, 1)" ~ "RPV_{t-1}",
+    term == "headline_inflation" ~ "\\pi_t",
+    # term == "abs_core_inflation" ~ "|\\pi_t|",
+    term == "squared_headline_inflation" ~ "\\pi_t^2",
+    term == "lag(log_rpd_cov, 1)" ~ "RPD_{t-1}",
+    term == "lag(log_rpd_cov, 2)" ~ "RPD_{t-2}",
+    term == "lag(log_rpd_cov, 3)" ~ "RPD_{t-3}",
     term == "dum_2011m121" ~ "D_{2011m12}",
     term == "dum_2014m71" ~ "D_{2014m7}",
     term == "dum_2017m71" ~ "D_{2017m7}",
@@ -576,16 +658,16 @@ core_tbl <-
   )) |> 
   arrange(desc(term)) 
 
-replace_two <- core_tbl |> 
-  slice(2)
+replace_one <- cov_tbl |> 
+  slice(1)
   
-replace_three <- core_tbl |> 
-  slice(3)
+replace_two <- cov_tbl |> 
+  slice(2)
 
-core_tbl[2, ] <- replace_three
-core_tbl[3, ] <- replace_two
+cov_tbl[2, ] <- replace_one
+cov_tbl[1, ] <- replace_two
 
-core_tbl |>
+cov_tbl |>
   rename(
     " " = term,
   ) |> 
@@ -596,47 +678,20 @@ core_tbl |>
         as_paragraph(
         "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."), 
       colwidths = 7) |> 
-  width(j = 1, width = 0.05) |> 
+  width(j = 1, width = 0.1) |> 
   align(j = 2, align = "center", part = "all") |>
   compose(j = 1, value = as_paragraph(as_equation(` `))) |>
   autofit(add_w = -.95)
 ```
-
-
 \newpage
-
-# Appendix: Coefficient of variation version of RPV
-
-The coefficient of variation (CV) version of RPV (or RPV-CV) normalizes the RPV by the aggregate price level to account for changes in the overall price level. This measure is particularly useful when comparing RPV across different time periods or economies with varying inflation rates. The RPV-CV is calculated as follows:
-
-$$RPV_{t} = \sqrt{\dfrac{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}{|1 + \pi_t|}}, $$ {#eq-rpvcv}
-
-where $\pi_t$ is the aggregate inflation rate at time $t$, and $\omega_{i}$ are the inflation basket weights.
-
-<!-- ## RPV-CV over-time -->
-
-<!-- @fig-alt_rvp_measure shows the CV version of RPV calculated using the above formula. -->
-
-```{r}
-#| label: fig-alt_rvp_measure
-#| fig-cap: "RPV-CV over-time"
-#| fig-width: 8
-#| fig-height: 3
-#| eval: FALSE
-
-rvp_measures |> 
-  pluck(2)
-
-```
 
 # Appendix: Explanation of the quantile on quantile regression
 
-To further capture the dynamic dependencies in the data, we perform a quantile on quantile regressions. Quantile regressions address the limitations of OLS which only estimates the mean dependency between on or more independent variables and the dependant variable. Distribution moments, such as the mean, can be strongly affected by heavy tails (or tail behaviour), non-linearity and extreme values in general (see @koenker2017quantile). In response to these limitations, the quantile regression was first introduced by \cite{koenker1978regression}. @koenker2017quantile notes that quantile regressions are inherently local and are immune to small deviations in distributions. 
+To further capture the dynamic dependencies in the data, we perform a quantile on quantile regressions. Quantile regressions address the limitations of OLS which only estimates the mean dependency between on or more independent variables and the dependant variable. Distribution moments, such as the mean, can be strongly affected by heavy tails (or tail behaviour), non-linearity and extreme values in general [see @koenker2017]. In response to these limitations, the quantile regression was first introduced by @koenker1978a. @koenker2017 notes that quantile regressions are inherently local and are immune to small deviations in distributions. 
 
-However, @gupta2018does note that standard quantile regressions are limited in their ability to capture dependency in its entirety. That is, although quantile regressions capture the relationship between two variable (for example) at various points of the conditional distribution, it restricts the possibility that the nature of the independent variable can also influence how the independent variable is calculated. The quantile-on-quantile  regression (QQR), therefore, offers a more complete picture of the complex dependency structure, and was utilised numerous times in the literature (see @mishra2019does, @chang2020asymmetric, and @sim2016modeling).
+However, @gupta2018 note that standard quantile regressions are limited in their ability to capture dependency in its entirety. That is, although quantile regressions capture the relationship between two variable (for example) at various points of the conditional distribution, it restricts the possibility that the nature of the independent variable can also influence how the independent variable is calculated. The quantile-on-quantile  regression (QQR), therefore, offers a more complete picture of the complex dependency structure, and was utilised numerous times in the literature [see @mishra2019; @chang2020; @sim2016].
 
-\newpage
-Given this brief explanation on QQR, we estimate the relationship between the $\theta$-quantile of RPV ($a_{2t}$) and the $\tau$-quantile of headline inflation ($\Gamma_t$) as follows:
+Given this brief explanation on QQR, we estimate the relationship between the $\theta$-quantile of RPD ($a_{2t}$) and the $\tau$-quantile of headline inflation ($\Gamma_t$) as follows:
 
 $$
 	a_{2t} = \beta^\theta\Gamma_t + \epsilon_{t}^\theta, 
@@ -663,7 +718,7 @@ $$ {#eq-qqr_4}
 
 where $\beta^\theta(\Gamma^\tau)$ and $\beta^{\theta'}(\Gamma^\tau)$ are substituted with $\beta_0(\theta, \tau)$ and $\beta_1(\theta, \tau)(\Gamma^\tau)$ respectively.
 
-Therefore, @eq-qqr_4 captures the relationship between the $\theta$-quantile of the RPV and the $\tau$-quantile of inflation, that is, the overall dependence structure of the respective distributions. To this end, to get the estimates of $\hat{\beta_0}(\theta, \tau)$ and  $\hat{\beta_1}(\theta, \tau)$ we solve for:
+Therefore, @eq-qqr_4 captures the relationship between the $\theta$-quantile of the RPD and the $\tau$-quantile of inflation, that is, the overall dependence structure of the respective distributions. To this end, to get the estimates of $\hat{\beta_0}(\theta, \tau)$ and  $\hat{\beta_1}(\theta, \tau)$ we solve for:
 
 $$
 	\underset{b_0, b_1}{min}\sum_{i=1}^n\rho_{\theta}\left[a_{2t} - b_0 - b_1(\widehat{\Gamma_t} - \widehat{\Gamma}) \right]K\left(\dfrac{F_n(\widehat{\Gamma_t}) - \tau}{h}\right)
