@@ -121,7 +121,45 @@ The theoretical literature generally distinguishes between menu-cost and signal 
 
 @adam2024 @baglan2016 @ball1993 @benabou1993 @caglayan2003 @caglayan2008 @grier1996 @lach1992 @nakamura2018 @ndou2014 @ndou2017 @parks1978 @parsley1996 @rather2018
 
-# Literature review
+
+# Understanding relative price dispersion through Lucas's aggregate supply curve
+
+
+$$y_t(z) = y_{n,t} + y_{ct}(z), $$
+
+
+where $y_t(z)$ is the aggregate supply at time $t$ in market $z$, $y_{n,t}$ is the natural or secular level of supply at time $t$, and $y_{ct}$ is the cyclical component of supply at time $t$.
+
+$$ y_{n,t} = \alpha + \beta t, $$
+
+where $\alpha$ is a constant and $\beta$ captures the trend growth rate of the natural level of supply.
+
+$$ y_{ct}(z) = \gamma[P_t(z) - E(P_t | I_t(z))] + \lambda y_{c, t-1}(z), $$
+where $\gamma$ captures the sensitivity of supply to unexpected price changes, $P_t(z)$ is the actual price level in market $z$ at time $t$, $E(P_t | I_t(z))$ is the expected price level based on information available at time $t$ in market $z$, and $\lambda$ captures the persistence of the cyclical component and $|\lambda|$ < 1. $E(P_t | I_t(z))$ is current expected price level conditioned on information that is available at time $t$, at market $z$. 
+
+$I_t(z)$
+
+$$P_t \sim N(\overline{P_t}, \sigma^2), $$
+$$z \overset{\text{iid}}{\sim} N(0, \tau^2) $$
+
+$$P_t(z) = P_t + z $$
+
+$$ E(P_t| I_t(z))  = E(P_t|P_t(z), \overline{P_t}) = (1-\theta)P_t(z) + \theta\overline{Pt}$$
+
+$$\theta = \frac{\tau^2}{(\sigma^2 + \tau^2)} $$
+
+$$ y_t(z) = y_{nt} + \theta \gamma[P_t(z) - \overline{P_t}] + \lambda y_{c, t-1}$$
+
+$$y_t = y_{nt} + \theta\gamma(P_t - \overline{P_t}) + \lambda[y_{t-1} - y_{n, t-1}]$$
+
+
+$\theta \uparrow$ in $\tau^2$ and $\downarrow$ in $\sigma^2$.   $\gamma$
+
+
+#  Empirical literaturer review
+
+
+
 
 # Data and methodology
 
@@ -712,6 +750,7 @@ cov_tbl |>
   compose(j = 1, value = as_paragraph(as_equation(` `))) |>
   autofit(add_w = -.95)
 ```
+
 \newpage
 
 # Appendix: Explanation of the quantile on quantile regression

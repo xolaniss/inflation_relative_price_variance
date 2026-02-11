@@ -258,7 +258,51 @@ rate.
 \citet{lach1992} \citet{nakamura2018} \citet{ndou2014} \citet{ndou2017}
 \citet{parks1978} \citet{parsley1996} \citet{rather2018}
 
-\section{Literature review}\label{literature-review}
+\section{Understanding relative price dispersion through Lucas's
+aggregate supply
+curve}\label{understanding-relative-price-dispersion-through-lucass-aggregate-supply-curve}
+
+\[y_t(z) = y_{n,t} + y_{ct}(z), \]
+
+where \(y_t(z)\) is the aggregate supply at time \(t\) in market \(z\),
+\(y_{n,t}\) is the natural or secular level of supply at time \(t\), and
+\(y_{ct}\) is the cyclical component of supply at time \(t\).
+
+\[ y_{n,t} = \alpha + \beta t, \]
+
+where \(\alpha\) is a constant and \(\beta\) captures the trend growth
+rate of the natural level of supply.
+
+\[ y_{ct}(z) = \gamma[P_t(z) - E(P_t | I_t(z))] + \lambda y_{c, t-1}(z), \]
+where \(\gamma\) captures the sensitivity of supply to unexpected price
+changes, \(P_t(z)\) is the actual price level in market \(z\) at time
+\(t\), \(E(P_t | I_t(z))\) is the expected price level based on
+information available at time \(t\) in market \(z\), and \(\lambda\)
+captures the persistence of the cyclical component and \(|\lambda|\)
+\textless{} 1. \(E(P_t | I_t(z))\) is current expected price level
+conditioned on information that is available at time \(t\), at market
+\(z\).
+
+\(I_t(z)\)
+
+\[P_t \sim N(\overline{P_t}, \sigma^2), \]
+\[z \overset{\text{iid}}{\sim} N(0, \tau^2) \]
+
+\[P_t(z) = P_t + z \]
+
+\[ E(P_t| I_t(z))  = E(P_t|P_t(z), \overline{P_t}) = (1-\theta)P_t(z) + \theta\overline{Pt}\]
+
+\[\theta = \frac{\tau^2}{(\sigma^2 + \tau^2)} \]
+
+\[ y_t(z) = y_{nt} + \theta \gamma[P_t(z) - \overline{P_t}] + \lambda y_{c, t-1}\]
+
+\[y_t = y_{nt} + \theta\gamma(P_t - \overline{P_t}) + \lambda[y_{t-1} - y_{n, t-1}]\]
+
+\(\theta \uparrow\) in \(\tau^2\) and \(\downarrow\) in \(\sigma^2\).
+\(\gamma\)
+
+\section{Empirical literaturer
+review}\label{empirical-literaturer-review}
 
 \section{Data and methodology}\label{data-and-methodology}
 
