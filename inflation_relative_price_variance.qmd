@@ -106,6 +106,7 @@ roll_regressions <- read_rds(here("Outputs","artifacts_roll.rds"))
 recursive_regression <- read_rds(here("Outputs","artifacts_recursive.rds"))
 cov_regressions <- read_rds(here("Outputs", "artifacts_base_regression_cov.rds"))
 qqr_results <- read_rds(here("Outputs","artifacts_quant_reg.rds")) 
+qqr_uinf_results <- read_rds(here("Outputs","artifacts_uinf_quant_reg.rds"))
 ```
 
 # Introduction
@@ -236,6 +237,7 @@ ggplot(aes(x = headline_inflation, y = rpd, color = factor(policy_2017_dum))) +
 
 ```
 
+\newpage
 
 ```{r}
 #| label: tbl-base_regression
@@ -290,7 +292,7 @@ base_tbl |>
 
 ```{r}
 #| label: fig-rolling_coefficients
-#| fig-cap: "Rolling regressions"
+#| fig-cap: "Rolling regressions. Note: t-statistics of greater (or less) than 1.96 ( or -1.96) is sigficant at a 5% level of significance."
 #| fig-width: 8
 #| fig-height: 6
 
@@ -302,7 +304,7 @@ roll_regressions |>
 
 ```{r}
 #| label: fig-recursive
-#| fig-cap: "Recursive regressions"
+#| fig-cap: "Recursive regressions. Note: Recursive regression estimates of the coefficient on absolute headline inflation with a fixed start date of 2012-07."
 #| fig-width: 8
 #| fig-height: 3
 
@@ -323,22 +325,22 @@ recursive_regression |>
 #| fig-height: 8
 
 # Function to read and convert image to ggplot
-img_to_plot <- function(path, title = "", y_axis = "") {
+img_to_plot <- function(path, title = "") {
   img <- magick::image_read(path)
   
   # Crop the left side to remove the old "Relative price dispersion" label
   # Stata left margins with titles are usually significant. 
   # We chop off 60 pixels from the left.
-  img <- magick::image_chop(img, "60x0")
+  # img <- magick::image_chop(img, "60x0")
   
   ggplot() +
     annotation_custom(grid::rasterGrob(img, width = unit(1,"npc"), height = unit(1,"npc")), 
                       -Inf, Inf, -Inf, Inf) +
-    labs(title = title, y = y_axis) +
+    labs(title = title) +
     theme_minimal() +
     theme(
-      plot.title = element_text(size = 10, hjust = 0.5, face = "bold"),
-      axis.title.y = element_text(angle = 90, size = 6, margin = margin(r = 5)), # Turn y-axis label back on
+      plot.title = element_text(size = 10, hjust = 0.5, face = "bold")
+      # axis.title.y = element_text(angle = 90, size = 6, margin = margin(r = 5)), # Turn y-axis label back on
     ) 
 }
 
@@ -346,20 +348,14 @@ img_to_plot <- function(path, title = "", y_axis = "") {
 # Columns: Gaussian, Epanechnikov
 # Rows: Full Sample, Pre-2017, Post-2017
 
-p1 <- img_to_plot(here("Outputs/non_linear/full_sample_gaussian_eq10.png"), 
-                  y_axis = "")
-p2 <- img_to_plot(here("Outputs/non_linear/full_sample_epanechnikov_eq10.png"), 
-                  y_axis = "")
+p1 <- img_to_plot(here("Outputs/non_linear/full_sample_gaussian_eq10.png"))
+p2 <- img_to_plot(here("Outputs/non_linear/full_sample_epanechnikov_eq10.png"))
 
-p3 <- img_to_plot(here("Outputs/non_linear/Pre2017_gaussian_eq10.png"), 
-                  y_axis = "")
-p4 <- img_to_plot(here("Outputs/non_linear/Pre2017_epanechnikov_eq10.png"), 
-                  y_axis = "")
+p3 <- img_to_plot(here("Outputs/non_linear/Pre2017_gaussian_eq10.png"))
+p4 <- img_to_plot(here("Outputs/non_linear/Pre2017_epanechnikov_eq10.png"))
 
-p5 <- img_to_plot(here("Outputs/non_linear/Post2017_gaussian_eq10.png"), 
-                  y_axis = "")
-p6 <- img_to_plot(here("Outputs/non_linear/Post2017_epanechnikov_eq10.png"), 
-                  y_axis = "")
+p5 <- img_to_plot(here("Outputs/non_linear/Post2017_gaussian_eq10.png"))
+p6 <- img_to_plot(here("Outputs/non_linear/Post2017_epanechnikov_eq10.png"))
 
 # Combine using patchwork
 (p1 + p2) / (p3 + p4) / (p5 + p6)
@@ -370,23 +366,17 @@ p6 <- img_to_plot(here("Outputs/non_linear/Post2017_epanechnikov_eq10.png"),
 
 ```{r}
 #| label: fig-semi_parametric_robustness
-#| fig-cap: "Semi-parametric regressions with alternative bandwidth selection"
+#| fig-cap: "Semi-parametric regressions with alternative bandwidth selection. Note: hcpi is the headline inflation rate." 
 #| fig-width: 8
 #| fig-height: 8
-p1 <- img_to_plot(here("Outputs/robustness/full_sample_gaussian_robust_bandwidth_eq10.png"), 
-                  y_axis = "")
-p2 <- img_to_plot(here("Outputs/robustness/full_sample_epanechnikov_robust_bandwidth_eq10.png"), 
-                  y_axis = "")
+p1 <- img_to_plot(here("Outputs/robustness/full_sample_gaussian_robust_bandwidth_eq10.png"))
+p2 <- img_to_plot(here("Outputs/robustness/full_sample_epanechnikov_robust_bandwidth_eq10.png"))
 
-p3 <- img_to_plot(here("Outputs/robustness/Pre2017_gaussian_robust_bandwidth_eq10.png"), 
-                  y_axis = "")
-p4 <- img_to_plot(here("Outputs/robustness/Pre2017_epanechnikov_robust_bandwidth_eq10.png"), 
-                  y_axis = "")
+p3 <- img_to_plot(here("Outputs/robustness/Pre2017_gaussian_robust_bandwidth_eq10.png"))
+p4 <- img_to_plot(here("Outputs/robustness/Pre2017_epanechnikov_robust_bandwidth_eq10.png"))
 
-p5 <- img_to_plot(here("Outputs/robustness/Post2017_gaussian_robust_bandwidth_eq10.png"), 
-                  y_axis = "")
-p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidth_eq10.png"), 
-                  y_axis = "")
+p5 <- img_to_plot(here("Outputs/robustness/Post2017_gaussian_robust_bandwidth_eq10.png"))
+p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidth_eq10.png"))
 
 # Combine using patchwork
 (p1 + p2) / (p3 + p4) / (p5 + p6)
@@ -399,23 +389,17 @@ p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidt
 
 ```{r}
 #| label: fig-unexpected_inflation
-#| fig-cap: "Semi-parametric regressions for unexpected inflation"
+#| fig-cap: "Semi-parametric regressions for unexpected inflation. Note: hcpi_u is the unexpected component of headline inflation."
 #| fig-width: 8
 #| fig-height: 8
-p1 <- img_to_plot(here("Outputs/unexpected/full_sample_gaussian_eq14.png"), 
-                  y_axis = "")
-p2 <- img_to_plot(here("Outputs/unexpected/full_sample_epanechnikov_eq14.png"), 
-                  y_axis = "")
+p1 <- img_to_plot(here("Outputs/unexpected/full_sample_gaussian_eq14.png"))
+p2 <- img_to_plot(here("Outputs/unexpected/full_sample_epanechnikov_eq14.png"))
 
-p3 <- img_to_plot(here("Outputs/unexpected/Pre2017_gaussian_eq14.png"), 
-                  y_axis = "")
-p4 <- img_to_plot(here("Outputs/unexpected/Pre2017_epanechnikov_eq14.png"), 
-                  y_axis = "")
+p3 <- img_to_plot(here("Outputs/unexpected/Pre2017_gaussian_eq14.png"))
+p4 <- img_to_plot(here("Outputs/unexpected/Pre2017_epanechnikov_eq14.png"))
 
-p5 <- img_to_plot(here("Outputs/unexpected/Post2017_gaussian_eq14.png"), 
-                  y_axis = "")
-p6 <- img_to_plot(here("Outputs/unexpected/Post2017_epanechnikov_eq14.png"), 
-                  y_axis = "")
+p5 <- img_to_plot(here("Outputs/unexpected/Post2017_gaussian_eq14.png"))
+p6 <- img_to_plot(here("Outputs/unexpected/Post2017_epanechnikov_eq14.png"))
 
 # Combine using patchwork
 (p1 + p2) / (p3 + p4) / (p5 + p6)
@@ -425,8 +409,31 @@ p6 <- img_to_plot(here("Outputs/unexpected/Post2017_epanechnikov_eq14.png"),
 \newpage 
 
 ```{r}
+#| label: fig-semi_parametric_unexpected_robustness
+#| fig-cap: "Semi-parametric regressions for unexpected inflation with alternative bandwidth selection. Note: hcpi_u is the unexpected component of headline inflation."
+#| fig-width: 8
+#| fig-height: 8
+p1 <- img_to_plot(here("Outputs/robustness/full_sample_gaussian_robust_bandwidth_eq14.png"))
+p2 <- img_to_plot(here("Outputs/robustness/full_sample_epanechnikov_robust_bandwidth_eq14.png"))
+
+p3 <- img_to_plot(here("Outputs/robustness/Pre2017_gaussian_robust_bandwidth_eq14.png"))
+p4 <- img_to_plot(here("Outputs/robustness/Pre2017_epanechnikov_robust_bandwidth_eq14.png"))
+
+p5 <- img_to_plot(here("Outputs/robustness/Post2017_gaussian_robust_bandwidth_eq14.png"))
+p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidth_eq14.png"))
+
+# Combine using patchwork
+(p1 + p2) / (p3 + p4) / (p5 + p6)
+
+```
+
+
+
+\newpage
+
+```{r}
 #| label: fig-quant_reg
-#| fig-cap: "Quantile on quantile regressions"
+#| fig-cap: "Quantile on quantile regressions for headline inflation. Note: In the quantile on quatile regression plots,  the x-axis represents the quantiles of headline inflation, while the y-axis represents the quantiles of RPD. The color gradient indicates the strength and direction of the relationship between headline inflation and RPD across different quantiles. Warmer colors (e.g., red) indicate a stronger positive relationship, while cooler colors (e.g., blue) indicate a stronger negative relationship. The white areas represent quantiles where the relationship is not statistically significant."
 #| fig-width: 8
 #| fig-height: 4
 theme <- 
@@ -446,12 +453,34 @@ p2 <- qqr_results[[4]] +
   labs(title = "Pre-2017") +
   theme
 p3 <- qqr_results[[5]] +
-  labs(title = "Post-2017") +
+  labs(title = "Post-2017", caption = ) +
   theme
 
 p1 | p2 | p3 
 
 ```
+
+
+```{r}
+#| label: fig-unif_quant_reg
+#| fig-cap: "Quantile on quantile regressions for the unexpected componenet of inflation. Note: The x-axis represents the quantiles of the unexpected componenet of headline inflation, while the y-axis represents the quantiles of RPD."
+#| fig-width: 8
+#| fig-height: 4
+
+p1 <- qqr_uinf_results[[1]] + 
+  labs(title = "Full sample") +
+  theme
+p2 <- qqr_uinf_results[[2]] +
+  labs(title = "Pre-2017") +
+  theme
+p3 <- qqr_uinf_results[[3]] +
+  labs(title = "Post-2017") +
+  theme
+
+p1 | p2 | p3 
+```
+
+
 \newpage
 
 # Conclusion

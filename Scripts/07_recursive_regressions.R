@@ -94,8 +94,7 @@ results_gg <-
   fx_plot(variables_color = 1) +
   labs(title = "",
        x = " ",
-       y = "Estimate",
-       caption = "Recursive regression estimates of the coefficient on absolute headline inflation with a fixed start date of 2012-07."
+       y = "Estimate"
        ) +
   theme(strip.text = element_blank())
 

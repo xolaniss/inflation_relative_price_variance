@@ -429,6 +429,8 @@ Appendix.
 
 \end{figure}%
 
+\newpage
+
 \global\setlength{\Oldarrayrulewidth}{\arrayrulewidth}
 
 \global\setlength{\Oldtabcolsep}{\tabcolsep}
@@ -550,7 +552,9 @@ Appendix.
 
 }
 
-\caption{\label{fig-rolling_coefficients}Rolling regressions}
+\caption{\label{fig-rolling_coefficients}Rolling regressions. Note:
+t-statistics of greater (or less) than 1.96 ( or -1.96) is sigficant at
+a 5\% level of significance.}
 
 \end{figure}%
 
@@ -562,7 +566,9 @@ Appendix.
 
 }
 
-\caption{\label{fig-recursive}Recursive regressions}
+\caption{\label{fig-recursive}Recursive regressions. Note: Recursive
+regression estimates of the coefficient on absolute headline inflation
+with a fixed start date of 2012-07.}
 
 \end{figure}%
 
@@ -589,7 +595,8 @@ Appendix.
 }
 
 \caption{\label{fig-semi_parametric_robustness}Semi-parametric
-regressions with alternative bandwidth selection}
+regressions with alternative bandwidth selection. Note: hcpi is the
+headline inflation rate.}
 
 \end{figure}%
 
@@ -602,7 +609,25 @@ regressions with alternative bandwidth selection}
 }
 
 \caption{\label{fig-unexpected_inflation}Semi-parametric regressions for
-unexpected inflation}
+unexpected inflation. Note: hcpi\_u is the unexpected component of
+headline inflation.}
+
+\end{figure}%
+
+\newpage
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{inflation_relative_price_variance_files/figure-pdf/fig-semi_parametric_unexpected_robustness-1.png}
+
+}
+
+\caption{\label{fig-semi_parametric_unexpected_robustness}Semi-parametric
+regressions for unexpected inflation with alternative bandwidth
+selection. Note: hcpi\_u is the unexpected component of headline
+inflation.}
 
 \end{figure}%
 
@@ -616,7 +641,30 @@ unexpected inflation}
 
 }
 
-\caption{\label{fig-quant_reg}Quantile on quantile regressions}
+\caption{\label{fig-quant_reg}Quantile on quantile regressions for
+headline inflation. Note: In the quantile on quatile regression plots,
+the x-axis represents the quantiles of headline inflation, while the
+y-axis represents the quantiles of RPD. The color gradient indicates the
+strength and direction of the relationship between headline inflation
+and RPD across different quantiles. Warmer colors (e.g., red) indicate a
+stronger positive relationship, while cooler colors (e.g., blue)
+indicate a stronger negative relationship. The white areas represent
+quantiles where the relationship is not statistically significant.}
+
+\end{figure}%
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{inflation_relative_price_variance_files/figure-pdf/fig-unif_quant_reg-1.png}
+
+}
+
+\caption{\label{fig-unif_quant_reg}Quantile on quantile regressions for
+the unexpected componenet of inflation. Note: The x-axis represents the
+quantiles of the unexpected componenet of headline inflation, while the
+y-axis represents the quantiles of RPD.}
 
 \end{figure}%
 

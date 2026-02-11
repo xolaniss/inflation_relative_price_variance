@@ -103,6 +103,7 @@ roll_rpd_2_year_gg <-
 #   facet_wrap (. ~ Series, scale = "free", labeller = label_parsed) +
 #   labs(subtitle = "2-year window")
 
+
 ## 5_year window ---------------
 roll_rpd_models_5_year_tbl <- 
   rpd_data_modelling_tbl |> 
@@ -111,7 +112,7 @@ roll_rpd_models_5_year_tbl <-
 
 roll_rpd_5_year_gg <- fx_plot(roll_rpd_models_5_year_tbl, variables_color = 2) +
   facet_wrap (. ~ Series, scale = "free", labeller = label_parsed) +
-  labs(subtitle = "5-year window", caption = "Note: t-statistics of greater (or less) than 1.96 ( or -1.96) is sigficant at a 5% level of significance.") 
+  labs(subtitle = "5-year window") 
 
 # roll_rpd_division_models_5_year_tbl <- 
 #   rpd_data_modelling_tbl |> 
