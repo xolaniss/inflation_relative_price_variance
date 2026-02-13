@@ -251,58 +251,127 @@ inflation rate zero, however, recently monetary search models
 optimal inflation rate somewhere between zero and positive inflation
 rate.
 
-\section{Citations}\label{citations}
+\section{Relative price dispersion through Lucas's aggregate supply
+curve}\label{relative-price-dispersion-through-lucass-aggregate-supply-curve}
+
+The concept of relative price dispersion can be abstract and difficult
+to grasp without a theoretical framework. One of the most influential
+frameworks for understanding relative price dispersion is the
+\citet{lucas1973} aggregate supply curve, which provides insights into
+how relative price dispersion can explain the output-inflation
+relationship, otherwise know as the 'natural rate theory. This theory
+essentially means (in part) that nominal ``rigidities'' partially
+dominate short-run supplier behaviour resulting from a lack of
+information about the some prices relevant to decision making. For our
+purposes we ignore other aspects of the theoretical framework and
+emphasis this aspect of the model to provide an understanding relative
+price dispersion.
+
+\citet{lucas1973} proposes a decomposition of the supply curve, all in
+logs, into a natural or secular component and a cyclical component as
+follows:
+
+\begin{equation}\phantomsection\label{eq-lucas_supply_curve}{y_t(z) = y_{n,t} + y_{ct}(z), }\end{equation}
+
+where \(y_t(z)\) is the aggregate supply at time \(t\) in market \(z\),
+\(y_{n,t}\) is the natural or secular level of supply at time \(t\), and
+\(y_{ct}\) is the cyclical component of supply at time \(t\).
+Competitive markets and a cleared labour market are assumed, meaning
+that the slope of the supply curve can only reflect the degree of
+information frictions and the speed of price adjustment related to
+labour and product markets. Furthermore, the demand for goods in each
+period is assumed to be unevenly distributed, leading to relative price
+and general price level movements leading. It is this imperfect
+information of the suppliers about the general price level that leads to
+relative price dispersion and the output-inflation relationship.
+
+In addition, the natural or secular level of supply is assumed to follow
+a linear trend as follows:
+\begin{equation}\phantomsection\label{eq-natural_supply}{ y_{n,t} = \alpha + \beta t, }\end{equation}
+
+where \(\alpha\) is a constant and \(\beta\) captures the trend growth
+rate of the natural level of supply.
+
+The cyclical component varies with the perceived relative price (the
+difference between the actual price level and the expected price level)
+and its lags as follows:
+
+\begin{equation}\phantomsection\label{eq-cyclical_component}{ y_{ct}(z) = \gamma[P_t(z) - E(P_t | I_t(z))] + \lambda y_{c, t-1}(z), }\end{equation}
+where \(\gamma\) captures the sensitivity of supply to the perceived
+relative price, \(P_t(z)\) is the actual price level in market \(z\) at
+time \(t\), \(E(P_t | I_t(z))\) is the expected price level based on
+information available at time \(t\) in market \(z\), and \(\lambda\)
+captures the persistence of the cyclical component and
+\(|\lambda| < 1\). \(E(P_t | I_t(z))\) is current expected price level
+conditioned on information that is available at time \(t\), at market
+\(z\). The available information set (\(I_t(z)\)) comprises of past
+demand driven shifts of the secular component (\(y_{n,t}\)), and the
+past deviations of the cyclical component
+(\(y_{c, t-1}, y_{c, t-2}, ...\)) from its natural level.
+
+The current general price level (\(P_t\)), which determines `prior'
+expectations common across all suppliers in all markets, is assumed to
+be \(P_t \sim N(\overline{P_t}, \sigma^2),\) where \(\overline{P_t}\) is
+the mean price level at time \(t\) and \(\sigma^2\) is the variance of
+the price level at time \(t\). Furthermore, \citet{lucas1973} defines
+\(z_t\) as the percentage deviation of the actual market price from the
+general price level as \(z\overset{\text{iid}}{\sim} N(0, \tau^2),\)
+where \(\tau^2\) is the variance of \(z\). Therefore, the actual price
+level in market \(z\) at time \(t\) can be expressed as:
+
+\begin{equation}\phantomsection\label{eq-price_decomposition}{P_t(z) = P_t + z, }\end{equation}
+
+where \(P_t(z)\) is the actual price in market \(z\) at time \(t\) (that
+is the markets are indexed to z), \(P_t\) is the current general price
+level at time \(t\), and \(z\) is the percentage deviation of the actual
+market price from the general price level. However, \(P_t\) is
+unobserved by traders, and therefore \(I_t(z)\) is used to estimate the
+expected price level (\(E(P_t| I_t(z))\)). The expected price level
+based on information available at time \(t\) in market \(z\) can be
+derived using Bayes' rule as follows:
+
+\begin{equation}\phantomsection\label{eq-expected_price_level}{ E(P_t| I_t(z))  = E(P_t|P_t(z), \overline{P_t}) = (1-\theta)P_t(z) + \theta\overline{Pt},}\end{equation}
+
+where \(\theta = \frac{\tau^2}{(\sigma^2 + \tau^2)}\) is the weight
+placed on the mean price level (\(\overline{P_t}\)) in forming
+expectations. Combining Equation~\ref{eq-lucas_supply_curve},
+Equation~\ref{eq-price_decomposition}, and
+Equation~\ref{eq-expected_price_level} by substitution yields the
+following:
+
+\begin{equation}\phantomsection\label{eq-lucas_supply_curve_final}{ y_t(z) = y_{nt} + \theta \gamma[P_t(z) - \overline{P_t}] + \lambda y_{c, t-1}}\end{equation}
+
+where the current supply in market \(z\) at time \(t\) is a function of
+the natural level of supply, the perceived relative price (the
+difference between the actual price level in market \(z\) and the mean
+price level), and the lagged cyclical component. Finally, aggregating
+across all markets (or integrating over all markets) yields the
+following aggregate supply curve:
+
+\begin{equation}\phantomsection\label{eq-aggregate_supply_curve}{y_t = y_{nt} + \theta\gamma(P_t - \overline{P_t}) + \lambda[y_{t-1} - y_{n, t-1}]}\end{equation}
+
+From Equation~\ref{eq-aggregate_supply_curve}, we can clearly
+demonstrate how the relative price dispersion (\(\theta\)), which is a
+fraction of the total individual price dispersion
+(\(\sigma^2 + \tau^2\)), affects the aggregate supply curve, and
+therefore the output-inflation relationship. That is,
+\(\theta \uparrow\) in \(\tau^2\) and \(\downarrow\) in \(\sigma^2\).
+Meaning that when \(\theta \uparrow\), the aggregate supply curve
+becomes flatter, and the output-inflation relationship becomes stronger.
+And when \(\theta\downarrow\), the slope is restricted by \(\gamma\).
+Therefore, the relative price variance (\(\theta\)), in this context, is
+a key determinant of the slope of the aggregate supply curve and the
+strength of the output-inflation relationship.
+
+\section{Empirical literaturer
+review}\label{empirical-literaturer-review}
+
+\subsection{Citations}\label{citations}
 
 \citet{adam2024} \citet{baglan2016} \citet{ball1993} \citet{benabou1993}
 \citet{caglayan2003} \citet{caglayan2008} \citet{grier1996}
 \citet{lach1992} \citet{nakamura2018} \citet{ndou2014} \citet{ndou2017}
 \citet{parks1978} \citet{parsley1996} \citet{rather2018}
-
-\section{Understanding relative price dispersion through Lucas's
-aggregate supply
-curve}\label{understanding-relative-price-dispersion-through-lucass-aggregate-supply-curve}
-
-\[y_t(z) = y_{n,t} + y_{ct}(z), \]
-
-where \(y_t(z)\) is the aggregate supply at time \(t\) in market \(z\),
-\(y_{n,t}\) is the natural or secular level of supply at time \(t\), and
-\(y_{ct}\) is the cyclical component of supply at time \(t\).
-
-\[ y_{n,t} = \alpha + \beta t, \]
-
-where \(\alpha\) is a constant and \(\beta\) captures the trend growth
-rate of the natural level of supply.
-
-\[ y_{ct}(z) = \gamma[P_t(z) - E(P_t | I_t(z))] + \lambda y_{c, t-1}(z), \]
-where \(\gamma\) captures the sensitivity of supply to unexpected price
-changes, \(P_t(z)\) is the actual price level in market \(z\) at time
-\(t\), \(E(P_t | I_t(z))\) is the expected price level based on
-information available at time \(t\) in market \(z\), and \(\lambda\)
-captures the persistence of the cyclical component and \(|\lambda|\)
-\textless{} 1. \(E(P_t | I_t(z))\) is current expected price level
-conditioned on information that is available at time \(t\), at market
-\(z\).
-
-\(I_t(z)\)
-
-\[P_t \sim N(\overline{P_t}, \sigma^2), \]
-\[z \overset{\text{iid}}{\sim} N(0, \tau^2) \]
-
-\[P_t(z) = P_t + z \]
-
-\[ E(P_t| I_t(z))  = E(P_t|P_t(z), \overline{P_t}) = (1-\theta)P_t(z) + \theta\overline{Pt}\]
-
-\[\theta = \frac{\tau^2}{(\sigma^2 + \tau^2)} \]
-
-\[ y_t(z) = y_{nt} + \theta \gamma[P_t(z) - \overline{P_t}] + \lambda y_{c, t-1}\]
-
-\[y_t = y_{nt} + \theta\gamma(P_t - \overline{P_t}) + \lambda[y_{t-1} - y_{n, t-1}]\]
-
-\(\theta \uparrow\) in \(\tau^2\) and \(\downarrow\) in \(\sigma^2\).
-\(\gamma\)
-
-\section{Empirical literaturer
-review}\label{empirical-literaturer-review}
 
 \section{Data and methodology}\label{data-and-methodology}
 

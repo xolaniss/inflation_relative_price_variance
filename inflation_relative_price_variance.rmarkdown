@@ -109,6 +109,7 @@ qqr_results <- read_rds(here("Outputs","artifacts_quant_reg.rds"))
 qqr_uinf_results <- read_rds(here("Outputs","artifacts_uinf_quant_reg.rds"))
 ```
 
+
 # Introduction
 
 Inflation is known to have adverse welfare effects through its distortion of relative prices which causes the misallocation of resources, production inefficiencies leading to lower real economic activity. This is well supported by both theoretical and empirical studies. This paper contributes to the empirical literature, by examining the relationship between inflation and relative price variability (RPD) in South Africa given the little evidence available and to better understand how this relationship has evolved and the implications for monetary policy.
@@ -230,6 +231,7 @@ Lastly, and some-what novel to the RPD literature, we employ a quantile on quant
 
 # Results
 
+
 ```{r}
 #| label: fig-rpd
 #| fig-cap: "RPD over-time"
@@ -240,8 +242,6 @@ rpd_measures |>
   pluck(2)
 
 ```
-
-
 
 ```{r}
 #| label: fig-rpd_inflation
@@ -281,7 +281,9 @@ ggplot(aes(x = headline_inflation, y = rpd, color = factor(policy_2017_dum))) +
 
 ```
 
+
 \newpage
+
 
 ```{r}
 #| label: tbl-base_regression
@@ -345,7 +347,6 @@ roll_regressions |>
 
 ```
 
-
 ```{r}
 #| label: fig-recursive
 #| fig-cap: "Recursive regressions. Note: Recursive regression estimates of the coefficient on absolute headline inflation with a fixed start date of 2012-07."
@@ -357,7 +358,9 @@ recursive_regression |>
 
 ```
 
+
 \newpage
+
 
 
 
@@ -405,9 +408,6 @@ p6 <- img_to_plot(here("Outputs/non_linear/Post2017_epanechnikov_eq10.png"))
 (p1 + p2) / (p3 + p4) / (p5 + p6)
 ```
 
-
-
-
 ```{r}
 #| label: fig-semi_parametric_robustness
 #| fig-cap: "Semi-parametric regressions with alternative bandwidth selection. Note: hcpi is the headline inflation rate." 
@@ -426,10 +426,6 @@ p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidt
 (p1 + p2) / (p3 + p4) / (p5 + p6)
 
 ```
-
-
-
-
 
 ```{r}
 #| label: fig-unexpected_inflation
@@ -450,7 +446,9 @@ p6 <- img_to_plot(here("Outputs/unexpected/Post2017_epanechnikov_eq14.png"))
 
 ```
 
+
 \newpage 
+
 
 ```{r}
 #| label: fig-semi_parametric_unexpected_robustness
@@ -473,7 +471,9 @@ p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidt
 
 
 
+
 \newpage
+
 
 ```{r}
 #| label: fig-quant_reg
@@ -504,7 +504,6 @@ p1 | p2 | p3
 
 ```
 
-
 ```{r}
 #| label: fig-unif_quant_reg
 #| fig-cap: "Quantile on quantile regressions for the unexpected componenet of inflation. Note: The x-axis represents the quantiles of the unexpected componenet of headline inflation, while the y-axis represents the quantiles of RPD."
@@ -523,6 +522,7 @@ p3 <- qqr_uinf_results[[3]] +
 
 p1 | p2 | p3 
 ```
+
 
 
 \newpage
@@ -549,6 +549,7 @@ p1 | p2 | p3
 ## Data
 
 
+
 ```{r}
 #| label: fig-headline_inflation
 #| fig-cap: "Headline inflation (%)."
@@ -559,8 +560,6 @@ price_data_list |>
   pluck(2, 2) 
 
 ```
-
-
 
 ```{r}
 #| label: fig-price_data
@@ -582,9 +581,11 @@ price_data_list |>
   pluck(2, 3)
 ```
 
+
 \newpage
 
 ## Descriptive statistics
+
 
 ```{r}
 #| label: tbl-descriptive_stats
@@ -597,8 +598,10 @@ descriptives_list |>
   autofit(add_w = 0)                                                                                                                              
 ```
 
+
 \newpage
 ## Stationarity tests
+
 
 ```{r}
 #| label: tbl-stationarity_tests
@@ -616,7 +619,9 @@ read_rds(here("Outputs","artifacts_stationarity.rds")) |>
   autofit(add_w = 0.2)
 ```
 
+
 ## Lag length selection
+
 
 ```{r}
 #| label: tbl-lag_selection
@@ -636,6 +641,7 @@ regressions |>
 
 ```
 
+
 \newpage
 
 \setcounter{table}{0}
@@ -654,6 +660,7 @@ where $\pi_t$ is the aggregate inflation rate at time $t$, and $\omega_{i}$ are 
 
 ## RPD-CV over-time
 
+
 ```{r}
 #| label: fig-core_rpd
 #| fig-cap: "RPD-CV overtime"
@@ -663,8 +670,10 @@ where $\pi_t$ is the aggregate inflation rate at time $t$, and $\omega_{i}$ are 
 cov_regressions |> pluck(2)
 ```
 
+
 \newpage
 ## Stationarity tests for RPD-CV
+
 
 ```{r}
 #| label: tbl-cov_stationarity_tests
@@ -682,7 +691,9 @@ cov_regressions |>
 ```
 
 
+
 ## Lag length selection for RPD-CV
+
 
 ```{r}
 #| label: tbl-cov_lag_selection
@@ -702,9 +713,11 @@ cov_regressions |>
 
 ```
 
+
 \newpage
 
 ## RPD-CV baseline regression results
+
 
 ```{r}
 #| label: tbl-cov_base_regression
@@ -757,6 +770,7 @@ cov_tbl |>
   autofit(add_w = -.95)
 ```
 
+
 \newpage
 
 # Appendix: Explanation of the quantile on quantile regression
@@ -799,3 +813,4 @@ $$
 $$ {#eq-qqr_5}
 
 where $\rho_{\theta}$ is a tilted absolute value function which produces $\theta$-quantile values of $a_{2t}$. A Gaussian kernel $K(.)$ is used to weight observations in the neighbourhood of $\widehat{\Gamma^\tau}$ using $h$ as a bandwidth. These weights are inversely related to $\widehat{\Gamma_t} - \widehat{\Gamma}$. Lastly, the choice of $h$ remains uncertain in kernel regression where if a small $h$ is chosen the bias of the estimates is smaller but the variance of these estimates increases, and conversely. To overcome this uncertainty we use the cross validation method to calculate the appropripate level of $h$.
+
