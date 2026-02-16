@@ -136,6 +136,19 @@
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
+\usepackage{fontspec}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{colortbl}
+\usepackage{ulem}
+\usepackage{hhline}
+\newlength\Oldarrayrulewidth
+\newlength\Oldtabcolsep
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{wrapfig}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -201,13 +214,294 @@
 
 \begin{frame}{Motivation}
 \phantomsection\label{motivation-1}
+\begin{itemize}
+\tightlist
+\item
+  Inflation is known to have adverse welfare effects through its
+  distortion of relative prices which causes the misallocation of
+  resources, production inefficiencies leading to lower real economic
+  activity.
+\item
+  This is well supported by both theoretical and empirical studies.
+\item
+  This paper contributes to the empirical literature, by examining the
+  relationship between inflation and relative price variability (RPD) in
+  South Africa given the little evidence available and to better
+  understand how this relationship has evolved and the implications for
+  monetary policy.
+\end{itemize}
 \end{frame}
 
-\section{Literature}\label{literature}
+\begin{frame}{Motivation}
+\phantomsection\label{motivation-2}
+\begin{itemize}
+\tightlist
+\item
+  The South African context can provide further insights into the
+  relationship between inflation and RPD given the shifts in the
+  inflation targets from 3-6 per cent in 2000 to 4.5 per cent since 2017
+  as structural changes in inflation can affect the link between
+  inflation and relative price variability (Caglayan and Filiztekin
+  2003)
+\item
+  That the functional form of relationship is U-shaped and dynamic
+  (Fielding and Mizen 2000; Choi 2010)
+\item
+  The latter motivates the estimation of the inflation rate that
+  minimizes relative price distortions since if the relationship was
+  linear then the optimal inflation rate would be zero
+\item
+  Given the inflation target reform towards a 3\% in South Africa, this
+  study contributes to the policy discussion on the appropriate
+  inflation target and understating how dynamic relations between
+  inflation and relative price variability has evolved
+\end{itemize}
+\end{frame}
 
-\begin{frame}{Relative price dispersion through Lucas's aggregate supply
-curve}
-\phantomsection\label{relative-price-dispersion-through-lucass-aggregate-supply-curve}
+\section{Theoretical Framework: RPD through Lucas's aggregate supply
+curve}\label{theoretical-framework-rpd-through-lucass-aggregate-supply-curve}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework}
+\begin{itemize}
+\item
+  The theoretical literature generally distinguishes between menu-cost
+  and signal extraction models in explaining the positive relation
+  between trend inflation and RPD.
+\item
+  In these models' firms follow a one-sided dynamic pricing rule when
+  setting prices and face fixed non-zero costs of adjusting nominal
+  prices (e.g.~printing new menus) when inflation increases as the
+  latter reduces the optimal real price of goods and services.
+\item
+  Due to differences in administrative costs, these nominal price
+  adjustment costs vary across firms moreover these adjustments occur at
+  different times which implies staggard price setting behaviour which
+  leads to relative price variability.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework-1}
+\begin{itemize}
+\tightlist
+\item
+  Menu cost models predict a that higher expected inflation causes an
+  increase in RPD (citations xxx) while Lucas-type signal extraction
+  models (Lucas 1973; Hercowitz 1981; Cukierman 1983) argue unexpected
+  inflation uncertainty causes higher RPD because informational
+  frictions make it difficult to distinguish between idiosyncratic
+  relative shocks or an aggregate (inflationary) shock.
+\item
+  Menu cost and signal-extraction models assume a positive and linear
+  relationship making the optimal inflation rate zero, however, recently
+  monetary search models (Head and Kumar 2005) show that this
+  relationship is nonlinear making the optimal inflation rate somewhere
+  between zero and positive inflation rate.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework-2}
+\begin{itemize}
+\item
+  The concept of relative price dispersion can be abstract and difficult
+  to grasp without a theoretical framework.
+\item
+  One of the most influential frameworks for understanding relative
+  price dispersion is the Lucas (1973) aggregate supply curve, which
+  provides insights into how relative price dispersion can explain the
+  output-inflation relationship.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework-3}
+\begin{itemize}
+\item
+  This theory essentially means (in part) that nominal ``rigidities''
+  partially dominate short-run supplier behaviour resulting from a lack
+  of information about the some prices relevant to decision making.
+\item
+  For our purposes we ignore other aspects of the theoretical framework
+  and emphasis this aspect of the model to provide an understanding
+  relative price dispersion.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework-4}
+Lucas (1973) proposes a decomposition of the supply curve, all in logs,
+into a natural or secular component and a cyclical component as follows:
+
+\begin{equation}\phantomsection\label{eq-lucas_supply_curve}{y_t(z) = y_{n,t} + y_{ct}(z), }\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  \(y_t(z)\) is the aggregate supply at time \(t\) in market \(z\),
+  \(y_{n,t}\) is the natural or secular level of supply at time \(t\)
+\item
+  \(y_{ct}\) is the cyclical component of supply at time \(t\).
+\item
+  Competitive markets and a cleared labour market are assumed
+\item
+  Leading to relative price and general price level movements leading.
+\item
+  Imperfect information of the suppliers about the general price level
+  that leads to relative price dispersion and the output-inflation
+  relationship.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework-5}
+In addition, the natural or secular level of supply is assumed to follow
+a linear trend as follows:
+\begin{equation}\phantomsection\label{eq-natural_supply}{ y_{n,t} = \alpha + \beta t, }\end{equation}
+
+where \(\alpha\) is a constant and \(\beta\) captures the trend growth
+rate of the natural level of supply.
+\end{frame}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework-6}
+The cyclical component varies with the perceived relative price (the
+difference between the actual price level and the expected price level)
+and its lags as follows:
+
+\begin{equation}\phantomsection\label{eq-cyclical_component}{ y_{ct}(z) = \gamma[P_t(z) - E(P_t | I_t(z))] + \lambda y_{c, t-1}(z), }\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\gamma\) captures the sensitivity of supply to the perceived
+  relative price, \(P_t(z)\) is the actual price level in market \(z\)
+  at time \(t\),
+\item
+  \(E(P_t | I_t(z))\) is the expected price level based on information
+  available at time \(t\) in market \(z\)
+\item
+  \(\lambda\) captures the persistence of the cyclical component and
+  \(|\lambda| < 1\). \(E(P_t | I_t(z))\) is current expected price level
+  conditioned on information that is available at time \(t\), at market
+  \(z\).
+\item
+  The available information set (\(I_t(z)\)) comprises of past demand
+  driven shifts of the secular component (\(y_{n,t}\)),
+\item
+  Past deviations of the cyclical component
+  (\(y_{c, t-1}, y_{c, t-2}, ...\)) from its natural level.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework-7}
+\begin{itemize}
+\tightlist
+\item
+  The current general price level (\(P_t\)), which determines `prior'
+  expectations common across all suppliers in all markets, is assumed to
+  be \(P_t \sim N(\overline{P_t}, \sigma^2)\)
+\item
+  \(\overline{P_t}\) is the mean price level at time \(t\) and
+  \(\sigma^2\) is the variance of the price level at time \(t\).
+\item
+  Furthermore, Lucas (1973) defines \(z_t\) as the percentage deviation
+  of the actual market price from the general price level as
+  \(z\overset{\text{iid}}{\sim} N(0, \tau^2),\) where \(\tau^2\) is the
+  variance of \(z\).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework-8}
+Therefore, the actual price level in market \(z\) at time \(t\) can be
+expressed as:
+
+\begin{equation}\phantomsection\label{eq-price_decomposition}{P_t(z) = P_t + z, }\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  \(P_t(z)\) is the actual price in market \(z\) at time \(t\) (that is
+  the markets are indexed to z),
+\item
+  \(P_t\) is the current general price level at time \(t\), and \(z\) is
+  the percentage deviation of the actual market price from the general
+  price level.
+\item
+  However, \(P_t\) is unobserved by traders, and therefore \(I_t(z)\) is
+  used to estimate the expected price level (\(E(P_t| I_t(z))\)).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework-9}
+The expected price level based on information available at time \(t\) in
+market \(z\) can be derived using Bayes' rule as follows:
+
+\begin{equation}\phantomsection\label{eq-expected_price_level}{ E(P_t| I_t(z))  = E(P_t|P_t(z), \overline{P_t}) = (1-\theta)P_t(z) + \theta\overline{Pt},}\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\theta = \frac{\tau^2}{(\sigma^2 + \tau^2)}\) is the weight placed
+  on the mean price level (\(\overline{P_t}\)) in forming expectations.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework-10}
+Combining Equation~\ref{eq-lucas_supply_curve},
+Equation~\ref{eq-price_decomposition}, and
+Equation~\ref{eq-expected_price_level} by substitution yields the
+following:
+
+\begin{equation}\phantomsection\label{eq-lucas_supply_curve_final}{ y_t(z) = y_{nt} + \theta \gamma[P_t(z) - \overline{P_t}] + \lambda y_{c, t-1}}\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  current supply in market \(z\) at time \(t\) is a function of the
+  natural level of supply, the perceived relative price (the difference
+  between the actual price level in market \(z\) and the mean price
+  level), and the lagged cyclical component.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework-11}
+Finally, aggregating across all markets (or integrating over all
+markets) yields the following aggregate supply curve:
+
+\begin{equation}\phantomsection\label{eq-aggregate_supply_curve}{y_t = y_{nt} + \theta\gamma(P_t - \overline{P_t}) + \lambda[y_{t-1} - y_{n, t-1}]}\end{equation}
+
+From Equation~\ref{eq-aggregate_supply_curve}, we can clearly
+demonstrate how the relative price dispersion (\(\theta\)) is a fraction
+of the total individual price dispersion (\(\sigma^2 + \tau^2\)),
+affects the aggregate supply curve, and therefore the output-inflation
+relationship.
+\end{frame}
+
+\begin{frame}{RPD theoretical framework}
+\phantomsection\label{rpd-theoretical-framework-12}
+\begin{itemize}
+\tightlist
+\item
+  That is, \(\theta \uparrow\) in \(\tau^2\) and \(\downarrow\) in
+  \(\sigma^2\).
+\item
+  Meaning that when \(\theta \uparrow\), the aggregate supply curve
+  becomes flatter, and the output-inflation relationship becomes
+  stronger.
+\item
+  And when \(\theta\downarrow\), the slope is restricted by \(\gamma\).
+\item
+  Therefore, the relative price variance (\(\theta\)), in this context,
+  is a key determinant of the slope of the aggregate supply curve and
+  the strength of the output-inflation relationship.
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Empirical literaturer review}
@@ -218,31 +512,69 @@ curve}
 
 \begin{frame}{Data}
 \phantomsection\label{data}
-Our analysis uses monthly inflation data on 45 goods categories from
-January 2009 to November 2025 obtained from Statistics South Africa
-(Stats SA).\footnote<.->{The data is available at:
-  \url{http://www.statssa.gov.za/} The data is seasonally adjusted.} .
-\textbf{?@fig-headline\_inflation} below shows the long term inflation
-rate in South Africa, and \textbf{?@fig-price\_data} in the appendix
-shows the various price categories used in the analysis.
-\textbf{?@tbl-descriptive\_stats} provides the descriptive statistics of
-the inflation rates for the various price categories used in the
-analysis.
+\begin{itemize}
+\tightlist
+\item
+  Our analysis uses monthly inflation data on 45 goods categories from
+  January 2009 to November 2025 obtained from Statistics South Africa
+  (Stats SA).\footnote<.->{The data is available at:
+    http://www.statssa.gov.za/ and the data was seasonally adjusted.}\\
+\item
+  Figure~\ref{fig-headline_inflation} below shows the long term
+  inflation rate in South Africa, and Figure~\ref{fig-price_data} in the
+  appendix shows the various price categories used in the analysis
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Data}
+\phantomsection\label{data-1}
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{inflation_relative_price_variance_presentation_files/figure-beamer/fig-headline_inflation-1.pdf}
+
+}
+
+\caption{\label{fig-headline_inflation}Headline inflation (\%).}
+
+\end{figure}%
+\end{frame}
+
+\begin{frame}{Data}
+\phantomsection\label{data-2}
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{inflation_relative_price_variance_presentation_files/figure-beamer/fig-price_data-1.pdf}
+
+}
+
+\caption{\label{fig-price_data}Inflation categories (\%)}
+
+\end{figure}%
 \end{frame}
 
 \begin{frame}{Methodology}
 \phantomsection\label{methodology}
-The relative price dispersion (RPD) is calculated in line with @lach1992
-as the weighted standard deviation of individual price inflation rates
-from the aggregate inflation rate. The RPD is essentially the
-variability of relative prices of a given product. We first calculate
-the monthly inflation rate as follows:
+RPD is calculated in line with Lach and Tsiddon (1992) as the weighted
+standard deviation of individual price inflation rates from the
+aggregate inflation rate. The RPD is essentially the variability of
+relative prices of a given product. - We first calculate the monthly
+inflation rate as follows:
 
 \begin{equation}\phantomsection\label{eq-inflation_rate}{ \pi_{i,t} = ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right) * 100, }\end{equation}
 
-where \(\pi_{i,t}\) is the inflation rate of good \(i\) at time \(t\),
-\(P_{i,t}\) is the price of good \(i\) at time \(t\), and \(P_{i,t-1}\)
-is the price of good \(i\) at time \(t-1\).
+\begin{itemize}
+\tightlist
+\item
+  \(\pi_{i,t}\) is the inflation rate of good \(i\) at time \(t\)
+\item
+  \(P_{i,t}\) is the price of good \(i\) at time \(t\)
+\item
+  \(P_{i,t-1}\) is the price of good \(i\) at time \(t-1\)
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Methodology}
@@ -251,14 +583,18 @@ Then, the RPD is calculated as:
 
 \begin{equation}\phantomsection\label{eq-rpd}{RPD_{t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, }\end{equation}
 
-where \(\omega_{j}\) is the expenditure share of the \(j^{th}\) good,
-\(\pi_{t}\) is the headline or aggregate inflation rate at time \(t\),
-and \(\sum_{i=1}^{n}\omega_{i} = 1\). The expenditure weights
-(\(\omega_{i}\)) used are derived from the Consumer Price Index (CPI)
-basket provided by Stats SA. Figure~\ref{fig-rpd} shows the RPD
-calculated using the above formula. We use the 2025 CPI Stats SA
-weights. The weights are shown in \textbf{?@fig-weights} in the
-appendix.
+\begin{itemize}
+\tightlist
+\item
+  \(\omega_{j}\) is the expenditure share of the \(j^{th}\) good,
+\item
+  \(\pi_{t}\) is the headline or aggregate inflation rate at time \(t\),
+\item
+  \(\sum_{i=1}^{n}\omega_{i} = 1\).
+\item
+  The expenditure weights (\(\omega_{i}\)) used are derived from the
+  Consumer Price Index (CPI) basket provided by Stats SA
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Methodology}
@@ -268,16 +604,26 @@ following econometric model:
 
 \begin{equation}\phantomsection\label{eq-rpd_reg}{RPD_{t} = \beta_0 + \beta_1|\pi_{t}| + \sum_{h=1}^{3}\omega_hRPD_{t-h}  +  \mu_{t}, }\end{equation}
 
-where \(RPD_{t}\) is the relative price variance at time \(t\),
-\(|\pi_{t}|\) is the absolute value of aggregate inflation rate at time
-\(t\), \(RPD_{t-h}\) are lagged values of RPD to account for its dynamic
-nature, and \(\mu_{t}\) is the error term. The coefficient \(\beta_1\)
-captures the effect of inflation on RPD. We include three lags of RPD
-based on Akaike Information Criterion (AIC) (and other tests) and to
-capture potential persistence in RPD. For robustness, we repeat this
-estimation using core inflation (excluding food and non-alcoholic
-beverages, and fuel and electricity) instead of headline inflation to
-account for the potential volatility in these components.
+\begin{itemize}
+\tightlist
+\item
+  \(RPD_{t}\) is the relative price variance at time \(t\)
+\item
+  \(|\pi_{t}|\) is the absolute value of aggregate inflation rate at
+  time \(t\)
+\item
+  \(RPD_{t-h}\) are lagged values of RPD to account for its dynamic
+  nature, and \(\mu_{t}\) is the error term
+\item
+  The coefficient \(\beta_1\) captures the effect of inflation on RPD.
+  We include three lags of RPD based on Akaike Information Criterion
+  (AIC) (and other tests) and to capture potential persistence in RPD.
+\item
+  For robustness, we repeat this estimation using core inflation
+  (excluding food and non-alcoholic beverages, and fuel and electricity)
+  instead of headline inflation to account for the potential volatility
+  in these components.
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Methodology}
@@ -290,10 +636,16 @@ model with a 24-month and 60-month windows as follows:
 
 \begin{equation}\phantomsection\label{eq-rpd_rolling_reg}{RPD_{t} = \alpha_{t} + \beta_{1,t}|\pi_{t}| + \sum_{h=1}^{3}\omega_{h,t}RPD_{t-h}  +  \mu_{t}, }\end{equation}
 
-where the coefficients \(\alpha_{t}\), \(\beta_{1,t}\), and
-\(\omega_{h,t}\) vary over time. This approach allows us to observe the
-stability of the coefficients over time, which is an indicator of
-non-linearity in the relationship between RPD and inflation.
+\begin{itemize}
+\tightlist
+\item
+  The coefficients \(\alpha_{t}\), \(\beta_{1,t}\), and \(\omega_{h,t}\)
+  vary over time.
+\item
+  This approach allows us to observe the stability of the coefficients
+  over time, which is an indicator of non-linearity in the relationship
+  between RPD and inflation.
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Methodology}
@@ -307,78 +659,136 @@ follows:
 
 \begin{equation}\phantomsection\label{eq-rpd_semi_parametric}{RPD_t = \alpha + \pi_t + \beta_2\pi_t^2 + \sum_{h=1}^{3}\phi_hRPD_{t-h} + \epsilon_t, }\end{equation}
 
-where \(\beta_2\) captures the curvature of the relationship between
-inflation and RPD. The optimal inflation rate that minimizes RPD can be
-derived by taking the first derivative of the equation with respect to
-\(\pi_t\) and setting it to zero, yielding:
+\begin{itemize}
+\tightlist
+\item
+  \(\beta_2\) captures the curvature of the relationship between
+  inflation and RPD
+\item
+  The optimal inflation rate that minimizes RPD can be derived by taking
+  the first derivative of the equation with respect to \(\pi_t\) and
+  setting it to zero, yielding:
+\end{itemize}
 
 \begin{equation}\phantomsection\label{eq-optimal_inflation}{\pi_t^* = -\dfrac{1}{2\beta_2}.}\end{equation}
 \end{frame}
 
 \begin{frame}{Methodology}
 \phantomsection\label{methodology-5}
-To estimate this optiomal inflation we implement a semi parametric
+To estimate this optimal inflation we implement a semi-parametric
 approach as follows:
 
 \begin{equation}\phantomsection\label{eq-rpd_semi_parametric_f}{RPD_t =  f(\pi_t) + \sum_{h=1}^{3}\phi_hRPD_{t-h} + \epsilon_t, }\end{equation}
 
-where \(f(\pi_t)\) is a non-linear smooth differentiable function of
-inflation and the RPD. Therefore, the optimal inflation rate can be
-obtained by finding the minimum of the estimated \(f(\pi_t)\) function.
-\(f(\pi_t)\) is estimated in two stages. First we estimate \(\lambda_h\)
-as follows:
-
-\begin{equation}\phantomsection\label{eq-rpd_semi_parametric_stage1}{ RPD_t = \sum_{h=1}^{3}\lambda_h\overline{RPD}_{t-h} + \eta_t, }\end{equation}
-
-where \(\overline{RPD}_{t-h}\) are the residuals from a non-parametric
-regression of each lag of \(RPD_t\) on \(\pi_t\). In the second stage,
-we estimate \(f(\pi_t)\) non-parametrically as follows:
-
-\begin{equation}\phantomsection\label{eq-rpd_semi_parametric_stage2}{\hat{\eta}_t = f(\pi_t) + v_t, }\end{equation}
-
-where \(\hat{\eta}_t\) are the residuals from
-Equation~\ref{eq-rpd_semi_parametric_stage1}, and \(f(\pi_t)\) is
-estimated using a kernel regression method. The bandwidth (\(h\)) for
-the kernel estimator is selected using cross-validation to minimize the
-mean squared error. As a treatment for extreme values of inflation, we
-further implement the unbounded Gaussian kernel and the outlier-robust
-Epanechnikov kernel. In essence, the semi-parametric approach captures
-the sensitivity of RPD to marginal increases in inflation. In that case,
-the optimal inflation rate can be obtained by finding the point where
-the first derivative (\(f'(\pi_t)\)) is equal to zero. Therefore, if
-\(f'(\pi_t) > 0\) (\(f'(\pi_t) < 0\)), then an increase in inflation
-(decrease) leads to an increase (decrease) in the RPD. For robustness we
-estimate the \(g(UIN_t)\) with multiple bandwith (\(h\)).
+\begin{itemize}
+\tightlist
+\item
+  \(f(\pi_t)\) is a non-linear smooth differentiable function of
+  inflation and the RPD.
+\item
+  Therefore, the optimal inflation rate can be obtained by finding the
+  minimum of the estimated \(f(\pi_t)\) function. \(f(\pi_t)\) is
+  estimated in two stages.
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Methodology}
 \phantomsection\label{methodology-6}
+First we estimate \(\lambda_h\) as follows:
+
+\begin{equation}\phantomsection\label{eq-rpd_semi_parametric_stage1}{ RPD_t = \sum_{h=1}^{3}\lambda_h\overline{RPD}_{t-h} + \eta_t, }\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\overline{RPD}_{t-h}\) are the residuals from a non-parametric
+  regression of each lag of \(RPD_t\) on \(\pi_t\)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Methodology}
+\phantomsection\label{methodology-7}
+In the second stage, we estimate \(f(\pi_t)\) non-parametrically as
+follows:
+
+\begin{equation}\phantomsection\label{eq-rpd_semi_parametric_stage2}{\hat{\eta}_t = f(\pi_t) + v_t, }\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\hat{\eta}_t\) are the residuals from
+  Equation~\ref{eq-rpd_semi_parametric_stage1}
+\item
+  \(f(\pi_t)\) is estimated using a kernel regression method
+\item
+  The bandwidth (\(h\)) for the kernel estimator is selected using
+  cross-validation to minimize the mean squared error.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Methodology}
+\phantomsection\label{methodology-8}
+\begin{itemize}
+\tightlist
+\item
+  As a treatment for extreme values of inflation, we further implement
+  the unbounded Gaussian kernel and the outlier-robust Epanechnikov
+  kernel.
+\item
+  In essence, the semi-parametric approach captures the sensitivity of
+  RPD to marginal increases in inflation.
+\item
+  In that case, the optimal inflation rate can be obtained by finding
+  the point where the first derivative (\(f'(\pi_t)\)) is equal to zero.
+\item
+  Therefore, if \(f'(\pi_t) > 0\) (\(f'(\pi_t) < 0\)), then an increase
+  in inflation (decrease) leads to an increase (decrease) in the RPD.
+  For robustness we estimate the \(g(UIN_t)\) with multiple bandwith
+  (\(h\)).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Methodology}
+\phantomsection\label{methodology-9}
 To further disentangle the effects of RPD on inflation, we decompose
 headline inflation into its expected and unexpected components. As
 discussed in the literature section, for example, theory suggests that
 inflation uncertainty has a more pronounced effect on RPD due to
-information frictions faced by firms when adjusting prices
-{[}@lucas1973; @hercowitz1981; @cukierman1983{]}.
+information frictions faced by firms when adjusting prices (Lucas 1973;
+Hercowitz 1981; Cukierman 1983).
 
 We therefore estimate the following model:
 
 \begin{equation}\phantomsection\label{eq-unexpected}{ RPD_t = \alpha + \beta_0 EIN_t + \beta_1 UIN_t + g(UIN_t) + \sum_{k=1}^{3}\lambda_k RPD_{t-k} + \epsilon_t, }\end{equation}
 
-where \(EIN_t\) is the expected inflation rate, \(UIN_t\) is the
-unexpected inflation rate, and \(g(UIN_t)\) is a non-linear function of
-unexpected inflation (\(UIN_t\)). We obtain the expected using \textbf{a
-simple moving average of headline inflation, and unexpected inflation as
-the standard deviation of inflation}. The estimation of \(g(UIN_t)\)
-follows the same two-stage semi-parametric approach outlined in
-Equation~\ref{eq-rpd_semi_parametric_stage1} and
-Equation~\ref{eq-rpd_semi_parametric_stage2}. The number of lags is the
-same as in Equation~\ref{eq-rpd_reg}.
+\begin{itemize}
+\tightlist
+\item
+  \(EIN_t\) is the expected inflation rate and \(UIN_t\) is the
+  unexpected inflation rate
+\item
+  \(g(UIN_t)\) is a non-linear function of unexpected inflation
+  (\(UIN_t\)).
+\item
+  We obtain the expected using \textbf{a simple moving average of
+  headline inflation, and unexpected inflation as the standard deviation
+  of inflation}. The estimation of \(g(UIN_t)\) follows the same
+  two-stage semi-parametric approach outlined in
+  Equation~\ref{eq-rpd_semi_parametric_stage1} and
+  Equation~\ref{eq-rpd_semi_parametric_stage2}. The number of lags is
+  the same as in Equation~\ref{eq-rpd_reg}.
+\end{itemize}
+\end{frame}
 
+\begin{frame}{Methodology}
+\phantomsection\label{methodology-10}
 Lastly, and some-what novel to the RPD literature, we employ a quantile
-on quantile regression approach {[}@koenker2017{]}. Quantile on quantile
+on quantile regression approach (Koenker 2017). Quantile on quantile
 regressions are robust to outliers and allows us to estimate the regime
-aspects of the relationship between RPD and inflation. For brevity, we
-explain the quantile on quantile estimation procedure in the Appendix.
+aspects of the relationship between RPD and inflation.
+
+For brevity, we do not explain the quantile on quantile estimation
+procedure
 \end{frame}
 
 \section{Results}\label{results}
@@ -415,6 +825,122 @@ explain the quantile on quantile estimation procedure in the Appendix.
 
 \begin{frame}{Results}
 \phantomsection\label{results-3}
+\global\setlength{\Oldarrayrulewidth}{\arrayrulewidth}
+
+\global\setlength{\Oldtabcolsep}{\tabcolsep}
+
+\setlength{\tabcolsep}{2pt}
+
+\renewcommand*{\arraystretch}{0}
+
+
+
+\providecommand{\ascline}[3]{\noalign{\global\arrayrulewidth #1}\arrayrulecolor[HTML]{#2}\cline{#3}}
+
+\begin{longtable}[l]{|p{1.69in}|p{1.20in}|p{1.08in}|p{1.12in}|p{1.99in}|p{1.87in}|p{1.91in}}
+
+\caption{\label{tbl-base_regression}Baseline regressions}
+
+\tabularnewline
+
+\ascline{1pt}{000000}{1-7}
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Full\ Sample}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Pre\ 2017}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Post\ 2017}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Full\ Sample:\ Squared\ Inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Pre\ 2017:\ Squared\ Inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Post\ 2017:\ Squared\ Inflation}}}} \\
+
+\ascline{1pt}{000000}{1-7}\endfirsthead 
+
+\ascline{1pt}{000000}{1-7}
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Full\ Sample}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Pre\ 2017}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Post\ 2017}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Full\ Sample:\ Squared\ Inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Pre\ 2017:\ Squared\ Inflation}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Post\ 2017:\ Squared\ Inflation}}}} \\
+
+\ascline{1pt}{000000}{1-7}\endhead
+
+
+
+\multicolumn{7}{>{\raggedright}m{\dimexpr 10.86in+12\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{Note:\ ***\ =\ p\ value\ <\ 0.01,\ **\ =\ 0.01\ <\ p\ value\ <\ 0.05,\ *\ =\ 0.05\ <\ p\ value\ <\ 0.1.}}}} \\
+
+\endlastfoot
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.01*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.009\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.032***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.046\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.104\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.033\ }}}} \\
+
+\ascline{1pt}{FFFFFF}{1-7}
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$\pi_t^2$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.006*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.011*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.007*}}}} \\
+
+\ascline{1pt}{FFFFFF}{1-7}
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RPD_{t-3}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.244***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.173*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.248**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.234***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.154\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.209**}}}} \\
+
+\ascline{1pt}{FFFFFF}{1-7}
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RPD_{t-2}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.382***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.14\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.645***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.363***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.111\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.609***}}}} \\
+
+\ascline{1pt}{FFFFFF}{1-7}
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$RPD_{t-1}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.039***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.896***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.116***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.017***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.864***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{1.063***}}}} \\
+
+\ascline{1pt}{FFFFFF}{1-7}
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2022m8}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.026\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.024\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.001\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.012\ }}}} \\
+
+\ascline{1pt}{FFFFFF}{1-7}
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2020m2}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.116\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.213**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.106\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.205**}}}} \\
+
+\ascline{1pt}{FFFFFF}{1-7}
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2017m7}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.156*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.161*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} \\
+
+\ascline{1pt}{FFFFFF}{1-7}
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2014m7}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.098\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.087\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.105\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{-0.096\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} \\
+
+\ascline{1pt}{FFFFFF}{1-7}
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$D_{2011m12}$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.042\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.027\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.047\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.037\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{}}}} \\
+
+\ascline{1pt}{FFFFFF}{1-7}
+
+
+
+\multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\raggedright}m{\dimexpr 1.69in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{$C$}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.2in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.044\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.08in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.012\ }}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.12in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.117***}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.99in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.184**}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.87in+0\tabcolsep}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.326*}}}} & \multicolumn{1}{!{\color[HTML]{FFFFFF}\vrule width 1pt}>{\centering}m{\dimexpr 1.91in+0\tabcolsep}!{\color[HTML]{FFFFFF}\vrule width 1pt}}{\textcolor[HTML]{000000}{\fontsize{7}{7}\selectfont{\global\setmainfont{Arial}{0.304**}}}} \\
+
+\ascline{1pt}{000000}{1-7}
+
+
+\end{longtable}
+
+\arrayrulecolor[HTML]{000000}
+
+\global\setlength{\arrayrulewidth}{\Oldarrayrulewidth}
+
+\global\setlength{\tabcolsep}{\Oldtabcolsep}
+
+\renewcommand*{\arraystretch}{1}
+\end{frame}
+
+\begin{frame}{Results}
+\phantomsection\label{results-4}
 \begin{figure}[H]
 
 \centering{
@@ -431,7 +957,7 @@ a 5\% level of significance.}
 \end{frame}
 
 \begin{frame}{Results}
-\phantomsection\label{results-4}
+\phantomsection\label{results-5}
 \begin{figure}[H]
 
 \centering{
@@ -448,7 +974,7 @@ with a fixed start date of 2012-07.}
 \end{frame}
 
 \begin{frame}{Results}
-\phantomsection\label{results-5}
+\phantomsection\label{results-6}
 \begin{figure}[H]
 
 \centering{
@@ -463,7 +989,7 @@ with a fixed start date of 2012-07.}
 \end{frame}
 
 \begin{frame}{Results}
-\phantomsection\label{results-6}
+\phantomsection\label{results-7}
 \begin{figure}[H]
 
 \centering{
@@ -480,7 +1006,7 @@ headline inflation rate.}
 \end{frame}
 
 \begin{frame}{Results}
-\phantomsection\label{results-7}
+\phantomsection\label{results-8}
 \begin{figure}[H]
 
 \centering{
@@ -497,7 +1023,7 @@ headline inflation.}
 \end{frame}
 
 \begin{frame}{Results}
-\phantomsection\label{results-8}
+\phantomsection\label{results-9}
 \begin{figure}[H]
 
 \centering{
@@ -515,7 +1041,7 @@ inflation.}
 \end{frame}
 
 \begin{frame}{Results}
-\phantomsection\label{results-9}
+\phantomsection\label{results-10}
 \begin{figure}[H]
 
 \centering{
@@ -538,7 +1064,7 @@ quantiles where the relationship is not statistically significant.}
 \end{frame}
 
 \begin{frame}{Results}
-\phantomsection\label{results-10}
+\phantomsection\label{results-11}
 \begin{figure}[H]
 
 \centering{
@@ -564,7 +1090,54 @@ y-axis represents the quantiles of RPD.}
 \begin{frame}{References}
 \phantomsection\label{references}
 \phantomsection\label{refs}
-\begin{CSLReferences}{0}{1}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-caglayan2003}
+Caglayan, Mustafa, and Alpay Filiztekin. 2003. {``Nonlinear Impact of
+Inflation on Relative Price Variability.''} \emph{Economics Letters} 79
+(2): 213--18.
+
+\bibitem[\citeproctext]{ref-choi2010}
+Choi, Chi-Young. 2010. {``Reconsidering the {Relationship} Between
+{Inflation} and {Relative Price Variability}.''} \emph{Journal of Money,
+Credit and Banking} 42 (5): 769--98.
+\url{https://doi.org/10.1111/j.1538-4616.2010.00307.x}.
+
+\bibitem[\citeproctext]{ref-cukierman1983}
+Cukierman, Alex. 1983. {``Relative Price Variability and Inflation: A
+Survey and Further Results.''} In \emph{Carnegie-{Rochester Conference
+Series} on {Public Policy}}, 19:103--57. Elsevier.
+
+\bibitem[\citeproctext]{ref-fielding2000}
+Fielding, David, and Paul Mizen. 2000. {``Relative {Price Variability}
+and {Inflation} in {Europe}.''} \emph{Economica} 67 (265): 57--78.
+\url{https://doi.org/10.1111/1468-0335.00195}.
+
+\bibitem[\citeproctext]{ref-head2005}
+Head, Allen, and Alok Kumar. 2005. {``Price {Dispersion}, {Inflation},
+and {Welfare}.''} \emph{International Economic Review} 46 (2): 533--72.
+\url{https://doi.org/10.1111/j.1468-2354.2005.00333.x}.
+
+\bibitem[\citeproctext]{ref-hercowitz1981}
+Hercowitz, Zvi. 1981. {``Money and the {Dispersion} of {Relative
+Prices}.''} \emph{Journal of Political Economy} 89 (2): 328--56.
+\url{https://doi.org/10.1086/260968}.
+
+\bibitem[\citeproctext]{ref-koenker2017}
+Koenker, Roger. 2017. {``Quantile {Regression}: 40 {Years On}.''}
+\emph{Annual Review of Economics} 9 (1): 155--76.
+\url{https://doi.org/10.1146/annurev-economics-063016-103651}.
+
+\bibitem[\citeproctext]{ref-lach1992}
+Lach, Saul, and Daniel Tsiddon. 1992. {``The {Behavior} of {Prices} and
+{Inflation}: {An Empirical Analysis} of {Disaggregat Price Data}.''}
+\emph{Journal of Political Economy} 100 (2): 349--89.
+\url{https://doi.org/10.1086/261821}.
+
+\bibitem[\citeproctext]{ref-lucas1973}
+Lucas, Robert E. 1973. {``Some International Evidence on
+Output-Inflation Tradeoffs.''} \emph{The American Economic Review} 63
+(3): 326--34. \url{https://www.jstor.org/stable/1914364}.
+
 \end{CSLReferences}
 \end{frame}
 

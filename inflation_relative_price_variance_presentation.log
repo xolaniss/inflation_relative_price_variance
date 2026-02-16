@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2026.2.13)  13 FEB 2026 13:13
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2026.2.13)  16 FEB 2026 09:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -857,51 +857,155 @@ Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 ))
 \cslhangindent=\skip77
 \csllabelwidth=\skip78
+(/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip79
+\multirow@cntb=\count396
+\multirow@dima=\skip80
+\bigstrutjot=\dimen334
+) (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2025/10/21 v2.0b multicolumn formatting (FMi)
+\c@tracingmulticols=\count397
+\mult@box=\box88
+\multicol@leftmargin=\dimen335
+\c@unbalance=\count398
+\c@collectmore=\count399
+\doublecol@number=\count400
+\multicoltolerance=\count401
+\multicolpretolerance=\count402
+\full@width=\dimen336
+\page@free=\dimen337
+\premulticols=\dimen338
+\postmulticols=\dimen339
+\multicolsep=\skip81
+\multicolbaselineskip=\skip82
+\partial@page=\box89
+\last@line=\box90
+\mc@boxedresult=\box91
+\maxbalancingoverflow=\dimen340
+\mult@rightbox=\box92
+\mult@grightbox=\box93
+\mult@firstbox=\box94
+\mult@gfirstbox=\box95
+\@tempa=\box96
+\@tempa=\box97
+\@tempa=\box98
+\@tempa=\box99
+\@tempa=\box100
+\@tempa=\box101
+\@tempa=\box102
+\@tempa=\box103
+\@tempa=\box104
+\@tempa=\box105
+\@tempa=\box106
+\@tempa=\box107
+\@tempa=\box108
+\@tempa=\box109
+\@tempa=\box110
+\@tempa=\box111
+\@tempa=\box112
+\@tempa=\box113
+\@tempa=\box114
+\@tempa=\box115
+\@tempa=\box116
+\@tempa=\box117
+\@tempa=\box118
+\@tempa=\box119
+\@tempa=\box120
+\@tempa=\box121
+\@tempa=\box122
+\@tempa=\box123
+\@tempa=\box124
+\@tempa=\box125
+\@tempa=\box126
+\@tempa=\box127
+\@tempa=\box128
+\@tempa=\box129
+\@tempa=\box130
+\@tempa=\box131
+\c@minrows=\count403
+\c@columnbadness=\count404
+\c@finalcolumnbadness=\count405
+\last@try=\dimen341
+\multicolovershoot=\dimen342
+\multicolundershoot=\dimen343
+\mult@nat@firstbox=\box132
+\colbreak@box=\box133
+\mc@col@check@num=\count406
+\g__mc_curr_col_int=\count407
+) (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2024/10/29 v1.0k Color table columns (DPC)
+\everycr=\toks50
+\minrowclearance=\skip83
+\rownum=\count408
+) (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box134
+\UL@hyphenbox=\box135
+\UL@skip=\skip84
+\UL@hook=\toks51
+\UL@height=\dimen344
+\UL@pe=\count409
+\UL@pixel=\dimen345
+\ULC@box=\box136
+Package: ulem 2019/11/18
+\ULdepth=\dimen346
+) (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/tools/hhline.sty
+Package: hhline 2020/01/04 v2.04 Table rule package (DPC)
+)
+\Oldarrayrulewidth=\skip85
+\Oldtabcolsep=\skip86
 (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count396
-\float@exts=\toks50
-\float@box=\box88
-\@float@everytoks=\toks51
-\@floatcapt=\box89
+\c@float@type=\count410
+\float@exts=\toks52
+\float@box=\box137
+\@float@everytoks=\toks53
+\@floatcapt=\box138
+) (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen347
+\WF@size=\dimen348
+\c@WF@wrappedlines=\count411
+\WF@box=\box139
+\WF@everypar=\toks54
+Package: wrapfig 2003/01/31  v 3.6
 )
-\@float@every@codelisting=\toks52
-\c@codelisting=\count397
+\@float@every@codelisting=\toks55
+\c@codelisting=\count412
 (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
 Package caption Info: New subtype `subfigure' on input line 238.
-\c@subfigure=\count398
+\c@subfigure=\count413
 Package caption Info: New subtype `subtable' on input line 238.
-\c@subtable=\count399
+\c@subtable=\count414
 ) (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
 (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def
 File: bkm-dvipdfm.def 2023-12-10 v1.31 bookmark driver for dvipdfm (HO)
-\BKM@id=\count400
+\BKM@id=\count415
 ))
 No file inflation_relative_price_variance_presentation.aux.
 \openout1 = `inflation_relative_price_variance_presentation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 210.
+LaTeX Font Info:    ... okay on input line 210.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 210.
+LaTeX Font Info:    ... okay on input line 210.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 210.
+LaTeX Font Info:    ... okay on input line 210.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 210.
+LaTeX Font Info:    ... okay on input line 210.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 210.
+LaTeX Font Info:    ... okay on input line 210.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 210.
+LaTeX Font Info:    ... okay on input line 210.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 210.
+LaTeX Font Info:    ... okay on input line 210.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 210.
+LaTeX Font Info:    ... okay on input line 210.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 210.
+LaTeX Font Info:    ... okay on input line 210.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 210.
+LaTeX Font Info:    ... okay on input line 210.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -936,7 +1040,7 @@ LaTeX Font Info:    ... okay on input line 197.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 197.
+Package hyperref Info: Link coloring OFF on input line 210.
 
 Package hyperref Warning: Rerun to get /PageLabels entry.
 
@@ -954,19 +1058,19 @@ Dictionary: translator-numbers-dictionary, Language: English
 Dictionary: translator-theorem-dictionary, Language: English 
 )
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 197.
+(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 210.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 197.
+(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 210.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 197.
+(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 210.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 197.
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 210.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 197.
+(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 210.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 197.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 210.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 197.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 210.
 
 Package fontspec Info: 
 (fontspec)             latinmodern-math scale = 1.03015890977869.
@@ -994,7 +1098,7 @@ Package fontspec Info:
 (fontspec)             <->s*[1.03015890977869]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 11.28015pt on input line 197.
+(Font)              scaled to size 11.28015pt on input line 210.
 
 Package fontspec Info: 
 (fontspec)             latinmodern-math scale = 1.03015890977869.
@@ -1030,15 +1134,15 @@ Package fontspec Info:
 (fontspec)             <->s*[1.03015890977869]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 11.28015pt on input line 197.
+(Font)              scaled to size 11.28015pt on input line 210.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 197.
+(Font)              `operators' in the math version `normal' on input line 210.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input line 197.
+(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input line 210.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 197.
+(Font)              `operators' in the math version `bold' on input line 210.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on input line 197.
+(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on input line 210.
 
 Package fontspec Info: 
 (fontspec)             latinmodern-math scale = 1.03015890977869.
@@ -1104,13 +1208,13 @@ Package fontspec Info:
 (fontspec)             <->s*[1.030261925669668]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 197.
+(Font)              `symbols' in the math version `normal' on input line 210.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
-(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on input line 197.
+(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on input line 210.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 197.
+(Font)              `symbols' in the math version `bold' on input line 210.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
-(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on input line 197.
+(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on input line 210.
 
 Package fontspec Info: 
 (fontspec)             latinmodern-math scale = 1.03015890977869.
@@ -1170,20 +1274,20 @@ Package fontspec Info:
 (fontspec)             <->s*[1.030055893887712]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `normal' on input line 197.
+(Font)              `largesymbols' in the math version `normal' on input line 210.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on input line 197.
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on input line 210.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 197.
+(Font)              `largesymbols' in the math version `bold' on input line 210.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on input line 197.
-LaTeX Info: Redefining \microtypecontext on input line 197.
-Package microtype Info: Applying patch `item' on input line 197.
-Package microtype Info: Applying patch `toc' on input line 197.
-Package microtype Info: Applying patch `eqnum' on input line 197.
-Package microtype Info: Applying patch `footnote' on input line 197.
-Package microtype Info: Applying patch `verbatim' on input line 197.
-LaTeX Info: Redefining \microtypesetup on input line 197.
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on input line 210.
+LaTeX Info: Redefining \microtypecontext on input line 210.
+Package microtype Info: Applying patch `item' on input line 210.
+Package microtype Info: Applying patch `toc' on input line 210.
+Package microtype Info: Applying patch `eqnum' on input line 210.
+Package microtype Info: Applying patch `footnote' on input line 210.
+Package microtype Info: Applying patch `verbatim' on input line 210.
+LaTeX Info: Redefining \microtypesetup on input line 210.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -1195,13 +1299,46 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
+Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
 No file inflation_relative_price_variance_presentation.nav.
 [1
 
 ] [2
 
-] [3
+]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.8961pt on input line 233.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.64008pt on input line 233.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 233.
+(/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 11.28131pt on input line 233.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.89691pt on input line 233.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.64066pt on input line 233.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 11.27914pt on input line 233.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.8954pt on input line 233.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.63957pt on input line 233.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 233.
+(/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 233.
+(/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+) [3
 
 ] [4
 
@@ -1211,207 +1348,168 @@ No file inflation_relative_price_variance_presentation.nav.
 
 ] [7
 
-]
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.8961pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.64008pt on input line 231.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 231.
-(/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
-File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 11.28131pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.89691pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.64066pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 11.27914pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.8954pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.63957pt on input line 231.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 231.
-(/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-) (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
-File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 231.
-(/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (/Users/xolanisibande/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
-File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-)
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 9.27136pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.18091pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.15076pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.27232pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.18155pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.15129pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.27054pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.18036pt on input line 231.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.1503pt on input line 231.
-[8
+] [8
 
 ] [9
 
-]
-
-LaTeX Warning: Reference `fig-rpd' on page 10 undefined on input line 262.
-
-[10
+] [10
 
 ] [11
 
-] [12
-
 ]
-Overfull \vbox (0.97745pt too high) detected at line 316
+Overfull \vbox (2.16017pt too high) detected at line 396
  []
 
-[13
+[12
+
+] [13
+
+] [14
+
+] [15
 
 ]
 
-LaTeX Warning: Reference `eq-rpd_semi_parametric_stage1' on page 14 undefined on input line 352.
+LaTeX Warning: Reference `eq-lucas_supply_curve' on page 16 undefined on input line 471.
 
 
-Overfull \vbox (223.77193pt too high) detected at line 352
- []
-
-[14
-
-]
-Overfull \hbox (18.91048pt too wide) detected at line 382
-[][]
- []
+LaTeX Warning: Reference `eq-price_decomposition' on page 16 undefined on input line 471.
 
 
-LaTeX Warning: Reference `eq-rpd_semi_parametric_stage1' on page 15 undefined on input line 382.
+LaTeX Warning: Reference `eq-expected_price_level' on page 16 undefined on input line 471.
 
-
-LaTeX Warning: Reference `eq-rpd_semi_parametric_stage2' on page 15 undefined on input line 382.
-
-
-LaTeX Warning: Reference `eq-rpd_reg' on page 15 undefined on input line 382.
-
-
-Overfull \vbox (131.075pt too high) detected at line 382
- []
-
-[15
-
-] [16
+[16
 
 ]
-File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-rpd-1.pdf Graphic file (type pdf)
-<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-rpd-1.pdf>
+
+LaTeX Warning: Reference `eq-aggregate_supply_curve' on page 17 undefined on input line 485.
+
 [17
 
-]
-File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-rpd_inflation-1.pdf Graphic file (type pdf)
-<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-rpd_inflation-1.pdf>
-[18
+] [18
+
+] [19
+
+] [20
 
 ]
-File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-rolling_coefficients-1.pdf Graphic file (type pdf)
-<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-rolling_coefficients-1.pdf>
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 9.27136pt on input line 527.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.18091pt on input line 527.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.15076pt on input line 527.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.27232pt on input line 527.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.18155pt on input line 527.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.15129pt on input line 527.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 9.27054pt on input line 527.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.18036pt on input line 527.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.1503pt on input line 527.
 
-Overfull \vbox (26.52478pt too high) detected at line 431
- []
+LaTeX Warning: Reference `fig-headline_inflation' on page 21 undefined on input line 527.
 
-[19
 
-]
-File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-recursive-1.pdf Graphic file (type pdf)
-<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-recursive-1.pdf>
-[20
-
-]
-File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-semi_parametric-1.pdf Graphic file (type pdf)
-<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-semi_parametric-1.pdf>
-
-Overfull \vbox (9.68294pt too high) detected at line 463
- []
+LaTeX Warning: Reference `fig-price_data' on page 21 undefined on input line 527.
 
 [21
 
 ]
-File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-semi_parametric_robustness-1.pdf Graphic file (type pdf)
-<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-semi_parametric_robustness-1.pdf>
-
-Overfull \vbox (21.68294pt too high) detected at line 480
- []
-
+File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-headline_inflation-1.pdf Graphic file (type pdf)
+<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-headline_inflation-1.pdf>
 [22
 
 ]
-File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-unexpected_inflation-1.pdf Graphic file (type pdf)
-<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-unexpected_inflation-1.pdf>
-
-Overfull \vbox (21.68294pt too high) detected at line 497
- []
-
+File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-price_data-1.pdf Graphic file (type pdf)
+<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-price_data-1.pdf>
 [23
 
-]
-File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-semi_parametric_unexpected_robustness-1.pdf Graphic file (type pdf)
-<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-semi_parametric_unexpected_robustness-1.pdf>
+] [24
 
-Overfull \vbox (33.68294pt too high) detected at line 515
+] [25
+
+]
+Overfull \vbox (7.98085pt too high) detected at line 627
  []
 
-[24
-
-]
-File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-quant_reg-1.pdf Graphic file (type pdf)
-<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-quant_reg-1.pdf>
-
-Overfull \vbox (15.14334pt too high) detected at line 538
- []
-
-[25
-
-]
-File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-unif_quant_reg-1.pdf Graphic file (type pdf)
-<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-unif_quant_reg-1.pdf>
 [26
 
 ] [27
 
-] [28
+]
+Overfull \vbox (15.51161pt too high) detected at line 674
+ []
+
+[28
+
+] [29
+
+] [30
 
 ]
 
-! LaTeX Error: Something's wrong--perhaps a missing \item.
+LaTeX Warning: Reference `eq-rpd_semi_parametric_stage1' on page 31 undefined on input line 727.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.569 \end{frame}
+[31
+
+] [32
+
+]
+Overfull \hbox (18.91048pt too wide) detected at line 781
+[][]
+ []
+
+
+LaTeX Warning: Reference `eq-rpd_semi_parametric_stage1' on page 33 undefined on input line 781.
+
+
+LaTeX Warning: Reference `eq-rpd_semi_parametric_stage2' on page 33 undefined on input line 781.
+
+
+LaTeX Warning: Reference `eq-rpd_reg' on page 33 undefined on input line 781.
+
+
+Overfull \vbox (69.87497pt too high) detected at line 781
+ []
+
+[33
+
+] [34
+
+] [35
+
+]
+File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-rpd-1.pdf Graphic file (type pdf)
+<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-rpd-1.pdf>
+[36
+
+]
+File: inflation_relative_price_variance_presentation_files/figure-beamer/fig-rpd_inflation-1.pdf Graphic file (type pdf)
+<use inflation_relative_price_variance_presentation_files/figure-beamer/fig-rpd_inflation-1.pdf>
+[37
+
+]
+! Illegal parameter number in definition of \iterate.
+<to be read again> 
+                   1
+l.940 \end{frame}
                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+You meant to type ## instead of #, right?
+Or maybe a } was forgotten somewhere earlier, and things
+are all screwed up? I'm going to assume that you meant ##.
 
  
 Here is how much of TeX's memory you used:
- 31175 strings out of 470129
- 637992 string characters out of 5475194
- 1174656 words of memory out of 5000000
- 59232 multiletter control sequences out of 15000+600000
- 634153 words of font info for 90 fonts, out of 8000000 for 9000
+ 31640 strings out of 470129
+ 641898 string characters out of 5475194
+ 1182631 words of memory out of 5000000
+ 59681 multiletter control sequences out of 15000+600000
+ 634267 words of font info for 92 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 101i,11n,114p,1043b,673s stack positions out of 10000i,1000n,20000p,200000b,200000s
-Output written on inflation_relative_price_variance_presentation.pdf (28 pages).
+ 101i,11n,114p,1522b,577s stack positions out of 10000i,1000n,20000p,200000b,200000s
+Output written on inflation_relative_price_variance_presentation.pdf (37 pages).

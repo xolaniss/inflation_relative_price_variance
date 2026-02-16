@@ -1,8 +1,11 @@
 ---
 title: "Relative price dispersion and inflation regimes in South Africa"
-author: "Keagile Lesame and Xolani Sibande"
+author: |
+  Keagile Lesame and Xolani Sibande |
+  *National Treasury of South Africa and South African Reserve Bank*
 format: 
-  pptx: default
+  pptx:
+    reference-doc: template_b.pptx
 editor: source
 bibliography: references.bib
 crossref:
@@ -83,20 +86,37 @@ qqr_uinf_results <- read_rds(here("Outputs","artifacts_uinf_quant_reg.rds"))
 # Motivation
 ## Motivation
 
-Inflation is known to have adverse welfare effects through its distortion of relative prices which causes the misallocation of resources, production inefficiencies leading to lower real economic activity. This is well supported by both theoretical and empirical studies. This paper contributes to the empirical literature, by examining the relationship between inflation and relative price variability (RPD) in South Africa given the little evidence available and to better understand how this relationship has evolved and the implications for monetary policy.
+- Inflation is known to have adverse welfare effects through its distortion of relative prices which causes the misallocation of resources, production inefficiencies leading to lower real economic activity. 
+- This is well supported by both theoretical and empirical studies. 
+- This paper contributes to the empirical literature, by examining the relationship between inflation and relative price variability (RPD) in South Africa given the little evidence available and to better understand how this relationship has evolved and the implications for monetary policy.
+- The South African context can provide further insights into the relationship between inflation and RPD given the shifts in the inflation targets from 3-6 per cent in 2000 to 4.5 per cent since 2017 as structural changes in inflation can affect the link between inflation and relative price variability [@caglayan2003] 
+- That the functional form of relationship is U-shaped and dynamic [@fielding2000; @choi2010] 
+- The latter motivates the estimation of the inflation rate that minimizes relative price distortions since if the relationship was linear then the optimal inflation rate would be zero
+- Given the inflation target reform towards a 3% in South Africa, this study contributes to the policy discussion on the appropriate inflation target and understating how dynamic relations between inflation and relative price variability has evolved
 
-## Motivation
-The South African context can provide further insights into the relationship between inflation and RPD given the shifts in the inflation targets from 3-6 per cent in 2000 to 4.5 per cent since 2017 as structural changes in inflation can affect the link between inflation and relative price variability [@caglayan2003] and that the functional form of relationship is U-shaped and dynamic [@fielding2000; @choi2010]. The latter motivates the estimation of the inflation rate that minimizes relative price distortions since if the relationship was linear then the optimal inflation rate would be zero. Given the inflation target reform towards a 3% in South Africa, this study contributes to the policy discussion on the appropriate inflation target and understating how dynamic relations between inflation and relative price variability has evolved.
 
-## Motivation
-The theoretical literature generally distinguishes between menu-cost and signal extraction models in explaining the positive relation between trend inflation and RPD. In these models’ firms follow a one-sided dynamic pricing rule when setting prices and face fixed non-zero costs of adjusting nominal prices (e.g. printing new menus) when inflation increases as the latter reduces the optimal real price of goods and services. Due to differences in administrative costs, these nominal price adjustment costs vary across firms moreover these adjustments occur at different times which implies staggard price setting behaviour which leads to relative price variability. Menu cost models predict a that higher expected inflation causes an increase in RPD (citations xxx) while Lucas-type signal extraction models [@lucas1973; @hercowitz1981; @cukierman1983] argue unexpected inflation uncertainty causes higher RPD because informational frictions make it difficult to distinguish between idiosyncratic relative shocks or an aggregate (inflationary) shock. Menu cost and signal-extraction models assume a positive and linear relationship making the optimal inflation rate zero, however, recently monetary search models [@head2005] show that this relationship is nonlinear making the optimal inflation rate somewhere between zero and positive inflation rate.
 
-# Literature 
-
-# Relative price dispersion through Lucas's aggregate supply curve
+# Theoretical Framework: RPD through Lucas's aggregate supply curve
 
 ## RPD theoretical framework 
-The concept of relative price dispersion can be abstract and difficult to grasp without a theoretical framework. One of the most influential frameworks for understanding relative price dispersion is the @lucas1973 aggregate supply curve, which provides insights into how relative price dispersion can explain the output-inflation relationship, otherwise know as the 'natural rate theory. This theory essentially means (in part) that nominal "rigidities" partially dominate short-run supplier behaviour resulting from a lack of information about the some prices relevant to decision making. For our purposes we ignore other aspects of the theoretical framework and emphasis this aspect of the model to provide an understanding relative price dispersion.
+
+- The theoretical literature generally distinguishes between menu-cost and signal extraction models in explaining the positive relation between trend inflation and RPD. 
+
+- In these models’ firms follow a one-sided dynamic pricing rule when setting prices and face fixed non-zero costs of adjusting nominal prices (e.g. printing new menus) when inflation increases as the latter reduces the optimal real price of goods and services. 
+
+ - Due to differences in administrative costs, these nominal price adjustment costs vary across firms moreover these adjustments occur at different times which implies staggard price setting behaviour which leads to relative price variability.
+
+ - Menu cost models predict a that higher expected inflation causes an increase in RPD (citations xxx) while Lucas-type signal extraction models [@lucas1973; @hercowitz1981; @cukierman1983] argue unexpected inflation uncertainty causes higher RPD because informational frictions make it difficult to distinguish between idiosyncratic relative shocks or an aggregate (inflationary) shock. 
+ - Menu cost and signal-extraction models assume a positive and linear relationship making the optimal inflation rate zero, however, recently monetary search models [@head2005] show that this relationship is nonlinear making the optimal inflation rate somewhere between zero and positive inflation rate.
+
+## RPD theoretical framework 
+- The concept of relative price dispersion can be abstract and difficult to grasp without a theoretical framework. 
+
+- One of the most influential frameworks for understanding relative price dispersion is the @lucas1973 aggregate supply curve, which provides insights into how relative price dispersion can explain the output-inflation relationship.
+
+- This theory essentially means (in part) that nominal "rigidities" partially dominate short-run supplier behaviour resulting from a lack of information about the some prices relevant to decision making. 
+
+- For our purposes we ignore other aspects of the theoretical framework and emphasis this aspect of the model to provide an understanding relative price dispersion.
 
 
 ## RPD theoretical framework 
@@ -105,9 +125,12 @@ The concept of relative price dispersion can be abstract and difficult to grasp 
 $$y_t(z) = y_{n,t} + y_{ct}(z), $$ {#eq-lucas_supply_curve}
 
 
-where $y_t(z)$ is the aggregate supply at time $t$ in market $z$, $y_{n,t}$ is the natural or secular level of supply at time $t$, and $y_{ct}$ is the cyclical component of supply at time $t$. Competitive markets and a cleared labour market are assumed, meaning that the slope of the supply curve can only reflect the degree of information frictions and the speed of price adjustment related to labour and product markets. Furthermore, the demand for goods in each period is assumed to be unevenly distributed, leading to relative price and general price level movements leading. It is this imperfect information of the suppliers about the general price level that leads to relative price dispersion and the output-inflation relationship.
+- $y_t(z)$ is the aggregate supply at time $t$ in market $z$, $y_{n,t}$ is the natural or secular level of supply at time $t$ 
+- $y_{ct}$ is the cyclical component of supply at time $t$. 
+- Competitive markets and a cleared labour market are assumed
+- Leading to relative price and general price level movements leading. 
+- Imperfect information of the suppliers about the general price level that leads to relative price dispersion and the output-inflation relationship.
 
-## RPD theoretical framework 
 In addition, the natural or secular level of supply is assumed to follow a linear trend as follows:
 $$ y_{n,t} = \alpha + \beta t, $$ {#eq-natural_supply}
 
@@ -118,28 +141,40 @@ where $\alpha$ is a constant and $\beta$ captures the trend growth rate of the n
 The cyclical component varies with the perceived relative price (the difference between the actual price level and the expected price level) and its lags as follows:
 
 $$ y_{ct}(z) = \gamma[P_t(z) - E(P_t | I_t(z))] + \lambda y_{c, t-1}(z), $$ {#eq-cyclical_component}
-where $\gamma$ captures the sensitivity of supply to the perceived relative price, $P_t(z)$ is the actual price level in market $z$ at time $t$, $E(P_t | I_t(z))$ is the expected price level based on information available at time $t$ in market $z$, and $\lambda$ captures the persistence of the cyclical component and $|\lambda| < 1$. $E(P_t | I_t(z))$ is current expected price level conditioned on information that is available at time $t$, at market $z$. The available information set ($I_t(z)$) comprises of past demand driven shifts of the secular component ($y_{n,t}$), and the past deviations  of the cyclical component ($y_{c, t-1}, y_{c, t-2}, ...$) from its natural level. 
+
+-  $\gamma$ captures the sensitivity of supply to the perceived relative price, $P_t(z)$ is the actual price level in market $z$ at time $t$, 
+- $E(P_t | I_t(z))$ is the expected price level based on information available at time $t$ in market $z$
+- $\lambda$ captures the persistence of the cyclical component and $|\lambda| < 1$. $E(P_t | I_t(z))$ is current expected price level conditioned on information that is available at time $t$, at market $z$. 
+- The available information set ($I_t(z)$) comprises of past demand driven shifts of the secular component ($y_{n,t}$), 
+- Past deviations  of the cyclical component ($y_{c, t-1}, y_{c, t-2}, ...$) from its natural level. 
 
 ## RPD theoretical framework 
-The current general price level ($P_t$), which determines 'prior' expectations common across all suppliers in all markets, is assumed to be $P_t \sim N(\overline{P_t}, \sigma^2),$ where $\overline{P_t}$ is the mean price level at time $t$ and $\sigma^2$ is the variance of the price level at time $t$. Furthermore, @lucas1973 defines $z_t$ as the percentage deviation of the actual market price from the general price level as $z\overset{\text{iid}}{\sim} N(0, \tau^2),$ where $\tau^2$ is the variance of $z$. Therefore, the actual price level in market $z$ at time $t$ can be expressed as:
+- The current general price level ($P_t$), which determines 'prior' expectations common across all suppliers in all markets, is assumed to be $P_t \sim N(\overline{P_t}, \sigma^2)$ 
+- $\overline{P_t}$ is the mean price level at time $t$ and $\sigma^2$ is the variance of the price level at time $t$. 
+- Furthermore, @lucas1973 defines $z_t$ as the percentage deviation of the actual market price from the general price level as $z\overset{\text{iid}}{\sim} N(0, \tau^2),$ where $\tau^2$ is the variance of $z$. 
+
+ 
+Therefore, the actual price level in market $z$ at time $t$ can be expressed as:
 
 $$P_t(z) = P_t + z, $$ {#eq-price_decomposition}
 
-where $P_t(z)$ is the actual price in market $z$ at time $t$ (that is the markets are indexed to z), $P_t$ is the current general price level at time $t$, and $z$ is the percentage deviation of the actual market price from the general price level. However, $P_t$ is unobserved by traders, and therefore $I_t(z)$ is used to estimate the expected price level ($E(P_t| I_t(z))$). 
+- $P_t(z)$ is the actual price in market $z$ at time $t$ (that is the markets are indexed to z), 
+- $P_t$ is the current general price level at time $t$, and $z$ is the percentage deviation of the actual market price from the general price level. 
+- However, $P_t$ is unobserved by traders, and therefore $I_t(z)$ is used to estimate the expected price level ($E(P_t| I_t(z))$). 
 
 ## RPD theoretical framework 
 The expected price level based on information available at time $t$ in market $z$ can be derived using Bayes' rule as follows:
 
 $$ E(P_t| I_t(z))  = E(P_t|P_t(z), \overline{P_t}) = (1-\theta)P_t(z) + \theta\overline{Pt},$$ {#eq-expected_price_level}
 
-where $\theta = \frac{\tau^2}{(\sigma^2 + \tau^2)}$ is the weight placed on the mean price level ($\overline{P_t}$) in forming expectations. 
+- $\theta = \frac{\tau^2}{(\sigma^2 + \tau^2)}$ is the weight placed on the mean price level ($\overline{P_t}$) in forming expectations. 
 
-## RPD theoretical framework 
+
 Combining @eq-lucas_supply_curve, @eq-price_decomposition, and @eq-expected_price_level by substitution yields the following:
 
 $$ y_t(z) = y_{nt} + \theta \gamma[P_t(z) - \overline{P_t}] + \lambda y_{c, t-1}$$ {#eq-lucas_supply_curve_final}
 
-where the current supply in market $z$ at time $t$ is a function of the natural level of supply, the perceived relative price (the difference between the actual price level in market $z$ and the mean price level), and the lagged cyclical component. 
+- current supply in market $z$ at time $t$ is a function of the natural level of supply, the perceived relative price (the difference between the actual price level in market $z$ and the mean price level), and the lagged cyclical component. 
 
 
 ## RPD theoretical framework 
@@ -149,7 +184,13 @@ Finally, aggregating across all markets (or integrating over all markets) yields
 $$y_t = y_{nt} + \theta\gamma(P_t - \overline{P_t}) + \lambda[y_{t-1} - y_{n, t-1}]$$ {#eq-aggregate_supply_curve}
 
 
-From @eq-aggregate_supply_curve, we can clearly demonstrate how the relative price dispersion ($\theta$), which is a fraction of the total individual price dispersion ($\sigma^2 + \tau^2$), affects the aggregate supply curve, and therefore the output-inflation relationship. That is, $\theta \uparrow$ in $\tau^2$ and $\downarrow$ in $\sigma^2$. Meaning that when $\theta \uparrow$, the aggregate supply curve becomes flatter, and the output-inflation relationship becomes stronger. And when $\theta\downarrow$, the slope is restricted by $\gamma$. Therefore, the relative price variance ($\theta$), in this context, is a key determinant of the slope of the aggregate supply curve and the strength of the output-inflation relationship.
+From @eq-aggregate_supply_curve, we can clearly demonstrate how the relative price dispersion ($\theta$) is a fraction of the total individual price dispersion ($\sigma^2 + \tau^2$), affects the aggregate supply curve, and therefore the output-inflation relationship.
+
+
+-  That is, $\theta \uparrow$ in $\tau^2$ and $\downarrow$ in $\sigma^2$. 
+- Meaning that when $\theta \uparrow$, the aggregate supply curve becomes flatter, and the output-inflation relationship becomes stronger. 
+- And when $\theta\downarrow$, the slope is restricted by $\gamma$. 
+- Therefore, the relative price variance ($\theta$), in this context, is a key determinant of the slope of the aggregate supply curve and the strength of the output-inflation relationship.
 
 
 ## Empirical literaturer review
@@ -158,9 +199,10 @@ From @eq-aggregate_supply_curve, we can clearly demonstrate how the relative pri
 # Data and methodology
 
 ## Data 
-::: {style="font-size: 20%;"}
-Our analysis uses monthly inflation data on 45 goods categories from January 2009 to November 2025 obtained from Statistics South Africa (Stats SA).[^1] . @fig-headline_inflation below shows the long term inflation rate in South Africa, and @fig-price_data in the appendix shows the various price categories used in the analysis. @tbl-descriptive_stats provides the descriptive statistics of the inflation rates for the various price categories used in the analysis.
-::: 
+
+- Our analysis uses monthly inflation data on 45 goods categories from January 2009 to November 2025 obtained from Statistics South Africa (Stats SA).[^1]  
+- @fig-headline_inflation below shows the long term inflation rate in South Africa, and @fig-price_data in the appendix shows the various price categories used in the analysis
+
 [^1]: The data is available at: http://www.statssa.gov.za/ and the data was seasonally adjusted.
 
 ## Data
@@ -190,26 +232,17 @@ price_data_list |>
 ```
 
 
-## Data
-
-```{r}
-#| label: tbl-descriptive_stats
-#| tbl-cap: "Descriptive statistics"
-
-descriptives_list |> 
-  pluck(1) |> 
-  flextable_word() |>
-  align(j = 1, align = "left", part = "all") |>
-  autofit(add_w = 0)                                                                                                                              
-```
 
 ## Methodology
 
-The relative price dispersion (RPD) is calculated in line with @lach1992 as the weighted standard deviation of individual price inflation rates from the aggregate inflation rate. The RPD is essentially the variability of relative prices of a given product. We first calculate the monthly inflation rate as follows:
+RPD is calculated in line with @lach1992 as the weighted standard deviation of individual price inflation rates from the aggregate inflation rate. The RPD is essentially the variability of relative prices of a given product. 
+- We first calculate the monthly inflation rate as follows:
 
 $$ \pi_{i,t} = ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right) * 100, $$ {#eq-inflation_rate}
 
-where $\pi_{i,t}$ is the inflation rate of good $i$ at time $t$, $P_{i,t}$ is the price of good $i$ at time $t$, and $P_{i,t-1}$ is the price of good $i$ at time $t-1$. 
+- $\pi_{i,t}$ is the inflation rate of good $i$ at time $t$ 
+- $P_{i,t}$ is the price of good $i$ at time $t$
+- $P_{i,t-1}$ is the price of good $i$ at time $t-1$
 
 
 ## Methodology
@@ -218,7 +251,10 @@ Then, the RPD is calculated as:
 
 $$RPD_{t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, $$ {#eq-rpd}
 
-where $\omega_{j}$ is the expenditure share of the $j^{th}$ good, $\pi_{t}$ is the headline or aggregate inflation rate at time $t$, and $\sum_{i=1}^{n}\omega_{i} = 1$. The expenditure weights ($\omega_{i}$) used are derived from the Consumer Price Index (CPI) basket provided by Stats SA. @fig-rpd shows the RPD calculated using the above formula. We use the 2025 CPI Stats SA weights. The weights are shown in @fig-weights in the appendix.
+- $\omega_{j}$ is the expenditure share of the $j^{th}$ good, 
+- $\pi_{t}$ is the headline or aggregate inflation rate at time $t$, 
+- $\sum_{i=1}^{n}\omega_{i} = 1$. 
+- The expenditure weights ($\omega_{i}$) used are derived from the Consumer Price Index (CPI) basket provided by Stats SA
 
 ## Methodology
 
@@ -226,7 +262,11 @@ To examine the relationship between inflation and RPD, we estimate the following
 
 $$RPD_{t} = \beta_0 + \beta_1|\pi_{t}| + \sum_{h=1}^{3}\omega_hRPD_{t-h}  +  \mu_{t}, $$ {#eq-rpd_reg}
 
-where $RPD_{t}$ is the relative price variance at time $t$, $|\pi_{t}|$ is the absolute value of aggregate inflation rate at time $t$, $RPD_{t-h}$ are lagged values of RPD to account for its dynamic nature, and $\mu_{t}$ is the error term. The coefficient $\beta_1$ captures the effect of inflation on RPD. We include three lags of RPD based on Akaike Information Criterion (AIC) (and other tests)  and to capture potential persistence in RPD. For robustness, we repeat this estimation using core inflation (excluding food and non-alcoholic beverages, and fuel and electricity) instead of headline inflation to account for the potential volatility in these components.
+- $RPD_{t}$ is the relative price variance at time $t$
+- $|\pi_{t}|$ is the absolute value of aggregate inflation rate at time $t$
+- $RPD_{t-h}$ are lagged values of RPD to account for its dynamic nature, and $\mu_{t}$ is the error term
+- The coefficient $\beta_1$ captures the effect of inflation on RPD. We include three lags of RPD based on Akaike Information Criterion (AIC) (and other tests)  and to capture potential persistence in RPD. 
+- For robustness, we repeat this estimation using core inflation (excluding food and non-alcoholic beverages, and fuel and electricity) instead of headline inflation to account for the potential volatility in these components.
 
 ## Methodology
 
@@ -234,7 +274,8 @@ The literature on RPD emphasises that the relationship between inflation and RPD
 
 $$RPD_{t} = \alpha_{t} + \beta_{1,t}|\pi_{t}| + \sum_{h=1}^{3}\omega_{h,t}RPD_{t-h}  +  \mu_{t}, $$ {#eq-rpd_rolling_reg}
 
-where the coefficients $\alpha_{t}$, $\beta_{1,t}$, and $\omega_{h,t}$ vary over time. This approach allows us to observe the stability of the coefficients over time, which is an indicator of non-linearity in the relationship between RPD and inflation. 
+- The coefficients $\alpha_{t}$, $\beta_{1,t}$, and $\omega_{h,t}$ vary over time. 
+- This approach allows us to observe the stability of the coefficients over time, which is an indicator of non-linearity in the relationship between RPD and inflation. 
 
 ## Methodology
 
@@ -242,17 +283,19 @@ Next, we utilise a semi-parametric or partially linear approach to estimate the 
 
 $$RPD_t = \alpha + \pi_t + \beta_2\pi_t^2 + \sum_{h=1}^{3}\phi_hRPD_{t-h} + \epsilon_t, $$ {#eq-rpd_semi_parametric}
 
-where $\beta_2$ captures the curvature of the relationship between inflation and RPD. The optimal inflation rate that minimizes RPD can be derived by taking the first derivative of the equation with respect to $\pi_t$ and setting it to zero, yielding:
+- $\beta_2$ captures the curvature of the relationship between inflation and RPD
+- The optimal inflation rate that minimizes RPD can be derived by taking the first derivative of the equation with respect to $\pi_t$ and setting it to zero, yielding:
 
 $$\pi_t^* = -\dfrac{1}{2\beta_2}.$$ {#eq-optimal_inflation}
 
 ## Methodology
 
-To estimate this optiomal inflation we implement a semi parametric approach as follows:
+To estimate this optimal inflation we implement a semi-parametric approach as follows:
 
 $$RPD_t =  f(\pi_t) + \sum_{h=1}^{3}\phi_hRPD_{t-h} + \epsilon_t, $$ {#eq-rpd_semi_parametric_f}
 
-where $f(\pi_t)$ is a non-linear smooth differentiable function of inflation and the RPD. Therefore, the optimal inflation rate can be obtained by finding the minimum of the estimated $f(\pi_t)$ function. $f(\pi_t)$ is estimated in two stages. 
+- $f(\pi_t)$ is a non-linear smooth differentiable function of inflation and the RPD. 
+- Therefore, the optimal inflation rate can be obtained by finding the minimum of the estimated $f(\pi_t)$ function. $f(\pi_t)$ is estimated in two stages. 
 
 ## Methodology
 
@@ -260,17 +303,21 @@ First we estimate $\lambda_h$ as follows:
 
 $$ RPD_t = \sum_{h=1}^{3}\lambda_h\overline{RPD}_{t-h} + \eta_t, $$ {#eq-rpd_semi_parametric_stage1}
 
-where $\overline{RPD}_{t-h}$ are the residuals from a non-parametric regression of each lag of $RPD_t$ on $\pi_t$. 
+- $\overline{RPD}_{t-h}$ are the residuals from a non-parametric regression of each lag of $RPD_t$ on $\pi_t$
 
-## Methodology
 In the second stage, we estimate $f(\pi_t)$ non-parametrically as follows:
 
 $$\hat{\eta}_t = f(\pi_t) + v_t, $$ {#eq-rpd_semi_parametric_stage2}
 
-where $\hat{\eta}_t$ are the residuals from @eq-rpd_semi_parametric_stage1, and $f(\pi_t)$ is estimated using a kernel regression method. The bandwidth ($h$) for the kernel estimator is selected using cross-validation to minimize the mean squared error.
+- $\hat{\eta}_t$ are the residuals from @eq-rpd_semi_parametric_stage1
+- $f(\pi_t)$ is estimated using a kernel regression method
+- The bandwidth ($h$) for the kernel estimator is selected using cross-validation to minimize the mean squared error.
 
 ## Methodology
-As a treatment for extreme values of inflation, we further implement the unbounded Gaussian kernel and the outlier-robust Epanechnikov kernel. In essence, the semi-parametric approach captures the sensitivity of RPD to marginal increases in inflation. In that case, the optimal inflation rate can be obtained by finding the point where the first derivative ($f'(\pi_t)$) is equal to zero. Therefore, if $f'(\pi_t) > 0$ ($f'(\pi_t) < 0$), then an increase in inflation (decrease) leads to an increase (decrease) in the RPD. For robustness we estimate the $g(UIN_t)$ with multiple bandwith ($h$).
+- As a treatment for extreme values of inflation, we further implement the unbounded Gaussian kernel and the outlier-robust Epanechnikov kernel. 
+- In essence, the semi-parametric approach captures the sensitivity of RPD to marginal increases in inflation. 
+- In that case, the optimal inflation rate can be obtained by finding the point where the first derivative ($f'(\pi_t)$) is equal to zero. 
+- Therefore, if $f'(\pi_t) > 0$ ($f'(\pi_t) < 0$), then an increase in inflation (decrease) leads to an increase (decrease) in the RPD. For robustness we estimate the $g(UIN_t)$ with multiple bandwith ($h$).
 
 ## Methodology
 
@@ -280,9 +327,16 @@ We therefore estimate the following model:
 
 $$ RPD_t = \alpha + \beta_0 EIN_t + \beta_1 UIN_t + g(UIN_t) + \sum_{k=1}^{3}\lambda_k RPD_{t-k} + \epsilon_t, $$ {#eq-unexpected}
 
-where $EIN_t$ is the expected inflation rate, $UIN_t$ is the unexpected inflation rate, and $g(UIN_t)$ is a non-linear function of unexpected inflation ($UIN_t$). We obtain the expected using **a simple moving average of headline inflation, and unexpected inflation as the standard deviation of inflation**. The estimation of $g(UIN_t)$ follows the same two-stage semi-parametric approach outlined in @eq-rpd_semi_parametric_stage1 and @eq-rpd_semi_parametric_stage2. The number of lags is the same as in @eq-rpd_reg.
+- $EIN_t$ is the expected inflation rate and $UIN_t$ is the unexpected inflation rate
+- $g(UIN_t)$ is a non-linear function of unexpected inflation ($UIN_t$). 
+- We obtain the expected using **a simple moving average of headline inflation, and unexpected inflation as the standard deviation of inflation**. The estimation of $g(UIN_t)$ follows the same two-stage semi-parametric approach outlined in @eq-rpd_semi_parametric_stage1 and @eq-rpd_semi_parametric_stage2. The number of lags is the same as in @eq-rpd_reg.
 
-Lastly, and some-what novel to the RPD literature, we employ a quantile on quantile regression approach [@koenker2017]. Quantile on quantile regressions are robust to outliers and allows us to estimate the regime aspects of the relationship between RPD and inflation. For brevity, we explain the quantile on quantile estimation procedure in the Appendix.
+## Methodology
+
+Lastly, and some-what novel to the RPD literature, we employ a quantile on quantile regression approach [@koenker2017]. Quantile on quantile regressions are robust to outliers and allows us to estimate the regime aspects of the relationship between RPD and inflation. 
+
+
+For brevity, we do not explain the quantile on quantile estimation procedure
 
 
 # Results
@@ -338,6 +392,65 @@ ggplot(aes(x = headline_inflation, y = rpd, color = factor(policy_2017_dum))) +
       plot.tag = element_text(size = 6),
       axis.line = element_line(color = "black", linewidth = 0.2)
     )
+
+```
+
+
+## Results
+```{r}
+#| label: tbl-base_regression
+#| tbl-cap: "Baseline regressions"
+#| ft.arraystretch: 0
+#| echo: false
+#| message: false
+#| results: asis
+
+base_tbl <- 
+  regressions |> 
+  pluck(2) |> 
+  mutate(term = case_when(
+    term == "(Intercept)" ~ "C",
+    term == "headline_inflation" ~ "\\pi_t",
+    # term == "abs_headline_inflation" ~ "|\\pi_t|",
+    term == "squared_headline_inflation" ~ "\\pi_t^2",
+    term == "lag(log_rpd, 1)" ~ "RPD_{t-1}",
+    term == "lag(log_rpd, 2)" ~ "RPD_{t-2}",
+    term == "lag(log_rpd, 3)" ~ "RPD_{t-3}",
+    term == "dum_2011m121" ~ "D_{2011m12}",
+    term == "dum_2014m71" ~ "D_{2014m7}",
+    term == "dum_2017m71" ~ "D_{2017m7}",
+    term == "dum_2020m21" ~ "D_{2020m2}",
+    term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions
+    TRUE ~ term
+  )) |>  
+  arrange(desc(term))
+
+replace_one <- base_tbl |> 
+  slice(1)
+  
+replace_two <- base_tbl |> 
+  slice(2)
+
+base_tbl[2, ] <- replace_one
+base_tbl[1, ] <- replace_two
+
+table <- base_tbl |> 
+  rename(
+    " " = term
+  ) |> 
+  flextable_word() |> 
+  align(j = 1, align = "left", part = "all") |>
+  add_footer_row(
+      values = 
+        as_paragraph(
+        "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."), 
+      colwidths = 7) |> 
+  width(j = 1, width = 0.05) |>
+  align(j = 2, align = "center", part = "all") |>
+  compose(j = 1, value = as_paragraph(as_equation(` `))) |>
+  autofit(add_w = 0.5)
+
+flextable_to_rmd(table)
 
 ```
 
@@ -532,14 +645,16 @@ p1 | p2 | p3
 ```
 
 
-
-
 # Conclusions
 
 ## Conclusion
 
+## Thank You! {.center}
 
-## References {.unnumbered}
+**Questions?**
+
+
+## References
 
 ::: {#refs}
 :::
