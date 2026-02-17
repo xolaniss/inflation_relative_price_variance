@@ -111,11 +111,18 @@ qqr_uinf_results <- read_rds(here("Outputs","artifacts_uinf_quant_reg.rds"))
 
 # Introduction
 
-Inflation is known to have adverse welfare effects through its distortion of relative prices which causes the misallocation of resources, production inefficiencies leading to lower real economic activity. This is well supported by both theoretical and empirical studies. This paper contributes to the empirical literature, by examining the relationship between inflation and relative price variability (RPD) in South Africa given the little evidence available and to better understand how this relationship has evolved and the implications for monetary policy.
+Inflation is known to have adverse welfare effects through its distortion of relative prices which causes the mis-allocation of resources, production inefficiencies leading to lower real economic activity. This is well supported by both theoretical and empirical studies. This paper contributes to the empirical literature, by examining the relationship between inflation and relative price dispersion (RPD) in South Africa given the little evidence available and to determine how the relationship has evolved and its implications for monetary policy.
 
-The South African context can provide further insights into the relationship between inflation and RPD given the shifts in the inflation targets from 3-6 per cent in 2000 to 4.5 per cent since 2017 as structural changes in inflation can affect the link between inflation and relative price variability [@caglayan2003] and that the functional form of relationship is U-shaped and dynamic [@fielding2000; @choi2010]. The latter motivates the estimation of the inflation rate that minimizes relative price distortions since if the relationship was linear then the optimal inflation rate would be zero. Given the inflation target reform towards a 3% in South Africa, this study contributes to the policy discussion on the appropriate inflation target and understating how dynamic relations between inflation and relative price variability has evolved.
+The South African context can provide further insights into the relationship between inflation and RPD given the changes in the inflation targets from a 3- 6 per cent band in 2000 to a 4.5 per cent midpoint target since 2017 and a shift to 3 per cent inflation target in  2025 as structural changes in inflation can affect the linkages with relative price dispersion [@caglayan2003] and that the functional form of relationship is U-shaped and dynamic [@fielding2000; @choi2010] implying a non-zero optimal inflation rate that minimizes the distortive effect on relative prices since a linear relationship would imply that the optimal inflation rate is zero. Given the above mentioned inflation target reforms, South Africa provides an opportunity to examine the dynamic effects of inflation on relative price variability and optimal inflation target with policy implications for emerging market economies that intend to transition to lower inflation targets.
 
-The theoretical literature generally distinguishes between menu-cost and signal extraction models in explaining the positive relation between trend inflation and RPD. In these models’ firms follow a one-sided dynamic pricing rule when setting prices and face fixed non-zero costs of adjusting nominal prices (e.g. printing new menus) when inflation increases as the latter reduces the optimal real price of goods and services. Due to differences in administrative costs, these nominal price adjustment costs vary across firms moreover these adjustments occur at different times which implies staggard price setting behaviour which leads to relative price variability. Menu cost models predict a that higher expected inflation causes an increase in RPD (citations xxx) while Lucas-type signal extraction models [@lucas1973; @hercowitz1981; @cukierman1983] argue unexpected inflation uncertainty causes higher RPD because informational frictions make it difficult to distinguish between idiosyncratic relative shocks or an aggregate (inflationary) shock. Menu cost and signal-extraction models assume a positive and linear relationship making the optimal inflation rate zero, however, recently monetary search models [@head2005] show that this relationship is nonlinear making the optimal inflation rate somewhere between zero and positive inflation rate.
+The theoretical literature distinguishes between menu-cost and signal extraction models in explaining the positive relation between inflation and RPD.  In menu cost models [@sheshinki1979; @sheshinski1983; @rotemberg1983; @benabou1992] firms face fixed cost of adjusting nominal prices (e.g. printing new menus) and since they follow a one-sided dynamic pricing rule (S, s)[1] when setting prices, inflation reduces the optimal real price. Given price adjustment costs differ across firms (e.g. due to differences administrative costs) price adjustment occurs infrequently and at sporadic times leading to staggard price setting and consequently an increase in relative price variability with latter reflects nominal rigidities rather than a scarcity of resources. Signal extraction models emphasize the role of inflation surprises in increasing RPD. In these models, under the assumption of imperfect information, firms observe their own prices immediately and only observe aggregate prices imperfectly, therefore unexpected inflation o inflation volatility reduces the informational content of prices as firms are unable to distinguish between idiosyncratic relative (real) shocks and aggregate (inflationary) shocks [@lucas1973; @hercowitz1981; @cukierman1983; @barro1976 leading to cross-sectional price dispersion which results in allocative inefficiencies generating adverse real effects. While menu cost models predict a linear relationship, signal extraction models predict nonlinearities along with monetary search models [@head2005] with the latter also arguing that moderate inflation can increase welfare suggesting the optimal inflation can be non-zero.
+
+Against this backdrop, this paper closely follows @caraballo2013 and tests the menu cost and signal extraction models in a semi-parametric framework (Robinsons,1988) for South Africa between 2009 and 2025. We further extend our analysis further by estimating the inflation-RPD nexus using a quantile-on-quantile regression since the semiparametric estimation provides average inflation effects on RPD, the quantile-on-quantile estimation shows how the state-dependant inflation effect specific areas of the distribution of relative price dispersion. We chose a post 2008 financial crisis period sample because inflation was broadly within the target range and monetary policy credibility had broadly improved during this period relative to the period after the adoption of the inflation target framework in 2000. Furthermore, we estimate the inflation-RPD nexus in the pre-and post-2017 samples when the South African Reserve Bank (SARB) began to target the midpoint of the 3-6 per inflation target range. Our sample includes 2025 with structurally lower inflation which averaged 3.2 per cent after the SARB communicated its preference for 3 per cent lower bound and the National Treasury officially adopting the 3 per cent in November 2025 nevertheless, we do not specifically make inference with regards to this as an extended post sample period is needed.
+
+The empirical literature is well established but with evidence for emerging markets few. To the best of our knowledge, @ndou2014 and  @ndou2017 are there only papers that examined the inflation and RPD relationship for an emerging market, South Africa. @ndou2014  focused estimating the disaggregated CPI components and found heterogenous effects of these on RPD over 1980-2010 before and after the adoption of the inflation target framework while @ndou2017 focused on RPD for services only during 1980-2011. This paper contributes to the empirical literature by examining the headline inflation-RPD nexus in the context of structural changes in inflation induced by inflation target changes estimating both mean and tail effects.
+
+Findings xxxxxxxxxxx
+The rest of the paper is organised as follows. Section 2 presents the data and methodology. Section 3 discusses the main results, Section 4 discusses the robustness tests and Section 5 concludes the paper.
 
 
 # Relative price dispersion through Lucas's aggregate supply curve
@@ -160,12 +167,6 @@ $$y_t = y_{nt} + \theta\gamma(P_t - \overline{P_t}) + \lambda[y_{t-1} - y_{n, t-
 
 From @eq-aggregate_supply_curve, we can clearly demonstrate how the relative price dispersion ($\theta$), which is a fraction of the total individual price dispersion ($\sigma^2 + \tau^2$), affects the aggregate supply curve, and therefore the output-inflation relationship. That is, $\theta \uparrow$ in $\tau^2$ and $\downarrow$ in $\sigma^2$. Meaning that when $\theta \uparrow$, the aggregate supply curve becomes flatter, and the output-inflation relationship becomes stronger. And when $\theta\downarrow$, the slope is restricted by $\gamma$. Therefore, the relative price variance ($\theta$), in this context, is a key determinant of the slope of the aggregate supply curve and the strength of the output-inflation relationship.
 
-
-#  Empirical literaturer review
-
-## Citations
-
-@adam2024 @baglan2016 @ball1993 @benabou1993 @caglayan2003 @caglayan2008 @grier1996 @lach1992 @nakamura2018 @ndou2014 @ndou2017 @parks1978 @parsley1996 @rather2018
 
 # Data and methodology
 
@@ -228,7 +229,7 @@ where $EIN_t$ is the expected inflation rate, $UIN_t$ is the unexpected inflatio
 
 Lastly, and some-what novel to the RPD literature, we employ a quantile on quantile regression approach [@koenker2017]. Quantile on quantile regressions are robust to outliers and allows us to estimate the regime aspects of the relationship between RPD and inflation. For brevity, we explain the quantile on quantile estimation procedure in the Appendix.
 
-# Results
+#  Main Results
 
 ```{r}
 #| label: fig-rpd
@@ -240,7 +241,6 @@ rpd_measures |>
   pluck(2)
 
 ```
-
 
 
 ```{r}
@@ -360,8 +360,6 @@ recursive_regression |>
 \newpage
 
 
-
-
 ```{r}
 #| label: fig-semi_parametric
 #| fig-cap: "Semi-parametric regressions"
@@ -406,31 +404,6 @@ p6 <- img_to_plot(here("Outputs/non_linear/Post2017_epanechnikov_eq10.png"))
 ```
 
 
-
-
-```{r}
-#| label: fig-semi_parametric_robustness
-#| fig-cap: "Semi-parametric regressions with alternative bandwidth selection. Note: hcpi is the headline inflation rate." 
-#| fig-width: 8
-#| fig-height: 8
-p1 <- img_to_plot(here("Outputs/robustness/full_sample_gaussian_robust_bandwidth_eq10.png"))
-p2 <- img_to_plot(here("Outputs/robustness/full_sample_epanechnikov_robust_bandwidth_eq10.png"))
-
-p3 <- img_to_plot(here("Outputs/robustness/Pre2017_gaussian_robust_bandwidth_eq10.png"))
-p4 <- img_to_plot(here("Outputs/robustness/Pre2017_epanechnikov_robust_bandwidth_eq10.png"))
-
-p5 <- img_to_plot(here("Outputs/robustness/Post2017_gaussian_robust_bandwidth_eq10.png"))
-p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidth_eq10.png"))
-
-# Combine using patchwork
-(p1 + p2) / (p3 + p4) / (p5 + p6)
-
-```
-
-
-
-
-
 ```{r}
 #| label: fig-unexpected_inflation
 #| fig-cap: "Semi-parametric regressions for unexpected inflation. Note: hcpi_u is the unexpected component of headline inflation."
@@ -452,28 +425,6 @@ p6 <- img_to_plot(here("Outputs/unexpected/Post2017_epanechnikov_eq14.png"))
 
 \newpage 
 
-```{r}
-#| label: fig-semi_parametric_unexpected_robustness
-#| fig-cap: "Semi-parametric regressions for unexpected inflation with alternative bandwidth selection. Note: hcpi_u is the unexpected component of headline inflation."
-#| fig-width: 8
-#| fig-height: 8
-p1 <- img_to_plot(here("Outputs/robustness/full_sample_gaussian_robust_bandwidth_eq14.png"))
-p2 <- img_to_plot(here("Outputs/robustness/full_sample_epanechnikov_robust_bandwidth_eq14.png"))
-
-p3 <- img_to_plot(here("Outputs/robustness/Pre2017_gaussian_robust_bandwidth_eq14.png"))
-p4 <- img_to_plot(here("Outputs/robustness/Pre2017_epanechnikov_robust_bandwidth_eq14.png"))
-
-p5 <- img_to_plot(here("Outputs/robustness/Post2017_gaussian_robust_bandwidth_eq14.png"))
-p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidth_eq14.png"))
-
-# Combine using patchwork
-(p1 + p2) / (p3 + p4) / (p5 + p6)
-
-```
-
-
-
-\newpage
 
 ```{r}
 #| label: fig-quant_reg
@@ -526,6 +477,47 @@ p1 | p2 | p3
 
 
 \newpage
+
+# Robustness
+
+```{r}
+#| label: fig-semi_parametric_robustness
+#| fig-cap: "Semi-parametric regressions with alternative bandwidth selection. Note: hcpi is the headline inflation rate." 
+#| fig-width: 8
+#| fig-height: 8
+p1 <- img_to_plot(here("Outputs/robustness/full_sample_gaussian_robust_bandwidth_eq10.png"))
+p2 <- img_to_plot(here("Outputs/robustness/full_sample_epanechnikov_robust_bandwidth_eq10.png"))
+
+p3 <- img_to_plot(here("Outputs/robustness/Pre2017_gaussian_robust_bandwidth_eq10.png"))
+p4 <- img_to_plot(here("Outputs/robustness/Pre2017_epanechnikov_robust_bandwidth_eq10.png"))
+
+p5 <- img_to_plot(here("Outputs/robustness/Post2017_gaussian_robust_bandwidth_eq10.png"))
+p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidth_eq10.png"))
+
+# Combine using patchwork
+(p1 + p2) / (p3 + p4) / (p5 + p6)
+
+```
+
+
+```{r}
+#| label: fig-semi_parametric_unexpected_robustness
+#| fig-cap: "Semi-parametric regressions for unexpected inflation with alternative bandwidth selection. Note: hcpi_u is the unexpected component of headline inflation."
+#| fig-width: 8
+#| fig-height: 8
+p1 <- img_to_plot(here("Outputs/robustness/full_sample_gaussian_robust_bandwidth_eq14.png"))
+p2 <- img_to_plot(here("Outputs/robustness/full_sample_epanechnikov_robust_bandwidth_eq14.png"))
+
+p3 <- img_to_plot(here("Outputs/robustness/Pre2017_gaussian_robust_bandwidth_eq14.png"))
+p4 <- img_to_plot(here("Outputs/robustness/Pre2017_epanechnikov_robust_bandwidth_eq14.png"))
+
+p5 <- img_to_plot(here("Outputs/robustness/Post2017_gaussian_robust_bandwidth_eq14.png"))
+p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidth_eq14.png"))
+
+# Combine using patchwork
+(p1 + p2) / (p3 + p4) / (p5 + p6)
+
+```
 
 # Conclusion
 
@@ -643,121 +635,123 @@ regressions |>
 \setcounter{figure}{0}
 \renewcommand{\thefigure}{B\arabic{figure}}
 
-# Appendix: Alternative Results (OLS Robustness)
+<!-- # Appendix: Alternative Results (OLS Robustness) -->
 
-The coefficient of variation (CV) version of RPD (or RPD-CV) normalizes the RPD by the aggregate price level to account for changes in the overall price level. This measure is particularly useful when comparing RPD across different time periods or economies with varying inflation rates. The RPD-CV is calculated as follows:
+<!-- The coefficient of variation (CV) version of RPD (or RPD-CV) normalizes the RPD by the aggregate price level to account for changes in the overall price level. This measure is particularly useful when comparing RPD across different time periods or economies with varying inflation rates. The RPD-CV is calculated as follows: -->
 
-$$RPD-CV_{t} = \sqrt{\dfrac{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}{|1 + \pi_t|}}, $$ {#eq-rpdcv}
+<!-- $$RPD-CV_{t} = \sqrt{\dfrac{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}{|1 + \pi_t|}}, $$ {#eq-rpdcv} -->
 
-where $\pi_t$ is the aggregate inflation rate at time $t$, and $\omega_{i}$ are the inflation basket weights.
-
-
-## RPD-CV over-time
-
-```{r}
-#| label: fig-core_rpd
-#| fig-cap: "RPD-CV overtime"
-#| fig-width: 8
-#| fig-height: 3
-
-cov_regressions |> pluck(2)
-```
-
-\newpage
-## Stationarity tests for RPD-CV
-
-```{r}
-#| label: tbl-cov_stationarity_tests
-#| tbl-cap: "Stationarity tests results for RPD-CV"
-cov_regressions |>
-  pluck(4) |> 
-  mutate(
-    Measure = str_replace_all(Measure,
-    c("headline_inflation" = "Headline Inflation",
-      "rpd_cov" = "RPD-CV")),
-  ) |> 
-  flextable_word() |>
-  align(j = 1, align = "left", part = "all") |>
-  autofit(add_w = 0.2)
-```
+<!-- where $\pi_t$ is the aggregate inflation rate at time $t$, and $\omega_{i}$ are the inflation basket weights. -->
 
 
-## Lag length selection for RPD-CV
+<!-- ## RPD-CV over-time -->
 
-```{r}
-#| label: tbl-cov_lag_selection
-#| tbl-cap: "RPD-CV lag length selection"
+<!-- ```{r} -->
+<!-- #| label: fig-core_rpd -->
+<!-- #| fig-cap: "RPD-CV overtime" -->
+<!-- #| fig-width: 8 -->
+<!-- #| fig-height: 3 -->
 
-cov_regressions |> 
-  pluck(3) |> 
-  mutate(
-    across(
-      where(is.numeric),
-      ~ round(.x, 0)
-    )
-  ) |> 
-  flextable_word() |> 
-  colformat_double(j = 2, digits = 0) |>
-  autofit(add_w = 2.5)
+<!-- cov_regressions |> pluck(2) -->
+<!-- ``` -->
 
-```
+<!-- \newpage -->
+<!-- ## Stationarity tests for RPD-CV -->
 
-\newpage
+<!-- ```{r} -->
+<!-- #| label: tbl-cov_stationarity_tests -->
+<!-- #| tbl-cap: "Stationarity tests results for RPD-CV" -->
+<!-- cov_regressions |> -->
+<!--   pluck(4) |>  -->
+<!--   mutate( -->
+<!--     Measure = str_replace_all(Measure, -->
+<!--     c("headline_inflation" = "Headline Inflation", -->
+<!--       "rpd_cov" = "RPD-CV")), -->
+<!--   ) |>  -->
+<!--   flextable_word() |> -->
+<!--   align(j = 1, align = "left", part = "all") |> -->
+<!--   autofit(add_w = 0.2) -->
+<!-- ``` -->
 
-## RPD-CV baseline regression results
 
-```{r}
-#| label: tbl-cov_base_regression
-#| tbl-cap: "RPD-CV baseline regressions"
-#| ft.arraystretch: 0.6
+<!-- ## Lag length selection for RPD-CV -->
 
-cov_tbl <- 
-  cov_regressions |> 
-  pluck(5) |> 
-  mutate(term = case_when(
-    term == "(Intercept)" ~ "Constant",
-    term == "headline_inflation" ~ "\\pi_t",
-    # term == "abs_core_inflation" ~ "|\\pi_t|",
-    term == "squared_headline_inflation" ~ "\\pi_t^2",
-    term == "lag(log_rpd_cov, 1)" ~ "RPD_{t-1}",
-    term == "lag(log_rpd_cov, 2)" ~ "RPD_{t-2}",
-    term == "lag(log_rpd_cov, 3)" ~ "RPD_{t-3}",
-    term == "dum_2011m121" ~ "D_{2011m12}",
-    term == "dum_2014m71" ~ "D_{2014m7}",
-    term == "dum_2017m71" ~ "D_{2017m7}",
-    term == "dum_2020m21" ~ "D_{2020m2}",
-    term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions
-    TRUE ~ term
-  )) |> 
-  arrange(desc(term)) 
+<!-- ```{r} -->
+<!-- #| label: tbl-cov_lag_selection -->
+<!-- #| tbl-cap: "RPD-CV lag length selection" -->
 
-replace_one <- cov_tbl |> 
-  slice(1)
-  
-replace_two <- cov_tbl |> 
-  slice(2)
+<!-- cov_regressions |>  -->
+<!--   pluck(3) |>  -->
+<!--   mutate( -->
+<!--     across( -->
+<!--       where(is.numeric), -->
+<!--       ~ round(.x, 0) -->
+<!--     ) -->
+<!--   ) |>  -->
+<!--   flextable_word() |>  -->
+<!--   colformat_double(j = 2, digits = 0) |> -->
+<!--   autofit(add_w = 2.5) -->
 
-cov_tbl[2, ] <- replace_one
-cov_tbl[1, ] <- replace_two
+<!-- ``` -->
 
-cov_tbl |>
-  rename(
-    " " = term,
-  ) |> 
-  flextable_word() |> 
-  align(j = 1, align = "left", part = "all") |>
-  add_footer_row(
-      values = 
-        as_paragraph(
-        "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."), 
-      colwidths = 7) |> 
-  width(j = 1, width = 0.1) |> 
-  align(j = 2, align = "center", part = "all") |>
-  compose(j = 1, value = as_paragraph(as_equation(` `))) |>
-  autofit(add_w = -.95)
-```
+<!-- \newpage -->
 
-\newpage
+<!-- ## RPD-CV baseline regression results -->
+
+<!-- ```{r} -->
+<!-- #| label: tbl-cov_base_regression -->
+<!-- #| tbl-cap: "RPD-CV baseline regressions" -->
+<!-- #| ft.arraystretch: 0.6 -->
+
+<!-- cov_tbl <-  -->
+<!--   cov_regressions |>  -->
+<!--   pluck(5) |>  -->
+<!--   mutate(term = case_when( -->
+<!--     term == "(Intercept)" ~ "Constant", -->
+<!--     term == "headline_inflation" ~ "\\pi_t", -->
+<!--     # term == "abs_core_inflation" ~ "|\\pi_t|", -->
+<!--     term == "squared_headline_inflation" ~ "\\pi_t^2", -->
+<!--     term == "lag(log_rpd_cov, 1)" ~ "RPD_{t-1}", -->
+<!--     term == "lag(log_rpd_cov, 2)" ~ "RPD_{t-2}", -->
+<!--     term == "lag(log_rpd_cov, 3)" ~ "RPD_{t-3}", -->
+<!--     term == "dum_2011m121" ~ "D_{2011m12}", -->
+<!--     term == "dum_2014m71" ~ "D_{2014m7}", -->
+<!--     term == "dum_2017m71" ~ "D_{2017m7}", -->
+<!--     term == "dum_2020m21" ~ "D_{2020m2}", -->
+<!--     term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions -->
+<!--     TRUE ~ term -->
+<!--   )) |>  -->
+<!--   arrange(desc(term))  -->
+
+<!-- replace_one <- cov_tbl |>  -->
+<!--   slice(1) -->
+
+<!-- replace_two <- cov_tbl |>  -->
+<!--   slice(2) -->
+
+<!-- cov_tbl[2, ] <- replace_one -->
+<!-- cov_tbl[1, ] <- replace_two -->
+
+<!-- cov_tbl |> -->
+<!--   rename( -->
+<!--     " " = term, -->
+<!--   ) |>  -->
+<!--   flextable_word() |>  -->
+<!--   align(j = 1, align = "left", part = "all") |> -->
+<!--   add_footer_row( -->
+<!--       values =  -->
+<!--         as_paragraph( -->
+<!--         "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."),  -->
+<!--       colwidths = 7) |>  -->
+<!--   width(j = 1, width = 0.1) |>  -->
+<!--   align(j = 2, align = "center", part = "all") |> -->
+<!--   compose(j = 1, value = as_paragraph(as_equation(` `))) |> -->
+<!--   autofit(add_w = -.95) -->
+<!-- ``` -->
+
+<!-- \newpage -->
+
+
 
 # Appendix: Explanation of the quantile on quantile regression
 
