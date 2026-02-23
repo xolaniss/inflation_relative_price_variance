@@ -54,8 +54,8 @@ uinf_data_tbl <- read_excel(here("Data", "unexpected_inflation_data.xlsx")) |>
 
 # QQR ---------------------------------------------------------------------
 ## Full sample QQR -----------------------------------------------------------
-qqr_rpd_full <- QQR(x = uinf_data_tbl $hcpi_u,
-                    y = log(uinf_data_tbl $rpd),
+qqr_rpd_full <- QQR(x = uinf_data_tbl$hcpi_u,
+                    y = log(uinf_data_tbl$rpd),
                     hm = "CV"
 )
 qqr_rpd_full_gg <- ggplot.QQR(qqr_rpd_full)

@@ -260,10 +260,10 @@ $$RPD_{t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, $$ {#eq-rpd}
 
 To examine the relationship between inflation and RPD, we estimate the following econometric model:
 
-$$RPD_{t} = \beta_0 + \beta_1|\pi_{t}| + \sum_{h=1}^{3}\omega_hRPD_{t-h}  +  \mu_{t}, $$ {#eq-rpd_reg}
+$$RPD_{t} = \beta_0 + \beta_1\pi_{t} + \sum_{h=1}^{3}\omega_hRPD_{t-h}  +  \mu_{t}, $$ {#eq-rpd_reg}
 
 - $RPD_{t}$ is the relative price variance at time $t$
-- $|\pi_{t}|$ is the absolute value of aggregate inflation rate at time $t$
+- $\pi_{t}$ is the aggregate inflation rate at time $t$
 - $RPD_{t-h}$ are lagged values of RPD to account for its dynamic nature, and $\mu_{t}$ is the error term
 - The coefficient $\beta_1$ captures the effect of inflation on RPD. We include three lags of RPD based on Akaike Information Criterion (AIC) (and other tests)  and to capture potential persistence in RPD. 
 - For robustness, we repeat this estimation using core inflation (excluding food and non-alcoholic beverages, and fuel and electricity) instead of headline inflation to account for the potential volatility in these components.
@@ -272,7 +272,7 @@ $$RPD_{t} = \beta_0 + \beta_1|\pi_{t}| + \sum_{h=1}^{3}\omega_hRPD_{t-h}  +  \mu
 
 The literature on RPD emphasises that the relationship between inflation and RPD maybe time-varying due to structural changes in the economy, monetary policy regimes, and other factors. To capture potential time variation in the relationship, we also estimate a rolling regression model with a 24-month and 60-month windows as follows:
 
-$$RPD_{t} = \alpha_{t} + \beta_{1,t}|\pi_{t}| + \sum_{h=1}^{3}\omega_{h,t}RPD_{t-h}  +  \mu_{t}, $$ {#eq-rpd_rolling_reg}
+$$RPD_{t} = \alpha_{t} + \beta_{1,t}\pi_{t} + \sum_{h=1}^{3}\omega_{h,t}RPD_{t-h}  +  \mu_{t}, $$ {#eq-rpd_rolling_reg}
 
 - The coefficients $\alpha_{t}$, $\beta_{1,t}$, and $\omega_{h,t}$ vary over time. 
 - This approach allows us to observe the stability of the coefficients over time, which is an indicator of non-linearity in the relationship between RPD and inflation. 
@@ -512,14 +512,14 @@ img_to_plot <- function(path, title = "") {
 # Columns: Gaussian, Epanechnikov
 # Rows: Full Sample, Pre-2017, Post-2017
 
-p1 <- img_to_plot(here("Outputs/non_linear/full_sample_gaussian_eq10.png"))
-p2 <- img_to_plot(here("Outputs/non_linear/full_sample_epanechnikov_eq10.png"))
+p1 <- img_to_plot(here("Outputs/non_linear/Full_sample_gaussian_eq10.png"))
+p2 <- img_to_plot(here("Outputs/non_linear/Full_sample_epanechnikov_eq10.png"))
 
-p3 <- img_to_plot(here("Outputs/non_linear/Pre2017_gaussian_eq10.png"))
-p4 <- img_to_plot(here("Outputs/non_linear/Pre2017_epanechnikov_eq10.png"))
+p3 <- img_to_plot(here("Outputs/non_linear/Pre-2017_gaussian_eq10.png"))
+p4 <- img_to_plot(here("Outputs/non_linear/Pre-2017_epanechnikov_eq10.png"))
 
-p5 <- img_to_plot(here("Outputs/non_linear/Post2017_gaussian_eq10.png"))
-p6 <- img_to_plot(here("Outputs/non_linear/Post2017_epanechnikov_eq10.png"))
+p5 <- img_to_plot(here("Outputs/non_linear/Post-2017_gaussian_eq10.png"))
+p6 <- img_to_plot(here("Outputs/non_linear/Post-2017_epanechnikov_eq10.png"))
 
 # Combine using patchwork
 (p1 + p2) / (p3 + p4) / (p5 + p6)
@@ -555,40 +555,21 @@ p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidt
 #| fig-cap: "Semi-parametric regressions for unexpected inflation. Note: hcpi_u is the unexpected component of headline inflation."
 #| fig-width: 11
 #| fig-height: 8
-p1 <- img_to_plot(here("Outputs/unexpected/full_sample_gaussian_eq14.png"))
-p2 <- img_to_plot(here("Outputs/unexpected/full_sample_epanechnikov_eq14.png"))
+p1 <- img_to_plot(here("Outputs/unexpected/Full_sample_gaussian_eq14.png"))
+p2 <- img_to_plot(here("Outputs/unexpected/Full_sample_epanechnikov_eq14.png"))
 
-p3 <- img_to_plot(here("Outputs/unexpected/Pre2017_gaussian_eq14.png"))
-p4 <- img_to_plot(here("Outputs/unexpected/Pre2017_epanechnikov_eq14.png"))
+p3 <- img_to_plot(here("Outputs/unexpected/Pre_2017_gaussian_eq14.png"))
+p4 <- img_to_plot(here("Outputs/unexpected/Pre_2017_epanechnikov_eq14.png"))
 
-p5 <- img_to_plot(here("Outputs/unexpected/Post2017_gaussian_eq14.png"))
-p6 <- img_to_plot(here("Outputs/unexpected/Post2017_epanechnikov_eq14.png"))
-
-# Combine using patchwork
-(p1 + p2) / (p3 + p4) / (p5 + p6)
-
-```
-
-## Results
-
-```{r}
-#| label: fig-semi_parametric_unexpected_robustness
-#| fig-cap: "Semi-parametric regressions for unexpected inflation with alternative bandwidth selection. Note: hcpi_u is the unexpected component of headline inflation."
-#| fig-width: 11
-#| fig-height: 8
-p1 <- img_to_plot(here("Outputs/robustness/full_sample_gaussian_robust_bandwidth_eq14.png"))
-p2 <- img_to_plot(here("Outputs/robustness/full_sample_epanechnikov_robust_bandwidth_eq14.png"))
-
-p3 <- img_to_plot(here("Outputs/robustness/Pre2017_gaussian_robust_bandwidth_eq14.png"))
-p4 <- img_to_plot(here("Outputs/robustness/Pre2017_epanechnikov_robust_bandwidth_eq14.png"))
-
-p5 <- img_to_plot(here("Outputs/robustness/Post2017_gaussian_robust_bandwidth_eq14.png"))
-p6 <- img_to_plot(here("Outputs/robustness/Post2017_epanechnikov_robust_bandwidth_eq14.png"))
+p5 <- img_to_plot(here("Outputs/unexpected/Post_2017_gaussian_eq14.png"))
+p6 <- img_to_plot(here("Outputs/unexpected/Post_2017_epanechnikov_eq14.png"))
 
 # Combine using patchwork
 (p1 + p2) / (p3 + p4) / (p5 + p6)
 
 ```
+
+
 
 
 ## Results
