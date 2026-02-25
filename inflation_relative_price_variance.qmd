@@ -167,10 +167,9 @@ $$y_t = y_{nt} + \theta\gamma(P_t - \overline{P_t}) + \lambda[y_{t-1} - y_{n, t-
 
 From @eq-aggregate_supply_curve, we can clearly demonstrate how the relative price dispersion ($\theta$), which is a fraction of the total individual price dispersion ($\sigma^2 + \tau^2$), affects the aggregate supply curve, and therefore the output-inflation relationship. That is, $\theta \uparrow$ in $\tau^2$ and $\downarrow$ in $\sigma^2$. Meaning that when $\theta \uparrow$, the aggregate supply curve becomes flatter, and the output-inflation relationship becomes stronger. And when $\theta\downarrow$, the slope is restricted by $\gamma$. Therefore, the relative price variance ($\theta$), in this context, is a key determinant of the slope of the aggregate supply curve and the strength of the output-inflation relationship.
 
-
 # Data and methodology
 
-Our analysis uses monthly inflation data on 45 goods categories from January 2009 to November 2025 obtained from Statistics South Africa (Stats SA).[^1] . @fig-headline_inflation below shows the long term inflation rate in South Africa, and @fig-price_data in the appendix shows the various price categories used in the analysis. @tbl-descriptive_stats provides the descriptive statistics of the inflation rates for the various price categories used in the analysis.
+Our analysis uses monthly inflation data on 45 goods categories from January 2009 to November 2025 obtained from Statistics South Africa (Stats SA).[^1] @fig-headline_inflation below shows the long term inflation rate in South Africa, and @fig-price_data in the appendix shows the various price categories used in the analysis. @tbl-descriptive_stats provides the descriptive statistics of the inflation rates for the various price categories used in the analysis.
 
 [^1]: The data is available at: \url{http://www.statssa.gov.za/} The data is seasonally adjusted.
 
@@ -195,7 +194,7 @@ The literature on RPD emphasises that the relationship between inflation and RPD
 
 $$RPD_{t} = \alpha_{t} + \beta_{1,t}\pi_{t} + \sum_{h=1}^{3}\omega_{h,t}RPD_{t-h}  +  \mu_{t}, $$ {#eq-rpd_rolling_reg}
 
-where the coefficients $\alpha_{t}$, $\beta_{1,t}$, and $\omega_{h,t}$ vary over time. This approach allows us to observe the stability of the coefficients over time, which is an indicator of non-linearity in the relationship between RPD and inflation. 
+where the coefficients $\alpha_{t}$, $\beta_{1,t}$, and $\omega_{h,t}$ vary over time. This approach allows us to observe the stability of the coefficients over time, which is an indicator of linearity in the relationship between RPD and inflation. 
 
 Next, we utilise a semi-parametric or partially linear approach to estimate the optimal level of inflation given the RPD. This approach allows us to model the relationship between inflation and RPD without imposing a strict functional form. Following the literature, we first specify a quadratic (U-shaped) relationship between inflation and RPD as follows:
 
@@ -225,7 +224,7 @@ We therefore estimate the following model:
 
 $$ RPD_t = \alpha + \beta_0 EIN_t + \beta_1 UIN_t + g(UIN_t) + \sum_{k=1}^{3}\lambda_k RPD_{t-k} + \epsilon_t, $$ {#eq-unexpected}
 
-where $EIN_t$ is the expected inflation rate, $UIN_t$ is the unexpected inflation rate, and $g(UIN_t)$ is a non-linear function of unexpected inflation ($UIN_t$). We obtain the expected using **a simple moving average of headline inflation, and unexpected inflation as the standard deviation of inflation**. The estimation of $g(UIN_t)$ follows the same two-stage semi-parametric approach outlined in @eq-rpd_semi_parametric_stage1 and @eq-rpd_semi_parametric_stage2. The number of lags is the same as in @eq-rpd_reg.
+where $EIN_t$ is the expected inflation rate, $UIN_t$ is the unexpected inflation rate, and $g(UIN_t)$ is a non-linear function of unexpected inflation ($UIN_t$). We obtain the expected using one-period step ahead forecast of a fitted AMRA model of headline inflation and unexpected inflation as the rolling standard deviation of inflation. The estimation of $g(UIN_t)$ follows the same two-stage semi-parametric approach outlined in @eq-rpd_semi_parametric_stage1 and @eq-rpd_semi_parametric_stage2. The number of lags is the same as in @eq-rpd_reg.
 
 Lastly, and some-what novel to the RPD literature, we employ a quantile on quantile regression approach [@koenker2017]. Quantile on quantile regressions are robust to outliers and allows us to estimate the regime aspects of the relationship between RPD and inflation. For brevity, we explain the quantile on quantile estimation procedure in the Appendix.
 
@@ -246,7 +245,7 @@ rpd_measures |>
 
 ```{r}
 #| label: fig-rpd_inflation
-#| fig-cap: "RPD vs headline Inflation"
+#| fig-cap: "RPD vs Headline Inflation"
 #| fig-width: 6
 #| fig-height: 3
 
@@ -260,7 +259,7 @@ ggplot(aes(x = headline_inflation, y = rpd, color = factor(policy_2017_dum))) +
   geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE, linewidth = 0.5) +
   labs(
        y = "RPD", 
-       x = "Inflation rate (%)",
+       x = "Headline inflation (%)",
        color = "Period") +
   scale_color_manual(values =  pnw_palette("Winter", 2), 
                      labels = c("Before Jul 2017", "After Jul 2017")) +
@@ -272,10 +271,10 @@ ggplot(aes(x = headline_inflation, y = rpd, color = factor(policy_2017_dum))) +
       panel.grid.minor = element_blank()
     ) +
     theme(
-      text = element_text(size = 8),
+      text = element_text(size = 6),
       strip.background = element_rect(colour = "white", fill = "white"),
       axis.text.x = element_text(angle = 90),
-      axis.title = element_text(size = 7),
+      axis.title = element_text(size = 6),
       plot.tag = element_text(size = 6),
       axis.line = element_line(color = "black", linewidth = 0.2)
     )
@@ -332,7 +331,7 @@ base_tbl |>
   width(j = 1, width = 0.05) |>
   align(j = 2, align = "center", part = "all") |>
   compose(j = 1, value = as_paragraph(as_equation(` `))) |>
-  autofit(add_w = -0.95)
+  set_table_properties(layout = "autofit")
 ```
 
 ```{r}
@@ -599,7 +598,7 @@ regressions |>
   ) |> 
   flextable_word() |> 
   colformat_double(j = 2, digits = 0) |>
-  autofit(add_w = 2.5)
+  autofit(add_w = 2)
 
 ```
 

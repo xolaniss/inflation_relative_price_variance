@@ -120,7 +120,7 @@ rpd_gg <-
     axis.line = element_line(color = "black", linewidth = 0.2),
     strip.text = element_blank()
   ) +
-  labs(x = "", y = "Relative price dispersion") +
+  labs(x = "", y = "RPD") +
   scale_fill_manual(values = pnw_palette("Winter", 1))
 
 
