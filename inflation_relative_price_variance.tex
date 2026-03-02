@@ -423,11 +423,11 @@ Table~\ref{tbl-descriptive_stats} provides the descriptive statistics of
 the inflation rates for the various price categories used in the
 analysis.
 
-The relative price dispersion (RPD) is calculated in line with
-\citet{lach1992} as the weighted standard deviation of individual price
-inflation rates from the aggregate inflation rate. The RPD is
-essentially the variability of relative prices of a given product. We
-first calculate the monthly inflation rate as follows:
+The RPD is calculated in line with \citet{lach1992} as the weighted
+standard deviation of individual price inflation rates from the
+aggregate inflation rate. The RPD is essentially the variability of
+relative prices of a given product. We first calculate the monthly
+inflation rate as follows:
 
 \begin{equation}\phantomsection\label{eq-inflation_rate}{ \pi_{i,t} = ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right) * 100, }\end{equation}
 
@@ -458,10 +458,10 @@ are lagged values of RPD to account for its dynamic nature, and
 \(\mu_{t}\) is the error term. The coefficient \(\beta_1\) captures the
 effect of inflation on RPD. We include three lags of RPD based on Akaike
 Information Criterion (AIC) (and other tests) and to capture potential
-persistence in RPD. For robustness, we repeat this estimation using core
-inflation (excluding food and non-alcoholic beverages, and fuel and
-electricity) instead of headline inflation to account for the potential
-volatility in these components.
+persistence in RPD. In addition we test the inflation for structural
+breaks using the \citet{bai1998a} test and include dummy variables for
+the identified break points to control for structural breaks in the
+relationship.
 
 The literature on RPD emphasises that the relationship between inflation
 and RPD maybe time-varying due to structural changes in the economy,
@@ -492,7 +492,7 @@ derived by taking the first derivative of the equation with respect to
 
 \begin{equation}\phantomsection\label{eq-optimal_inflation}{\pi_t^* = -\dfrac{1}{2\beta_2}.}\end{equation}
 
-To estimate this optiomal inflation we implement a semi parametric
+To estimate this optimal inflation we implement a semi parametric
 approach as follows:
 
 \begin{equation}\phantomsection\label{eq-rpd_semi_parametric_f}{RPD_t =  f(\pi_t) + \sum_{h=1}^{3}\phi_hRPD_{t-h} + \epsilon_t, }\end{equation}
@@ -539,7 +539,7 @@ We therefore estimate the following model:
 where \(EIN_t\) is the expected inflation rate, \(UIN_t\) is the
 unexpected inflation rate, and \(g(UIN_t)\) is a non-linear function of
 unexpected inflation (\(UIN_t\)). We obtain the expected using
-one-period step ahead forecast of a fitted AMRA model of headline
+one-period step ahead forecast of a fitted ARMA model of headline
 inflation and unexpected inflation as the rolling standard deviation of
 inflation. The estimation of \(g(UIN_t)\) follows the same two-stage
 semi-parametric approach outlined in

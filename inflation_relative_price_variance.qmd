@@ -174,7 +174,7 @@ Our analysis uses monthly inflation data on 45 goods categories from January 200
 [^1]: The data is available at: \url{http://www.statssa.gov.za/} The data is seasonally adjusted.
 
 
-The relative price dispersion (RPD) is calculated in line with @lach1992 as the weighted standard deviation of individual price inflation rates from the aggregate inflation rate. The RPD is essentially the variability of relative prices of a given product. We first calculate the monthly inflation rate as follows:
+The RPD is calculated in line with @lach1992 as the weighted standard deviation of individual price inflation rates from the aggregate inflation rate. The RPD is essentially the variability of relative prices of a given product. We first calculate the monthly inflation rate as follows:
 
 $$ \pi_{i,t} = ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right) * 100, $$ {#eq-inflation_rate}
 
@@ -188,7 +188,7 @@ To examine the relationship between inflation and RPD, we estimate the following
 
 $$RPD_{t} = \beta_0 + \beta_1\pi_{t} + \sum_{h=1}^{3}\omega_hRPD_{t-h}  +  \mu_{t}, $$ {#eq-rpd_reg}
 
-where $RPD_{t}$ is the relative price variance at time $t$, $\pi_{t}$ is the aggregate inflation rate at time $t$, $RPD_{t-h}$ are lagged values of RPD to account for its dynamic nature, and $\mu_{t}$ is the error term. The coefficient $\beta_1$ captures the effect of inflation on RPD. We include three lags of RPD based on Akaike Information Criterion (AIC) (and other tests)  and to capture potential persistence in RPD. For robustness, we repeat this estimation using core inflation (excluding food and non-alcoholic beverages, and fuel and electricity) instead of headline inflation to account for the potential volatility in these components.
+where $RPD_{t}$ is the relative price variance at time $t$, $\pi_{t}$ is the aggregate inflation rate at time $t$, $RPD_{t-h}$ are lagged values of RPD to account for its dynamic nature, and $\mu_{t}$ is the error term. The coefficient $\beta_1$ captures the effect of inflation on RPD. We include three lags of RPD based on Akaike Information Criterion (AIC) (and other tests)  and to capture potential persistence in RPD. In addition we test the inflation for structural breaks using the @bai1998a test and include dummy variables for the identified break points to control for structural breaks in the relationship.
 
 The literature on RPD emphasises that the relationship between inflation and RPD maybe time-varying due to structural changes in the economy, monetary policy regimes, and other factors. To capture potential time variation in the relationship, we also estimate a rolling regression model with a 24-month and 60-month windows as follows:
 
@@ -204,7 +204,7 @@ where $\beta_2$ captures the curvature of the relationship between inflation and
 
 $$\pi_t^* = -\dfrac{1}{2\beta_2}.$$ {#eq-optimal_inflation}
 
-To estimate this optiomal inflation we implement a semi parametric approach as follows:
+To estimate this optimal inflation we implement a semi parametric approach as follows:
 
 $$RPD_t =  f(\pi_t) + \sum_{h=1}^{3}\phi_hRPD_{t-h} + \epsilon_t, $$ {#eq-rpd_semi_parametric_f}
 
@@ -224,7 +224,7 @@ We therefore estimate the following model:
 
 $$ RPD_t = \alpha + \beta_0 EIN_t + \beta_1 UIN_t + g(UIN_t) + \sum_{k=1}^{3}\lambda_k RPD_{t-k} + \epsilon_t, $$ {#eq-unexpected}
 
-where $EIN_t$ is the expected inflation rate, $UIN_t$ is the unexpected inflation rate, and $g(UIN_t)$ is a non-linear function of unexpected inflation ($UIN_t$). We obtain the expected using one-period step ahead forecast of a fitted AMRA model of headline inflation and unexpected inflation as the rolling standard deviation of inflation. The estimation of $g(UIN_t)$ follows the same two-stage semi-parametric approach outlined in @eq-rpd_semi_parametric_stage1 and @eq-rpd_semi_parametric_stage2. The number of lags is the same as in @eq-rpd_reg.
+where $EIN_t$ is the expected inflation rate, $UIN_t$ is the unexpected inflation rate, and $g(UIN_t)$ is a non-linear function of unexpected inflation ($UIN_t$). We obtain the expected using one-period step ahead forecast of a fitted ARMA model of headline inflation and unexpected inflation as the rolling standard deviation of inflation. The estimation of $g(UIN_t)$ follows the same two-stage semi-parametric approach outlined in @eq-rpd_semi_parametric_stage1 and @eq-rpd_semi_parametric_stage2. The number of lags is the same as in @eq-rpd_reg.
 
 Lastly, and some-what novel to the RPD literature, we employ a quantile on quantile regression approach [@koenker2017]. Quantile on quantile regressions are robust to outliers and allows us to estimate the regime aspects of the relationship between RPD and inflation. For brevity, we explain the quantile on quantile estimation procedure in the Appendix.
 
