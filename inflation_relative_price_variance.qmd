@@ -347,7 +347,7 @@ base_tbl |>
   set_table_properties(layout = "autofit")
 ```
 
-In @fig-rolling_coefficients and @fig-recursive we estimate the rolling and recursive estimates. A 24 and 60 month window are implemented for the rolling window estimation. The results of both methods suggest a dynamic relationship with periods of strong significance. In the main, we observe a positive response of RPD to a 1 percentage point change in headline inflation. This dynamic relationship futher builds the case for a U-shaped relationship.
+In @fig-rolling_coefficients and @fig-recursive we estimate the rolling and recursive estimates. 24 and 60 month windows are implemented for the rolling window estimation. The results of both methods suggest a dynamic relationship with periods of strong significance. In the main, we observe a positive response of RPD to a 1 percentage point change in headline inflation. This dynamic relationship futher builds the case for a U-shaped relationship.
 
 
 ```{r}

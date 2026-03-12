@@ -96,7 +96,9 @@ weights_tbl <-
     "Other services" = other_serv,
     "Insurance" = insurance,
     "Financial services" = fin_serv,
-    "Fuel" = fuel
+    "Fuel" = fuel,
+    "Operation of personal transport equipment" = other_op_pers_trans_equip,
+    "Recreational goods" = recr_goods_gardnprod 
   ) |>  
   pivot_longer(-month, names_to = "Series", values_to = "Weight") |> 
   dplyr::select(-month)
@@ -148,7 +150,9 @@ price_data_tbl <-
     "Other services" = other_serv,
     "Insurance" = insurance,
     "Financial services" = fin_serv,
-    "Fuel" = fuel
+    "Fuel" = fuel,
+    "Operation of personal transport equipment" = other_op_pers_trans_equip,
+    "Recreational goods" = recr_goods_gardnprod
   ) |> 
   rename(Date = month)
 
