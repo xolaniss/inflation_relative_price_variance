@@ -131,5 +131,10 @@ artifacts_quant_reg <- list (
 )
 
 write_rds(artifacts_quant_reg, file = here("Outputs", "artifacts_quant_reg.rds"))
-  
+
+# save all the ggplots as pngs
+ggsave(filename = here("Outputs", "qqr_rpd_full_gg.png"), plot = qqr_rpd_full_gg, width = 6, height = 4, dpi = 300)
+ggsave(filename = here("Outputs", "qqr_rpd_pre_2017_gg.png"), plot = qqr_rpd_pre_2017_gg, width = 6, height = 4, dpi = 300)
+ggsave(filename = here("Outputs", "qqr_rpd_post_2017_gg.png"), plot = qqr_rpd_post_2017_gg, width = 6, height = 4, dpi = 300)
+
 
