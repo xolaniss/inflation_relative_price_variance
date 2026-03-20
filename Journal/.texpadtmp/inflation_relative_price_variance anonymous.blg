@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2022)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: /Users/xolanisibande/Papers/inflation_relative_price_variance/Journal/.texpadtmp/inflation_relative_price_variance anonymous.aux
+The style file: apalike.bst
+Database file #1: ../references.bib
+Warning--there's a number but no series in durand2023
+Warning--empty journal in hornstein2024
+Warning--empty journal in moessner2020
+You've used 35 entries,
+            1935 wiz_defined-function locations,
+            689 strings with 9572 characters,
+and the built_in function-call counts, 13712 in all, are:
+= -- 1387
+> -- 468
+< -- 32
++ -- 162
+- -- 150
+* -- 1157
+:= -- 2353
+add.period$ -- 105
+call.type$ -- 35
+change.case$ -- 248
+chr.to.int$ -- 35
+cite$ -- 38
+duplicate$ -- 521
+empty$ -- 991
+format.name$ -- 213
+if$ -- 2683
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 37
+newline$ -- 176
+num.names$ -- 105
+pop$ -- 186
+preamble$ -- 1
+purify$ -- 250
+quote$ -- 0
+skip$ -- 416
+stack$ -- 0
+substring$ -- 1103
+swap$ -- 67
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 206
+warning$ -- 3
+while$ -- 128
+width$ -- 0
+write$ -- 449
+(There were 3 warnings)

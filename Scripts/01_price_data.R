@@ -152,7 +152,9 @@ price_data_tbl <-
     "Financial services" = fin_serv,
     "Fuel" = fuel,
     "Operation of personal transport equipment" = other_op_pers_trans_equip,
-    "Recreational goods" = recr_goods_gardnprod
+    "Recreational goods" = recr_goods_gardnprod,
+    "Headline Inflation" = hinfl,
+    "Core Inflation" = coreinfl
   ) |> 
   rename(Date = month)
 
@@ -182,7 +184,7 @@ price_data_long_tbl <-
 
 price_data_gg <-
   price_data_long_tbl |>
-  filter(!Series %in% c("hinfl", "coreinfl")) |>
+  filter(!Series %in% c("Headline Inflation", "Core Inflation")) |>
   fx_plot(variables_color = 45, ncol = 5)+
   theme(
     strip.text = element_text(size = 4)
@@ -190,8 +192,8 @@ price_data_gg <-
 
 headline_inflation_gg <-
   price_data_long_tbl |>
-  filter(Series %in% c("hinfl")) |> 
-  mutate(Series = str_replace(Series, "hinfl", "Headline Inflation")) |>
+  filter(Series %in% c("Headline Inflation")) |> 
+  # mutate(Series = str_replace(Series, "hinfl", "Headline Inflation")) |>
   fx_plot(variables_color = 1) +
   # geom_hline(yintercept = median_headline_inflation$median_value, linewidth = .8, linetype = "dashed", color = "red") +
   # geom_vline(xintercept = as.Date("2017-07-10"), color = "red", linetype = "dashed") +

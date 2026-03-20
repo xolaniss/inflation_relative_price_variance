@@ -69,6 +69,19 @@
 \def\fps@figure{htbp}
 \makeatother
 
+\usepackage{fontspec}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{colortbl}
+\usepackage{ulem}
+\usepackage{hhline}
+\newlength\Oldarrayrulewidth
+\newlength\Oldtabcolsep
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{wrapfig}
 % \usepackage{hyperref}
 % \hypersetup{
 %     colorlinks,
@@ -162,10 +175,10 @@
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
   colorlinks=true,
-  linkcolor={blue!000!black},
+  linkcolor={blue!100!black},
   filecolor={Maroon},
-  citecolor={blue!000!black},
-  urlcolor={blue!000!black},
+  citecolor={blue!100!black},
+  urlcolor={blue!100!black},
   pdfcreator={LaTeX via pandoc}}
 
 \author{}
@@ -173,117 +186,22 @@
 
 \begin{document}
 
-\title{Regulation and bank lending in South Africa: A narrative index approach}
-
-
-
-
-
-\author {Xolani Sibande\footnote{Economic Research Department, South African Reserve Bank; Email: xolani.sibande@resbank.co.za.} \and
-Dumakude Nxumalo\footnote{Department of Economics, University of Pretoria, Pretoria, South Africa; Email: dumakude.nxumalo@up.ac.za} \and
-Keaoleboga Mncube\footnote{Department of Economics, University of Pretoria, Pretoria, South Africa; Email: keaolebogamncube@gmail.com} \and
-Steve Koch\footnote{Department of Economics, University of Pretoria, Pretoria, South Africa; Email: steve.koch@up.ac.za} \and
-Nicola Viegi\footnote{Department of Economics, University of Pretoria, Pretoria, South Africa; Email: viegin@gmail.com}}
+\title{Inflation Dynamics and Relative Price Dispersion in South Africa: Implications for Optimal Inflation Targeting}
+\author {Keagile Lesame\footnote{Corresponding author. National Treasury, South Africa. Email: Keagile.Lesame@treasury.gov.za} \and
+Xolani Sibande\footnote{Economic Research Department, South African Reserve Bank. Email: xolani.sibande@resbank.co.za.}}
 
 
 \date{\today}
 \maketitle
 
 \begin{abstract}
-Duma.
-
+This paper investigates the dynamic relationship between inflation and relative price dispersion (RPD) in South Africa, focusing on the period from 2009 to 2025, a timeframe marked by significant structural changes in inflation targeting. Drawing on both theoretical models—the menu cost and signal extraction frameworks—the study tests their predictions on how inflation influences RPD using a semi-parametric approach. It extends the analysis by employing quantile-on-quantile regression to capture state-dependent effects across the distribution of relative price variability. The South African case is particularly insightful due to its evolving inflation targets, transitioning from a 3-6 percent band (2000) to a 4.5 percent midpoint target (2017), and moving towards a 3 percent target projected for 2025. These policy shifts offer a unique opportunity to explore the nonlinear, U-shaped nature of the inflation-RPD relationship, challenging the traditional view that zero inflation is optimal. Empirically, this study contributes to the scant emerging market literature, complementing prior work but incorporating inflation target changes. The findings have important implications for monetary policy design in emerging economies aiming to lower inflation targets while minimizing distortive effects on price signals and resource allocation.
 \end{abstract}
 
-\noindent\textbf{Keywords}: Bank lending, Narrative methods, Finance regulation\\
-\textbf{JEL Codes}: G01, G18, G28, G32, G38
+\noindent\textbf{Keywords}: Relative Price Dispersion, Inflation, Monetary Policy\\
+\textbf{JEL Codes}: E31, E52, E58
 \newpage
 
-\setstretch{1.5}
-\section{Introduction}\label{introduction}
-
-Inflation is known to have adverse welfare effects through its
-distortion of relative prices which causes the misallocation of
-resources, production inefficiencies leading to lower real economic
-activity. This is well supported by both theoretical and empirical
-studies. This paper contributes to the empirical literature, by
-examining the relationship between inflation and relative price
-variability (RPV) in South Africa given the little evidence available
-and to better understand how this relationship has evolved and the
-implications for monetary policy.
-
-The South African context can provide further insights into the
-relationship between inflation and RPV given the shifts in the inflation
-targets from 3- 6 per cent in 2000 to 4.5 per cent since 2017 as
-structural changes in inflation can affect the link between inflation
-and relative price variability (Caglayan and Filiztekin (2005) and that
-the functional form of relationship is U-shaped and dynamic (Fielding
-and Mizen, (2000); Choi (2010)). The latter motivates the estimation of
-the inflation rate that minimizes relative price distortions since if
-the relationship was linear then the optimal inflation rate would be
-zero. Given the inflation target reform towards a 3\% in South Africa,
-this study contributes to the policy discussion on the appropriate
-inflation target and understating how dynamic relations between
-inflation and relative price variability has evolved.
-
-The theoretical literature generally distinguishes between menu-cost and
-signal extraction models in explaining the positive relation between
-trend inflation and RVP. In these models' firms follow a one-sided
-dynamic pricing rule when setting prices and face fixed non-zero costs
-of adjusting nominal prices (e.g.~printing new menus) when inflation
-increases as the latter reduces the optimal real price of goods and
-services. Due to differences in administrative costs, these nominal
-price adjustment costs vary across firms moreover these adjustments
-occur at different times which implies staggard price setting behaviour
-which leads to relative price variability. Menu cost models predict a
-that higher expected inflation causes an increase in RVP (citations xxx)
-while Lucas-type signal extraction models (Lucas(1973); Hercowitz
-(1981); Cukierman (1984) xxxx more citatiosn) argue unexpected inflation
-uncertainty causes higher RVP because informational frictions make it
-difficult to distinguish between idiosyncratic relative shocks or an
-aggregate (inflationary) shock. Menu cost and signal-extraction models
-assume a positive and linear relationship making the optimal inflation
-rate zero, however, recently monetary search models (Head and Kumar
-(2005)) show that this relationship is nonlinear making the optimal
-inflation rate somewhere between zero and positive inflation rate.
-
-\section{Literature review}\label{literature-review}
-
-\section{Data and methodology}\label{data-and-methodology}
-
-\section{Results}\label{results}
-
-\section{Conclusion}\label{conclusion}
-
-\newpage
-
-\section*{References}\label{references}
-\addcontentsline{toc}{section}{References}
-
-\renewcommand{\bibsection}{}
-\bibliography{references.bib}
-
-\setcounter{section}{0}
-\renewcommand{\thesection}{\Alph{section}}
-
-\setcounter{table}{0}
-\renewcommand{\thetable}{A\arabic{table}}
-
-\setcounter{figure}{0}
-\renewcommand{\thefigure}{A\arabic{figure}}
-
-\newpage
-
-\section{Appendix}\label{appendix}
-
-\subsection{Data}\label{data}
-
-\begin{verbatim}
-[1] FALSE  TRUE  TRUE
-\end{verbatim}
-
-\begin{verbatim}
-[1] TRUE
-\end{verbatim}
 
 
 

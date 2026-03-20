@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{Motivation}{2}{0}{1}
+\beamer@sectionintoc {2}{Theoretical Framework: RPD through Lucas's aggregate supply curve}{5}{0}{2}
+\beamer@sectionintoc {3}{Data and methodology}{20}{0}{3}
+\beamer@sectionintoc {4}{Results}{35}{0}{4}
+\beamer@sectionintoc {5}{Conclusions}{47}{0}{5}
