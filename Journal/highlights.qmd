@@ -1,0 +1,65 @@
+---
+title: "Highlights: Inflation Dynamics and Relative PriceDispersion in South Africa: Implications forOptimal Inflation Targeting"
+author: "Keagile Lesame and Xolani Sibande"
+format:
+  pdf:
+    tbl-cap-location: top
+    dpi: 500
+    fig-pos: "H"
+    number-sections: true
+    cite-method: natbib
+    include-in-header: 
+      - text: |
+          \usepackage{lscape}
+          \newcommand{\blandscape}{\begin{landscape}}
+          \newcommand{\elandscape}{\end{landscape}}
+          \usepackage{rotating}
+          \newcommand{\bsideways}{\begin{sidewaystable}[htbp]}
+          \newcommand{\esideways}{\end{sidewaystable}}
+    #   - file: preamble.tex 
+    # include-before-body: title.tex
+    keep-tex: TRUE
+    fig-format: png
+    default-image-extension: png
+  docx:
+    reference-doc: new_template_no_numbering.docx
+pdf-engine: lualatex
+# monofont: "DejaVu Sans Mono"
+# mainfont: "Times New Roman"
+execute: 
+  echo: false
+  warning: false
+  cache: false
+editor: source
+# bibliography: references.bib
+# biblio-style: apalike
+natbiboptions: round
+link-citations: true
+linkcolor: blue!100!black
+urlcolor: blue!100!black
+citecolor: blue!100!black
+linestretch: 1.5
+indent: TRUE
+title-block-banner: false
+title-block-style: none
+---
+
+\begin{itemize}
+    \item[•] We establish a U-shaped, nonlinear relationship between inflation and relative price dispersion in South Africa.
+    
+    \vspace{0.2cm}
+    
+    \item[•] Only positive inflation surprises worsen price dispersion; negative surprises have no asymmetric effect.
+    
+    \vspace{0.2cm}
+    
+    \item[•] The inflation-RPD nexus evolves with structural changes in inflation targeting regimes.
+    
+    \vspace{0.2cm}
+    
+    \item[•] Post-2017, unexpected inflation exhibits a negative, monotonic relationship with price dispersion.
+    
+    \vspace{0.2cm}
+    
+    \item[•] Findings support flexible inflation targets that account for nonlinear dynamics in emerging markets.
+\end{itemize}
