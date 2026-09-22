@@ -1,5 +1,5 @@
 ---
-title: "Highlights: Inflation Dynamics and Relative PriceDispersion in South Africa: Implications forOptimal Inflation Targeting"
+title: "Highlights: Inflation Dynamics and Relative Price Dispersion in South Africa: Implications forOptimal Inflation Targeting"
 author: "Keagile Lesame and Xolani Sibande"
 format:
   pdf:

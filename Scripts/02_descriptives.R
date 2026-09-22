@@ -47,6 +47,9 @@ source(here("Functions", "fx_plot.R"))
 price_data_tbl <- read_rds(here("Outputs", "artifacts_price_data.rds")) |> pluck(1,1)
 
 # Descriptive statistics -----------------------------------------------------------------
+# Skewness and (excess) kurtosis follow psych::skew()/kurtosi() (type = 2,
+# the standard moment-based definition); the Jarque-Bera test jointly
+# tests the null of normality (skewness = 0, excess kurtosis = 0).
 desc_stats_tbl <- price_data_tbl |> 
   pivot_longer(cols = -Date, names_to = "Goods category", values_to = "inflation_rate") |> 
   filter(!`Goods category` %in% c("rvp", "headline_inflation")) |> 
@@ -57,9 +60,20 @@ desc_stats_tbl <- price_data_tbl |>
     "SD" = sd(inflation_rate, na.rm = TRUE),
     "Min" = min(inflation_rate, na.rm = TRUE),
     "Max" = max(inflation_rate, na.rm = TRUE),
+    "Skewness" = psych::skew(inflation_rate, na.rm = TRUE, type = 2),
+    "Kurtosis" = psych::kurtosi(inflation_rate, na.rm = TRUE, type = 2),
+    "Jarque-Bera" = tseries::jarque.bera.test(na.omit(inflation_rate))$statistic,
+    "Jarque-Bera (p-value)" = tseries::jarque.bera.test(na.omit(inflation_rate))$p.value,
     "Observations" = n()
   ) |> 
-  ungroup()
+  mutate(
+    stars = if_else(`Jarque-Bera (p-value)` < 0.1, "*", 
+                            if_else(`Jarque-Bera (p-value)` < 0.05, "**",
+                            if_else(`Jarque-Bera (p-value)` < 0.01, "*", " ")))
+  ) |> 
+  mutate(`Jarque-Bera` = round(`Jarque-Bera`, 0)) |> 
+  mutate(`Jarque-Bera` = paste0(`Jarque-Bera`, stars)) |> 
+  dplyr::select(-stars, - `Jarque-Bera (p-value)`)
 
 # Export ---------------------------------------------------------------
 artifacts_descriptives <- list (

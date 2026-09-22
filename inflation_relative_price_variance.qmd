@@ -29,6 +29,8 @@ execute:
   warning: false
   cache: false
 editor: source
+filters:
+  - color-text.lua
 bibliography: references.bib
 biblio-style: apalike
 natbiboptions: round
@@ -119,7 +121,7 @@ The theoretical literature distinguishes between menu-cost and signal extraction
 
 The SARB’s inflation forecasts and expectations in 2024 increasingly clustered around the lower half of the 3-6 band. For example,  the September 2024 Monetary Policy Statement (MPC) stated that “Moving to inflation, headline eased to 4.4% in August, a 3-year low, and close to the middle of our target range. Our forecast suggests this progress will be sustained, with inflation contained below the 4.5% midpoint of our range through to the end of the forecast horizon”. The SARB signaled its preference for 3 per cent target in the May 2024 MPC when it modelled a scenario with a 3 per cent inflation objective before explicitly incorporating the 3 per cent inflation target in its baseline forecasts in the July 2025 MPC.
 
-Against this backdrop, this paper closely follows @caraballo2013 and tests the menu cost and signal extraction models in a semi-parametric framework [@robinson1988a] for South Africa between 2009 and 2025. We further extend our analysis by estimating the inflation-RPD nexus using a quantile-on-quantile regression (QQR) since the semiparametric estimation provides average inflation effects on RPD, the QQR estimation shows how the state-dependent inflation effects specific areas of the distribution of relative price dispersion. We chose a post 2008 financial crisis period sample because inflation was broadly within the target range and monetary policy credibility had broadly improved during this period relative to the period after the adoption of the inflation target framework in 2000. Furthermore, we estimate the inflation-RPD nexus in the pre-and post-2017 samples when the South African Reserve Bank (SARB) began to target the midpoint of the 3-6 per cent inflation target range. Our sample includes 2025 with inflation structurally lower at 3.2 per cent in the year after the SARB had communicated its preference for a 3 per cent target.^[The SARB’s inflation forecasts and expectations in 2024 increasingly clustered around the lower half of the 3-6 band, e.g. “Moving to inflation, headline eased to 4.4% in August, a 3-year low, and close to the middle of our target range. Our forecast suggests this progress will be sustained, with inflation contained.]. The National Treasury officially adopted the 3 per cent in November 2025 nevertheless, we do not specifically make inference with regards to this as an extended post sample period is needed.
+Against this backdrop, this paper closely follows @caraballo2013 and tests the menu cost and signal extraction models in a semi-parametric framework [@robinson1988a] for South Africa between 2009 and 2025. We further extend our analysis by estimating the inflation-RPD nexus using a quantile-on-quantile regression (QQR) since the semiparametric estimation provides average inflation effects on RPD, the QQR estimation shows how the state-dependent inflation effects specific areas of the distribution of relative price dispersion. We chose a post 2008 financial crisis period sample because inflation was broadly within the target range and monetary policy credibility had broadly improved during this period relative to the period after the adoption of the inflation target framework in 2000. Furthermore, we estimate the inflation-RPD nexus in the pre-and post-2017 samples when the South African Reserve Bank (SARB) began to target the midpoint of the 3-6 per cent inflation target range. Our sample includes 2025 with inflation structurally lower at 3.2 per cent in the year after the SARB had communicated its preference for a 3 per cent target. The National Treasury officially adopted the 3 per cent in November 2025 nevertheless, we do not specifically make inference with regards to this as an extended post sample period is needed.
 
 The empirical literature is well established but with evidence for emerging markets few. To the best of our knowledge, @ndou2014 and  @ndou2017 are the only papers that examined the inflation and RPD relationship for South Africa. @ndou2014  estimated the disaggregated CPI components and their relation to RPD and found heterogeneous effects of these on RPD over 1980-2010 before and after the adoption of the inflation target framework while @ndou2017 focused their analysis on RPD for services only during 1980-2011. This paper contributes to the empirical literature by examining the headline inflation-RPD nexus in the context of structural changes in inflation induced by inflation target changes estimating both mean and tail effects, and estimating the optimal inflation target.
 
@@ -175,7 +177,7 @@ From @eq-aggregate_supply_curve, we can clearly demonstrate how the relative pri
 
 Our analysis uses monthly inflation data on 45 goods categories from January 2009 to November 2025 obtained from Statistics South Africa (Stats SA).[^1] @fig-headline_inflation below shows the long term inflation rate in South Africa, and @fig-price_data in the appendix shows the various price categories used in the analysis. @tbl-descriptive_stats provides the descriptive statistics of the inflation rates for the various price categories used in the analysis.
 
-[^1]: The data is available at: \url{http://www.statssa.gov.za/} The data is seasonally adjusted.
+[^1]: See @tbl-sources in the Appendix for data sources. The data is seasonally adjusted.
 
 
 The RPD is calculated in line with @lach1992 as the weighted standard deviation of individual price inflation rates from the aggregate inflation rate. The RPD is essentially the variability of relative prices of a given product. We first calculate the monthly inflation rate as follows:
@@ -233,6 +235,8 @@ $$ RPD_t = \alpha + \beta_0 EIN_t + \beta_1 UIN_t + g(UIN_t) + \sum_{k=1}^{3}\la
 where $EIN_t$ is the expected inflation rate, $UIN_t$ is the unexpected inflation rate, and $g(UIN_t)$ is a non-linear function of unexpected inflation ($UIN_t$). We obtain the expected using one-period step ahead forecast of a fitted ARMA model of headline inflation and unexpected inflation as the difference between one-step ahead inflation forecast and actual inflation in the previous period. The estimation of $g(UIN_t)$ follows the same two-stage semi-parametric approach outlined in @eq-rpd_semi_parametric_stage1 and @eq-rpd_semi_parametric_stage2. The number of lags is the same as in @eq-rpd_reg.
 
 Lastly, and some-what novel to the RPD literature, we employ a quantile on quantile regression approach [@koenker2017]. Quantile on quantile regressions are robust to outliers and allows us to estimate the regime aspects of the relationship between RPD and inflation. For brevity, we explain the quantile on quantile estimation procedure in the Appendix.
+
+[Throughout, we follow the bulk of the empirical RPD literature in treating headline inflation as predetermined with respect to RPD. This assumption is not innocuous. @grier1996 show, using a bivariate GARCH-M model, that inflation and relative price dispersion are more plausibly jointly determined, so that any contemporaneous correlation between the two is difficult to interpret causally. @parsley1996 raise a related concern at the level of aggregation: shocks that are unobserved to the econometrician can drive both the aggregate inflation rate and the dispersion of its components simultaneously, biasing single-equation estimates of the inflation-RPD relationship. More recently, @sheremirov2020 makes the same point explicitly, arguing that the comovement between inflation and price dispersion should not be read as causal because both are endogenous outcomes of the same underlying shocks, and that identifying genuinely exogenous variation in inflation is a substantially harder empirical problem than estimating their comovement. Our RPD measure compounds this concern further, since it is constructed from the same disaggregated price series that are aggregated, using the same expenditure weights, into the headline inflation rate we use as a regressor; a large common shock to a subset of categories (for example fuel or electricity) can therefore raise both the weighted mean and the weighted dispersion of inflation mechanically, independently of any behavioural response to inflation. We do not attempt to fully resolve this identification problem here. Our rolling-window, semi-parametric, and quantile-on-quantile results should accordingly be read as documenting the evolving *association* between inflation and RPD, rather than as estimates of a causal effect of inflation on relative price dispersion. We return to this limitation, and to possible extensions that would address it more directly (for example a structural VAR, local projections around identified shocks, or Granger-causality tests), in the Conclusion.]{color="red"}
 
 #  Main results
 
@@ -582,6 +586,31 @@ price_data_list |>
 
 \newpage
 
+## Data sources
+
+```{r}
+#| label: tbl-sources
+#| tbl-cap: "Data sources"
+tribble(
+  ~ Variable, ~ `Construction method`, ~ Source,
+  "Headline inflation", "Calculation as the monthly percentage growth in the monthly CPI",  "Statistics South Africa",
+  "CPI categories", "45 montly CPI categories as constructed by the consumer price survey", "Statistics South Africa",
+  "Expected inflation", "Is the one step ahead ARIMA forecast of headline inflation.", "Author calculation",
+  "Unexpected inflation", "Is the difference between the one step ARIMA forecast and actual inflation in the previous period", "Author calculation",
+  "Relative price dispersion", "As calculated in Equation 9. The RPD is essentially the variability of relative prices over time. ", "Author calculation"
+  ) |> 
+  flextable_word() |> 
+  align(align = "left", part = "all") |> 
+  autofit(add_w = 0)
+
+
+
+
+```
+
+
+\newpage
+
 ## Descriptive statistics
 
 ```{r}
@@ -592,9 +621,10 @@ descriptives_list |>
   pluck(1) |> 
   rename("Variable" = `Goods category`) |>
   flextable_word() |>
-
+  width(j = 1, width = 0.1, unit = "cm") |> 
   align(j = 1, align = "left", part = "all") |>
-  autofit(add_w = 0)                                                                                                                              
+  autofit(add_w = -0.1) |> 
+  fontsize(size = 6, part = "all")
 ```
 
 \newpage
@@ -604,17 +634,50 @@ descriptives_list |>
 #| label: tbl-stationarity_tests
 #| tbl-cap: "Stationarity tests results"
 
-read_rds(here("Outputs","artifacts_stationarity.rds")) |> 
+tests <- read_rds(here("Outputs","artifacts_stationarity.rds"))
+tests |> 
   pluck(1) |> 
   mutate(
     Measure = str_replace_all(Measure,
     c("headline_inflation" = "Headline Inflation",
-      "rpd" = "RPD")),
+      "rpd" = "Relative Price Dispersion (RDP)")),
   ) |> 
   flextable_word() |>
   align(j = 1, align = "left", part = "all") |>
-  autofit(add_w = 0.2)
+  autofit(add_w = 0.3)
 ```
+
+
+## BDS test for non-linearity
+
+```{r}
+#| label: tbl-bds_tests
+#| tbl-cap: "BDS test results"
+
+tests |> 
+  pluck(3) |> 
+  rename(
+    "Embedding Dimension" = embedding_dim,
+    "Epsilon"= epsilon,
+    "P-value" = p_value
+  ) |> 
+  mutate(Measure = 
+           replace_values(
+             Measure,
+             "headline_inflation" ~ "Headline Inflation",
+             "rpd" ~ "Relative Price Dispersion (RDP)"
+  ))|> 
+  mutate(across(2:3, ~as.numeric(.x))) |> 
+  mutate(across(3:4, ~round(.x, 2))) |> 
+  as_grouped_data(groups = "Measure") |> 
+  flextable_word() |> 
+  colformat_double(digits = 0, j = 2) |> 
+  align(j = 1, align = "left", part = "all") |> 
+  autofit(add_w = 0.55)
+
+```
+
+
 
 ## Lag length selection
 
@@ -632,7 +695,7 @@ regressions |>
   ) |> 
   flextable_word() |> 
   colformat_double(j = 2, digits = 0) |>
-  autofit(add_w = 2)
+  autofit(add_w = 2.5)
 
 ```
 
@@ -758,6 +821,99 @@ regressions |>
 <!-- ``` -->
 
 <!-- \newpage -->
+
+
+
+# Appendix: Robustness
+
+## Core inflation models
+
+```{r}
+#| label: tbl-core_base_regression
+#| tbl-cap: "Core inflation baseline regressions"
+#| ft.arraystretch: 0.6
+
+core <- read_rds(here("Outputs", "artifacts_base_regression_core.rds"))
+
+
+core_base_tbl <- 
+  core  |> 
+  pluck(4) |> 
+  mutate(term = case_when(
+    term == "(Intercept)" ~ "C",
+    term == "core_inflation" ~ "\\pi_t",
+    # term == "abs_headline_inflation" ~ "|\\pi_t|",
+    term == "squared_core_inflation" ~ "\\pi_t^2",
+    term == "lag(log_rpd, 1)" ~ "RPD_{t-1}",
+    term == "lag(log_rpd, 2)" ~ "RPD_{t-2}",
+    term == "lag(log_rpd, 3)" ~ "RPD_{t-3}",
+    term == "dum_2011m121" ~ "D_{2011m12}",
+    term == "dum_2014m71" ~ "D_{2014m7}",
+    term == "dum_2017m71" ~ "D_{2017m7}",
+    term == "dum_2020m21" ~ "D_{2020m2}",
+    term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions
+    TRUE ~ term
+  )) |>  
+  arrange(desc(term))
+
+replace_one <- core_base_tbl |> 
+  slice(1)
+  
+replace_two <- core_base_tbl |> 
+  slice(2)
+
+core_base_tbl[2, ] <- replace_one
+core_base_tbl[1, ] <- replace_two
+
+core_base_tbl |> 
+  rename(
+    " " = term
+  ) |> 
+  flextable_word() |> 
+  align(j = 1, align = "left", part = "all") |>
+  add_footer_row(
+      values = 
+        as_paragraph(
+        "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."), 
+      colwidths = 7) |> 
+  width(j = 1, width = 0.05) |>
+  align(j = 2, align = "center", part = "all") |>
+  compose(j = 1, value = as_paragraph(as_equation(` `))) |>
+  set_table_properties(layout = "autofit")
+
+```
+
+
+
+```{r}
+#| label: fig-rolling_coefficients_core
+#| fig-cap: "Core inflation rolling regressions. Note: t-statistics of greater (or less) than 1.96 ( or -1.96) is significant at a 5% level of significance."
+#| fig-width: 8
+#| fig-height: 5
+
+core_roll_regressions <- read_rds(here("Outputs", "artifacts_roll_core.rds"))
+
+core_roll_regressions |>
+  pluck(1)
+
+```
+
+
+```{r}
+#| label: fig-recursive_core
+#| fig-cap: "Recursive regressions. Note: Recursive regression estimates of the coefficient on core inflation with a fixed start date of 2012-07."
+#| fig-width: 8
+#| fig-height: 2.5
+recursive_core <- read_rds(here("Outputs", "artifacts_recursive_core.rds"))
+
+recursive_core |> 
+  pluck(1)
+
+```
+
+
+## Lagged inflation models
+
 
 
 

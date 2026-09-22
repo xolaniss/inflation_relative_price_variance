@@ -183,10 +183,10 @@ combined_models_tbl <-
       model_type == 6 ~ "Post 2017: Squared Inflation"
     )
   ) |> 
-  dplyr::select(-std.error, -statistic, -p.value) |> 
+  dplyr::select(-statistic, -p.value) |> 
   mutate(across(where(is.numeric), ~ round(.x, 3))) |> 
-  mutate(estimate = paste0(estimate, stars)) |> 
-  dplyr::select(-stars) |> 
+  mutate(estimate = paste0(estimate, stars, "\n(", std.error, ")")) |> 
+  dplyr::select(-stars, -std.error) |> 
   pivot_wider(names_from = model_type, values_from = estimate)
 
 # Export ---------------------------------------------------------------
