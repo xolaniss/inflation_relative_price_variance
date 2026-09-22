@@ -220,12 +220,11 @@ combined_models_core_tbl <-
                      model_type == 6 ~ "Post 2017: Squared Inflation"
               )
        ) |>
-       dplyr::select(-std.error, -statistic, -p.value) |>
-       mutate(across(where(is.numeric), ~ round(.x, 3))) |>
-       mutate(estimate = paste0(estimate, stars)) |>
-       dplyr::select(-stars) |> 
-       pivot_wider(names_from = model_type, values_from = estimate)
-
+      dplyr::select(-statistic, -p.value) |> 
+      mutate(across(where(is.numeric), ~ round(.x, 3))) |> 
+      mutate(estimate = paste0(estimate, stars, "\n(", std.error, ")")) |> 
+      dplyr::select(-stars, -std.error) |> 
+      pivot_wider(names_from = model_type, values_from = estimate)
 
 # Export ---------------------------------------------------------------
 artifacts_base_regression_core <- list(

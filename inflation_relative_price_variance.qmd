@@ -914,7 +914,60 @@ recursive_core |>
 
 ## Lagged inflation models
 
+```{r}
+#| label: tbl-core_base_regression
+#| tbl-cap: "Core inflation baseline regressions"
+#| ft.arraystretch: 0.6
 
+lagged <- read_rds(here("Outputs", "artifacts_base_regression_lagged.rds"))
+
+
+lagged_base_tbl <- 
+  lagged  |> 
+  pluck(2) |> 
+  mutate(term = case_when(
+    term == "(Intercept)" ~ "C",
+    term == "headline_inflation" ~ "\\pi_{t-1}",
+    # term == "abs_headline_inflation" ~ "|\\pi_t|",
+    term == "squared_headline_inflation" ~ "\\pi_{t-1}^2",
+    term == "lag(log_rpd, 1)" ~ "RPD_{t-1}",
+    term == "lag(log_rpd, 2)" ~ "RPD_{t-2}",
+    term == "lag(log_rpd, 3)" ~ "RPD_{t-3}",
+    term == "dum_2011m121" ~ "D_{2011m12}",
+    term == "dum_2014m71" ~ "D_{2014m7}",
+    term == "dum_2017m71" ~ "D_{2017m7}",
+    term == "dum_2020m21" ~ "D_{2020m2}",
+    term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions
+    TRUE ~ term
+  )) |>  
+  arrange(desc(term))
+
+replace_one <- lagged_base_tbl |> 
+  slice(1)
+  
+replace_two <- lagged_base_tbl |> 
+  slice(2)
+
+lagged_base_tbl[2, ] <- replace_one
+lagged_base_tbl[1, ] <- replace_two
+
+lagged_base_tbl |> 
+  rename(
+    " " = term
+  ) |> 
+  flextable_word() |> 
+  align(j = 1, align = "left", part = "all") |>
+  add_footer_row(
+      values = 
+        as_paragraph(
+        "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."), 
+      colwidths = 7) |> 
+  width(j = 1, width = 0.05) |>
+  align(j = 2, align = "center", part = "all") |>
+  compose(j = 1, value = as_paragraph(as_equation(` `))) |>
+  set_table_properties(layout = "autofit")
+
+```
 
 
 # Appendix: Explanation of the quantile on quantile regression
