@@ -1,0 +1,892 @@
+---
+format:
+  pdf:
+    tbl-cap-location: top
+    dpi: 500
+    fig-pos: "H"
+    number-sections: true
+    cite-method: natbib
+    include-in-header: 
+      - text: |
+          \usepackage{lscape}
+          \newcommand{\blandscape}{\begin{landscape}}
+          \newcommand{\elandscape}{\end{landscape}}
+          \usepackage{rotating}
+          \newcommand{\bsideways}{\begin{sidewaystable}[htbp]}
+      - file: preamble.tex 
+    include-before-body: title.tex
+    keep-tex: TRUE
+    fig-format: png
+    default-image-extension: png
+  docx:
+    reference-doc: new_template_no_numbering.docx
+pdf-engine: lualatex
+# monofont: "DejaVu Sans Mono"
+# mainfont: "Times New Roman"
+execute: 
+  echo: false
+  warning: false
+  cache: false
+editor: source
+filters:
+  - color-text.lua
+bibliography: references.bib
+biblio-style: apalike
+natbiboptions: round
+link-citations: true
+linkcolor: blue!100!black
+urlcolor: blue!100!black
+citecolor: blue!100!black
+linestretch: 1.5
+indent: TRUE
+title-block-banner: false
+title-block-style: none
+---
+
+```{r setup}
+#| include=FALSE
+options(scipen=999)
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE, 
+                      message = FALSE, 
+                      cache = TRUE,
+                      dpi = 500, 
+                      fig.pos = "H", 
+                      fig.env= 'figure', 
+                      tab.topcaption = TRUE,
+                      ft.align = "left",
+                      ft.arraystretch = 0.5
+                      )
+library(tidyverse)
+library(readr)
+library(readxl)
+library(zoo)
+library(magick)
+library(stringi)
+library(patchwork)
+library(xtable)
+library(scales)
+library(rvest)
+library(rebus)
+library(PNWColors)
+library(lubridate)
+library(here)
+library(flextable)
+library(gt)
+library(officer)
+library(officedown)
+library(modelsummary)
+library(sandwich)
+library(lmtest)
+
+set_flextable_defaults(
+  font.size = 7,
+  digits = 2,
+  font.family = "Arial",
+  border.color = "black",
+  border.width = 0.5,
+  fp_border = fp_border(color = "black", width = 0.5, style = "solid")
+)
+
+
+```
+
+```{r functions}
+source(here("Functions","flextable_word.R" ))
+source(here("Functions","modelsummary_word.R" ))
+source(here("Functions","modelplot_word.R" ))
+source(here("Functions","borderlines.R" ))
+```
+
+
+
+```{r, echo=FALSE, results='asis'}
+hl <- function(text) {
+  paste0("\\sethlcolor{red!20}\\hl{", text, "}")
+}
+```
+
+
+```{r data_loading}
+price_data_list <- read_rds(here("Outputs","artifacts_price_data.rds"))
+descriptives_list <- read_rds(here("Outputs","artifacts_descriptives.rds"))
+rpd_measures <- read_rds(here("Outputs", "artifacts_rpd_measures.rds"))
+regressions <- read_rds(here("Outputs","artifacts_base_regression.rds"))
+roll_regressions <- read_rds(here("Outputs","artifacts_roll.rds")) 
+recursive_regression <- read_rds(here("Outputs","artifacts_recursive.rds"))
+cov_regressions <- read_rds(here("Outputs", "artifacts_base_regression_cov.rds"))
+qqr_results <- read_rds(here("Outputs","artifacts_quant_reg.rds")) 
+qqr_uinf_results <- read_rds(here("Outputs","artifacts_uinf_quant_reg.rds"))
+dcc_results <- read_rds(here("Outputs", "artifacts_dcc.rds"))
+```
+
+# Introduction
+
+Inflation is known to have adverse welfare effects through its distortion of relative prices, which causes the mis-allocation of resources and production inefficiencies leading to lower real economic activity. This is well supported by both theoretical and empirical studies. This paper contributes to the empirical literature by examining the relationship between inflation and relative price dispersion (RPD) in South Africa where evidence is remains limited. Furthermore, by assessing how the relationship has evolved as the inflation target has changed and its implications for monetary policy.
+
+`r hl("Because RPD is central to the analysis, it is useful to define it at the outset. At the aggregate level, RPD measures the dispersion of individual price changes around the aggregate inflation rate. Some of this dispersion is efficient, as relative prices adjust to genuine shifts in demand or costs. However, when inflation itself raises RPD, for example, because firms adjust prices at different times in the presence of menu costs, or confuse aggregate and relative shocks, prices diverge for reasons unrelated to underlying scarcity. Price signals then misdirect labour and capital across sectors, with some sectors expanding and others contracting relative to their efficient levels, and consumers altering their consumption mix in response to distorted relative prices. Taken collectively, this means the economy does not produce at its efficient level.")`
+
+`r hl("The South African case is unique for studying the relationship between inflation and RPD. South Africa adopted an inflation-targeting framework in 2000 with a 3 - 6 per cent target range, shifting to an informal focus on the 4.5 per cent midpoint of that range from 2017 before formally adopted 3 per cent point target in November 2025. Therefore, the South African context can provide insights into the relationship between inflation and RPD given structural changes in inflation can affect the linkages with relative price dispersion")` [@caglayan2003]. Furthermore, that the functional form of relationship is U-shaped and dynamic [@fielding2000; @choi2010] `r hl("implying that the inflation rate that minimises the distortive effect on relative prices is non-zero, whereas a monotonically increasing linear relationship would imply that RPD is minimised at zero inflation. Given the above-mentioned inflation target reforms, the policy question motivating this paper is what is the optimal inflation target for South Africa from the perspective of relative price distortions?")`^[We emphasise that examining the inflation-RPD relationship is only one approach to assessing the appropriate level of the inflation target, and that it captures only one of the welfare costs of inflation. Therefore, the inflation rate that minimises RPD should therefore not be interpreted as the welfare-optimal inflation rate. Rather, it provides evidence on whether relative price distortions are a cost of, or a constraint on, a move to a lower inflation target. Throughout the paper, references to the ‘optimal’ inflation rate should be read in this narrow sense of the inflation rate that minimises RPD.] 
+
+
+The theoretical literature distinguishes between menu-cost and signal extraction models in explaining the positive relation between inflation and RPD.  In menu cost models [@sheshinki1979; @sheshinski1983; @rotemberg1983; @benabou1992] firms face fixed cost of adjusting nominal prices (e.g. printing new menus) and since they follow a one-sided dynamic pricing rule (S, s) when setting prices, inflation reduces the optimal real price. Given price adjustment costs differ across firms (e.g. due to differences in administrative costs) price adjustment occurs infrequently and at sporadic times leading to staggered price setting and consequently an increase in relative price variability with the latter reflecting nominal rigidities rather than a scarcity of resources. Signal extraction models emphasize the role of inflation surprises in increasing RPD. 
+
+
+In these models, under the assumption of imperfect information, firms observe their own prices immediately, but only observe aggregate prices imperfectly, therefore unexpected inflation or inflation volatility reduces the informational content of prices as firms are unable to distinguish between idiosyncratic relative (real) shocks and aggregate (inflationary) shocks [@lucas1973; @hercowitz1981; @cukierman1983; @barro1976] leading to cross-sectional price dispersion which results in allocative inefficiencies generating adverse real effects.^[In signal extraction models, the effect of unexpected inflation on RPD depends on the magnitude not the sign and the effect is symmetric around zero inflation resulting in a U-shaped relationship.] While menu cost models predict a linear relationship, signal extraction models predict nonlinearities along with monetary search models [@head2005] with the latter also arguing that moderate inflation can increase welfare suggesting the optimal inflation can be non-zero.^[In monetary search model developed by Head and Kumar (2005), inflation affects relative price dispersion through two closely related channels arising from search frictions and market power. In their model, there are two groups of buyers, those who observe only one price (incomplete information) offered by sellers and those that observe more than one price. Since an increase in inflation reduces purchasing power of fiat money held by buyers, this weakens their bargaining position in the market while increasing sellers’ market power.  In this case, the Friedman rule is optimal. If however, buyers observe multiple price quotes, an increase in inflation from a low rate increases the gains to search weakening sellers’ market power, compresses the distribution of prices, raising welfare as a result the optimal inflation rate is in region above zero inflation implying a nonlinear relationship between inflation and RPD.]
+
+
+Against this backdrop, this paper closely follows @caraballo2013 and tests the menu cost and signal extraction models in a semi-parametric framework [@robinson1988a] for South Africa between 2009 and 2025. We further extend our analysis by estimating the inflation-RPD nexus using a quantile-on-quantile regression (QQR) since the semi-parametric estimation provides average inflation effects on RPD, the QQR estimation shows how the state-dependent inflation effects specific areas of the distribution of relative price dispersion. We chose a post 2008 financial crisis period sample because inflation was broadly within the target range and monetary policy credibility had broadly improved during this period relative to the period after the adoption of the inflation target framework in 2000, , and because Stats SA overhauled the CPI basket and classification in January 2009, so that consistent category-level data are available from that date.^[In 2009, South Africa’s statistical agency introduced a major revision to the consumer price index, replacing CPIX with the headline Consumer Price Index (CPI) for all urban areas. The revision involved introducing the international COICOP classification system, expanding geographical coverage to all urban areas, and rebasing the index to 2008 = 100. An important methodological change was the replacement of mortgage interest costs with owners' equivalent rent in the measurement of housing costs, reducing the direct influence of monetary policy changes on the inflation measure.] We estimate the inflation-RPD nexus in the pre-and post-2017 samples when the South African Reserve Bank (SARB) `r hl("informally")` began to target the midpoint of the 3-6 per cent inflation target range. Our sample includes 2025 with inflation structurally lower at 3.2 per cent in the year after the SARB had communicated its preference for a 3 per cent target.^[The SARB’s inflation forecasts and expectations in 2024 increasingly clustered around the lower half of the 3-6 band, e.g. “Moving to inflation, headline eased to 4.4% in August, a 3-year low, and close to the middle of our target range. Our forecast suggests this progress will be sustained, with inflation contained.] Although the 3 per cent target was formally adopted in November 2025, we do not draw inferences about the effects of the formal target change itself, as a longer post-adoption sample is needed.
+
+`r hl("The empirical literature is well established but with evidence for emerging markets is limited. To the best of our knowledge,")` @ndou2014 and @ndou2017 are there `r hl("only papers that examined the inflation and RPD relationship specifically for South Africa")`. @ndou2014 `r hl("using monthly data from 1980 to 2011 calculate RPD separately for each component of the headline inflation basket as the absolute deviation of the component’s price change from headline inflation. They estimate component-by-component semi-parametric, quadratic and ten-year rolling regressions before and after the adoption of inflation targeting in 2000. They find little systematic relationship before inflation targeting, but a U-shaped relationship with a positive RPD-minimising inflation rate for most components thereafter, with the component-level minimising rates converging towards the target range.")` @ndou2017 `r hl("apply the same absolute-deviation measure to services prices only over 1980-2011. They find a quadratic relationship, with the inflation rate that minimises services RPD falling from about 8.3 per cent before inflation targeting to about 5.8 per cent over 2000–2011, close to the upper end of the target range. Using parametric models of trend, expected and unexpected inflation and inflation volatility, together with bivariate VARs, they find that trend and expected inflation raise services RPD (consistent with menu cost models), that inflation volatility does not (contrary to the signal extraction prediction), and that positive inflation surprises raise services RPD more than negative surprises.")`
+
+`r hl( "This paper differs from these two studies in several respects. First, our sample (2009–2025) begins where theirs ends and covers the period in which the SARB anchored policy on the 4.5 per cent midpoint (from 2017) as well as the run-up to the formal adoption of the 3 per cent target in 2025. The only regime change in the earlier studies is the adoption of inflation targeting in 2000. Our question is not whether inflation targeting per se altered the relationship, but whether moving to lower targets within an established inflation-targeting framework does. Second, we construct a single expenditure-weighted measure of aggregate RPD across 45 CPI categories of the post-2008 consumer price inflation basket, following")` @lach1992, `r hl("rather than component-by-component RPD measure")` [@ndou2014] `r hl("or a services-only RPD measures")` [@ndou2017]. `r hl("Our approach speaks directly to the question relevant to setting a headline inflation target. Third, following")` @caraballo2013, `r hl("we decompose inflation into expected and unexpected components within the semi-parametric framework, so that the menu cost and signal extraction predictions including possible asymmetries between positive and negative surprises can be assessed without imposing a quadratic functional form.")` @ndou2014 `r hl("explicitly leave the distinction between expected and unexpected inflation untested, while @ndou2017 assess it only parametrically and for services. Fourth, methodologically this paper complements the semiparametric approach used in earlier studies with quantile-on-quantile regressions, which has not previously been applied to the inflation RPD relationship in the literature. Finally, because our RPD-minimising inflation estimates are comparable with those of the earlier studies, we can assess whether the leftward shift in the minimising rate that they document for the transition to inflation targeting has continued as inflation has been brought lower.")`
+
+`r ("Throughout, we follow the bulk of the empirical RPD literature in treating headline inflation as predetermined with respect to RPD. This assumption is not innocuous.")` @grier1996 `r ("show, using a bivariate GARCH-M model, that inflation and relative price dispersion are more plausibly jointly determined, so that any contemporaneous correlation between the two is difficult to interpret causally.")` @parsley1996 `r hl("raise a related concern at the level of aggregation: shocks that are unobserved to the econometrician can drive both the aggregate inflation rate and the dispersion of its components simultaneously, biasing single-equation estimates of the inflation-RPD relationship. More recently,")` @sheremirov2020 `r hl("makes the same point explicitly, arguing that the co-movement between inflation and price dispersion should not be read as causal because both are endogenous outcomes of the same underlying shocks, and that identifying genuinely exogenous variation in inflation is a substantially harder empirical problem than estimating their co-movement. We do not attempt to fully resolve this identification problem here. Our methodological approach seeks to mitigate in the following manner. First, we demonstrate the need for a time-varying and non-linear approach by showing the inadequacy of the static approach. Second, using rolling and recursive window approaches we see that the relationship varies overtime. Third, the semi-parametric approach incorporates the non-linear features, and confirms the their importance with a U-shaped relationship. The U-shape relationship is important as it shows that the inflation-RPD nexus is not mechanical but a complex interplay. Lastly, furthermore the robustness analysis tests for the existence of regimes and dynamic causality in the inflation-RPD nexus. These together higlight key aspects of the U-shape relationship. The combined effect of this layered methodological approach is increased confidence that the results have economic meaning.")` 
+
+
+In brief, our findings confirm a non-linear relationship for the South African case. Furthermore, we find evidence of regime-dependence in the relationship between inflation and RPD with the post-2017 period showing a flatter relationship compared to the pre-2017 period. The optimal inflation rate that minimizes RPD is estimated to be in the range of 2-3 per cent, which is lower than the current 4.5 per cent target but closer to the 3 per cent target adopted in 2025. The rest of the paper is organised as follows: Section 2 offers a RPD-inflation theoretical foundation, Section 3 presents the data and methodology. Section 4 discusses the main results, Section 5 discusses the robustness tests and Section 6 concludes the paper.
+
+
+# Relative price dispersion through Lucas's aggregate supply curve: A conceptual framework
+
+The concept of relative price dispersion can be abstract and difficult to grasp without a theoretical framework. One of the most influential frameworks for understanding relative price dispersion is the @lucas1973 aggregate supply curve, which provides insights into how relative price dispersion can explain the output-inflation relationship, otherwise known as the natural rate theory. This theory essentially means (in part) that nominal "rigidities" partially dominate short-run supplier behaviour resulting from a lack of information about some prices relevant to decision making. For our purposes we ignore other aspects of the theoretical framework and emphasis this aspect of the model to provide an understanding of relative price dispersion.
+
+@lucas1973 proposes a decomposition of the supply curve, all in logs, into a natural or secular component and a cyclical component as follows:
+
+$$y_t(z) = y_{n,t} + y_{c,t}(z), $$ {#eq-lucas_supply_curve}
+
+
+where $y_t(z)$ is the aggregate supply at time $t$ in market $z$, $y_{n,t}$ is the natural or secular level of supply at time $t$, and $y_{c,t}$ is the cyclical component of supply at time $t$. Competitive markets and a cleared labour market are assumed, meaning that the slope of the supply curve can only reflect the degree of information frictions and the speed of price adjustment related to labour and product markets. Furthermore, the demand for goods in each period is assumed to be unevenly distributed, leading to relative price and general price level movements leading. It is this imperfect information of the suppliers about the general price level that leads to relative price dispersion and the output-inflation relationship.
+
+In addition, the natural or secular level of supply is assumed to follow a linear trend as follows:
+$$ y_{n,t} = \alpha + \beta t, $$ {#eq-natural_supply}
+
+where $\alpha$ is a constant and $\beta$ captures the trend growth rate of the natural level of supply.
+
+The cyclical component varies with the perceived relative price (the difference between the actual price level and the expected price level) and its lags as follows:
+
+$$ y_{ct}(z) = \gamma[P_t(z) - E(P_t | I_t(z))] + \lambda y_{c, t-1}(z), $$ {#eq-cyclical_component}
+where $\gamma$ captures the sensitivity of supply to the perceived relative price, $P_t(z)$ is the actual price level in market $z$ at time $t$, $E(P_t | I_t(z))$ is the expected price level based on information available at time $t$ in market $z$, and $\lambda$ captures the persistence of the cyclical component and $|\lambda| < 1$. $E(P_t | I_t(z))$ is current expected price level conditioned on information that is available at time $t$, at market $z$. The available information set ($I_t(z)$) comprises of past demand driven shifts of the secular component ($y_{n,t}$), and the past deviations  of the cyclical component ($y_{c, t-1}, y_{c, t-2}, ...$) from its natural level. 
+
+The current general price level ($P_t$), which determines 'prior' expectations common across all suppliers in all markets, is assumed to be $P_t \sim N(\overline{P_t}, \sigma^2),$ where $\overline{P_t}$ is the mean price level at time $t$ and $\sigma^2$ is the variance of the price level at time $t$. Furthermore, @lucas1973 defines $z_t$ as the percentage deviation of the actual market price from the general price level as $z\overset{\text{iid}}{\sim} N(0, \tau^2),$ where $\tau^2$ is the variance of $z$. Therefore, the actual price level in market $z$ at time $t$ can be expressed as:
+
+$$P_t(z) = P_t + z, $$ {#eq-price_decomposition}
+
+where $P_t(z)$ is the actual price in market $z$ at time $t$ (that is the markets are indexed to z), $P_t$ is the current general price level at time $t$, and $z$ is the percentage deviation of the actual market price from the general price level. However, $P_t$ is unobserved by traders, and therefore $I_t(z)$ is used to estimate the expected price level ($E(P_t| I_t(z))$). The expected price level based on information available at time $t$ in market $z$ can be derived using Bayes' rule as follows:
+
+
+$$ E(P_t| I_t(z))  = E(P_t|P_t(z), \overline{P_t}) = (1-\theta)P_t(z) + \theta\overline{Pt},$$ {#eq-expected_price_level}
+
+where $\theta = \frac{\tau^2}{(\sigma^2 + \tau^2)}$ is the weight placed on the mean price level ($\overline{P_t}$) in forming expectations. Combining @eq-lucas_supply_curve, @eq-price_decomposition, and @eq-expected_price_level by substitution yields the following:
+
+$$ y_t(z) = y_{nt} + \theta \gamma[P_t(z) - \overline{P_t}] + \lambda y_{c, t-1}$$ {#eq-lucas_supply_curve_final}
+
+where the current supply in market $z$ at time $t$ is a function of the natural level of supply, the perceived relative price (the difference between the actual price level in market $z$ and the mean price level), and the lagged cyclical component. Finally, aggregating across all markets (or integrating over all markets) yields the following aggregate supply curve:
+
+
+$$y_t = y_{nt} + \theta\gamma(P_t - \overline{P_t}) + \lambda[y_{t-1} - y_{n, t-1}]$$ {#eq-aggregate_supply_curve}
+
+
+From @eq-aggregate_supply_curve, we can clearly demonstrate how the relative price dispersion ($\theta$), which is a fraction of the total individual price dispersion ($\sigma^2 + \tau^2$), affects the aggregate supply curve, and therefore the output-inflation relationship. That is, $\theta \uparrow$ in $\tau^2$ and $\downarrow$ in $\sigma^2$. Meaning that when $\theta \uparrow$, the aggregate supply curve becomes flatter, and the output-inflation relationship becomes stronger. And when $\theta\downarrow$, the slope is restricted by $\gamma$. Therefore, the relative price variance ($\theta$), in this context, is a key determinant of the slope of the aggregate supply curve and the strength of the output-inflation relationship.
+
+# Data and methodology
+
+Our analysis uses monthly inflation data on 45 goods categories from January 2009 to November 2025 obtained from Statistics South Africa (Stats SA).[^1] @fig-headline_inflation below shows the long term inflation rate in South Africa, and @fig-price_data in the appendix shows the various price categories used in the analysis. @tbl-descriptive_stats provides the descriptive statistics of the inflation rates for the various price categories used in the analysis.
+
+[^1]: See @tbl-sources in the Appendix for data sources. The data is seasonally adjusted.
+
+
+The RPD is calculated in line with @lach1992 as the weighted standard deviation of individual price inflation rates from the aggregate inflation rate. The RPD is essentially the variability of relative prices of a given product. `r hl("The RPD, therefore, measures the cross-sectional variability of relative price changes across CPI categories in a given month: it is zero when the prices of all categories change at the same rate as headline inflation, and rises as individual price changes become more uneven.")` We first calculate the monthly inflation rate as follows:
+
+$$ \pi_{i,t} = ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right) * 100, $$ {#eq-inflation_rate}
+
+where $\pi_{i,t}$ is the inflation rate of good $i$ at time $t$, $P_{i,t}$ is the price of good $i$ at time $t$, and $P_{i,t-1}$ is the price of good $i$ at time $t-1$. Then, the RPD is calculated as:
+
+$$RPD_{t} = \sqrt{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}, $$ {#eq-rpd}
+
+where $\omega_{j}$ is the expenditure share of the $j^{th}$ good, $\pi_{t}$ is the headline or aggregate inflation rate at time $t$, and $\sum_{i=1}^{n}\omega_{i} = 1$. The expenditure weights ($\omega_{i}$) used are derived from the Consumer Price Index (CPI) basket provided by Stats SA. @fig-rpd shows the RPD calculated using the above formula. We use the 2025 CPI Stats SA weights. The weights are shown in @fig-weights in the appendix.
+
+To examine the relationship between inflation and RPD, we estimate the following econometric model:
+
+$$RPD_{t} = \beta_0 + \beta_1\pi_{t} + \sum_{h=1}^{3}\omega_hRPD_{t-h}  +  \mu_{t}, $$ {#eq-rpd_reg}
+
+where $RPD_{t}$ is the relative price variance at time $t$, $\pi_{t}$ is the aggregate inflation rate at time $t$, $RPD_{t-h}$ are lagged values of RPD to account for its dynamic nature, and $\mu_{t}$ is the error term. The coefficient $\beta_1$ captures the effect of inflation on RPD. We include three lags of RPD based on Akaike Information Criterion (AIC) (and other tests)  and to capture potential persistence in RPD. In addition we test the inflation for structural breaks using the @bai1998a test and include dummy variables for the identified break points to control for structural breaks in the relationship.
+
+The literature on RPD emphasises that the relationship between inflation and RPD maybe time-varying due to structural changes in the economy, monetary policy regimes, and other factors. To capture potential time variation in the relationship, we also estimate a rolling regression model with a 24-month and 60-month windows as follows:
+
+$$RPD_{t} = \alpha_{t} + \beta_{1,t}\pi_{t} + \sum_{h=1}^{3}\omega_{h,t}RPD_{t-h}  +  \mu_{t}, $$ {#eq-rpd_rolling_reg}
+
+where the coefficients $\alpha_{t}$, $\beta_{1,t}$, and $\omega_{h,t}$ vary over time. This approach allows us to observe the stability of the coefficients over time, which is an indicator of linearity in the relationship between RPD and inflation. 
+
+Next, we utilise a semi-parametric or partially linear approach to estimate the `r hl("inflation rate that minimises RPD")`. This approach allows us to model the relationship between inflation and RPD without imposing a strict functional form. Following the literature, we first specify a quadratic (U-shaped) relationship between inflation and RPD as follows:
+
+$$RPD_t = \alpha + \pi_t + \beta_2\pi_t^2 + \sum_{h=1}^{3}\phi_hRPD_{t-h} + \epsilon_t, $$ {#eq-rpd_semi_parametric}
+
+where $\beta_2$ captures the curvature of the relationship between inflation and RPD. The `r hl("inflation rate that minimises RPD")` can be derived by taking the first derivative of the equation with respect to $\pi_t$ and setting it to zero, yielding:
+
+$$\pi_t^* = -\dfrac{1}{2\beta_2}.$$ {#eq-optimal_inflation}
+
+To estimate this optimal inflation we implement a semi parametric approach as follows:
+
+$$RPD_t =  f(\pi_t) + \sum_{h=1}^{3}\phi_hRPD_{t-h} + \epsilon_t, $$ {#eq-rpd_semi_parametric_f}
+
+where $f(\pi_t)$ is a non-linear smooth differentiable function of inflation and the RPD. Therefore, the optimal inflation rate can be obtained by finding the minimum of the estimated $f(\pi_t)$ function. $f(\pi_t)$ is estimated in two stages. First we estimate $\lambda_h$ as follows:
+
+$$ RPD_t = \sum_{h=1}^{3}\lambda_h\overline{RPD}_{t-h} + \eta_t, $$ {#eq-rpd_semi_parametric_stage1}
+
+where $\overline{RPD}_{t-h}$ are the residuals from a non-parametric regression of each lag of $RPD_t$ on $\pi_t$. In the second stage, we estimate $f(\pi_t)$ non-parametrically as follows:
+
+$$\hat{\eta}_t = f(\pi_t) + v_t, $$ {#eq-rpd_semi_parametric_stage2}
+
+where $\hat{\eta}_t$ are the residuals from @eq-rpd_semi_parametric_stage1, and $f(\pi_t)$ is estimated using a kernel regression method. The bandwidth ($h$) for the kernel estimator is selected using cross-validation to minimize the mean squared error. As a treatment for extreme values of inflation, we further implement the unbounded Gaussian kernel and the outlier-robust Epanechnikov kernel. In essence, the semi-parametric approach captures the sensitivity of RPD to marginal increases in inflation. In that case, the optimal inflation rate can be obtained by finding the point where the first derivative ($f'(\pi_t)$) is equal to zero. Therefore, if $f'(\pi_t) > 0$ ($f'(\pi_t) < 0$), then an increase in inflation (decrease) leads to an increase (decrease) in the RPD. For robustness we estimate the $g(UIN_t)$ with multiple bandwith ($h$).^[We use bootstraps with 500 replications to obtain confidence intervals for the non-parametric estimates.]
+
+To further disentangle the effects of RPD on inflation, we decompose headline inflation into its expected and unexpected components. As discussed in the literature section, for example, theory suggests that inflation uncertainty has a more pronounced effect on RPD due to information frictions faced by firms when adjusting prices [@lucas1973; @hercowitz1981; @cukierman1983].
+
+
+We therefore estimate the following model:
+
+$$ RPD_t = \alpha + \beta_0 EIN_t + \beta_1 UIN_t + g(UIN_t) + \sum_{k=1}^{3}\lambda_k RPD_{t-k} + \epsilon_t, $$ {#eq-unexpected}
+
+where $EIN_t$ is the expected inflation rate, $UIN_t$ is the unexpected inflation rate, and $g(UIN_t)$ is a non-linear function of unexpected inflation ($UIN_t$). We obtain the expected using one-period step ahead forecast of a fitted ARMA model of headline inflation and unexpected inflation as the difference between one-step ahead inflation forecast and actual inflation in the previous period. The estimation of $g(UIN_t)$ follows the same two-stage semi-parametric approach outlined in @eq-rpd_semi_parametric_stage1 and @eq-rpd_semi_parametric_stage2. The number of lags is the same as in @eq-rpd_reg.
+
+In a some-what novel to the RPD literature, we employ a quantile on quantile regression approach [@koenker2017]. Quantile on quantile regressions are robust to outliers and allows us to estimate the regime aspects of the relationship between RPD and inflation. For brevity, we explain the quantile on quantile estimation procedure in the Appendix. `r hl("Lastly, and as an additional robustness measure, we estimate time-varying Granger causality by")` @lu2024.^[See @lu2024 for the details of the estimation process, including the appropriate test statistics.] The @lu2024 `r hl("uses a Dynamic Conditional Correlation (DCC) MGARCH approach to Granger causality. This approach allows us to estimate a dynamic causality approach, which takes into account significant time shifts in the strength of the causality. In this way we can pinpoint exactly when the interplay between RDP and inflation intensifies or weakens.")`
+
+
+
+#  Main results
+
+We commence our analysis, by calculating RPD over our sample period. @fig-rpd shows that RPD in South Africa, as expected, follows headline inflation (see @fig-headline_inflation). In other words, it rises in periods of inflation shocks, otherwise settling on a steady long term level. For example, we see a significant rise in the RPD in the recent COVID-19 inflation shock.
+
+As a precursor to the formal estimation of the RPD inflation relationship, in @fig-rpd_inflation we plot the calculated RPD against headline inflation. Fitting a quadratic polynomial to the data suggests that pre and post 2017, the RPD-inflation relationship was non-linear. Furthermore, the optimal inflation, the lowest point in the quadratic polynomial, was lower post 2017 as compared to pre 2017. Therefore, @fig-rpd_inflation provides prima facie evidence, which supports our hypothesis. 
+
+```{r}
+#| label: fig-rpd
+#| fig-cap: "RPD over-time"
+#| fig-width: 8
+#| fig-height: 3
+
+rpd_measures |> 
+  pluck(2)
+
+```
+
+
+
+```{r}
+#| label: fig-rpd_inflation
+#| fig-cap: "RPD vs Headline Inflation. Note: A quadratic polynomial was fitted on two the data before and after July 2017. This is the period of the first inflation target reform to a mid-point of 4.5 per cent."
+#| fig-width: 6
+#| fig-height: 3
+
+rpd_measures|> 
+  pluck(1) |> 
+  mutate(
+    policy_2017_dum = if_else(Date >= ymd("2017-07-01"), 1, 0)
+  ) |> 
+ggplot(aes(x = headline_inflation, y = rpd, color = factor(policy_2017_dum))) +
+  geom_point(size = 0.5) +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE, linewidth = 0.5) +
+  labs(
+       y = "RPD", 
+       x = "Headline inflation (%)",
+       color = "Period") +
+  scale_color_manual(values =  pnw_palette("Winter", 2), 
+                     labels = c("Before Jul 2017", "After Jul 2017")) +
+  scale_y_continuous(limits = c(0, 5), breaks = c(1, 2, 3, 4, 5)) +
+  theme_minimal() +
+      theme(
+      legend.position = "bottom",
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank()
+    ) +
+    theme(
+      text = element_text(size = 6),
+      strip.background = element_rect(colour = "white", fill = "white"),
+      axis.text.x = element_text(angle = 90),
+      axis.title = element_text(size = 6),
+      plot.tag = element_text(size = 6),
+      axis.line = element_line(color = "black", linewidth = 0.2)
+    )
+
+```
+
+
+\newpage
+
+The formal estimation in @tbl-base_regression, using ordinary least squares of both the linear and quadratic specifications, reveals that indeed the evidence for non-linearity is stronger. In particular all the estimates of the quadratic term ($\pi^2$) are all significant. As noted in the methodology section, this significance is in the presence of estimated break-points in the inflation data. Therefore, the next question is whether the estimates of the RPD are stable overtime, or are subject to significant shocks? `r hl("All the headline inflation baseline results are comparable to the core-inflation results in Appendix B. Indicating that these results are not only driven by volatility episodes from energy and food in the inflation data.")`
+
+```{r}
+#| label: tbl-base_regression
+#| tbl-cap: "Baseline regressions"
+#| ft.arraystretch: 0.6
+
+base_tbl <- 
+  regressions |> 
+  pluck(2) |> 
+  mutate(term = case_when(
+    term == "(Intercept)" ~ "C",
+    term == "headline_inflation" ~ "\\pi_t",
+    # term == "abs_headline_inflation" ~ "|\\pi_t|",
+    term == "squared_headline_inflation" ~ "\\pi_t^2",
+    term == "lag(log_rpd, 1)" ~ "RPD_{t-1}",
+    term == "lag(log_rpd, 2)" ~ "RPD_{t-2}",
+    term == "lag(log_rpd, 3)" ~ "RPD_{t-3}",
+    term == "dum_2011m121" ~ "D_{2011m12}",
+    term == "dum_2014m71" ~ "D_{2014m7}",
+    term == "dum_2017m71" ~ "D_{2017m7}",
+    term == "dum_2020m21" ~ "D_{2020m2}",
+    term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions
+    TRUE ~ term
+  )) |>  
+  arrange(desc(term))
+
+replace_one <- base_tbl |> 
+  slice(1)
+  
+replace_two <- base_tbl |> 
+  slice(2)
+
+base_tbl[2, ] <- replace_one
+base_tbl[1, ] <- replace_two
+
+base_tbl |> 
+  rename(
+    " " = term
+  ) |> 
+  flextable_word() |> 
+  align(j = 1, align = "left", part = "all") |>
+  add_footer_row(
+      values = 
+        as_paragraph(
+        "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."), 
+      colwidths = 7) |> 
+  width(j = 1, width = 0.05) |>
+  align(j = 2, align = "center", part = "all") |>
+  compose(j = 1, value = as_paragraph(as_equation(` `))) |>
+  set_table_properties(layout = "autofit")
+```
+
+In @fig-rolling_coefficients and @fig-recursive we estimate the rolling and recursive estimates. 24 and 60 month windows are implemented for the rolling window estimation. The results of both methods suggest a dynamic relationship with periods of strong significance. In the main, we observe a positive response of RPD to a 1 percentage point change in headline inflation. This dynamic relationship further builds the case for a U-shaped relationship. `r hl("In addition we conduct a series of stationarity and non-linearity tests to justify the semi-parametric approach. The conflicting stationarity tests in")` @tbl-stationarity_tests `r hl("may suggestes non-linearity in addition to the structural breaks already established in the OLS analysis. To confirm the non-linearity we conducted the")` @brock1991 `r hl("test, which confirmed")` (see @tbl-bds_tests).
+
+
+```{r}
+#| label: fig-rolling_coefficients
+#| fig-cap: "Rolling regressions. Note: t-statistics of greater (or less) than 1.96 ( or -1.96) is significant at a 5% level of significance."
+#| fig-width: 8
+#| fig-height: 5
+
+roll_regressions |>
+  pluck(1)
+
+```
+
+
+```{r}
+#| label: fig-recursive
+#| fig-cap: "Recursive regressions. Note: Recursive regression estimates of the coefficient on absolute headline inflation with a fixed start date of 2012-07."
+#| fig-width: 8
+#| fig-height: 2.5
+
+recursive_regression |> 
+  pluck(1)
+
+```
+
+\newpage
+@fig-semi_parametric shows the estimated nonparametric conditional mean effect of inflation on RPD for the full sample, pre-2017 and post-2017 samples. The optimal bandwidth was selected automatically using cross-validation method. To test the sensitivity of the nonparametric estimates to the smoothing parameter, we also consider smaller and larger bandwidths in both @fig-semi_parametric and @fig-unexpected_inflation, in both cases the results are qualitatively similar indicating that the nonparametric estimates are robust to the smoothing parameter. In  @fig-semi_parametric across all samples, the relationship is approximately linear and upward sloping indicating that the marginal effect is positive across the inflation range, broadly in line with the menu cost theoretical predictions. 
+
+Specifically, in the full sample, @fig-semi_parametric shows that small positive effects on RPD for the inflation range of 2-3 per cent, with RPD is at its lowest in this range suggesting that the optimal inflation lies within this range as RPD is not amplified, otherwise RPD increases monotonically as inflation increases beyond this range. Thus, higher average inflation increases price misconception, leading to inefficient resource allocation equivalent to a negative productivity shock [@damjanovic2010]. The pre-2017 sample results show a similar profile except that a 3 per cent inflation rate minimises price dispersion. These findings are similar across both the Gaussian and Epanechnikov kernels.
+
+Interestingly, the sub-samples results show regime shifts in the inflation and RPD relationship. The post-2017 sub-sample still shows positive and linear effects however the curvature is `r hl("weaker and flatter in contrast to the pre-2017 period, suggesting regime-dependence")` [@choi2011; @baglan2016; @hornstein2024]. Specifically, relatively lower regimes levels are associated with weaker inflation effects on RPD because even at high inflation rates in the range of 7-8 per cent the curve is less steep than pre-2017 results - suggesting a less responsive RPD. The results in @fig-semi_parametric suggest the optimal inflation rate in the post-2017 sub-sample is also in the range of 2-3 per cent. These optimal inflation rate estimates are lower than the 4 per cent estimate from [@caraballo2013] whom we closely follow in our empirical framework but our results are closer to estimates in the literature. See @diercks2019 for a summary of these studies.^[Menu cost models generally find the optimal inflation rate to be 0 per cent and studies that take into account the zero-lower bound constraint, measurement bias in inflation measure and downward wage rigidities generally propose an optimal inflation rate that are positive at near 2 per cent]
+
+
+\newpage
+
+```{r}
+#| label: fig-semi_parametric
+#| fig-cap: "Semi-parametric regressions for headline inflation. Note: hcpi is headline inflation. This figure shows the estimated nonparametric conditional mean effect of headline inflation on RPD for the full sample, pre-2017 and post-2017 samples. The optimal bandwidth was selected automatically using cross-validation method."
+#| fig-width: 8
+#| fig-height: 8
+
+# Function to read and convert image to ggplot
+img_to_plot <- function(path, title = "") {
+  img <- magick::image_read(path)
+  
+  # Crop the left side to remove the old "Relative price dispersion" label
+  # Stata left margins with titles are usually significant. 
+  # We chop off 60 pixels from the left.
+  # img <- magick::image_chop(img, "60x0")
+  
+  ggplot() +
+    annotation_custom(grid::rasterGrob(img, width = unit(1,"npc"), height = unit(1,"npc")), 
+                      -Inf, Inf, -Inf, Inf) +
+    labs(title = title) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 10, hjust = 0.5, face = "bold")
+      # axis.title.y = element_text(angle = 90, size = 6, margin = margin(r = 5)), # Turn y-axis label back on
+    ) 
+}
+
+# Paths with consistent ordering and correct spellings
+# Columns: Gaussian, Epanechnikov
+# Rows: Full Sample, Pre-2017, Post-2017
+
+p1 <- img_to_plot(here("Outputs/non_linear/Full_sample_gaussian_eq10.png"))
+p2 <- img_to_plot(here("Outputs/non_linear/Full_sample_epanechnikov_eq10.png"))
+
+p3 <- img_to_plot(here("Outputs/non_linear/Pre-2017_gaussian_eq10.png"))
+p4 <- img_to_plot(here("Outputs/non_linear/Pre-2017_epanechnikov_eq10.png"))
+
+p5 <- img_to_plot(here("Outputs/non_linear/Post-2017_gaussian_eq10.png"))
+p6 <- img_to_plot(here("Outputs/non_linear/Post-2017_epanechnikov_eq10.png"))
+
+# Combine using patchwork
+(p1 + p2) / (p3 + p4) / (p5 + p6)
+```
+
+
+
+\newpage
+
+```{r}
+#| label: fig-unexpected_inflation
+#| fig-cap: "Semi-parametric regressions for unexpected inflation. Note: hcpi_u is the unexpected component of headline inflation. This figure shows the estimated nonparametric conditional mean effect of unexpected inflation on RPD for the full sample, pre-2017 and post-2017 samples. The optimal bandwidth was selected automatically using cross-validation method."
+#| fig-width: 8
+#| fig-height: 8
+
+p1 <- img_to_plot(here("Outputs/unexpected/Full_sample_gaussian_eq14.png"))
+p2 <- img_to_plot(here("Outputs/unexpected/Full_sample_epanechnikov_eq14.png"))
+
+p3 <- img_to_plot(here("Outputs/unexpected/Pre_2017_gaussian_eq14.png"))
+p4 <- img_to_plot(here("Outputs/unexpected/Pre_2017_epanechnikov_eq14.png"))
+
+p5 <- img_to_plot(here("Outputs/unexpected/Post_2017_gaussian_eq14.png"))
+p6 <- img_to_plot(here("Outputs/unexpected/Post_2017_epanechnikov_eq14.png"))
+
+# Combine using patchwork
+(p1 + p2) / (p3 + p4) / (p5 + p6)
+
+```
+
+
+
+
+@fig-unexpected_inflation shows the estimated results of the nonparametric effect of unexpected inflation on RPD and the findings are broadly consistent with the predictions of the signal extraction theory. These results exhibit a U-shaped profile. Positive and negative surprises both increase relative price variability however the effects are asymmetric. Positive inflation surprises generate a stronger dispersion response than negative ones. 
+
+Notably, the estimated effects are similar in both the full sample and the pre-2017 sample periods. The response of RPD to negative inflation surprises is relatively moderate and relatively flat, while positive inflation causes RPD to accelerate more noticeably particularly for inflation surprises near 0.2 and above. This suggests that price-setters respond more aggressively to inflationary surprises than deflationary ones suggesting that positive inflation surprises create informational noise and as a result firms confuse aggregate price shocks with relative shocks leading to higher relative price variability consistent with the misconception models. However unlike these theoretical predictions as well as the empirical studies [@caraballo2013; @becker2012; @sara-zaror2024] the positive and negative inflation shocks, in our case, do not have a symmetric effect on RPD. The post-2017 suggests a structural regime change in the relationship as the magnitude of the effect of unexpected inflation on RPD is weaker on either side of the distribution. We attribute this to a relatively low inflation regime as well as better anchored inflation expectations [@durand2023] in the post-2017 period in line with the adoption of a lower inflation targets in both 2017 as well as 2025. For example, the x-axis only extends to about ±0.25 percentage points in the post-2017 sample, reflecting less variation in unexpected inflation compared to the pre-2017 sample. Furthermore, the latter years in our sample are characterised by significant global shocks to inflation from the COVID-2019 Pandemic in 2020, the post-pandemic recovery induced energy price shock in 2021 as well as the global food price shock after the outbreak of the Russia-Ukraine war in 2022. These global shocks would’ve induced a similar price setting behavioural response in the same direction therefore compressing price dispersion [@nakamura2018] which, in our view, also explains the relatively benign results post-2017. `r hl("However, synchronised price responses to common shocks would imply a temporary compression of RPD that could reverse whereas a lower and better-anchored inflation expectations would imply a durable flattening of the relationship.")` 
+
+# Robustness
+
+## The inflation-RPD nexus across quantiles
+
+To further investigate the idea of RPD-inflation regimes, we take a novel approach in the literature to estimate a quantile-on-quantile (QQR) regression analysis [@koenker2017]. The QQR will further examine the inflation-RPD nexus since kernel estimation in @fig-semi_parametric and @fig-unexpected_inflation show average marginal effects across the inflation distribution, while the QQR directly estimates the dependence structure across the joint distribution of inflation ($\tau$) and RPD ($\theta$). The results in @fig-quant_reg show that, across the all sub-samples, in most quantiles of RPD, higher quantiles of inflation are associated with a positive and increasingly strong effect on RPD. When inflation is in its upper quantiles ($\tau \rightarrow 1$), the coefficient is at its largest and most positive, suggesting a strong amplification where high inflation episodes are associated with meaningfully larger relative price dispersion. At low quantiles of inflation ($\tau \leftarrow 0$), the relationship is substantially muted and largely statistically insignificant (white areas), particularly for middle quantiles of RPD indicating that low or stable inflation has little systematic effect on relative price dispersion. This is a double confirmation of the U-shaped relationship. Furthermore, lower quantiles of RPD ($\theta < 0.25$) show weak effects throughout, implying that episodes of low-price dispersion are relatively insensitive to inflation regardless of where inflation sits in its distribution. 
+
+Notably in the post-2017 sub-sample, structural changes in the relationship are evident. Firstly, the size of the magnitude is larger and the positive effects are concentrated at very high inflation quantiles likely reflecting the heightened inflationary volatility of the post-2017 period, including commodity price shocks and the COVID-19 era inflation surge. Secondly, there is a wider region of insignificance at low and mid inflation quantiles ($\tau < 0.50$) particularly for lower quantiles of RPD implying low-to-moderate inflation in the post-2017 associated with reductions in the inflation target, has little systematic effect on price dispersion. The relationship being driven almost entirely by tail inflation events or shocks. `r hl("Given the small number of such shocks in this period, however, this pattern should be interpreted with caution.")`
+
+
+
+```{r}
+#| label: fig-quant_reg
+#| fig-cap: "Quantile on quantile regressions for headline inflation. Note: In the quantile on quatile regression plots,  the x-axis represents the quantiles of headline inflation, while the y-axis represents the quantiles of RPD. The color gradient indicates the strength and direction of the relationship between headline inflation and RPD across different quantiles. Warmer colors (e.g., red) indicate a stronger positive relationship, while cooler colors (e.g., blue) indicate a stronger negative relationship. The white areas represent quantiles where the relationship is not statistically significant."
+#| fig-width: 8
+#| fig-height: 4
+theme <- 
+  theme(
+    plot.title = element_text(size = 9, hjust = 0.5, face = "bold"),
+    axis.title = element_text(size = 8),
+    axis.text = element_text(size = 7),
+    legend.text = element_text(size = 7),
+    legend.title = element_text(size = 8),
+    plot.tag = element_text(size = 8, face = "plain"),
+    legend.position = "bottom"
+  )
+p1 <- qqr_results[[3]] + 
+  labs(title = "Full sample") +
+  theme
+p2 <- qqr_results[[4]] +
+  labs(title = "Pre-2017") +
+  theme
+p3 <- qqr_results[[5]] +
+  labs(title = "Post-2017", caption = ) +
+  theme
+
+p1 | p2 | p3 
+
+```
+
+
+Interestingly the positive coefficient region in @fig-unif_quant_reg is larger and more pervasive across the space compared to @fig-quant_reg with the implication that unexpected inflation appears to have a stronger and more broadly distributed positive effect on relative price dispersion than aggregate inflation. Specifically, positive inflation surprises have a visible effect on RPD even at moderate quantiles in the pre-2017 era. This implies that even modest positive inflation surprises - not just extreme ones - were sufficient to generate significant RPD responses before 2017. The lower quantiles of RPD ($\theta < 0.25$) remain largely insignificant. Interestingly, there is a weak negative region at very low quantiles of unexpected inflation for mid-range RPD, suggesting that negative inflation surprises were mildly associated with reduced dispersion in this era.
+
+Positive inflation surprises have less concentrated effects in the post-2017 sub-sample compared to the pre-2017 period however the coefficient scale is wider compared to pre-2017 indicating the sensitivity of RPD to unexpected inflation as inflation shocks surged enormously after 2017 and these shocks were more disruptive to relative price alignment. There is a broader insignificance at intermediate quantile combinations. A notable feature of the post-2017 sub-sample is the emergence of statistically significant negative coefficients at low quantiles of unexpected inflation ($\tau < 0.25$), particularly across mid-to-high quantiles of RPD ($\theta > 0.25$). This means negative inflation surprises in the post-2017 period, were associated with lower RPD. This pattern was absent (or negligible) pre-2017. We attribute this to the likelihood that when inflation expectations were managed down by the central bank as inflation targets are lowered, downside inflation surprises actively compress price dispersion, while upside surprises amplify it [@bems2021; @moessner2020].
+
+
+```{r}
+#| label: fig-unif_quant_reg
+#| fig-cap: "Quantile on quantile regressions for the unexpected component of inflation. Note: The x-axis represents the quantiles of the unexpected component of headline inflation, while the y-axis represents the quantiles of RPD."
+#| fig-width: 8
+#| fig-height: 4
+
+p1 <- qqr_uinf_results[[1]] + 
+  labs(title = "Full sample") +
+  theme
+p2 <- qqr_uinf_results[[2]] +
+  labs(title = "Pre-2017") +
+  theme
+p3 <- qqr_uinf_results[[3]] +
+  labs(title = "Post-2017") +
+  theme
+
+p1 | p2 | p3 
+```
+
+\newpage
+
+## Dynamic Causality and Temporal Shifts
+
+`r hl("Whilst the quarter on quarter analysis provides sufficient evidence of regimes in the inflation-RDP relationship, it lacks a comprehensive analysis of the temporal shifts in causality between the variables. As noted in the literature earlier")` [for example @grier1996; @parsley1996],`r hl("that the inflation-RDP relationship can be difficult to determine because both variables can contemporaneously impact each other. We do not make any strong conclusion on the accuracy of previous evidence. However, using time-varying Granger causality approach by")` @lu2014 `r hl("to explore the dynamic interactions between headline inflation and RPD over time, we show significance in a dynamic context. That is, evidence that the relationship is not static but evolves over time, with periods of bidirectional causality")`^[We only show the bi-directional causality as it aligns with the fundamental hypothesis of the study. However, both unidirectional tests confirmed the results of the bi-directional test. The test requires optimal lag selection and non-linearity, which is shown are shown in the Appendices]. `r hl("Or that, the relationship is not just contemporaneous, but complex and interdependent where previous developments in one variable influence the other in the next period. This shows that the relationship, is not merely mechanical or just a statistical association.")` 
+
+`r hl("The evidence of the causal relationships is presented in")` @fig-dcc_expected and @fig-dcc_uneexpected. In @fig-dcc_expected, `r hl("we show the bi-directional Granger causality between headline inflation and RPD or menu costs approach, while")` @fig-dcc_uneexpected `r hl("illustrates the unexpected inflation (or signal extraction approach) causal patterns observed in the data. Similar to the semi-parametric results, the time-varying Granger causality analysis reveals that the causality between headline inflation and RPD is consistently significant. The strength of the causality varies over time, with periods of stronger influence from one variable to the other. Therefore, it is not just periods of crisis that dominate the relationship, but also periods of stability and structural change. However,")` @fig-dcc_uneexpected `r hl("confirms our earlier assertion that the post-2017 period shows a shift in the nature of the causal relationship, which was dominated by big shocks that were persistent. These shocks were a combination of domestic and global factors, including the COVID-19 pandemic related supply chain disruptions, the Russia-Ukraine conflict energy and food price shock, and a less understood positive inflation shock in South Africa post the Covid crisis period. We argue that this had the effect of compressing RDP as shown in")` @fig-unif_quant_reg.
+
+
+```{r}
+#| label: "fig-dcc_expected"
+#| fig-cap: "Bi-directional Granger causality for headline inflation and RPD. The green line in the plot is the time-varying Granger causality test statistic, and the vertical bars indicate the significant of the test stastic at a 5 percent level of significance. These are estimated using the @lu2014 methodolody. "
+#| fig-width: 8
+#| fig-height: 3.5
+
+dcc_results |> 
+  pluck(1)
+```
+
+
+```{r}
+#| label: "fig-dcc_uneexpected"
+#| fig-cap: "Bi-directional Granger causality for unexpected inflation and RPD. Explanation of the plot is the same as in @fig-dcc_expected."
+#| fig-width: 8
+#| fig-height: 3.5
+
+dcc_results |> 
+  pluck(2)
+
+
+```
+
+
+\newpage
+
+
+# Conclusion
+
+`r hl("This paper provides a comprehensive empirical analysis of the relationship between inflation and relative price dispersion (RPD) in South Africa, highlighting the importance of structural changes in inflation targeting on this nexus. Our findings support the presence of a nonlinear and dynamic relationship between inflation and RPD, consistent with the signal extraction and monetary search models that allow RPD to be minimised at a non-zero inflation rate. The semi-parametric estimation revealed that average inflation effects on price dispersion evolve over time, especially around changes in inflation targets; nevertheless lower inflation is favourable for RPD, while the quantile-on-quantile regression uncovered heterogeneity in the impact of inflation across different parts of the RPD distribution. This dynamic behaviour reinforces the idea that lower inflation reduces welfare losses associated with price rigidities and informational frictions. Interestingly, testing the predictions of the signal extraction models, inflation surprises in our case do not have a symmetric effect on price relative variability instead only positive surprises worsen price variability or RPD.")`
+
+`r hl("We emphasise that examining the inflation–RPD relationship is only one approach to assessing the appropriate level of the inflation target, and that it captures only one of the costs of inflation. The inflation rate that minimises RPD should therefore not be interpreted as the welfare-optimal inflation rate. Rather, it provides evidence on whether relative price distortions are a cost of, or a constraint on, a move to a lower inflation target. Throughout the paper, references to the ‘optimal’ inflation rate should be read in this narrow sense of the inflation rate that minimises RPD.")`
+
+`r hl("The post-2017 period is characterized by a unique combination of factors including revised lower inflation target, and significant global shocks such as the COVID-19 pandemic, supply chain disruptions, energy price shocks, and the Russia-Ukraine conflict. These elements contributed to synchronized price adjustments across firms, compressing relative price dispersion. This makes it difficult to disentangle the effect of the change in the operational target from the effect of these shocks, since both would be expected to flatten the measured inflation–RPD relationship over this period. Our results suggest that the inflation-RPD trade-off will move towards a more favourable profile compared to the pre-2017 era if prices are anchored at the recently adopted 3 per cent inflation target, although this can only be tested once a sufficiently long sample under the new target is available.")`
+
+`r hl("This analysis contributes to the relatively sparse literature on emerging markets by providing nuanced insights into how inflation influences relative price variability under evolving monetary policy frameworks. Moreover, our findings are consistent with the decision to lower South Africa’s inflation target in 2025. The estimated RPD-minimising inflation rate of 2-3 per cent implies that moving from a 4.5 per cent midpoint to a 3 per cent target should reduce, rather than increase, inflation-induced relative price distortions. For other emerging markets considering lower inflation targets, our evidence suggests that the nonlinear and regime-dependent nature of the inflation–RPD relationship is worth taking into account in balancing inflation control against distortions in relative prices that can hinder efficient resource allocation and growth. Future research should use product-level price microdata were RPD is measured at a product-level and across outlets which would allow analysis of the frequency and size of price changes to distinguish more sharply between the menu cost and signal extraction mechanisms and finally embedding the estimated inflation-RPD relationship in a structural model would allow the costs of relative price distortions to be weighed against other costs and benefits of inflation in determining a welfare-optimal inflation target.")`
+
+
+\newpage
+
+# References {.unnumbered}
+
+::: {#refs}
+:::
+
+
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Alph{section}}
+\setcounter{table}{0}
+\renewcommand{\thetable}{A\arabic{table}}
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{A\arabic{figure}}
+\newpage
+# Appendix: Data and descriptive statistics
+
+## Data
+
+
+```{r}
+#| label: fig-headline_inflation
+#| fig-cap: "Headline inflation (%)."
+#| fig-width: 8
+#| fig-height: 3
+
+price_data_list |>
+  pluck(2, 2) 
+
+```
+
+
+```{r}
+#| label: fig-price_data
+#| fig-cap: "Inflation categories (%)"
+#| fig-width: 8
+#| fig-height: 9
+
+price_data_list |> 
+  pluck(2, 1)
+```
+
+```{r}
+#| label: fig-weights
+#| fig-cap: "CPI Weights. Note: Due to a lack of data, some categories (no spitirits; transport services of goods; household textiles; glassware,tableware, and house utensils; and Tools and equipment for house and garden) have been excluded."
+#| fig-width: 8
+#| fig-height: 5
+
+price_data_list |> 
+  pluck(2, 3)
+```
+
+\newpage
+
+## Data sources
+
+```{r}
+#| label: tbl-sources
+#| tbl-cap: "Data sources"
+tribble(
+  ~ Variable, ~ `Construction method`, ~ Source,
+  "Headline inflation", "Calculation as the monthly percentage growth in the monthly CPI",  "Statistics South Africa",
+  "CPI categories", "45 montly CPI categories as constructed by the consumer price survey", "Statistics South Africa",
+  "Expected inflation", "Is the one step ahead ARIMA forecast of headline inflation.", "Author calculation",
+  "Unexpected inflation", "Is the difference between the one step ARIMA forecast and actual inflation in the previous period", "Author calculation",
+  "Relative price dispersion", "As calculated in Equation 9. The RPD is essentially the variability of relative prices over time. ", "Author calculation"
+  ) |> 
+  flextable_word() |> 
+  align(align = "left", part = "all") |> 
+  autofit(add_w = 0)
+
+
+
+
+```
+
+
+\newpage
+
+## Descriptive statistics
+
+```{r}
+#| label: tbl-descriptive_stats
+#| tbl-cap: "Descriptive statistics"
+
+descriptives_list |> 
+  pluck(1) |> 
+  rename("Variable" = `Goods category`) |>
+  flextable_word() |>
+  # width(j = 1, width = 0.01, unit = "cm") |> 
+  align(j = 1, align = "left", part = "all") |>
+  autofit(add_w = -0.15) |> 
+  fontsize(size = 6, part = "all")
+```
+
+\newpage
+## Stationarity tests
+
+```{r}
+#| label: tbl-stationarity_tests
+#| tbl-cap: "Stationarity tests results"
+
+tests <- read_rds(here("Outputs","artifacts_stationarity.rds"))
+tests |> 
+  pluck(1) |> 
+  mutate(
+    Measure = str_replace_all(Measure,
+    c("headline_inflation" = "Headline Inflation",
+      "rpd" = "Relative Price Dispersion (RDP)")),
+  ) |> 
+  flextable_word() |>
+  align(j = 1, align = "left", part = "all") |>
+  autofit(add_w = 0.3)
+```
+
+
+## BDS test for non-linearity
+
+```{r}
+#| label: tbl-bds_tests
+#| tbl-cap: "BDS test results"
+
+tests |> 
+  pluck(3) |> 
+  rename(
+    "Embedding Dimension" = embedding_dim,
+    "Epsilon"= epsilon,
+    "P-value" = p_value
+  ) |> 
+  mutate(Measure = 
+           replace_values(
+             Measure,
+             "headline_inflation" ~ "Headline Inflation",
+             "rpd" ~ "Relative Price Dispersion (RDP)"
+  ))|> 
+  mutate(across(2:3, ~as.numeric(.x))) |> 
+  mutate(across(3:4, ~round(.x, 2))) |> 
+  as_grouped_data(groups = "Measure") |> 
+  flextable_word() |> 
+  colformat_double(digits = 0, j = 2) |> 
+  align(j = 1, align = "left", part = "all") |> 
+  autofit(add_w = 0.55)
+
+```
+
+
+
+## Lag length selection
+
+```{r}
+#| label: tbl-lag_selection
+#| tbl-cap: "RPD lag length selection"
+
+regressions |> 
+  pluck(1) |> 
+  mutate(
+    across(
+      where(is.numeric),
+      ~ round(.x, 0)
+    )
+  ) |> 
+  flextable_word() |> 
+  colformat_double(j = 2, digits = 0) |>
+  autofit(add_w = 2.5)
+
+```
+
+\newpage
+
+\setcounter{table}{0}
+\renewcommand{\thetable}{B\arabic{table}}
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{B\arabic{figure}}
+
+# Appendix: Core inflation models
+
+```{r}
+#| label: tbl-core_base_regression
+#| tbl-cap: "Core inflation baseline regressions"
+#| ft.arraystretch: 0.6
+
+core <- read_rds(here("Outputs", "artifacts_base_regression_core.rds"))
+
+
+core_base_tbl <- 
+  core  |> 
+  pluck(4) |> 
+  mutate(term = case_when(
+    term == "(Intercept)" ~ "C",
+    term == "core_inflation" ~ "\\pi_t",
+    # term == "abs_headline_inflation" ~ "|\\pi_t|",
+    term == "squared_core_inflation" ~ "\\pi_t^2",
+    term == "lag(log_rpd, 1)" ~ "RPD_{t-1}",
+    term == "lag(log_rpd, 2)" ~ "RPD_{t-2}",
+    term == "lag(log_rpd, 3)" ~ "RPD_{t-3}",
+    term == "dum_2011m121" ~ "D_{2011m12}",
+    term == "dum_2014m71" ~ "D_{2014m7}",
+    term == "dum_2017m71" ~ "D_{2017m7}",
+    term == "dum_2020m21" ~ "D_{2020m2}",
+    term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions
+    TRUE ~ term
+  )) |>  
+  arrange(desc(term))
+
+replace_one <- core_base_tbl |> 
+  slice(1)
+  
+replace_two <- core_base_tbl |> 
+  slice(2)
+
+core_base_tbl[2, ] <- replace_one
+core_base_tbl[1, ] <- replace_two
+
+core_base_tbl |> 
+  rename(
+    " " = term
+  ) |> 
+  flextable_word() |> 
+  align(j = 1, align = "left", part = "all") |>
+  add_footer_row(
+      values = 
+        as_paragraph(
+        "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."), 
+      colwidths = 7) |> 
+  width(j = 1, width = 0.05) |>
+  align(j = 2, align = "center", part = "all") |>
+  compose(j = 1, value = as_paragraph(as_equation(` `))) |>
+  set_table_properties(layout = "autofit")
+
+```
+
+
+
+```{r}
+#| label: fig-rolling_coefficients_core
+#| fig-cap: "Core inflation rolling regressions. Note: t-statistics of greater (or less) than 1.96 ( or -1.96) is significant at a 5% level of significance."
+#| fig-width: 8
+#| fig-height: 5
+
+core_roll_regressions <- read_rds(here("Outputs", "artifacts_roll_core.rds"))
+
+core_roll_regressions |>
+  pluck(1)
+
+```
+
+
+
+```{r}
+#| label: fig-rolling_coefficients_lagged
+#| fig-cap: "Lagged headline inflation rolling regressions. Note: t-statistics of greater (or less) than 1.96 ( or -1.96) is significant at a 5% level of significance."
+#| fig-width: 8
+#| fig-height: 5
+
+lagged_roll_regressions <- read_rds(here("Outputs", "artifacts_roll_lagged.rds"))
+
+lagged_roll_regressions |>
+  pluck(1)
+
+```
+
+
+
+# Appendix: Explanation of the quantile on quantile regression
+
+To further capture the dynamic dependencies in the data, we perform a quantile on quantile regressions. Quantile regressions address the limitations of OLS which only estimates the mean dependency between one or more independent variables and the dependant variable. Distribution moments, such as the mean, can be strongly affected by heavy tails (or tail behaviour), non-linearity and extreme values in general [see @koenker2017]. In response to these limitations, the quantile regression was first introduced by @koenker1978a. @koenker2017 notes that quantile regressions are inherently local and are immune to small deviations in distributions. 
+
+However, @gupta2018 note that standard quantile regressions are limited in their ability to capture dependency in its entirety. That is, although quantile regressions capture the relationship between two variable (for example) at various points of the conditional distribution, it restricts the possibility that the nature of the independent variable can also influence how the dependent variable is calculated. The quantile-on-quantile  regression (QQR), therefore, offers a more complete picture of the complex dependency structure, and was utilised numerous times in the literature [see @mishra2019; @chang2020; @sim2016].
+
+Given this brief explanation on QQR, we estimate the relationship between the $\theta$-quantile of RPD ($a_{2t}$) and the $\tau$-quantile of headline inflation ($\Gamma_t$) as follows:
+
+$$
+	a_{2t} = \beta^\theta\Gamma_t + \epsilon_{t}^\theta, 
+$$ {#eq-qqr_1}
+
+Taking the linear version of  $\beta^\theta(.)$ with a first order Taylor expansion of $\beta^\theta(.)$ around $\Gamma^\tau$  gives:
+
+$$
+	\beta^\theta(\Gamma_t) \approx \beta^\theta(\Gamma^\tau) + \beta^{\theta'}(\Gamma^\tau)(\Gamma_t - \Gamma^\tau)
+$$ {#eq-qqr_2}
+
+
+In this instance both $\beta^\theta(\Gamma^\tau)$ and $\beta^{\theta'}(\Gamma^\tau)$ are indexed to $\theta$ and $\tau$. This means that @eq-qqr_2 can be summarised as follows:
+
+$$
+	\beta^\theta(\Gamma_t) \approx \beta_0(\theta, \tau) + \beta_1(\theta, \tau)(\Gamma_t - \Gamma),
+$$ {#eq-qqr_3}
+
+and collecting terms gives and substituting into @eq-qqr_1 results in :
+
+$$
+a_{2t} =  \beta_0(\theta, \tau) + \beta_1(\theta, \tau)(\Gamma^\tau)(\Gamma_t - \Gamma) + \epsilon_{t}^\theta
+$$ {#eq-qqr_4}
+
+where $\beta^\theta(\Gamma^\tau)$ and $\beta^{\theta'}(\Gamma^\tau)$ are substituted with $\beta_0(\theta, \tau)$ and $\beta_1(\theta, \tau)(\Gamma^\tau)$ respectively.
+
+Therefore, @eq-qqr_4 captures the relationship between the $\theta$-quantile of the RPD and the $\tau$-quantile of inflation, that is, the overall dependence structure of the respective distributions. To this end, to get the estimates of $\hat{\beta_0}(\theta, \tau)$ and  $\hat{\beta_1}(\theta, \tau)$ we solve for:
+
+$$
+	\underset{b_0, b_1}{min}\sum_{i=1}^n\rho_{\theta}\left[a_{2t} - b_0 - b_1(\widehat{\Gamma_t} - \widehat{\Gamma}) \right]K\left(\dfrac{F_n(\widehat{\Gamma_t}) - \tau}{h}\right)
+$$ {#eq-qqr_5}
+
+where $\rho_{\theta}$ is a tilted absolute value function which produces $\theta$-quantile values of $a_{2t}$. A Gaussian kernel $K(.)$ is used to weight observations in the neighbourhood of $\widehat{\Gamma^\tau}$ using $h$ as a bandwidth. These weights are inversely related to $\widehat{\Gamma_t} - \widehat{\Gamma}$. Lastly, the choice of $h$ remains uncertain in kernel regression where if a small $h$ is chosen the bias of the estimates is smaller but the variance of these estimates increases, and conversely. To overcome this uncertainty we use the cross validation method to calculate the appropriate level of $h$.

@@ -9,14 +9,21 @@ Acknowledge the bivariate limitation of the rolling-window regressions. Add disc
 Acknowledge the same limitation for the quantile-on-quantile (QQ) method. Note explicitly that QQ estimates are also bivariate and do not support a causal interpretation; omitted variables could be driving the observed quantile relationships.
 Add an explicit identification/limitations discussion. State clearly that the causal interpretation used to motivate optimal inflation-target design is not established by these methods, and that confounders could bias results.
 Consider extending to a multivariate framework, if feasible: a structural VAR or local-projections-with-controls specification that conditions on supply-side variables, to give a more defensible basis for the policy conclusions. (This is a "strongly encouraged" extension, not strictly mandatory — worth flagging to the user as a scope decision.)
+
+
 Reviewer #3 — Econometric/methodological detail
-Resolve the stationarity inconsistency in Table A2. ADF/PP fail to reject a unit root while KPSS rejects stationarity for both headline inflation and RPD, yet both are labeled "Stationary." Re-examine the tests, reconcile the conflicting results (e.g., discuss near-unit-root/fractional integration possibilities), and correct the classification and discussion accordingly.
+Resolve the stationarity inconsistency in Table A2. 
+ADF/PP fail to reject a unit root while KPSS rejects stationarity for both headline inflation and RPD, yet both are labeled "Stationary." Re-examine the tests, reconcile the conflicting results (e.g., discuss near-unit-root/fractional integration possibilities), and correct the classification and discussion accordingly.
 Add a variable definition and data source table in Section 3, covering headline inflation, the 45 CPI components, RPD, and expected/unexpected inflation, with construction method and source for each.
 Expand Table A1 (descriptive statistics) to include Jarque–Bera statistic, skewness, kurtosis, and a formal nonlinearity test (e.g., BDS test) for headline inflation and RPD.
-Sharpen the Abstract and Introduction's contribution statement. Explicitly differentiate the paper from Ndou and Redford (2014) and Ndou and Gumata (2017) — specify what's new (sample period, semi-parametric/QQ methods, incorporation of 2017 and 2025 target changes).
+Sharpen the Abstract and Introduction's contribution statement. 
+Explicitly differentiate the paper from Ndou and Redford (2014) and Ndou and Gumata (2017) — specify what's new (sample period, semi-parametric/QQ methods, incorporation of 2017 and 2025 target changes).
 Address the mechanical construction issue in RPD (Eq. 9). Since RPD is the CPI-weighted SD of the same 45 series aggregated into headline inflation (the regressor in Eqs. 10, 12, 17), part of the estimated relationship may be mechanical (a common shock to volatile categories like fuel/electricity raises both weighted mean and weighted variance simultaneously). Add a robustness check: re-estimate RPD excluding fuel and electricity, and/or decompose category contributions to RPD in high-inflation periods.
-Address simultaneity/exogeneity of inflation. All models (Eqs. 10, 12, 17) treat inflation as exogenous. Discuss the risk of simultaneity bias given common shocks (exchange-rate pass-through, global commodity prices). Consider adding a local-projections exercise around dated exogenous shocks (2020 oil collapse, 2022 food/energy shock) or a Granger-causality test to support the causal framing used in the menu-cost/signal-extraction discussion.
-Expand the conclusion's policy discussion and limitations. Separate the effect of the 2017 inflation-target change itself from the effect of concurrent large global shocks (COVID-19, energy shock, Russia–Ukraine war) before generalizing to other emerging markets. Add an explicit limitations paragraph and a paragraph on future research directions.
+Address simultaneity/exogeneity of inflation. All models (Eqs. 10, 12, 17) treat inflation as exogenous. Discuss the risk of simultaneity bias given common shocks (exchange-rate pass-through, global commodity prices). 
+Consider adding a local-projections exercise around dated exogenous shocks (2020 oil collapse, 2022 food/energy shock) or a Granger-causality test to support the causal framing used in the menu-cost/signal-extraction discussion.
+Expand the conclusion's policy discussion and limitations. 
+Separate the effect of the 2017 inflation-target change itself from the effect of concurrent large global shocks (COVID-19, energy shock, Russia–Ukraine war) before generalizing to other emerging markets. 
+Add an explicit limitations paragraph and a paragraph on future research directions.
 Trim Footnote 2 — it duplicates text already in the main body; shorten or remove.
 Add standard errors or t-statistics to Table 1, alongside the significance stars.
 Copyedit for exposition issues throughout (reviewer doesn't specify locations — likely need a full read-through pass).

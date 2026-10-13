@@ -117,7 +117,7 @@ Inflation is known to have adverse welfare effects through its distortion of rel
 
 The South African context can provide further insights into the relationship between inflation and RPD given the changes in the inflation targets from a 3 to 6 per cent band in 2000 to a 4.5 per cent midpoint target since 2017 and a shift to 3 per cent inflation target in  2025 as structural changes in inflation can affect the linkages with relative price dispersion [@caglayan2003]. Furthermore, that the functional form of relationship is U-shaped and dynamic [@fielding2000; @choi2010] implying a non-zero optimal inflation rate that minimizes the distortive effect on relative prices since a linear relationship would imply that the optimal inflation rate is zero. Given the above mentioned inflation target reforms, South Africa provides an opportunity to examine the dynamic effects of inflation on relative price variability and the optimal inflation target with policy implications for emerging market economies that intend to transition to lower inflation targets.
 
-The theoretical literature distinguishes between menu-cost and signal extraction models in explaining the positive relation between inflation and RPD.  In menu cost models [@sheshinki1979; @sheshinski1983; @rotemberg1983; @benabou1992] firms face fixed cost of adjusting nominal prices (e.g. printing new menus) and since they follow a one-sided dynamic pricing rule (S, s) when setting prices, inflation reduces the optimal real price. Given price adjustment costs differ across firms (e.g. due to differences in administrative costs) price adjustment occurs infrequently and at sporadic times leading to staggered price setting and consequently an increase in relative price variability with the latter reflecting nominal rigidities rather than a scarcity of resources. Signal extraction models emphasize the role of inflation surprises in increasing RPD. In these models, under the assumption of imperfect information, firms observe their own prices immediately, but only observe aggregate prices imperfectly, therefore unexpected inflation or inflation volatility reduces the informational content of prices as firms are unable to distinguish between idiosyncratic relative (real) shocks and aggregate (inflationary) shocks [@lucas1973; @hercowitz1981; @cukierman1983; @barro1976] leading to cross-sectional price dispersion which results in allocative inefficiencies generating adverse real effects.^[In signal extraction models, the effect of unexpected inflation on RPD depends on the magnitude not the sign and the effect is symmetric around zero inflation resulting in a U-shaped relationship.] While menu cost models predict a linear relationship, signal extraction models predict nonlinearities along with monetary search models [@head2005] with the latter also arguing that moderate inflation can increase welfare suggesting the optimal inflation can be non-zero.^[In monetary search model developed by Head and Kumar (2005), inflation affects relative price dispersion through two closely related channels arising from search frictions and market power. In their model, there are two groups of buyers, those who observe only one price (incomplete information) offered by sellers and those that observe more than one price. Since an increase in inflation reduces purchasing power of fiat money held by buyers, this weakens their bargaining position in the market while increasing sellers’ market power.  In this case, the Friedman rule is optimal. If however, buyers observe multiple price quotes, an increase in inflation from a low rate increases the gains to search weakening sellers’ market power, compresses the distribution of prices, raising welfare as a result the optimal inflation rate is in region above zero inflation implying a nonlinear relationship between inflation and RPD.
+The theoretical literature distinguishes between menu-cost and signal extraction models in explaining the positive relation between inflation and RPD.  In menu cost models [@sheshinki1979; @sheshinski1983; @rotemberg1983; @benabou1992] firms face fixed cost of adjusting nominal prices (e.g. printing new menus) and since they follow a one-sided dynamic pricing rule (S, s) when setting prices, inflation reduces the optimal real price. Given price adjustment costs differ across firms (e.g. due to differences in administrative costs) price adjustment occurs infrequently and at sporadic times leading to staggered price setting and consequently an increase in relative price variability with the latter reflecting nominal rigidities rather than a scarcity of resources. Signal extraction models emphasize the role of inflation surprises in increasing RPD. In these models, under the assumption of imperfect information, firms observe their own prices immediately, but only observe aggregate prices imperfectly, therefore unexpected inflation or inflation volatility reduces the informational content of prices as firms are unable to distinguish between idiosyncratic relative (real) shocks and aggregate (inflationary) shocks [@lucas1973; @hercowitz1981; @cukierman1983; @barro1976] leading to cross-sectional price dispersion which results in allocative inefficiencies generating adverse real effects.^[In signal extraction models, the effect of unexpected inflation on RPD depends on the magnitude not the sign and the effect is symmetric around zero inflation resulting in a U-shaped relationship.] While menu cost models predict a linear relationship, signal extraction models predict nonlinearities along with monetary search models [@head2005] with the latter also arguing that moderate inflation can increase welfare suggesting the optimal inflation can be non-zero. In monetary search model developed by Head and Kumar (2005), inflation affects relative price dispersion through two closely related channels arising from search frictions and market power. In their model, there are two groups of buyers, those who observe only one price (incomplete information) offered by sellers and those that observe more than one price. Since an increase in inflation reduces purchasing power of fiat money held by buyers, this weakens their bargaining position in the market while increasing sellers’ market power.  In this case, the Friedman rule is optimal. If however, buyers observe multiple price quotes, an increase in inflation from a low rate increases the gains to search weakening sellers’ market power, compresses the distribution of prices, raising welfare as a result the optimal inflation rate is in region above zero inflation implying a nonlinear relationship between inflation and RPD.
 
 The SARB’s inflation forecasts and expectations in 2024 increasingly clustered around the lower half of the 3-6 band. For example,  the September 2024 Monetary Policy Statement (MPC) stated that “Moving to inflation, headline eased to 4.4% in August, a 3-year low, and close to the middle of our target range. Our forecast suggests this progress will be sustained, with inflation contained below the 4.5% midpoint of our range through to the end of the forecast horizon”. The SARB signaled its preference for 3 per cent target in the May 2024 MPC when it modelled a scenario with a 3 per cent inflation objective before explicitly incorporating the 3 per cent inflation target in its baseline forecasts in the July 2025 MPC.
 
@@ -133,14 +133,14 @@ The rest of the paper is organised as follows: Section 2 offers a RPD-inflation 
 
 # Relative price dispersion through Lucas's aggregate supply curve
 
-The concept of relative price dispersion can be abstract and difficult to grasp without a theoretical framework. One of the most influential frameworks for understanding relative price dispersion is the @lucas1973 aggregate supply curve, which provides insights into how relative price dispersion can explain the output-inflation relationship, otherwise known as the 'natural rate theory. This theory essentially means (in part) that nominal "rigidities" partially dominate short-run supplier behaviour resulting from a lack of information about some prices relevant to decision making. For our purposes we ignore other aspects of the theoretical framework and emphasis this aspect of the model to provide an understanding of relative price dispersion.
+The concept of relative price dispersion can be abstract and difficult to grasp without a theoretical framework. One of the most influential frameworks for understanding relative price dispersion is the @lucas1973 aggregate supply curve, which provides insights into how relative price dispersion can explain the output-inflation relationship, otherwise known as the natural rate theory. This theory essentially means (in part) that nominal "rigidities" partially dominate short-run supplier behaviour resulting from a lack of information about some prices relevant to decision making. For our purposes we ignore other aspects of the theoretical framework and emphasis this aspect of the model to provide an understanding of relative price dispersion.
 
 @lucas1973 proposes a decomposition of the supply curve, all in logs, into a natural or secular component and a cyclical component as follows:
 
-$$y_t(z) = y_{n,t} + y_{ct}(z), $$ {#eq-lucas_supply_curve}
+$$y_t(z) = y_{n,t} + y_{c,t}(z), $$ {#eq-lucas_supply_curve}
 
 
-where $y_t(z)$ is the aggregate supply at time $t$ in market $z$, $y_{n,t}$ is the natural or secular level of supply at time $t$, and $y_{ct}$ is the cyclical component of supply at time $t$. Competitive markets and a cleared labour market are assumed, meaning that the slope of the supply curve can only reflect the degree of information frictions and the speed of price adjustment related to labour and product markets. Furthermore, the demand for goods in each period is assumed to be unevenly distributed, leading to relative price and general price level movements leading. It is this imperfect information of the suppliers about the general price level that leads to relative price dispersion and the output-inflation relationship.
+where $y_t(z)$ is the aggregate supply at time $t$ in market $z$, $y_{n,t}$ is the natural or secular level of supply at time $t$, and $y_{c,t}$ is the cyclical component of supply at time $t$. Competitive markets and a cleared labour market are assumed, meaning that the slope of the supply curve can only reflect the degree of information frictions and the speed of price adjustment related to labour and product markets. Furthermore, the demand for goods in each period is assumed to be unevenly distributed, leading to relative price and general price level movements leading. It is this imperfect information of the suppliers about the general price level that leads to relative price dispersion and the output-inflation relationship.
 
 In addition, the natural or secular level of supply is assumed to follow a linear trend as follows:
 $$ y_{n,t} = \alpha + \beta t, $$ {#eq-natural_supply}
@@ -706,124 +706,6 @@ regressions |>
 \setcounter{figure}{0}
 \renewcommand{\thefigure}{B\arabic{figure}}
 
-<!-- # Appendix: Alternative Results (OLS Robustness) -->
-
-<!-- The coefficient of variation (CV) version of RPD (or RPD-CV) normalizes the RPD by the aggregate price level to account for changes in the overall price level. This measure is particularly useful when comparing RPD across different time periods or economies with varying inflation rates. The RPD-CV is calculated as follows: -->
-
-<!-- $$RPD-CV_{t} = \sqrt{\dfrac{\sum_{i=1}^{n}\omega_{i}(\pi_{i,t} - \pi_{t})^2}{|1 + \pi_t|}}, $$ {#eq-rpdcv} -->
-
-<!-- where $\pi_t$ is the aggregate inflation rate at time $t$, and $\omega_{i}$ are the inflation basket weights. -->
-
-
-<!-- ## RPD-CV over-time -->
-
-<!-- ```{r} -->
-<!-- #| label: fig-core_rpd -->
-<!-- #| fig-cap: "RPD-CV overtime" -->
-<!-- #| fig-width: 8 -->
-<!-- #| fig-height: 3 -->
-
-<!-- cov_regressions |> pluck(2) -->
-<!-- ``` -->
-
-<!-- \newpage -->
-<!-- ## Stationarity tests for RPD-CV -->
-
-<!-- ```{r} -->
-<!-- #| label: tbl-cov_stationarity_tests -->
-<!-- #| tbl-cap: "Stationarity tests results for RPD-CV" -->
-<!-- cov_regressions |> -->
-<!--   pluck(4) |>  -->
-<!--   mutate( -->
-<!--     Measure = str_replace_all(Measure, -->
-<!--     c("headline_inflation" = "Headline Inflation", -->
-<!--       "rpd_cov" = "RPD-CV")), -->
-<!--   ) |>  -->
-<!--   flextable_word() |> -->
-<!--   align(j = 1, align = "left", part = "all") |> -->
-<!--   autofit(add_w = 0.2) -->
-<!-- ``` -->
-
-
-<!-- ## Lag length selection for RPD-CV -->
-
-<!-- ```{r} -->
-<!-- #| label: tbl-cov_lag_selection -->
-<!-- #| tbl-cap: "RPD-CV lag length selection" -->
-
-<!-- cov_regressions |>  -->
-<!--   pluck(3) |>  -->
-<!--   mutate( -->
-<!--     across( -->
-<!--       where(is.numeric), -->
-<!--       ~ round(.x, 0) -->
-<!--     ) -->
-<!--   ) |>  -->
-<!--   flextable_word() |>  -->
-<!--   colformat_double(j = 2, digits = 0) |> -->
-<!--   autofit(add_w = 2.5) -->
-
-<!-- ``` -->
-
-<!-- \newpage -->
-
-<!-- ## RPD-CV baseline regression results -->
-
-<!-- ```{r} -->
-<!-- #| label: tbl-cov_base_regression -->
-<!-- #| tbl-cap: "RPD-CV baseline regressions" -->
-<!-- #| ft.arraystretch: 0.6 -->
-
-<!-- cov_tbl <-  -->
-<!--   cov_regressions |>  -->
-<!--   pluck(5) |>  -->
-<!--   mutate(term = case_when( -->
-<!--     term == "(Intercept)" ~ "Constant", -->
-<!--     term == "headline_inflation" ~ "\\pi_t", -->
-<!--     # term == "abs_core_inflation" ~ "|\\pi_t|", -->
-<!--     term == "squared_headline_inflation" ~ "\\pi_t^2", -->
-<!--     term == "lag(log_rpd_cov, 1)" ~ "RPD_{t-1}", -->
-<!--     term == "lag(log_rpd_cov, 2)" ~ "RPD_{t-2}", -->
-<!--     term == "lag(log_rpd_cov, 3)" ~ "RPD_{t-3}", -->
-<!--     term == "dum_2011m121" ~ "D_{2011m12}", -->
-<!--     term == "dum_2014m71" ~ "D_{2014m7}", -->
-<!--     term == "dum_2017m71" ~ "D_{2017m7}", -->
-<!--     term == "dum_2020m21" ~ "D_{2020m2}", -->
-<!--     term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions -->
-<!--     TRUE ~ term -->
-<!--   )) |>  -->
-<!--   arrange(desc(term))  -->
-
-<!-- replace_one <- cov_tbl |>  -->
-<!--   slice(1) -->
-
-<!-- replace_two <- cov_tbl |>  -->
-<!--   slice(2) -->
-
-<!-- cov_tbl[2, ] <- replace_one -->
-<!-- cov_tbl[1, ] <- replace_two -->
-
-<!-- cov_tbl |> -->
-<!--   rename( -->
-<!--     " " = term, -->
-<!--   ) |>  -->
-<!--   flextable_word() |>  -->
-<!--   align(j = 1, align = "left", part = "all") |> -->
-<!--   add_footer_row( -->
-<!--       values =  -->
-<!--         as_paragraph( -->
-<!--         "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."),  -->
-<!--       colwidths = 7) |>  -->
-<!--   width(j = 1, width = 0.1) |>  -->
-<!--   align(j = 2, align = "center", part = "all") |> -->
-<!--   compose(j = 1, value = as_paragraph(as_equation(` `))) |> -->
-<!--   autofit(add_w = -.95) -->
-<!-- ``` -->
-
-<!-- \newpage -->
-
-
-
 # Appendix: Robustness
 
 ## Core inflation models
@@ -899,75 +781,21 @@ core_roll_regressions |>
 ```
 
 
-```{r}
-#| label: fig-recursive_core
-#| fig-cap: "Recursive regressions. Note: Recursive regression estimates of the coefficient on core inflation with a fixed start date of 2012-07."
-#| fig-width: 8
-#| fig-height: 2.5
-recursive_core <- read_rds(here("Outputs", "artifacts_recursive_core.rds"))
 
-recursive_core |> 
+```{r}
+#| label: fig-rolling_coefficients_lagged
+#| fig-cap: "Lagged headline inflation rolling regressions. Note: t-statistics of greater (or less) than 1.96 ( or -1.96) is significant at a 5% level of significance."
+#| fig-width: 8
+#| fig-height: 5
+
+lagged_roll_regressions <- read_rds(here("Outputs", "artifacts_roll_lagged.rds"))
+
+lagged_roll_regressions |>
   pluck(1)
 
 ```
 
 
-## Lagged inflation models
-
-```{r}
-#| label: tbl-core_base_regression
-#| tbl-cap: "Core inflation baseline regressions"
-#| ft.arraystretch: 0.6
-
-lagged <- read_rds(here("Outputs", "artifacts_base_regression_lagged.rds"))
-
-
-lagged_base_tbl <- 
-  lagged  |> 
-  pluck(2) |> 
-  mutate(term = case_when(
-    term == "(Intercept)" ~ "C",
-    term == "headline_inflation" ~ "\\pi_{t-1}",
-    # term == "abs_headline_inflation" ~ "|\\pi_t|",
-    term == "squared_headline_inflation" ~ "\\pi_{t-1}^2",
-    term == "lag(log_rpd, 1)" ~ "RPD_{t-1}",
-    term == "lag(log_rpd, 2)" ~ "RPD_{t-2}",
-    term == "lag(log_rpd, 3)" ~ "RPD_{t-3}",
-    term == "dum_2011m121" ~ "D_{2011m12}",
-    term == "dum_2014m71" ~ "D_{2014m7}",
-    term == "dum_2017m71" ~ "D_{2017m7}",
-    term == "dum_2020m21" ~ "D_{2020m2}",
-    term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions
-    TRUE ~ term
-  )) |>  
-  arrange(desc(term))
-
-replace_one <- lagged_base_tbl |> 
-  slice(1)
-  
-replace_two <- lagged_base_tbl |> 
-  slice(2)
-
-lagged_base_tbl[2, ] <- replace_one
-lagged_base_tbl[1, ] <- replace_two
-
-lagged_base_tbl |> 
-  rename(
-    " " = term
-  ) |> 
-  flextable_word() |> 
-  align(j = 1, align = "left", part = "all") |>
-  add_footer_row(
-      values = 
-        as_paragraph(
-        "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."), 
-      colwidths = 7) |> 
-  width(j = 1, width = 0.05) |>
-  align(j = 2, align = "center", part = "all") |>
-  compose(j = 1, value = as_paragraph(as_equation(` `))) |>
-  set_table_properties(layout = "autofit")
-
-```
 
 
 # Appendix: Explanation of the quantile on quantile regression
