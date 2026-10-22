@@ -44,7 +44,7 @@ library(tictoc)
 source(here("Functions", "fx_plot.R"))
 roll_modelling <- 
   function(data, window, dep_var){
-    roll_spec <-   slidify(.f =  ~lm(..1 ~ ..2 + ..3 + ..4 + ..5 ), 
+    roll_spec <-   slidify(.f =  ~lm(..1 ~ ..2 + ..3 + ..4 + ..5), 
                            .period = window,
                            .align = "right",
                            .unlist = FALSE,

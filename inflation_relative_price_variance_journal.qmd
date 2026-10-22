@@ -142,7 +142,7 @@ We chose a post 2008 financial crisis period sample because inflation was broadl
 
 `r hl( "This paper differs from these two studies in several respects. First, our sample (2009–2025) begins where theirs ends and covers the period in which the SARB anchored policy on the 4.5 per cent midpoint (from 2017) as well as the run-up to the formal adoption of the 3 per cent target in 2025. The only regime change in the earlier studies is the adoption of inflation targeting in 2000. Our question is not whether inflation targeting per se altered the relationship, but whether moving to lower targets within an established inflation-targeting framework does. Second, we construct a single expenditure-weighted measure of aggregate RPD across 45 CPI categories of the post-2008 consumer price inflation basket, following")` @lach1992, `r hl("rather than component-by-component RPD measure")` [@ndou2014] `r hl("or a services-only RPD measures")` [@ndou2017]. `r hl("Our approach speaks directly to the question relevant to setting a headline inflation target. Third, following")` @caraballo2013, `r hl("we decompose inflation into expected and unexpected components within the semi-parametric framework, so that the menu cost and signal extraction predictions including possible asymmetries between positive and negative surprises can be assessed without imposing a quadratic functional form.")` @ndou2014 `r hl("explicitly leave the distinction between expected and unexpected inflation untested, while")` @ndou2017 `r hl("assess it only parametrically and for services. Fourth, methodologically this paper complements the semiparametric approach used in earlier studies with quantile-on-quantile regressions, which has not previously been applied to the inflation RPD relationship in the literature. Finally, because our RPD-minimising inflation estimates are comparable with those of the earlier studies, we can assess whether the leftward shift in the minimising rate that they document for the transition to inflation targeting has continued as inflation has been brought lower.")`
 
-`r ("Throughout, we follow the bulk of the empirical RPD literature in treating headline inflation as predetermined with respect to RPD. This assumption is not innocuous.")` @grier1996 `r ("show, using a bivariate GARCH-M model, that inflation and relative price dispersion are more plausibly jointly determined, so that any contemporaneous correlation between the two is difficult to interpret causally.")` @parsley1996 `r hl("raise a related concern at the level of aggregation that shocks that are unobserved to the econometrician can drive both the aggregate inflation rate and the dispersion of its components simultaneously, biasing single-equation estimates of the inflation-RPD relationship. More recently,")` @sheremirov2020 `r hl("makes the same point explicitly, arguing that the co-movement between inflation and price dispersion should not be read as causal because both are endogenous outcomes of the same underlying shocks, and that identifying genuinely exogenous variation in inflation is a substantially harder empirical problem than estimating their co-movement. We do not attempt to fully resolve this identification problem here. Our methodological approach seeks to mitigate in the following manner. First, we demonstrate the need for a time-varying and non-linear approach by showing the inadequacy of the static approach. Second, using rolling and recursive window approaches we see that the relationship varies overtime. Third, the semi-parametric approach incorporates the non-linear features, and confirms their importance with a U-shaped relationship. The U-shape relationship is important as it shows that the inflation-RPD nexus is not mechanical but a complex interplay. This complex interplay is further demostrated by tests a robustness analysis on the existence of regimes and dynamic causality in the inflation-RPD nexus. These together higlight key aspects of the U-shape relationship. The combined effect of this layered methodological approach is increased confidence that the results have economic meaning.")` 
+`r hl("Throughout, we follow the bulk of the empirical RPD literature in treating headline inflation as predetermined with respect to RPD. This assumption is not innocuous.")` @grier1996 `r hl("show, using a bivariate GARCH-M model, that inflation and relative price dispersion are more plausibly jointly determined, so that any contemporaneous correlation between the two is difficult to interpret causally.")` @parsley1996 `r hl("raise a related concern at the level of aggregation that shocks that are unobserved to the econometrician can drive both the aggregate inflation rate and the dispersion of its components simultaneously, biasing single-equation estimates of the inflation-RPD relationship. More recently,")` @sheremirov2020 `r hl("makes the same point explicitly, arguing that the co-movement between inflation and price dispersion should not be read as causal because both are endogenous outcomes of the same underlying shocks, and that identifying genuinely exogenous variation in inflation is a substantially harder empirical problem than estimating their co-movement. We do not attempt to fully resolve this identification problem here. Our methodological approach seeks to mitigate in the following manner. First, we demonstrate the need for a time-varying and non-linear approach by showing the inadequacy of the static approach. Second, using rolling and recursive window approaches we see that the relationship varies overtime. Third, the semi-parametric approach incorporates the non-linear features, and confirms their importance with a U-shaped relationship. The U-shape relationship is important as it shows that the inflation-RPD nexus is not mechanical but a complex interplay. This complex interplay is further demostrated by tests a robustness analysis on the existence of regimes and dynamic causality in the inflation-RPD nexus. These together higlight key aspects of the U-shape relationship. The combined effect of this layered methodological approach is increased confidence that the results have economic meaning.")` 
 
 
 In brief, our findings confirm a non-linear relationship for the South African case. Furthermore, we find evidence of regime-dependence in the relationship between inflation and RPD with the post-2017 period showing a flatter relationship compared to the pre-2017 period. The optimal inflation rate that minimizes RPD is estimated to be in the range of 2-3 per cent, which is lower than the current 4.5 per cent target but closer to the 3 per cent target adopted in 2025. The rest of the paper is organised as follows: Section 2 offers a RPD-inflation theoretical foundation, Section 3 presents the data and methodology. Section 4 discusses the main results, Section 5 discusses the robustness tests and Section 6 concludes the paper.
@@ -250,8 +250,7 @@ $$ RPD_t = \alpha + \beta_0 EIN_t + \beta_1 UIN_t + g(UIN_t) + \sum_{k=1}^{3}\la
 
 where $EIN_t$ is the expected inflation rate, $UIN_t$ is the unexpected inflation rate, and $g(UIN_t)$ is a non-linear function of unexpected inflation ($UIN_t$). We obtain the expected using one-period step ahead forecast of a fitted ARMA model of headline inflation and unexpected inflation as the difference between one-step ahead inflation forecast and actual inflation in the previous period. The estimation of $g(UIN_t)$ follows the same two-stage semi-parametric approach outlined in @eq-rpd_semi_parametric_stage1 and @eq-rpd_semi_parametric_stage2. The number of lags is the same as in @eq-rpd_reg.
 
-In a some-what novel to the RPD literature, we employ a quantile on quantile regression approach [@koenker2017]. Quantile on quantile regressions are robust to outliers and allows us to estimate the regime aspects of the relationship between RPD and inflation. For brevity, we explain the quantile on quantile estimation procedure in the Appendix. `r hl("Lastly, and as an additional robustness measure, we estimate time-varying Granger causality by")` @lu2014.^[See @lu2014 for the details of the estimation process, including the appropriate test statistics.] The @lu2014 `r hl("uses a Dynamic Conditional Correlation (DCC) MGARCH approach to Granger causality. This approach allows us to estimate a dynamic causality approach, which takes into account significant time shifts in the strength of the causality. In this way we can pinpoint exactly when the interplay between RDP and inflation intensifies or weakens.")`
-
+In a some-what novel to the RPD literature, we employ a quantile on quantile regression approach [@koenker2017]. Quantile on quantile regressions are robust to outliers and allows us to estimate the regime aspects of the relationship between RPD and inflation. For brevity, we explain the quantile on quantile estimation procedure in the Appendix. `r hl("Lastly, and as an additional robustness measure, we estimate time-varying Granger causality by")` @lu2014.^[See @lu2014 for the details of the estimation process, including the appropriate test statistics.] The @lu2014 `r hl(" methodology uses a Dynamic Conditional Correlation (DCC) MGARCH approach to Granger causality. This approach allows us to estimate a dynamic causality approach, which takes into account significant time shifts in the strength of the causality. In this way we can pinpoint exactly when the interplay between RDP and inflation intensifies or weakens.")`
 
 
 #  Main results
@@ -340,7 +339,8 @@ base_tbl <-
     term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions
     TRUE ~ term
   )) |>  
-  arrange(desc(term))
+  arrange(desc(term)) |> 
+  slice(1, 2, 5, 4, 3, 6:n())
 
 replace_one <- base_tbl |> 
   slice(1)
@@ -836,19 +836,88 @@ core_roll_regressions |>
 ```
 
 
+\newpage
+
+# Appendix: Controls models
 
 ```{r}
-#| label: fig-rolling_coefficients_lagged
-#| fig-cap: "Lagged headline inflation rolling regressions. Note: t-statistics of greater (or less) than 1.96 ( or -1.96) is significant at a 5% level of significance."
+#| label: tbl-control_base_regression
+#| tbl-cap: "Inflation baseline regressions with controls"
+#| ft.arraystretch: 0.6
+
+controls <- read_rds(here("Outputs", "artifacts_base_regression_controls.rds"))
+
+
+controls_base_tbl <- 
+  controls  |> 
+  pluck(2) |> 
+  mutate(term = case_when(
+    term == "(Intercept)" ~ "C",
+    term == "headline_inflation" ~ "\\pi_t",
+    # term == "abs_headline_inflation" ~ "|\\pi_t|",
+    term == "squared_headline_inflation" ~ "\\pi_t^2",
+    term == "lag(log_rpd, 1)" ~ "RPD_{t-1}",
+    term == "lag(log_rpd, 2)" ~ "RPD_{t-2}",
+    term == "lag(log_rpd, 3)" ~ "RPD_{t-3}",
+    term == "dum_2011m121" ~ "D_{2011m12}",
+    term == "dum_2014m71" ~ "D_{2014m7}",
+    term == "dum_2017m71" ~ "D_{2017m7}",
+    term == "dum_2020m21" ~ "D_{2020m2}",
+    term == "dum_2022m81" ~ "D_{2022m8}", # issue with 1s poping in from the regressions
+    term == "zar" ~ "ZAR",
+    term == "oil" ~ "OIL",
+    TRUE ~ term
+  )) |>  
+  arrange(desc(term)) |> 
+  slice(1, 2, 6, 5, 4, 12, 11, 10, 9, 8, 3, 7)
+replace_one <- controls_base_tbl |> 
+  slice(1)
+  
+replace_two <- controls_base_tbl |> 
+  slice(2)
+
+controls_base_tbl[2, ] <- replace_one
+controls_base_tbl[1, ] <- replace_two
+
+controls_base_tbl |> 
+  rename(
+    " " = term
+  ) |> 
+  flextable_word() |> 
+  align(j = 1, align = "left", part = "all") |>
+  add_footer_row(
+      values = 
+        as_paragraph(
+        "Note: *** = p value < 0.01, ** = 0.01 < p value < 0.05, * = 0.05 < p value < 0.1."), 
+      colwidths = 7) |> 
+  width(j = 1, width = 0.05) |>
+  align(j = 2, align = "center", part = "all") |>
+  compose(j = 1, value = as_paragraph(as_equation(` `))) |>
+  colformat_double(digits = 8) |> 
+  set_table_properties(layout = "autofit")
+
+```
+
+
+
+
+
+
+
+
+```{r}
+#| label: fig-rolling_coefficients_controls
+#| fig-cap: "Rolling regressions with controls. Note: t-statistics of greater (or less) than 1.96 ( or -1.96) is significant at a 5% level of significance."
 #| fig-width: 8
 #| fig-height: 5
 
-lagged_roll_regressions <- read_rds(here("Outputs", "artifacts_roll_lagged.rds"))
+controls_roll_regressions <- read_rds(here("Outputs", "artifacts_roll_controls.rds"))
 
-lagged_roll_regressions |>
+controls_roll_regressions |>
   pluck(1)
 
 ```
+
 
 
 
