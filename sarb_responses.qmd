@@ -1,0 +1,134 @@
+---
+title: "Response to Reviewers"
+subtitle: "Inflation Dynamics and Relative Price Dispersion in South Africa, Implications for Optimal Inflation Targeting"
+author: "Keagile Lesame and Xolani Sibande"
+date: today
+date-format: "D MMMM YYYY"
+format:
+  docx:
+    reference-doc: new_template_no_numbering.docx
+    number-sections: false
+---
+
+Dear Reviewers,
+
+Thank you very much for taking the time to read our paper so carefully and for such constructive and thoughtful comments. They have made the paper clearer and more honest about what the evidence can and cannot show. Below we reproduce each comment (in italics) and follow it with our response. Section, table and figure numbers refer to the revised manuscript.
+
+While carrying out the additional checks you asked for, we found an error in how the pre-2017 and post-2017 panels of the semi-parametric figures were constructed. Those panels had displayed the full-sample estimates over each sub-sample range instead of estimates obtained separately for each sub-sample. We have corrected this, and every sub-sample is now estimated on its own data with its own cross-validated bandwidth. The corrected estimates strengthen the leftward shift of the relationship after 2017, with RPD lowest at headline inflation of about 5 per cent before 2017 and about 3.5 per cent after 2017. We apologise for the error and are grateful that your comments prompted the checks that uncovered it. The text, figures and conclusions have been revised accordingly.
+
+# Reviewer 1
+
+> *This study draws on both the Lucas signal extraction framework and the New Keynesian sticky-price model to analyze inflation dynamics and relative price dispersion. The former highlights the role of informational frictions, whereby firms may misinterpret aggregate inflation as relative price changes, while the latter emphasizes nominal rigidities stemming from costly and staggered price adjustment. Taken together, these frameworks offer a complementary perspective on how inflation can generate heterogeneous price movements and influence aggregate output dynamics. However, several aspects of the paper require further improvement.*
+
+Thank you for the kind summary and for recognising that the two frameworks complement each other. We have tried to keep that complementarity visible. The menu-cost and signal extraction predictions are set out side by side in the Introduction, and the results sections report which of the two channels the evidence supports in each period.
+
+**Comment 1.1**
+
+> *First, the research questions should be stated more clearly in the introduction to guide the reader and better frame the contribution of the study.*
+
+**Response.** Thank you, this was a fair point. The Introduction now states the policy question directly, namely what the optimal inflation target is for South Africa from the perspective of relative price distortions (third paragraph). A footnote is attached to that question to make clear that the inflation rate that minimises RPD is not the same thing as the welfare-optimal inflation rate. The following paragraphs then explain how we answer the question. We test the menu-cost and signal extraction predictions in a semi-parametric framework, we add quantile-on-quantile regressions and time-varying Granger causality, and we report bootstrap confidence bands, exchange rate and oil price controls, a core measure of RPD and a test of symmetry for inflation surprises. We have also added a paragraph that sets out what is new relative to the two existing South African studies, Ndou and Redford (2014) and Ndou and Gumata (2017), in terms of sample period, the regime change studied, the measure of RPD and the methods used.
+
+**Comment 1.2**
+
+> *Second, in the section on relative price dispersion through Lucas's aggregate supply curve, there are inconsistencies in the equation notation that need to be corrected for clarity and precision.*
+
+**Response.** Thank you for catching this. We have gone through the equations in Section 2 and made the notation consistent. Time subscripts are now written in the same way throughout, the symbols for the general price level and its mean are used consistently, and the description of the parameter that governs the weight on the mean price level now refers to it consistently. We have also made sure that symbols in Section 3 are not reused for different objects, so that the expenditure weights, the lag coefficients and the error terms each have their own notation. The optimal inflation formula has been rewritten so that it matches the quadratic specification it is derived from.
+
+<!-- CHECK before submission. These notation fixes are NOT yet in the journal qmd. See the note in the chat reply. -->
+
+**Comment 1.3**
+
+> *Third, the discussion of results should be strengthened by explicitly linking the findings to the research questions and situating them within the context of existing literature. In addition, for a full academic paper, it is recommended to use numbered footnotes rather than symbols to ensure consistency and readability.*
+
+**Response.** Thank you. We have linked the results back to the questions posed in the Introduction and placed them in the context of the literature at each step of Section 4. The post-2017 turning point is compared with earlier estimates (Choi et al., 2011, Baglan, 2016, Hornstein et al., 2024, and Caraballo and Dabus, 2013), and the leftward shift is related to the finding of Ndou and Gumata (2017) for services prices. The unexpected inflation results are related to the extended signal extraction models and to the evidence in Caraballo and Dabus (2013), Becker and Nautz (2012) and Sara-Zaror (2024). The parametric symmetry regressions are linked to the evidence on expected inflation in Ndou and Gumata (2017). The Robustness section closes with a short summary of what each additional test tells us about the main findings, and the Conclusion returns to the policy question. On footnotes, all footnotes in the body of the paper are now numbered consecutively.
+
+<!-- CHECK before submission. Confirm the title page author footnotes (title.tex) also print as numbers and not symbols. -->
+
+**Comment 1.4**
+
+> *Finally, formatting issues should be addressed, including ensuring that figure and table captions are presented in a smaller font than the main text. Additional minor comments have been provided using track changes.*
+
+**Response.** Thank you. Figure and table captions are now set in a smaller font than the main text, and we have reformatted the tables so that their notes sit inside the table width. We have also worked through the minor comments you provided in track changes and are grateful for them.
+
+<!-- CHECK before submission. Caption font size is not set in preamble.tex or the docx template yet. Confirm the minor track changes were all resolved. -->
+
+# Reviewer 2
+
+> *The paper asks a worthwhile question, how South Africa's successive inflation-target reductions have reshaped the inflation and relative price dispersion (RPD) nexus, and proposes a sensible toolkit. However, there are several problems throughout the paper's sections, which I report in the text as well as below.*
+
+Thank you for the encouraging opening and for the very detailed reading. Your points led to the most substantial changes in the paper, and we respond to each in turn.
+
+**Comment 2.1**
+
+> *The first problem is in the Introduction. This section does not explain why it is important to analyse this topic in general and in SA specifically, it does not define the relationship under study, nor does it properly define the RPD concept and process. Please see further suggestions on rebalancing this section in the text.*
+
+**Response.** Thank you, we have rebalanced the Introduction along these lines. The opening paragraph now explains why the topic matters, because inflation can distort relative prices, misallocate resources and lower real activity. The second paragraph defines RPD at the outset as the dispersion of individual price changes around the aggregate inflation rate. It also explains why part of this dispersion is efficient while the part driven by inflation is not, and how that leads to a misallocation of labour and capital. The third paragraph explains why South Africa is a useful case, given the move from the 3 to 6 per cent range in 2000, to an informal focus on the 4.5 per cent midpoint from 2017, to the formal 3 per cent point target in November 2025. It also defines the relationship under study, namely a U-shaped and dynamic link between inflation and RPD, in contrast with a monotonically increasing relationship that would put the RPD-minimising inflation rate at zero. Section 3 adds a precise definition of how RPD is measured, which is the cross-sectional variability of relative price changes across the 45 CPI categories in a given month.
+
+**Comment 2.2**
+
+> *Section 2 adds noise, rather than value, to the research. It restates a general theory and its mathematical derivation, with no interpretation or extension. It is not conducive to the empirical model either, which remains unrelated from this theory. My strong suggestion is to replace this section with a proper literature review, able to problematise the relationship under study, to interpret less intuitive results, and to compare EMs to AEs (which is a stated, but unfilled, contribution of this paper).*
+
+**Response.** We appreciate how frankly this was put, and we agree that a literature review is what the reader needs to place the paper. The Introduction now includes an extensive literature review. It covers the menu-cost, signal extraction and monetary search explanations and what each predicts about the shape of the relationship, the existing empirical evidence, and the two South African studies together with how this paper differs from them. In the results sections we then interpret the less intuitive findings against that literature, namely the absence of any response of RPD to unexpected inflation after 2017, the symmetry of positive and negative surprises, and the rise in the role of expected inflation after 2017. Our estimates of the RPD-minimising inflation rate are also compared with those reported for other economies.
+
+We have nevertheless kept Section 2, because we think it is important for understanding the mechanism behind the paper and not simply a restatement of general theory. Its role is to motivate the variable we study and the way we decompose inflation, rather than to derive the regression we estimate. In the Lucas model the weight $\theta$ is the share of the total variation in the price a supplier observes that is relative, or market-specific, rather than aggregate, and it scales the response of output to a price surprise. Our RPD measure is the empirical counterpart of the relative component of that variation, since it is the expenditure-weighted dispersion of category inflation rates around headline inflation. We use its standard deviation rather than the share itself, so RPD corresponds to the numerator of $\theta$ and not to $\theta$ as a whole. The aggregate component of the variation is the surprise in the general price level, which is why we split inflation into expected and unexpected parts. In this sense, the two components of price variation in the model, relative dispersion and aggregate surprise, have direct counterparts in RPD and unexpected inflation. The framework also links relative price dispersion theoretically to output, which is the reason the RPD-minimising inflation rate matters for the choice of an inflation target.
+
+What the framework does not tell us is how the level of inflation affects dispersion, or why that relationship should be U-shaped. Those predictions come from the menu-cost, signal extraction and search models reviewed in the Introduction, and they are what our empirical specification tests. You were right that the link between the framework and our empirical set-up was not visible enough, so we have added a paragraph at the end of Section 2 that makes it explicit. We also make clear that we do not use the framework to estimate the supply curve or to claim a causal effect on output.
+
+Finally, we have toned down the claim about comparing emerging and advanced economies. We now describe our contribution as adding evidence to the sparse emerging market literature, rather than as a systematic comparison.
+
+<!-- CHECK before submission. The new Section 2 paragraph is now in the journal qmd. The wording about toning down the EM versus AE comparison still needs matching edits in the Introduction and abstract. -->
+
+
+**Comment 2.3**
+
+> *On methods, the crucial issue is that RPD and inflation are mechanically linked. RPD is the weighted standard deviation of the same 45 category inflation rates that aggregate into headline. When food, fuel or administered prices spike, both series rise by construction. Nothing addresses this simultaneity, so part of the "effect of inflation on RPD" is an accounting identity. For South Africa this is acute, since electricity and other administered prices alone could drive most of the measured dispersion. There is no core/trimmed-mean version, no exclusion of administered prices, and Ndou and Redford (2014), a SARB paper on exactly which CPI components drive RPD, is cited once and never engaged.*
+
+**Response.** This is the most important point you raised, and we are grateful for it. We have responded in four ways.
+
+First, we now explain what RPD does and does not measure. It is a standard deviation around the aggregate rate, so it is zero whenever all prices change at the same pace, however high inflation is. A purely mechanical scaling of dispersion with inflation would put the RPD-minimising rate at zero, whereas we find positive turning points that differ across regimes.
+
+Second, we now estimate the models for a core measure of RPD that excludes food and energy (Appendix B). Energy covers fuel and electricity, the items you highlighted. The quadratic term is positive and significant for core RPD in the full and pre-2017 samples (Table B1), and the semi-parametric estimates show a U-shaped relationship before 2017 with RPD lowest at core inflation of about 5 to 5.5 per cent (Figure B3). The non-linearity is therefore not driven by food and energy price episodes. We have not excluded administered prices as a separate group, and we say so in the paper as a remaining limitation.
+
+Third, we now discuss simultaneity directly in the Introduction. We cite Grier and Perry (1996), Parsley (1996) and Sheremirov (2020) on why inflation and price dispersion are more plausibly jointly determined, and we state plainly that we do not claim to resolve the identification problem. The time-varying Granger causality results in Section 5.2 show that the link runs in both directions and changes over time, which is not what a pure accounting identity would produce. We have also added exchange rate and oil price controls (Appendix C), and the semi-parametric turning points are essentially unchanged, at about 4.9 per cent before 2017 and about 3.6 per cent after 2017.
+
+Fourth, Ndou and Redford (2014) is now engaged in the Introduction. We describe their component-by-component measure of RPD and their findings, and we explain how our single expenditure-weighted measure across 45 categories, our sample period and our methods differ. We read all of our results as describing the association between inflation and RPD rather than a causal effect.
+
+**Comment 2.4**
+
+> *The other problem is that the empirical results, as reported, are internally inconsistent and very difficult to follow. The abstract and conclusion assert a "U-shaped" nonlinearity, yet Section 4 states that in Figure 5 "the relationship is approximately linear and upward sloping" across all samples, and reads this as support for menu-cost rather than signal-extraction models, while the conclusion claims the opposite. If the conditional mean is monotonically increasing, an interior optimum at 2 to 3 per cent does not follow, and the reported minimum looks like the sample's lower support, not an identified turning point. No confidence bands are reported for these curves, so nothing distinguishes curvature from noise.*
+
+**Response.** Thank you, and we apologise for the confusion. The inconsistency partly came from the figure error described at the start of this letter. With the corrected sub-sample estimates, the three samples are described separately and the abstract, results and conclusion now tell the same story. In the full sample the marginal effect of inflation is small at 2 to 3 per cent and rises thereafter, so RPD is lowest at the bottom of the observed range and we say that this is in line with the menu-cost prediction. We no longer describe the full sample as having an interior optimum. In the pre-2017 sample the marginal effect turns from negative to positive at about 5 per cent, and in the post-2017 sample at about 3.5 per cent. The abstract and the conclusion now refer to a non-linear and regime-dependent relationship, and they attribute the post-2017 role of expected inflation to the menu-cost channel and the pre-2017 response to inflation surprises to the signal extraction channel, so that the two parts of the paper no longer pull in opposite directions.
+
+On confidence bands, we now report 95 per cent pointwise bootstrap bands for the derivative of the non-parametric component (Section 5.3 and the confidence bands figure). The marginal effect is significantly positive above about 4.9 per cent in the full sample, 5.8 per cent before 2017 and 3.9 per cent after 2017. It is not significantly negative anywhere, which means that the rise in RPD above the turning points is precisely estimated while the location of the minimum is less so. We state this limitation openly in the text, and we have relabelled the bandwidth sensitivity curves in the figures so that they are not mistaken for confidence bands.
+
+**Comment 2.5**
+
+> *The quadratic evidence is much weaker than claimed. In Table 1 the linear inflation term flips negative and is insignificant in every sample, while the squared term is significant only at 10 per cent. The text's "all the estimates of the quadratic term are significant" oversells this. Worse, the implied turning points are nowhere near the 2 to 3 per cent the paper reports from the kernel estimates, and pre-2017 is above, not below, the current target. No delta-method standard error is given for any turning point, so the headline "optimal inflation" number has never actually been tested.*
+
+**Response.** You are right, and we have changed both the estimates and the text. Table 1 now includes the structural break dummies identified for inflation. In the revised table the linear inflation term is positive and significant only in the post-2017 linear specification, and none of the quadratic terms is individually significant, with point estimates of -0.002 in the full sample, 0.002 before 2017 and -0.001 after 2017. We now say that a global quadratic is too restrictive and does not capture the relationship well, which is what motivates the rolling, recursive and semi-parametric approaches. Because the quadratic terms are not significant, we no longer derive headline turning points from them, so there is no turning point whose delta-method standard error is missing. The turning points we report come from the semi-parametric estimates, and their precision is assessed with the bootstrap bands described in our response to Comment 2.4. We also agree that the pre-2017 minimum of about 5 per cent lies above the current target. We now present it as the upper half of the old 3 to 6 per cent range, and we note that the post-2017 minimum of about 3.5 per cent is close to the 3 per cent target adopted in 2025, while stressing that the estimates below the turning point rest on relatively few observations.
+
+**Comment 2.6**
+
+> *The regime story is equally confusing. The kernel estimates put the optimum at 2 to 3 per cent both before and after 2017 (elsewhere 3 per cent pre-2017), which contradicts the claim of a lower post-2017 optimum. The QQR discussion describes post-2017 effects as simultaneously "larger," "weaker," "less concentrated" and "wider in scale." Post-2017 compression is attributed to better-anchored expectations and to COVID/Russia-Ukraine synchronisation, with no attempt to separate them, but this matters for the conclusion about the lower target. So the paper introduces explanation 2 to account for an inconvenient result, the estimated relationship being weaker exactly where you would want it strongest, and then reasons through to the policy conclusion as though only explanation 1 were operative.*
+
+**Response.** Thank you, this was a fair criticism on all three counts.
+
+On the optimum, the corrected sub-sample estimates now give a clear and consistent leftward shift, with RPD lowest at about 5 per cent before 2017 and about 3.5 per cent after 2017 (3.4 per cent with the Gaussian kernel and 3.6 per cent with the Epanechnikov kernel). The earlier overlap between the regimes came from the figure error we described above.
+
+On the quantile-on-quantile description, we have rewritten it so that each statement refers to one feature of the figures. For headline inflation after 2017, the coefficients are larger in magnitude but concentrated at very high inflation quantiles, and there is a wider region of insignificance at low and middle inflation quantiles. We therefore conclude that the relationship after 2017 is driven mainly by tail inflation events, and we add that, given the small number of such events, the pattern should be read with caution.
+
+On the two explanations, we now treat them as competing and untested rather than choosing between them. We state that better-anchored expectations after 2017 and the synchronised responses to the COVID-19, energy and Russia-Ukraine shocks would both weaken the measured response of RPD, and that the data cannot separate the effect of the lower operational target from the effect of these shocks. The policy conclusion no longer relies on the weaker unexpected inflation result. It rests on the headline inflation turning point and the bootstrap bands, and the Conclusion says that the post-2017 results should be read as indicative rather than definitive until a longer sample under the new target is available.
+
+**Comment 2.7**
+
+> *Presentation compounds these issues, with garbled sentences, missing words and references, undefined notation, and so on.*
+
+**Response.** Thank you, and we are sorry that the presentation got in the way of the content. We have gone through the whole paper line by line to correct garbled sentences, missing words and references, and we have defined the notation where it is first used, including the expected and unexpected inflation terms and the notes to each table. We have also added a table of variable definitions and data sources in the Appendix and expanded the descriptive statistics to report skewness, kurtosis and the Jarque-Bera test. We hope the paper now reads much more smoothly.
+
+<!-- CHECK before submission. Typos such as RDP for RPD remain in the journal qmd, and a final proofread is still needed. -->
+
+Thank you once again for your generous and careful feedback. We would be glad to make any further changes that would help.
+
+Kind regards,
+
+Keagile Lesame and Xolani Sibande
